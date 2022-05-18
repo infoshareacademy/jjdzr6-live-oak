@@ -1,8 +1,8 @@
 package com.infoshareacademy.model;
 
 public class User {
-    private int id;
-    private String username;
+    private final int id;
+    private final String username;
     private String password;
 
     public User(int id, String username, String password) {
@@ -19,15 +19,20 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

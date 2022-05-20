@@ -1,24 +1,24 @@
 package com.infoshareacademy.security;
 
+import com.infoshareacademy.core.Input;
 import com.infoshareacademy.model.User;
-
-import java.util.Scanner;
 
 public class Security {
     public void login() {
         LoginAuthenticator authenticator = new LoginAuthenticator();
         boolean loggedIn = false;
+        int failedAttempts = 0;
 
+        System.out.println("------------------------------");
+        System.out.println("Logowanie do systemu");
+        System.out.println("------------------------------");
+        
         while (!loggedIn) {
-            Scanner scanner = new Scanner(System.in);
-
             // prompt for user login
-            System.out.print("Login: ");
-            String username = scanner.nextLine();
+            String username = Input.getString("Login: ");
 
             // prompt for user password
-            System.out.print("Hasło: ");
-            String password = scanner.nextLine();
+            String password = Input.getString("Hasło: ");
 
             try {
                 // search for user
@@ -31,10 +31,17 @@ public class Security {
                 } else {
                     // wrong password
                     System.out.println("Niepoprawny login lub hasło");
+                    failedAttempts++;
                 }
             } catch (Exception e) {
                 // user not found
                 System.out.println("Niepoprawny login lub hasło");
+                failedAttempts++;
+            }
+
+            if (failedAttempts == 3) {
+                System.out.println("Trzykrotnie wprowadzono błędne dane. Program zostanie zakończony.");
+                System.exit(1);
             }
         }
     }

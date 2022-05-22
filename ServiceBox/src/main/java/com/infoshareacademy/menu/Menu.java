@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public void showMenu() {
+    private void showMenu() {
 
         System.out.println("      Witamy w systemie ServiceBox      ");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -17,8 +17,8 @@ public class Menu {
         System.out.print("Wybierz odpowiednia cyfre:  ");
     }
 
-    public Integer getOption() {
-        Integer option = 0;
+    private int getOption() {
+        int option = 0;
         boolean isValid = false;
         while (isValid == false) {
             try {
@@ -41,4 +41,27 @@ public class Menu {
         return option;
     }
 
+    public void start(){
+
+        showMenu();
+        int option = getOption();
+        switch(option) {
+
+            case 1: System.out.println("Wybrano opcje 1");
+            break;
+
+            case 2: System.out.println("Wybrano opcje 2");
+            break;
+
+            case 3: System.out.println("Wybrano opcje 3");
+            break;
+
+            default: System.out.print("Zakonczono program");
+
+        }
+
+
+
+
+    }
 }

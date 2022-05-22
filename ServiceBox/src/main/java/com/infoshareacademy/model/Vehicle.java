@@ -1,16 +1,26 @@
 package com.infoshareacademy.model;
 
 public class Vehicle {
-
+    private final String plateNumber;
     private String vin;
-    private String plateNumber;
     private String manufacter;
     private String carName;
     private String carType;
     private String carPlatform;
-    private Double engineCapacity;
-    private Integer productionYear;
+    private float engineCapacity;
+    private int productionYear;
     private String lasttechReview;
-    private Integer odometerBefore;
-    private Integer odometerAfter;
+    private int odometerBefore;
+    private int odometerAfter;
+
+    public Vehicle(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "plateNumber='" + plateNumber + '\'' +
+                '}';
+    }
 }

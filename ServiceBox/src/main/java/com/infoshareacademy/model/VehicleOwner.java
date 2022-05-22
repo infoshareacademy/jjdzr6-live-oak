@@ -1,7 +1,7 @@
 package com.infoshareacademy.model;
 
 public class VehicleOwner {
-    private Integer id;
+    private int id;
     private String name;
     private String surname;
     private String email;

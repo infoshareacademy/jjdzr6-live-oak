@@ -1,6 +1,6 @@
 package com.infoshareacademy.model;
 
-public class Adress {
+public class Address {
 
     private String street;
     private String houseNumber;

@@ -6,6 +6,6 @@ public class VehicleOwner {
     private String surname;
     private String email;
     private String telephoneNumber;
-    private Adress adress;
+    private Address adress;
     private Vehicle vehicle;
 }

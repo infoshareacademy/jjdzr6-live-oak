@@ -1,8 +1,11 @@
 package com.infoshareacademy.menu;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Menu {
 
-    public void showMenu(){
+    public void showMenu() {
 
         System.out.println("      Witamy w systemie ServiceBox      ");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -12,6 +15,30 @@ public class Menu {
         System.out.println("4. Zakoncz");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.print("Wybierz odpowiednia cyfre:  ");
+    }
+
+    public Integer getOption() {
+        Integer option = 0;
+        boolean isValid = false;
+        while (isValid == false) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                option = scanner.nextInt();
+                if (option >= 1 && option <= 4) {
+                    isValid = true;
+                }else {
+                    System.out.print("Wybierz opcje z zakresu 1-4:  ");
+                }
+
+
+            } catch (InputMismatchException e) {
+                System.out.print("Wybrales zla opcje, sprobuj ponownie:  ");
+
+            }
+        }
+
+
+        return option;
     }
 
 }

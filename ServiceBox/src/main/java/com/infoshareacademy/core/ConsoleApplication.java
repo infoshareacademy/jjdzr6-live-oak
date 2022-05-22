@@ -8,5 +8,8 @@ public class ConsoleApplication {
         System.out.println("");
         Menu menu = new Menu();
         menu.showMenu();
+
+        Integer option = menu.getOption();
+        System.out.println(option);
     }
 }

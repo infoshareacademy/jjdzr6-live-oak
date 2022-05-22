@@ -1,5 +1,7 @@
 package com.infoshareacademy.model;
 
+import java.time.LocalDate;
+
 public class Task {
 
     private Integer taskId;
@@ -13,5 +15,7 @@ public class Task {
     private Integer repairCost;
     private String repairsPerformed;
     private LocalDate pickingUp;
+    private Vehicle vehicle;
+    private User user;
 
 }

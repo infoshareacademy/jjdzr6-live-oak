@@ -4,8 +4,7 @@ import com.infoshareacademy.menu.Menu;
 
 public class ConsoleApplication {
     public void start() {
-        System.out.println("LiveOak Team!");
-        System.out.println(""); // add empty line
+        System.out.println("LiveOak Team!" + System.lineSeparator());
 
         // create instance of Menu class
         Menu menu = new Menu();

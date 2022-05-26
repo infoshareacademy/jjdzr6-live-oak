@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class Task {
     private final int id;
-    private final String clientName;
-    private final Vehicle vehicle;
-    private final String repairDescription;
+    private String clientName;
+    private Vehicle vehicle;
+    private String repairDescription;
     private ArrayList<String> thingsToDo;
     private ArrayList<String> repairsPerformed;
     private int initialCost;

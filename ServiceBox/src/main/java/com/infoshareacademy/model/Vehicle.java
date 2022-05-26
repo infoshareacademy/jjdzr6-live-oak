@@ -1,7 +1,7 @@
 package com.infoshareacademy.model;
 
 public class Vehicle {
-    private final String plateNumber;
+    private String plateNumber;
     private String vin;
     private String manufacter;
     private String carName;

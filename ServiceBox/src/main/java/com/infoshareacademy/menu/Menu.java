@@ -48,10 +48,11 @@ public class Menu {
         return selectedOption;
     }
 
-    public void start() {
+    public int start() {
         showMainMenu();
+        int option = getOptionFromRange(1, 4);
 
-        switch (getOptionFromRange(1, 4)) {
+        switch (option) {
             case 1:
                 getContainer().getTaskService().createTask();
                 break;
@@ -67,5 +68,7 @@ public class Menu {
             default:
                 System.out.println("Zakonczono program");
         }
+
+        return option;
     }
 }

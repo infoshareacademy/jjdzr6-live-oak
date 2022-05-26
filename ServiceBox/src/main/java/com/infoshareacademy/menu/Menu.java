@@ -1,9 +1,17 @@
 package com.infoshareacademy.menu;
 
+import com.infoshareacademy.core.ServiceContainer;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
+    private final ServiceContainer container = new ServiceContainer();
+
+    public ServiceContainer getContainer() {
+        return container;
+    }
+
     private void showMainMenu() {
         System.out.println("      Witamy w systemie ServiceBox      ");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -45,15 +53,15 @@ public class Menu {
 
         switch (getOptionFromRange(1, 4)) {
             case 1:
-                System.out.println("Wybrano opcje 1");
+                getContainer().getTaskService().createTask();
                 break;
 
             case 2:
-                System.out.println("Wybrano opcje 2");
+                getContainer().getTaskService().showAll();
                 break;
 
             case 3:
-                System.out.println("Wybrano opcje 3");
+                getContainer().getTaskService().showSingleTask();
                 break;
 
             default:

@@ -7,13 +7,13 @@ public class Vehicle {
     private String carName;
     private String carType;
     private String carPlatform;
-    private float engineCapacity;
+    private String engineCapacity;
     private int productionYear;
     private String lasttechReview;
     private int odometerBefore;
     private int odometerAfter;
 
-    public Vehicle(String plateNumber, String manufacter, String carName, float engineCapacity, int productionYear) {
+    public Vehicle(String plateNumber, String manufacter, String carName, String engineCapacity, int productionYear) {
         this.plateNumber = plateNumber;
         this.manufacter = manufacter;
         this.carName = carName;

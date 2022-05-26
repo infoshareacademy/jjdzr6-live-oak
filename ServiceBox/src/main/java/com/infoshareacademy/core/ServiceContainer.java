@@ -3,7 +3,7 @@ package com.infoshareacademy.core;
 import com.infoshareacademy.service.TaskService;
 import com.infoshareacademy.service.VehicleService;
 
-public class Container {
+public class ServiceContainer {
     TaskService taskService = new TaskService();
     VehicleService vehicleService = new VehicleService();
 

@@ -10,8 +10,8 @@ public class Vehicle {
     private String engineCapacity;
     private int productionYear;
     private String lasttechReview;
-    private int odometerBefore;
-    private int odometerAfter;
+    private int odometerBefore = 0;
+    private int odometerAfter = 0;
 
     public Vehicle(String plateNumber, String manufacter, String carName, String engineCapacity, int productionYear) {
         this.plateNumber = plateNumber;
@@ -19,12 +19,24 @@ public class Vehicle {
         this.carName = carName;
         this.engineCapacity = engineCapacity;
         this.productionYear = productionYear;
+
     }
+
 
     @Override
     public String toString() {
         return "Vehicle{" +
                 "plateNumber='" + plateNumber + '\'' +
+                ", vin='" + vin + '\'' +
+                ", manufacter='" + manufacter + '\'' +
+                ", carName='" + carName + '\'' +
+                ", carType='" + carType + '\'' +
+                ", carPlatform='" + carPlatform + '\'' +
+                ", engineCapacity='" + engineCapacity + '\'' +
+                ", productionYear=" + productionYear +
+                ", lasttechReview='" + lasttechReview + '\'' +
+                ", odometerBefore=" + odometerBefore +
+                ", odometerAfter=" + odometerAfter +
                 '}';
     }
 }

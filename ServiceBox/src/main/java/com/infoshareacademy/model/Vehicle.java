@@ -13,8 +13,12 @@ public class Vehicle {
     private int odometerBefore;
     private int odometerAfter;
 
-    public Vehicle(String plateNumber) {
+    public Vehicle(String plateNumber, String manufacter, String carName, float engineCapacity, int productionYear) {
         this.plateNumber = plateNumber;
+        this.manufacter = manufacter;
+        this.carName = carName;
+        this.engineCapacity = engineCapacity;
+        this.productionYear = productionYear;
     }
 
     @Override

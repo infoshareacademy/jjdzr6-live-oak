@@ -8,11 +8,10 @@ import com.infoshareacademy.model.Vehicle;
 public class VehicleService {
     private final String waves = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
-    public Vehicle createVehicle() {
+    public Vehicle createVehicle(String plateNumber) {
         System.out.println("Dodawanie nowego samochodu");
         System.out.println(waves);
 
-        String plateNumber = ConsoleInput.getString("Wprowadz numer rejestracyjny: ", "Bledna wartosc");
         String manufacturer = ConsoleInput.getString("Wprowadz marke pojazdu: ", "Bledna wartosc");
         String model = ConsoleInput.getString("Wprowadz model pojazdu: ", "Bledna wartosc");
         String engineCapacity = ConsoleInput.getString("Wprowadz pojemnosc silnika: ", "Bledna wartosc");

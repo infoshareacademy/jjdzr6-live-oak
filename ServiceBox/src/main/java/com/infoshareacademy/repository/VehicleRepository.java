@@ -13,9 +13,15 @@ public class VehicleRepository {
         this.db = db;
     }
 
-    public Vehicle findByPlateNumber(String plateNumber) {
-        // TODO
-        return null;
+    public Vehicle findByPlateNumber(String plateNumber) throws Exception {
+
+        for (Vehicle vehicle : db.getVehicles()) {
+            if (plateNumber.equals(vehicle.getPlateNumber())) {
+                return vehicle;
+            }
+        }
+        throw new Exception("Nie znaleziono pojazdu o podanym numerze");
+
     }
 
     public ArrayList<Task> findAll() {

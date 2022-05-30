@@ -22,6 +22,9 @@ public class Vehicle {
 
     }
 
+    public String getPlateNumber() {
+        return plateNumber;
+    }
 
     @Override
     public String toString() {

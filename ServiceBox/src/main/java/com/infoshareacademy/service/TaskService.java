@@ -7,6 +7,7 @@ import com.infoshareacademy.core.ServiceContainer;
 import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.TaskRepository;
+import com.infoshareacademy.repository.VehicleRepository;
 import com.infoshareacademy.security.Session;
 
 import java.util.ArrayList;
@@ -23,11 +24,21 @@ public class TaskService {
 
         String name = ConsoleInput.getString("Wprowadz imie i nazwisko: ", "Bledna nazwa");
         String repairDescription = ConsoleInput.getString("Wprowadz opis naprawy podany przez klienta: ", "Bledny opis");
+        String plateNumber = ConsoleInput.getString("Wprowadz numer rejestracyjny pojazdu: ", "Bledny opis");
 
-        Vehicle vehicle = ServiceContainer.getInstance().getVehicleService().createVehicle();
+        MemoryDatabase db = new MemoryDatabase();
+        VehicleRepository repo = new VehicleRepository(db);
+
+        Vehicle vehicle ;
+
+        try {
+             vehicle = repo.findByPlateNumber(plateNumber);
+        } catch (Exception e) {
+             vehicle = ServiceContainer.getInstance().getVehicleService().createVehicle(plateNumber);
+        }
+
+
         Task task = new Task(id, name, vehicle, repairDescription);
-
-        DatabaseInterface db = new MemoryDatabase();
         db.addTask(task);
 
         return task;

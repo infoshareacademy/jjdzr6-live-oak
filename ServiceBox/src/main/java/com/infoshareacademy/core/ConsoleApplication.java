@@ -16,8 +16,9 @@ public class ConsoleApplication {
 
         // test
 
+        DatabaseInterface db = new MemoryDatabase();
         // show all from memory
-        for (Task task : MemoryDB.getTasks()) {
+        for (Task task : db.getTasks()) {
             System.out.println(task);
         }
     }

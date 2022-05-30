@@ -12,13 +12,18 @@ public class TaskRepository {
         this.db = db;
     }
 
-    public Task findById(int id) {
-        // TODO
-        return null;
+    public Task findById(int id) throws Exception {
+
+        for(Task task: db.getTasks()) {
+            if(id == task.getId()){
+                return task;
+            }
+        }
+        throw new Exception("Nie znaleziono zlecenia o podanym numerze");
+
     }
 
     public ArrayList<Task> findAll() {
-        // TODO
-        return null;
+        return db.getTasks();
     }
 }

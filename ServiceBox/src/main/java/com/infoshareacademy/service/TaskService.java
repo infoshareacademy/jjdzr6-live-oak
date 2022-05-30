@@ -6,7 +6,10 @@ import com.infoshareacademy.core.MemoryDatabase;
 import com.infoshareacademy.core.ServiceContainer;
 import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
+import com.infoshareacademy.repository.TaskRepository;
 import com.infoshareacademy.security.Session;
+
+import java.util.Scanner;
 
 public class TaskService {
     private final String waves = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -40,10 +43,16 @@ public class TaskService {
         System.out.println("Wyszukaj zlecenie naprawy");
         System.out.println(waves);
 
-        // TODO: wyświetlanie zlecenia naprawy o wskazanym ID
+        int id = ConsoleInput.getInt("Podaj numer zlecenia naprawy: ", "Bledny numer zlecani");
+        MemoryDatabase db = new MemoryDatabase();
+        TaskRepository repo = new TaskRepository(db);
 
-        // 1. pobranie id
-        // 2. wyszukanie zlecenia
-        // 3. wyświetlenie zlecenia lub informacji, że zlecenie o podanym id nie istnieje
+        try {
+            Task task = repo.findById(id);
+            System.out.println(task);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

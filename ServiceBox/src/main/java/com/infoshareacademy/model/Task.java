@@ -28,6 +28,10 @@ public class Task {
         repairsPerformed = new ArrayList<>();
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void addThingToDo(String description) {
         thingsToDo.add(description);
     }

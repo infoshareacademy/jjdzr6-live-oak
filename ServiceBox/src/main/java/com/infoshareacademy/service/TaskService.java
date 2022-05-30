@@ -1,7 +1,8 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.core.ConsoleInput;
-import com.infoshareacademy.core.MemoryDB;
+import com.infoshareacademy.core.DatabaseInterface;
+import com.infoshareacademy.core.MemoryDatabase;
 import com.infoshareacademy.core.ServiceContainer;
 import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
@@ -19,9 +20,12 @@ public class TaskService {
         String name = ConsoleInput.getString("Wprowadz imie i nazwisko: ", "Bledna nazwa");
         String repairDescription = ConsoleInput.getString("Wprowadz opis naprawy podany przez klienta: ", "Bledny opis");
 
-        Vehicle vehicle = new ServiceContainer().getVehicleService().createVehicle();
+        Vehicle vehicle = ServiceContainer.getInstance().getVehicleService().createVehicle();
         Task task = new Task(id, name, vehicle, repairDescription);
-        MemoryDB.addTask(task);
+
+        DatabaseInterface db = new MemoryDatabase();
+        db.addTask(task);
+
         return task;
     }
 

@@ -1,7 +1,8 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.core.ConsoleInput;
-import com.infoshareacademy.core.MemoryDB;
+import com.infoshareacademy.core.DatabaseInterface;
+import com.infoshareacademy.core.MemoryDatabase;
 import com.infoshareacademy.model.Vehicle;
 
 public class VehicleService {
@@ -18,7 +19,10 @@ public class VehicleService {
         int productionYear = ConsoleInput.getInt("Wprowadz rok produkcji: ", "Bledna wartosc");
 
         Vehicle vehicle = new Vehicle(plateNumber, manufacturer, model, engineCapacity, productionYear);
-        MemoryDB.addVehicle(vehicle);
+
+        DatabaseInterface db = new MemoryDatabase();
+        db.addVehicle(vehicle);
+
         return vehicle;
     }
 }

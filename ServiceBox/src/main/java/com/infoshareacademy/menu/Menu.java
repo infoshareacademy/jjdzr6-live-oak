@@ -6,12 +6,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
-    private final ServiceContainer container = new ServiceContainer();
-
-    public ServiceContainer getContainer() {
-        return container;
-    }
-
     private void showMainMenu() {
         System.out.println("      Witamy w systemie ServiceBox      ");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -51,18 +45,19 @@ public class Menu {
     public int start() {
         showMainMenu();
         int option = getOptionFromRange(1, 4);
+        ServiceContainer container = ServiceContainer.getInstance();
 
         switch (option) {
             case 1:
-                getContainer().getTaskService().createTask();
+                container.getTaskService().createTask();
                 break;
 
             case 2:
-                getContainer().getTaskService().showAll();
+                container.getTaskService().showAll();
                 break;
 
             case 3:
-                getContainer().getTaskService().showSingleTask();
+                container.getTaskService().showSingleTask();
                 break;
 
             default:

@@ -5,7 +5,7 @@ import com.infoshareacademy.model.Vehicle;
 
 import java.util.ArrayList;
 
-public class MemoryDB implements DatabaseInterface{
+public class MemoryDatabase implements DatabaseInterface {
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static ArrayList<Vehicle> vehicles = new ArrayList<>();
 

@@ -14,8 +14,8 @@ public class TaskRepository {
 
     public Task findById(int id) throws Exception {
 
-        for(Task task: db.getTasks()) {
-            if(id == task.getId()){
+        for (Task task : db.getTasks()) {
+            if (id == task.getId()) {
                 return task;
             }
         }

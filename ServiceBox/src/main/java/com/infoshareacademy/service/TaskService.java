@@ -9,12 +9,13 @@ import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.TaskRepository;
 import com.infoshareacademy.security.Session;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskService {
     private final String waves = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
-    public Task createTask(){
+    public Task createTask() {
         int id = Session.generateId();
 
         System.out.println("Tworzenie nowego zlecenia nr " + id + "/2022");
@@ -36,7 +37,17 @@ public class TaskService {
         System.out.println("Wszystkie zlecenia naprawy");
         System.out.println(waves);
 
-        // TODO: wyświetlanie wszystkich utworzonych zleceń naprawy
+        MemoryDatabase db = new MemoryDatabase();
+        TaskRepository repo = new TaskRepository(db);
+
+        ArrayList<Task> myAllTask = repo.findAll();
+        if (myAllTask.isEmpty()) {
+            System.out.println("Brak zleceń.");
+        }else {
+            for (Task task : myAllTask) {
+                System.out.println(task);
+            }
+        }
     }
 
     public void showSingleTask() {

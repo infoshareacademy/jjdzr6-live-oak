@@ -1,5 +1,6 @@
 package com.infoshareacademy.menu;
 
+import com.infoshareacademy.core.ConsoleInput;
 import com.infoshareacademy.core.ServiceContainer;
 
 import java.util.InputMismatchException;
@@ -8,12 +9,12 @@ import java.util.Scanner;
 public class Menu {
     private void showMainMenu() {
         System.out.println("      Witamy w systemie ServiceBox      ");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(ConsoleInput.ROW_SEPARATOR);
         System.out.println("1. Utworz nowe zlecenie naprawy");
         System.out.println("2. Wyswietl wszystkie zlecenia naprawy");
         System.out.println("3. Wyszukaj zlecenie naprawy");
         System.out.println("4. Zakoncz");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(ConsoleInput.ROW_SEPARATOR);
         System.out.print("Wybierz odpowiednia cyfre: ");
     }
 

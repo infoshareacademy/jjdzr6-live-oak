@@ -12,36 +12,11 @@ public class Menu {
         System.out.println(ConsoleInput.ROW_SEPARATOR);
         System.out.println("1. Utworz nowe zlecenie naprawy");
         System.out.println("2. Wyswietl wszystkie zlecenia naprawy");
-        System.out.println("3. Wyszukaj zlecenie naprawy");
+        System.out.println("3. Wyszukaj/Zaktualizuj zlecenie naprawy");
         System.out.println("4. Zakoncz");
         System.out.println(ConsoleInput.ROW_SEPARATOR);
         System.out.print("Wybierz odpowiednia cyfre: ");
 
-    }
-
-    private int getOptionFromRange(int min, int max) {
-        int selectedOption = 0;
-        boolean isValid = false;
-
-        // repeat until input is not valid
-        while (!isValid) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                selectedOption = scanner.nextInt();
-
-                // check if in range
-                if (selectedOption >= min && selectedOption <= max) {
-                    isValid = true;
-                } else {
-                    // out of range
-                    System.out.print("Wybierz opcje z zakresu " + min + "-" + max + ": ");
-                }
-            } catch (InputMismatchException e) {
-                System.out.print("Niepoprawa wartosc, sprobuj ponownie:  ");
-            }
-        }
-
-        return selectedOption;
     }
 
     public void start() {
@@ -49,7 +24,7 @@ public class Menu {
         int option = 0;
         do {
             showMainMenu();
-            option = getOptionFromRange(1, 4);
+            option = ConsoleInput.getOptionFromRange(1, 4);
             ServiceContainer container = ServiceContainer.getInstance();
 
             switch (option) {
@@ -62,7 +37,7 @@ public class Menu {
                     break;
 
                 case 3:
-                    container.getTaskService().showSingleTask();
+                    container.getTaskService().findAndUpdateTask();
                     break;
 
                 default:

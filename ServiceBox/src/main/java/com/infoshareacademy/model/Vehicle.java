@@ -45,4 +45,8 @@ public class Vehicle {
                 ", odometerAfter=" + odometerAfter +
                 '}';
     }
+
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
 }

@@ -10,6 +10,7 @@ import com.infoshareacademy.repository.TaskRepository;
 import com.infoshareacademy.repository.VehicleRepository;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskService {
     private final DatabaseInterface db = new MemoryDatabase();
@@ -46,6 +47,42 @@ public class TaskService {
         System.out.println("Utworzono nowe zlecenie naprawy");
     }
 
+    public void editTask(Task task) {
+        System.out.println("Edycja zlecenia");
+
+        int option = 0;
+        do {
+            System.out.println("Wybierz pole do zmiany: ");
+            System.out.println("1.Imie i Nazwisko klienta ");
+            System.out.println("2.Opis naprawy ");
+            System.out.println("3.Numer rejestracyjny pojazdu ");
+            System.out.println("0.Zakoncz");
+
+            option = ConsoleInput.getOptionFromRange(0, 3);
+
+            switch (option) {
+                case 1:
+                    String clientName = ConsoleInput.getString("Podaj nowe imie i nazwisko klienta: ", "Bledne dane");
+                    task.setClientName(clientName);
+                    break;
+
+                case 2:
+                    String repairDescription = ConsoleInput.getString("Podaj nowy opis naprawy: ", "Bledny opis");
+                    task.setRepairDescription(repairDescription);
+                    break;
+
+                case 3:
+                    String plateNumber = ConsoleInput.getString("Podaj nowy numer rejestracyjny: ", "Bledny numer");
+                    task.getVehicle().setPlateNumber(plateNumber);
+                    break;
+
+                default:
+                    System.out.println("Zakonczono aktualizacje zlecenia numer: " + task.getId());
+            }
+            System.out.println("Dane zostaly zaktualizowane");
+        } while (option != 0);
+    }
+
     public void showAll() {
         System.out.println("Wszystkie zlecenia naprawy");
         System.out.println(ConsoleInput.ROW_SEPARATOR);
@@ -62,7 +99,7 @@ public class TaskService {
         }
     }
 
-    public void showSingleTask() {
+    public void findAndUpdateTask() {
         System.out.println("Wyszukaj zlecenie naprawy");
         System.out.println(ConsoleInput.ROW_SEPARATOR);
 
@@ -72,8 +109,15 @@ public class TaskService {
         try {
             Task task = repo.findById(id);
             System.out.println(task);
+            String letter = ConsoleInput.getString("Czy chcesz zaktualizowac zlecenie?  Wybierz opcje: [T/N] ", "Bledna opcja");
+
+            if (letter.equalsIgnoreCase("T")) {
+                editTask(task);
+
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
     }
 }

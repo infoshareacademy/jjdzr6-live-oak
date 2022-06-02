@@ -45,5 +45,31 @@ public class ConsoleInput {
 
         return input;
     }
+
+    public static int getOptionFromRange(int min, int max) {
+        int selectedOption = 0;
+        boolean isValid = false;
+
+        // repeat until input is not valid
+        while (!isValid) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                selectedOption = scanner.nextInt();
+
+                // check if in range
+                if (selectedOption >= min && selectedOption <= max) {
+                    isValid = true;
+                } else {
+                    // out of range
+                    System.out.print("Wybierz opcje z zakresu " + min + "-" + max + ": ");
+                }
+            } catch (InputMismatchException e) {
+                System.out.print("Niepoprawa wartosc, sprobuj ponownie:  ");
+            }
+        }
+
+        return selectedOption;
+    }
+
 }
 

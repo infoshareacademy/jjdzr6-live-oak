@@ -9,9 +9,6 @@ public class ConsoleApplication {
 
         // create instance of Menu class
         Menu menu = new Menu();
-        int option = 0;
-        do {
-            option = menu.start();
-        } while (option != 4);
+        menu.start();
     }
 }

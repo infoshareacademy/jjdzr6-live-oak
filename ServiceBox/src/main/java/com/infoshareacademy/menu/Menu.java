@@ -16,6 +16,7 @@ public class Menu {
         System.out.println("4. Zakoncz");
         System.out.println(ConsoleInput.ROW_SEPARATOR);
         System.out.print("Wybierz odpowiednia cyfre: ");
+
     }
 
     private int getOptionFromRange(int min, int max) {
@@ -43,28 +44,32 @@ public class Menu {
         return selectedOption;
     }
 
-    public int start() {
-        showMainMenu();
-        int option = getOptionFromRange(1, 4);
-        ServiceContainer container = ServiceContainer.getInstance();
+    public void start() {
 
-        switch (option) {
-            case 1:
-                container.getTaskService().createTask();
-                break;
+        int option = 0;
+        do {
+            showMainMenu();
+            option = getOptionFromRange(1, 4);
+            ServiceContainer container = ServiceContainer.getInstance();
 
-            case 2:
-                container.getTaskService().showAll();
-                break;
+            switch (option) {
+                case 1:
+                    container.getTaskService().createTask();
+                    break;
 
-            case 3:
-                container.getTaskService().showSingleTask();
-                break;
+                case 2:
+                    container.getTaskService().showAll();
+                    break;
 
-            default:
-                System.out.println("Zakonczono program");
-        }
+                case 3:
+                    container.getTaskService().showSingleTask();
+                    break;
 
-        return option;
+                default:
+                    System.out.println("Zakonczono program");
+            }
+
+        } while (option != 4);
     }
 }
+

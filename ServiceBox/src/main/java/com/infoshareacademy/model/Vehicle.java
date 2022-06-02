@@ -1,6 +1,7 @@
 package com.infoshareacademy.model;
 
 public class Vehicle {
+    private int id;
     private String plateNumber;
     private String vin;
     private String manufacter;
@@ -13,7 +14,8 @@ public class Vehicle {
     private int odometerBefore = 0;
     private int odometerAfter = 0;
 
-    public Vehicle(String plateNumber, String manufacter, String carName, String engineCapacity, int productionYear) {
+    public Vehicle(int id, String plateNumber, String manufacter, String carName, String engineCapacity, int productionYear) {
+        this.id = id;
         this.plateNumber = plateNumber;
         this.manufacter = manufacter;
         this.carName = carName;
@@ -29,7 +31,8 @@ public class Vehicle {
     @Override
     public String toString() {
         return "Vehicle{" +
-                "plateNumber='" + plateNumber + '\'' +
+                "id=" + id +
+                ", plateNumber='" + plateNumber + '\'' +
                 ", vin='" + vin + '\'' +
                 ", manufacter='" + manufacter + '\'' +
                 ", carName='" + carName + '\'' +

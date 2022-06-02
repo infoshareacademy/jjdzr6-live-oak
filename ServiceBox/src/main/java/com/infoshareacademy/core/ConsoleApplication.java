@@ -13,13 +13,5 @@ public class ConsoleApplication {
         do {
             option = menu.start();
         } while (option != 4);
-
-        // test
-
-        DatabaseInterface db = new MemoryDatabase();
-        // show all from memory
-        for (Task task : db.getTasks()) {
-            System.out.println(task);
-        }
     }
 }

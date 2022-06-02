@@ -4,10 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleInput {
+    public static final String ROW_SEPARATOR = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
-
-    public static int getInt(String textMessage, String errorMessage) {
-        System.out.print(textMessage);
+    public static int getInt(String prompt, String errorMessage) {
+        System.out.print(prompt);
         int input = 0;
         boolean isValid = false;
 
@@ -19,16 +19,15 @@ public class ConsoleInput {
                 isValid = true;
             } catch (InputMismatchException e) {
                 System.out.println(errorMessage);
-                System.out.print(textMessage);
+                System.out.print(prompt);
             }
-
         }
 
         return input;
     }
 
-    public static String getString(String textMessage, String errorMessage) {
-        System.out.print(textMessage);
+    public static String getString(String prompt, String errorMessage) {
+        System.out.print(prompt);
         String input = "";
         boolean isValid = false;
 
@@ -40,13 +39,11 @@ public class ConsoleInput {
                 isValid = true;
             } catch (InputMismatchException e) {
                 System.out.println(errorMessage);
-                System.out.print(textMessage);
+                System.out.print(prompt);
             }
-
         }
 
         return input;
     }
-
 }
 

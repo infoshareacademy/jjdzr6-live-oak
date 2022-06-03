@@ -1,11 +1,26 @@
 package com.infoshareacademy.core;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
 
+import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class JsonFileDatabase implements DatabaseInterface {
+    private final Gson gson;
+    private static final Path TASK_DB_PATH = Path.of("src", "main", "resources", "task.json");
+    private static final Path VEHICLE_DB_PATH = Path.of("src", "main", "resources", "vehicle.json");
+
+    public JsonFileDatabase() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        builder.registerTypeAdapter(LocalDate.class, new LocalDateConverter());
+        gson = builder.create();
+    }
+
     @Override
     public ArrayList<Task> getTasks() {
         // read all Tasks from JSON file

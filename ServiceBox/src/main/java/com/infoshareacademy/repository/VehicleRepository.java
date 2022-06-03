@@ -12,6 +12,16 @@ public class VehicleRepository {
         this.db = db;
     }
 
+    public Vehicle findById(int id) throws Exception {
+        for (Vehicle vehicle : db.getVehicles()) {
+            if (id == vehicle.getId()) {
+                return vehicle;
+            }
+        }
+
+        throw new Exception("Nie znaleziono pojazdu o podanym numerze");
+    }
+
     public Vehicle findByPlateNumber(String plateNumber) throws Exception {
         for (Vehicle vehicle : db.getVehicles()) {
             if (plateNumber.equals(vehicle.getPlateNumber())) {
@@ -19,7 +29,7 @@ public class VehicleRepository {
             }
         }
 
-        throw new Exception("Nie znaleziono pojazdu o podanym numerze");
+        throw new Exception("Nie znaleziono pojazdu o podanym numerze rejestracyjnym");
     }
 
     public ArrayList<Vehicle> findAll() {

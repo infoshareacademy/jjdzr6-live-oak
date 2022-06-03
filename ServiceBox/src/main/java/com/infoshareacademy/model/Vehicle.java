@@ -24,6 +24,10 @@ public class Vehicle {
 
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getPlateNumber() {
         return plateNumber;
     }

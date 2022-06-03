@@ -9,13 +9,15 @@ public class JsonFileDatabase implements DatabaseInterface {
     @Override
     public ArrayList<Task> getTasks() {
         // read all Tasks from JSON file
-        return null;
+        ArrayList<Task> tasks = new ArrayList<>();
+        return tasks;
     }
 
     @Override
     public ArrayList<Vehicle> getVehicles() {
         // read all Vehicles from JSON file
-        return null;
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        return vehicles;
     }
 
     @Override

@@ -9,7 +9,7 @@ public class VehicleMenu {
 
     private void showMainMenu() {
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
-        System.out.println("      Baza pojazdow");
+        System.out.println("Baza pojazdow");
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
         System.out.println("1. Dodaj nowy pojazd");
         System.out.println("2. Wyswietl wszystkie pojazdy");
@@ -28,8 +28,7 @@ public class VehicleMenu {
 
             switch (option) {
                 case 1:
-                    // TODO: dodawanie pojazdu
-                    System.out.println("Dodawanie pojazdu...");
+                    vehicleService.createVehicle("");
                     break;
 
                 case 2:

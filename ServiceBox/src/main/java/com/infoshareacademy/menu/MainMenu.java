@@ -36,7 +36,7 @@ public class MainMenu {
                     break;
 
                 default:
-                    System.out.println("Zakonczono program");
+                    ConsoleOutput.alert("Zakonczono program");
             }
 
         } while (option != EXIT_OPTION);

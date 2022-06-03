@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public interface DatabaseInterface {
     ArrayList<Task> getTasks();
+
     ArrayList<Vehicle> getVehicles();
 
     void addTask(Task task);

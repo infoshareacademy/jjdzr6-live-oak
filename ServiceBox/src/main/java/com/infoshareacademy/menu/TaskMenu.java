@@ -9,7 +9,7 @@ public class TaskMenu {
 
     private void showMainMenu() {
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
-        System.out.println("      Zlecenia naprawy");
+        System.out.println("Zlecenia naprawy");
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
         System.out.println("1. Utworz nowe zlecenie naprawy");
         System.out.println("2. Wyswietl wszystkie zlecenia naprawy");

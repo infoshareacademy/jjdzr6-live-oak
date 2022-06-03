@@ -6,8 +6,8 @@ import com.infoshareacademy.model.Vehicle;
 import java.util.ArrayList;
 
 public class MemoryDatabase implements DatabaseInterface {
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static ArrayList<Vehicle> vehicles = new ArrayList<>();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final ArrayList<Vehicle> vehicles = new ArrayList<>();
 
     public ArrayList<Task> getTasks() {
         return tasks;

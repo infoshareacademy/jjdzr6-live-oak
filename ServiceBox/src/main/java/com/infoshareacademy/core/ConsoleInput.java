@@ -69,7 +69,8 @@ public class ConsoleInput {
                     isValid = true;
                 } else {
                     // out of range
-                    ConsoleOutput.alert("Wybierz wartosc z zakresu " + min + "-" + max + ": ");
+                    ConsoleOutput.alert("Wybrano niepoprawną opcje. Wybierz opcje z zakresu " + min + "-" + max );
+                    System.out.print(prompt);
                 }
             } catch (InputMismatchException e) {
                 ConsoleOutput.alert(ERROR_MESSAGE);
@@ -78,6 +79,12 @@ public class ConsoleInput {
         }
 
         return input;
+    }
+
+    public static void waitForEnter() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nacisnij enter, aby kontynuowac...");
+        scanner.nextLine();
     }
 }
 

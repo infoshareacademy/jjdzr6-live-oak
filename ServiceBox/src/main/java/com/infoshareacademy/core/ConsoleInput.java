@@ -4,9 +4,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleInput {
-    public static final String ROW_SEPARATOR = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private static final String ERROR_MESSAGE = "Niepoprawna wartosc";
 
-    public static int getInt(String prompt, String errorMessage) {
+    public static int getInt(String prompt) {
         System.out.print(prompt);
         int input = 0;
         boolean isValid = false;
@@ -18,7 +18,7 @@ public class ConsoleInput {
                 input = scanner.nextInt();
                 isValid = true;
             } catch (InputMismatchException e) {
-                System.out.println(errorMessage);
+                ConsoleOutput.alert(ERROR_MESSAGE);
                 System.out.print(prompt);
             }
         }
@@ -26,7 +26,7 @@ public class ConsoleInput {
         return input;
     }
 
-    public static String getString(String prompt, String errorMessage) {
+    public static String getString(String prompt) {
         System.out.print(prompt);
         String input = "";
         boolean isValid = false;
@@ -36,9 +36,16 @@ public class ConsoleInput {
             try {
                 Scanner scanner = new Scanner(System.in);
                 input = scanner.nextLine();
-                isValid = true;
+
+                if (!input.trim().isEmpty()) {
+                    // is valid if not empty string
+                    isValid = true;
+                } else {
+                    ConsoleOutput.alert("Zadne dane nie zostaly wprowadzone");
+                    System.out.print(prompt);
+                }
             } catch (InputMismatchException e) {
-                System.out.println(errorMessage);
+                ConsoleOutput.alert(ERROR_MESSAGE);
                 System.out.print(prompt);
             }
         }
@@ -46,30 +53,31 @@ public class ConsoleInput {
         return input;
     }
 
-    public static int getOptionFromRange(int min, int max) {
-        int selectedOption = 0;
+    public static int getIntFromRange(String prompt, int min, int max) {
+        System.out.print(prompt);
+        int input = 0;
         boolean isValid = false;
 
         // repeat until input is not valid
         while (!isValid) {
             try {
                 Scanner scanner = new Scanner(System.in);
-                selectedOption = scanner.nextInt();
+                input = scanner.nextInt();
 
                 // check if in range
-                if (selectedOption >= min && selectedOption <= max) {
+                if (input >= min && input <= max) {
                     isValid = true;
                 } else {
                     // out of range
-                    System.out.print("Wybierz opcje z zakresu " + min + "-" + max + ": ");
+                    ConsoleOutput.alert("Wybierz wartosc z zakresu " + min + "-" + max + ": ");
                 }
             } catch (InputMismatchException e) {
-                System.out.print("Niepoprawa wartosc, sprobuj ponownie:  ");
+                ConsoleOutput.alert(ERROR_MESSAGE);
+                System.out.print(prompt);
             }
         }
 
-        return selectedOption;
+        return input;
     }
-
 }
 

@@ -2,26 +2,26 @@ package com.infoshareacademy.menu;
 
 import com.infoshareacademy.core.ConsoleInput;
 import com.infoshareacademy.core.ConsoleOutput;
-import com.infoshareacademy.service.TaskService;
 
-public class MainMenu {
-    private static final int EXIT_OPTION = 0;
+public class MainMenu extends AbstractMenu {
 
-    private void showMainMenu() {
-        System.out.println(ConsoleOutput.ROW_SEPARATOR);
-        System.out.println("      Witamy w systemie ServiceBox");
-        System.out.println(ConsoleOutput.ROW_SEPARATOR);
-        System.out.println("1. Zlecenia naprawy");
-        System.out.println("2. Baza pojazdów");
-        System.out.println("0. Zakoncz");
-        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+    public MainMenu() {
+        options.add(ConsoleOutput.ROW_SEPARATOR);
+        options.add("      Witamy w systemie ServiceBox");
+        options.add(ConsoleOutput.ROW_SEPARATOR);
+        options.add("1. Zlecenia naprawy");
+        options.add("2. Baza pojazdow");
+        options.add("0. Zakoncz");
+        options.add(ConsoleOutput.ROW_SEPARATOR);
     }
 
+
+    @Override
     public void start() {
         int option = 0;
 
         do {
-            showMainMenu();
+            showMainMenu(options);
             option = ConsoleInput.getIntFromRange("Wybierz jedna z opcji (0-2): ", 0, 2);
 
             switch (option) {

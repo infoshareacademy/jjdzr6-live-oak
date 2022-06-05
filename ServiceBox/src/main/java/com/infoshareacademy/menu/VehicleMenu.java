@@ -4,25 +4,31 @@ import com.infoshareacademy.core.ConsoleInput;
 import com.infoshareacademy.core.ConsoleOutput;
 import com.infoshareacademy.service.VehicleService;
 
-public class VehicleMenu {
-    private static final int EXIT_OPTION = 0;
+import java.util.List;
 
-    private void showMainMenu() {
-        System.out.println(ConsoleOutput.ROW_SEPARATOR);
-        System.out.println("Baza pojazdow");
-        System.out.println(ConsoleOutput.ROW_SEPARATOR);
-        System.out.println("1. Dodaj nowy pojazd");
-        System.out.println("2. Wyswietl wszystkie pojazdy");
-        System.out.println("3. Wyszukaj/Zaktualizuj dane pojazdu");
-        System.out.println("0. Wroc do menu glownego");
-        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+public class VehicleMenu extends AbstractMenu {
+    public VehicleMenu() {
+        options.add(ConsoleOutput.ROW_SEPARATOR);
+        options.add("Baza pojazdow");
+        options.add(ConsoleOutput.ROW_SEPARATOR);
+        options.add("1. Dodaj nowy pojazd");
+        options.add("2. Wyswietl wszystkie pojazdy");
+        options.add("3. Wyszukaj/Zaktualizuj dane pojazdu");
+        options.add("0. Wroc do menu glownego");
+        options.add(ConsoleOutput.ROW_SEPARATOR);
     }
 
+    @Override
+    public void showMainMenu(List<String> options) {
+
+    }
+
+    @Override
     public void start() {
 
         int option = 0;
         do {
-            showMainMenu();
+            showMainMenu(options);
             option = ConsoleInput.getIntFromRange("Wybierz jedna z opcji (0-3): ", 0, 3);
             VehicleService vehicleService = new VehicleService();
 

@@ -3,16 +3,12 @@ package com.infoshareacademy.model;
 public class Vehicle {
     private int id;
     private String plateNumber;
-    private String vin;
     private String manufacter;
     private String carName;
-    private String carType;
-    private String carPlatform;
+
     private String engineCapacity;
     private int productionYear;
-    private String lasttechReview;
-    private int odometerBefore = 0;
-    private int odometerAfter = 0;
+
 
     public Vehicle(int id, String plateNumber, String manufacter, String carName, String engineCapacity, int productionYear) {
         this.id = id;
@@ -24,12 +20,48 @@ public class Vehicle {
 
     }
 
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+
     public int getId() {
         return id;
     }
 
-    public String getPlateNumber() {
-        return plateNumber;
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
+
+    public String getManufacter() {
+        return manufacter;
+    }
+
+    public void setManufacter(String manufacter) {
+        this.manufacter = manufacter;
+    }
+
+    public String getCarName() {
+        return carName;
+    }
+
+    public void setCarName(String carName) {
+        this.carName = carName;
+    }
+
+    public String getEngineCapacity() {
+        return engineCapacity;
+    }
+
+    public void setEngineCapacity(String engineCapacity) {
+        this.engineCapacity = engineCapacity;
+    }
+
+    public int getProductionYear() {
+        return productionYear;
+    }
+
+    public void setProductionYear(int productionYear) {
+        this.productionYear = productionYear;
     }
 
     @Override
@@ -37,20 +69,10 @@ public class Vehicle {
         return "Vehicle{" +
                 "id=" + id +
                 ", plateNumber='" + plateNumber + '\'' +
-                ", vin='" + vin + '\'' +
                 ", manufacter='" + manufacter + '\'' +
                 ", carName='" + carName + '\'' +
-                ", carType='" + carType + '\'' +
-                ", carPlatform='" + carPlatform + '\'' +
                 ", engineCapacity='" + engineCapacity + '\'' +
                 ", productionYear=" + productionYear +
-                ", lasttechReview='" + lasttechReview + '\'' +
-                ", odometerBefore=" + odometerBefore +
-                ", odometerAfter=" + odometerAfter +
                 '}';
-    }
-
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
     }
 }

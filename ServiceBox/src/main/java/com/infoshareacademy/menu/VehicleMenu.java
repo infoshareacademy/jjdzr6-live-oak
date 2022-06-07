@@ -33,7 +33,7 @@ public class VehicleMenu extends AbstractMenu {
                     break;
 
                 case 2:
-                    // TODO: wyswietlanie listy wszystkich pojazdow
+                    vehicleService.showAllVeh();
                     System.out.println("Lista pojazdow...");
                     break;
 

@@ -4,14 +4,17 @@ import com.infoshareacademy.core.ConsoleInput;
 import com.infoshareacademy.core.ConsoleOutput;
 import com.infoshareacademy.core.DatabaseInterface;
 import com.infoshareacademy.core.MemoryDatabase;
+import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 
+import java.util.ArrayList;
+
 public class VehicleService {
     private final DatabaseInterface db = new MemoryDatabase();
-
+    private final VehicleRepository vehicleRepository = new VehicleRepository(db);
     public Vehicle createVehicle(String plateNumber) {
-        VehicleRepository vehicleRepository = new VehicleRepository(db);
+
         int id = vehicleRepository.getNextId();
 
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
@@ -35,4 +38,25 @@ public class VehicleService {
 
         return vehicle;
     }
+
+    public void showAllVeh() {
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+        System.out.println("Wszystkie pojazy w bazie");
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+
+        ArrayList<Vehicle> myAllVehicle = vehicleRepository.findAll();
+
+        if (myAllVehicle.isEmpty()) {
+            ConsoleOutput.alert("Nie dodano jeszcze zadnego pojazdu do bazy");
+        } else {
+            for (Vehicle vehicle : myAllVehicle) {
+                System.out.println(vehicle);
+            }
+        }
+
+        ConsoleInput.waitForEnter();
+    }
+
+
 }
+

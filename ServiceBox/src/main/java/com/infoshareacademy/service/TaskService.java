@@ -125,7 +125,7 @@ public class TaskService {
         }
     }
 
-    public void findByPlateNumber() {
+    public void findTasksByPlateNumber() {
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
         System.out.println("Wyszukaj zlecenia po numerze rejestracyjnym");
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
@@ -133,7 +133,7 @@ public class TaskService {
         String id = ConsoleInput.getString("Podaj numer rejestracyjny pojazdu: ");
     }
 
-    public void findByOwnerName() {
+    public void findTasksByOwnerName() {
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
         System.out.println("Wyszukaj zlecenia po imieniu i nazwisku klienta");
         System.out.println(ConsoleOutput.ROW_SEPARATOR);

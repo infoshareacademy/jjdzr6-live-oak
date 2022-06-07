@@ -27,7 +27,7 @@ public class TaskMenu extends AbstractMenu {
 
         do {
             showMainMenu(options);
-            option = ConsoleInput.getIntFromRange("Wybierz jedna z opcji (0-3): ", 0, 5);
+            option = ConsoleInput.getIntFromRange("Wybierz jedna z opcji (0-5): ", 0, 5);
             TaskService taskService = new TaskService();
 
             switch (option) {
@@ -44,11 +44,11 @@ public class TaskMenu extends AbstractMenu {
                     break;
 
                 case 4:
-                    taskService.findByPlateNumber();
+                    taskService.findTasksByPlateNumber();
                     break;
 
                 case 5:
-                    taskService.findByOwnerName();
+                    taskService.findTasksByOwnerName();
                     break;
                 default:
             }

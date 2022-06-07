@@ -15,6 +15,8 @@ public class TaskMenu extends AbstractMenu {
         options.add("1. Utworz nowe zlecenie naprawy");
         options.add("2. Wyswietl wszystkie zlecenia naprawy");
         options.add("3. Wyszukaj/Zaktualizuj zlecenie naprawy");
+        options.add("4. Wyszukaj zlecenia po numerze rejestracyjnym pojazdu");
+        options.add("5. Wyszukaj zlecenia po imieniu i nazwisku klienta");
         options.add("0. Wroc do menu glownego");
         options.add(ConsoleOutput.ROW_SEPARATOR);
     }
@@ -25,7 +27,7 @@ public class TaskMenu extends AbstractMenu {
 
         do {
             showMainMenu(options);
-            option = ConsoleInput.getIntFromRange("Wybierz jedna z opcji (0-3): ", 0, 3);
+            option = ConsoleInput.getIntFromRange("Wybierz jedna z opcji (0-3): ", 0, 5);
             TaskService taskService = new TaskService();
 
             switch (option) {
@@ -41,6 +43,13 @@ public class TaskMenu extends AbstractMenu {
                     taskService.findAndUpdateTask();
                     break;
 
+                case 4:
+                    taskService.findByPlateNumber();
+                    break;
+
+                case 5:
+                    taskService.findByOwnerName();
+                    break;
                 default:
             }
 

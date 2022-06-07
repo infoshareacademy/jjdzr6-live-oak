@@ -124,4 +124,20 @@ public class TaskService {
             ConsoleInput.waitForEnter();
         }
     }
+
+    public void findByPlateNumber() {
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+        System.out.println("Wyszukaj zlecenia po numerze rejestracyjnym");
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+
+        String id = ConsoleInput.getString("Podaj numer rejestracyjny pojazdu: ");
+    }
+
+    public void findByOwnerName() {
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+        System.out.println("Wyszukaj zlecenia po imieniu i nazwisku klienta");
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+
+        String id = ConsoleInput.getString("Podaj imię i nazwisko klienta: ");
+    }
 }

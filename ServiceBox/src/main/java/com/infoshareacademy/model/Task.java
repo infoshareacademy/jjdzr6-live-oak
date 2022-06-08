@@ -3,6 +3,7 @@ package com.infoshareacademy.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+
 public class Task {
     private final int id;
     private String clientName;
@@ -124,4 +125,5 @@ public class Task {
     public void setPickingUp(LocalDate pickingUp) {
         this.pickingUp = pickingUp;
     }
+
 }

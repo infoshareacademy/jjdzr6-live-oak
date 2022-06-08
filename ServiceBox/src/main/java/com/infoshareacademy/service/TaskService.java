@@ -130,7 +130,17 @@ public class TaskService {
         System.out.println("Wyszukaj zlecenia po numerze rejestracyjnym");
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
 
-        String id = ConsoleInput.getString("Podaj numer rejestracyjny pojazdu: ");
+        String plate = ConsoleInput.getString("Podaj numer rejestracyjny pojazdu: ");
+
+        try {
+            ArrayList<Task> foundedTasks = taskRepository.findByPlate(plate);
+            for (Task task : foundedTasks) {
+                System.out.println(task);
+            }
+        }catch (Exception e) {
+            ConsoleOutput.alert(e.getMessage());
+            ConsoleInput.waitForEnter();
+        }
     }
 
     public void findTasksByOwnerName() {

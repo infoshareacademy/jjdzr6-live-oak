@@ -1,14 +1,11 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.core.ConsoleInput;
-import com.infoshareacademy.core.ConsoleOutput;
-import com.infoshareacademy.core.DatabaseInterface;
-import com.infoshareacademy.core.MemoryDatabase;
+import com.infoshareacademy.core.*;
 import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 
 public class VehicleService {
-    private final DatabaseInterface db = new MemoryDatabase();
+    private final DatabaseInterface db = new JsonFileDatabase();
 
     public Vehicle createVehicle(String plateNumber) {
         VehicleRepository vehicleRepository = new VehicleRepository(db);

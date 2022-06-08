@@ -1,9 +1,6 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.core.ConsoleInput;
-import com.infoshareacademy.core.ConsoleOutput;
-import com.infoshareacademy.core.DatabaseInterface;
-import com.infoshareacademy.core.MemoryDatabase;
+import com.infoshareacademy.core.*;
 import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.TaskRepository;
@@ -12,7 +9,7 @@ import com.infoshareacademy.repository.VehicleRepository;
 import java.util.ArrayList;
 
 public class TaskService {
-    private final DatabaseInterface db = new MemoryDatabase();
+    private final DatabaseInterface db = new JsonFileDatabase();
     private final TaskRepository taskRepository = new TaskRepository(db);
     private final VehicleRepository vehicleRepository = new VehicleRepository(db);
 

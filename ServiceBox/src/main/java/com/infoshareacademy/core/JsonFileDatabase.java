@@ -28,7 +28,6 @@ public class JsonFileDatabase implements DatabaseInterface {
 
     @Override
     public ArrayList<Task> getTasks() {
-        // read all Tasks from JSON file
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             tasks = gson.fromJson(Files.readString(TASK_DB_PATH), new TypeToken<List<Task>>() {
@@ -42,14 +41,15 @@ public class JsonFileDatabase implements DatabaseInterface {
 
     @Override
     public ArrayList<Vehicle> getVehicles() {
-        // read all Vehicles from JSON file
+
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
         try {
-            ArrayList<Vehicle> vehicles = new Gson().fromJson(Files.readString(VEHICLE_DB_PATH), new TypeToken<List<Vehicle>>() {
+            vehicles = gson.fromJson(Files.readString(VEHICLE_DB_PATH), new TypeToken<List<Vehicle>>() {
             }.getType());
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("error");
         }
-        return new ArrayList<>();
+        return vehicles;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class JsonFileDatabase implements DatabaseInterface {
     @Override
     public void addVehicle(Vehicle vehicle) {
         // add (save) new Vehicle in JSON file
-        ArrayList<Vehicle> tableVehicle = new ArrayList<>();
+        ArrayList<Vehicle> tableVehicle = getVehicles();
         tableVehicle.add(vehicle);
         String json = gson.toJson(tableVehicle);
         try {

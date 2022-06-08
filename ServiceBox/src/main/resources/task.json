@@ -34,5 +34,41 @@
     "initialCost": 0,
     "repairCost": 0,
     "dateAcceptRepair": "2022-06-08"
+  },
+  {
+    "id": 3,
+    "clientName": "cc",
+    "vehicle": {
+      "id": 2,
+      "plateNumber": "cc",
+      "manufacter": "cc",
+      "carName": "cc",
+      "engineCapacity": "cc",
+      "productionYear": 2020
+    },
+    "repairDescription": "cc",
+    "thingsToDo": [],
+    "repairsPerformed": [],
+    "initialCost": 0,
+    "repairCost": 0,
+    "dateAcceptRepair": "2022-06-08"
+  },
+  {
+    "id": 4,
+    "clientName": "ee",
+    "vehicle": {
+      "id": 2,
+      "plateNumber": "ee",
+      "manufacter": "ee",
+      "carName": "ee",
+      "engineCapacity": "ee",
+      "productionYear": 2020
+    },
+    "repairDescription": "ee",
+    "thingsToDo": [],
+    "repairsPerformed": [],
+    "initialCost": 0,
+    "repairCost": 0,
+    "dateAcceptRepair": "2022-06-08"
   }
 ]

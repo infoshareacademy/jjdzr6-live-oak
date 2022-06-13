@@ -148,6 +148,17 @@ public class TaskService {
         System.out.println("Wyszukaj zlecenia po imieniu i nazwisku klienta");
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
 
-        String id = ConsoleInput.getString("Podaj imię i nazwisko klienta: ");
+        String clientName = ConsoleInput.getString("Podaj imię i nazwisko klienta: ");
+
+        try {
+            ArrayList<Task> foundedTasks = taskRepository.findByVehicleOwner(clientName);
+            for (Task task : foundedTasks) {
+                System.out.println(task);
+            }
+        }catch (Exception e) {
+            ConsoleOutput.alert(e.getMessage());
+            ConsoleInput.waitForEnter();
+        }
     }
-}
+    }
+

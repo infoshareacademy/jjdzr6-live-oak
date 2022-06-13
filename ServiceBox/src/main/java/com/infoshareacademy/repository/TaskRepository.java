@@ -41,6 +41,23 @@ public class TaskRepository {
 
     }
 
+    public ArrayList<Task> findByVehicleOwner(String clientName) throws Exception {
+        ArrayList<Task> foundedVehicleOwner = new ArrayList<>();
+
+        for (Task task : db.getTasks()) {
+            if (clientName.equalsIgnoreCase(task.getClientName())) {
+                foundedVehicleOwner.add(task);
+            }
+
+        }
+
+        if (foundedVehicleOwner.isEmpty()) {
+            throw new Exception("Nie znaleziono zlecenia przypisanego do Klienta");
+
+        }
+        return foundedVehicleOwner;
+    }
+
     public ArrayList<Task> findAll() {
         return db.getTasks();
     }

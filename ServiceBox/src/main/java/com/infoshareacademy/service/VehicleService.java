@@ -8,10 +8,10 @@ import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 
 public class VehicleService {
-    private final DatabaseInterface db = new MemoryDatabase();
+    private final DatabaseInterface database = new MemoryDatabase();
 
     public Vehicle createVehicle(String plateNumber) {
-        VehicleRepository vehicleRepository = new VehicleRepository(db);
+        VehicleRepository vehicleRepository = new VehicleRepository(database);
         int id = vehicleRepository.getNextId();
 
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
@@ -29,7 +29,7 @@ public class VehicleService {
 
         Vehicle vehicle = new Vehicle(id, plateNumber, manufacturer, model, engineCapacity, productionYear);
 
-        db.addVehicle(vehicle);
+        database.addVehicle(vehicle);
         ConsoleOutput.alert("Dodano nowy pojazd");
         ConsoleInput.waitForEnter();
 

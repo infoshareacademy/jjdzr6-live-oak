@@ -5,10 +5,10 @@ public class Vehicle {
     private String plateNumber;
     private String manufacter;
     private String carName;
-    private String engineCapacity;
+    private float engineCapacity;
     private int productionYear;
 
-    public Vehicle(int id, String plateNumber, String manufacter, String carName, String engineCapacity, int productionYear) {
+    public Vehicle(int id, String plateNumber, String manufacter, String carName, float engineCapacity, int productionYear) {
         this.id = id;
         this.plateNumber = plateNumber;
         this.manufacter = manufacter;

@@ -24,8 +24,8 @@ public class VehicleService {
 
         String manufacturer = ConsoleInput.getString("Wprowadz marke pojazdu: ");
         String model = ConsoleInput.getString("Wprowadz model pojazdu: ");
-        String engineCapacity = ConsoleInput.getString("Wprowadz pojemnosc silnika: ");
-        int productionYear = ConsoleInput.getInt("Wprowadz rok produkcji: ");
+        float engineCapacity = ConsoleInput.getCapacity("Wprowadz pojemnosc silnika: ");
+        int productionYear = ConsoleInput.getYear("Wprowadz rok produkcji: ");
 
         Vehicle vehicle = new Vehicle(id, plateNumber, manufacturer, model, engineCapacity, productionYear);
 

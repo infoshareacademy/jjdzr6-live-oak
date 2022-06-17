@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class Task {
     private final int id;
-    private final String clientName;
-    private final Vehicle vehicle;
-    private final String repairDescription;
+    private String clientName;
+    private Vehicle vehicle;
+    private String repairDescription;
     private ArrayList<String> thingsToDo;
     private ArrayList<String> repairsPerformed;
     private int initialCost;
@@ -28,12 +28,20 @@ public class Task {
         repairsPerformed = new ArrayList<>();
     }
 
-    public void addThingToDo(String description) {
-        thingsToDo.add(description);
+    public int getId() {
+        return id;
     }
 
-    public void addPerformedRepair(String description) {
-        repairsPerformed.add(description);
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public void setRepairDescription(String repairDescription) {
+        this.repairDescription = repairDescription;
     }
 
     @Override
@@ -43,9 +51,6 @@ public class Task {
                 ", clientName='" + clientName + '\'' +
                 ", vehicle=" + vehicle +
                 ", repairDescription='" + repairDescription + '\'' +
-                ", thingsToDo=" + thingsToDo +
-                ", repairsPerformed=" + repairsPerformed +
-                ", dateAcceptRepair=" + dateAcceptRepair +
                 '}';
     }
 }

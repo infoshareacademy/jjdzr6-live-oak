@@ -20,7 +20,7 @@ public class TaskRepository {
             }
         }
 
-        throw new Exception("Nie znaleziono zlecenia o podanym numerze");
+        throw new Exception("Nie znaleziono zlecenia o podanym numerze (" + id + ")");
     }
 
     public ArrayList<Task> findByPlate(String plate) throws Exception {

@@ -12,9 +12,9 @@ import com.infoshareacademy.repository.VehicleRepository;
 import java.util.ArrayList;
 
 public class TaskService {
-    private final DatabaseInterface db = new MemoryDatabase();
-    private final TaskRepository taskRepository = new TaskRepository(db);
-    private final VehicleRepository vehicleRepository = new VehicleRepository(db);
+    private final DatabaseInterface database = new MemoryDatabase();
+    private final TaskRepository taskRepository = new TaskRepository(database);
+    private final VehicleRepository vehicleRepository = new VehicleRepository(database);
 
     public void createTask() {
         int taskId = taskRepository.getNextId();
@@ -40,7 +40,7 @@ public class TaskService {
         // create a new Task
         Task task = new Task(taskId, name, vehicle, repairDescription);
         // ...and add to the database
-        db.addTask(task);
+        database.addTask(task);
 
         ConsoleOutput.alert("Utworzono nowe zlecenie naprawy");
         ConsoleInput.waitForEnter();

@@ -8,10 +8,10 @@ import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 
 public class VehicleService {
-    private final DatabaseInterface db = new MemoryDatabase();
+    private final DatabaseInterface database = new MemoryDatabase();
 
     public Vehicle createVehicle(String plateNumber) {
-        VehicleRepository vehicleRepository = new VehicleRepository(db);
+        VehicleRepository vehicleRepository = new VehicleRepository(database);
         int id = vehicleRepository.getNextId();
 
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
@@ -24,12 +24,12 @@ public class VehicleService {
 
         String manufacturer = ConsoleInput.getString("Wprowadz marke pojazdu: ");
         String model = ConsoleInput.getString("Wprowadz model pojazdu: ");
-        String engineCapacity = ConsoleInput.getString("Wprowadz pojemnosc silnika: ");
-        int productionYear = ConsoleInput.getInt("Wprowadz rok produkcji: ");
+        float engineCapacity = ConsoleInput.getCapacity("Wprowadz pojemnosc silnika: ");
+        int productionYear = ConsoleInput.getYear("Wprowadz rok produkcji: ");
 
         Vehicle vehicle = new Vehicle(id, plateNumber, manufacturer, model, engineCapacity, productionYear);
 
-        db.addVehicle(vehicle);
+        database.addVehicle(vehicle);
         ConsoleOutput.alert("Dodano nowy pojazd");
         ConsoleInput.waitForEnter();
 

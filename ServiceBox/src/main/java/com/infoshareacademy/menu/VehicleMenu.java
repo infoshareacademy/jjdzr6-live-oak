@@ -33,7 +33,7 @@ public class VehicleMenu extends AbstractMenu {
                     break;
 
                 case 2:
-                    vehicleService.showAllVeh();
+                    vehicleService.showAllVehicle();
                     System.out.println("Lista pojazdow...");
                     break;
 

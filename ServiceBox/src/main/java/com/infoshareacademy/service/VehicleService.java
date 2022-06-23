@@ -4,7 +4,6 @@ import com.infoshareacademy.core.ConsoleInput;
 import com.infoshareacademy.core.ConsoleOutput;
 import com.infoshareacademy.core.DatabaseInterface;
 import com.infoshareacademy.core.MemoryDatabase;
-import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 
@@ -40,9 +39,9 @@ public class VehicleService {
         return vehicle;
     }
 
-    public void showAllVeh() {
+    public void showAllVehicle() {
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
-        System.out.println("Wszystkie pojazy w bazie");
+        System.out.println("Wszystkie pojazdy w bazie");
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
 
         ArrayList<Vehicle> myAllVehicle = vehicleRepository.findAll();

@@ -41,4 +41,20 @@ public class Vehicle {
                 ", productionYear=" + productionYear +
                 '}';
     }
+
+    public void setManufacter(String manufacter) {
+        this.manufacter = manufacter;
+    }
+
+    public void setCarName(String carName) {
+        this.carName = carName;
+    }
+
+    public void setEngineCapacity(float engineCapacity) {
+        this.engineCapacity = engineCapacity;
+    }
+
+    public void setProductionYear(int productionYear) {
+        this.productionYear = productionYear;
+    }
 }

@@ -19,7 +19,7 @@ public class VehicleRepository {
             }
         }
 
-        throw new Exception("Nie znaleziono pojazdu o podanym numerze");
+        throw new Exception("Nie znaleziono pojazdu o podanym numerze (" + id + ")");
     }
 
     public Vehicle findByPlateNumber(String plateNumber) throws Exception {
@@ -29,7 +29,7 @@ public class VehicleRepository {
             }
         }
 
-        throw new Exception("Nie znaleziono pojazdu o podanym numerze rejestracyjnym");
+        throw new Exception("Nie znaleziono pojazdu o podanym numerze rejestracyjnym (" + plateNumber + ")");
     }
 
     public ArrayList<Vehicle> findAll() {

@@ -1,5 +1,6 @@
 package com.infoshareacademy.core;
 
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -79,6 +80,62 @@ public class ConsoleInput {
         }
 
         return input;
+    }
+
+    public static float getFloat(String prompt) {
+        System.out.print(prompt);
+        float input = 0;
+        boolean isValid = false;
+
+        // repeat until input is not valid
+        while (!isValid) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                input = scanner.nextFloat();
+                isValid = true;
+            } catch (InputMismatchException e) {
+                ConsoleOutput.alert(ERROR_MESSAGE);
+                System.out.print(prompt);
+            }
+        }
+
+        return input;
+    }
+
+    public static int getYear(String prompt) {
+        boolean isValid = false;
+        int year = 0;
+
+        while (!isValid) {
+            year = getInt(prompt);
+
+            if (year > LocalDate.now().getYear() || year < 1900) {
+                System.out.println("Niepoprawny rok. Wprowadz wartosc z zakresu 1900-" + LocalDate.now().getYear());
+            } else {
+                isValid = true;
+
+            }
+        }
+
+        return year;
+    }
+
+    public static float getCapacity(String prompt) {
+        boolean isValid = false;
+        float capacity = 0;
+
+        while (!isValid) {
+            capacity = getFloat(prompt);
+
+            if (capacity < 0) {
+                System.out.println("Pojemnosc silnika musi byc wieksza od 0");
+            } else {
+                isValid = true;
+
+            }
+        }
+
+        return capacity;
     }
 
     public static void waitForEnter() {

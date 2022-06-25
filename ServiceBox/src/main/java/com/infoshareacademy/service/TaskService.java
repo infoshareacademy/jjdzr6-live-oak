@@ -9,9 +9,10 @@ import com.infoshareacademy.repository.VehicleRepository;
 import java.util.ArrayList;
 
 public class TaskService {
-    private final DatabaseInterface db = new JsonFileDatabase();
-    private final TaskRepository taskRepository = new TaskRepository(db);
-    private final VehicleRepository vehicleRepository = new VehicleRepository(db);
+
+    private final DatabaseInterface database = new JsonFileDatabase();
+    private final TaskRepository taskRepository = new TaskRepository(database);
+    private final VehicleRepository vehicleRepository = new VehicleRepository(database);
 
     public void createTask() {
         int taskId = taskRepository.getNextId();
@@ -37,7 +38,7 @@ public class TaskService {
         // create a new Task
         Task task = new Task(taskId, name, vehicle, repairDescription);
         // ...and add to the database
-        db.addTask(task);
+        database.addTask(task);
 
         ConsoleOutput.alert("Utworzono nowe zlecenie naprawy");
         ConsoleInput.waitForEnter();
@@ -121,4 +122,41 @@ public class TaskService {
             ConsoleInput.waitForEnter();
         }
     }
+
+    public void findTasksByPlateNumber() {
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+        System.out.println("Wyszukaj zlecenia po numerze rejestracyjnym");
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+
+        String plate = ConsoleInput.getString("Podaj numer rejestracyjny pojazdu: ");
+
+        try {
+            ArrayList<Task> foundedTasks = taskRepository.findByPlate(plate);
+            for (Task task : foundedTasks) {
+                System.out.println(task);
+            }
+        }catch (Exception e) {
+            ConsoleOutput.alert(e.getMessage());
+            ConsoleInput.waitForEnter();
+        }
+    }
+
+    public void findTasksByOwnerName() {
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+        System.out.println("Wyszukaj zlecenia po imieniu i nazwisku klienta");
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+
+        String clientName = ConsoleInput.getString("Podaj imie i nazwisko klienta: ");
+
+        try {
+            ArrayList<Task> foundedTasks = taskRepository.findByVehicleOwner(clientName);
+            for (Task task : foundedTasks) {
+                System.out.println(task);
+            }
+        }catch (Exception e) {
+            ConsoleOutput.alert(e.getMessage());
+            ConsoleInput.waitForEnter();
+        }
+    }
 }
+

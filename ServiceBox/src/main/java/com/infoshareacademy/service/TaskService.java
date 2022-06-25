@@ -124,4 +124,41 @@ public class TaskService {
             ConsoleInput.waitForEnter();
         }
     }
+
+    public void findTasksByPlateNumber() {
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+        System.out.println("Wyszukaj zlecenia po numerze rejestracyjnym");
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+
+        String plate = ConsoleInput.getString("Podaj numer rejestracyjny pojazdu: ");
+
+        try {
+            ArrayList<Task> foundedTasks = taskRepository.findByPlate(plate);
+            for (Task task : foundedTasks) {
+                System.out.println(task);
+            }
+        }catch (Exception e) {
+            ConsoleOutput.alert(e.getMessage());
+            ConsoleInput.waitForEnter();
+        }
+    }
+
+    public void findTasksByOwnerName() {
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+        System.out.println("Wyszukaj zlecenia po imieniu i nazwisku klienta");
+        System.out.println(ConsoleOutput.ROW_SEPARATOR);
+
+        String clientName = ConsoleInput.getString("Podaj imie i nazwisko klienta: ");
+
+        try {
+            ArrayList<Task> foundedTasks = taskRepository.findByVehicleOwner(clientName);
+            for (Task task : foundedTasks) {
+                System.out.println(task);
+            }
+        }catch (Exception e) {
+            ConsoleOutput.alert(e.getMessage());
+            ConsoleInput.waitForEnter();
+        }
+    }
 }
+

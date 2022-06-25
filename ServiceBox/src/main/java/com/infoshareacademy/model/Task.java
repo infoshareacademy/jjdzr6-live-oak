@@ -3,6 +3,7 @@ package com.infoshareacademy.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+
 public class Task {
     private final int id;
     private String clientName;
@@ -10,12 +11,7 @@ public class Task {
     private String repairDescription;
     private ArrayList<String> thingsToDo;
     private ArrayList<String> repairsPerformed;
-    private int initialCost;
-    private int repairCost;
     private LocalDate dateAcceptRepair;
-    private LocalDate plannedRepair;
-    private LocalDate dateOfRepair;
-    private LocalDate pickingUp;
 
     public Task(int id, String clientName, Vehicle vehicle, String repairDescription) {
         this.id = id;
@@ -42,6 +38,10 @@ public class Task {
 
     public void setRepairDescription(String repairDescription) {
         this.repairDescription = repairDescription;
+    }
+
+    public String getClientName() {
+        return clientName;
     }
 
     @Override

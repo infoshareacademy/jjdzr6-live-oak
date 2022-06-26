@@ -1,9 +1,6 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.core.ConsoleInput;
-import com.infoshareacademy.core.ConsoleOutput;
-import com.infoshareacademy.core.DatabaseInterface;
-import com.infoshareacademy.core.MemoryDatabase;
+import com.infoshareacademy.core.*;
 import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 
@@ -11,7 +8,7 @@ import java.util.ArrayList;
 
 public class VehicleService {
 
-    private final DatabaseInterface database = new MemoryDatabase();
+    private final DatabaseInterface database = new JsonFileDatabase();
    private final VehicleRepository vehicleRepository = new VehicleRepository(database);
     public Vehicle createVehicle(String plateNumber) {
 

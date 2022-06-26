@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "plateNumber": "FNW1234",
+    "manufacter": "Opel",
+    "carName": "Insignia",
+    "engineCapacity": 2.0,
+    "productionYear": 2015
+  },
+  {
+    "id": 2,
+    "plateNumber": "FZ4321",
+    "manufacter": "Fiat",
+    "carName": "Panda",
+    "engineCapacity": 1.0,
+    "productionYear": 2004
+  }
+]

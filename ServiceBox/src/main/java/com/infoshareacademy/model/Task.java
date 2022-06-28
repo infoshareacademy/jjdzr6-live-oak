@@ -1,5 +1,9 @@
 package com.infoshareacademy.model;
 
+import com.infoshareacademy.core.DatabaseInterface;
+import com.infoshareacademy.core.JsonFileDatabase;
+import com.infoshareacademy.repository.VehicleRepository;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -7,7 +11,7 @@ import java.util.ArrayList;
 public class Task {
     private final int id;
     private String clientName;
-    private Vehicle vehicle;
+    private int vehicleId;
     private String repairDescription;
     private ArrayList<String> thingsToDo;
     private ArrayList<String> repairsPerformed;
@@ -16,7 +20,7 @@ public class Task {
     public Task(int id, String clientName, Vehicle vehicle, String repairDescription) {
         this.id = id;
         this.clientName = clientName;
-        this.vehicle = vehicle;
+        this.vehicleId = vehicle.getId();
         this.repairDescription = repairDescription;
 
         dateAcceptRepair = LocalDate.now();
@@ -29,7 +33,13 @@ public class Task {
     }
 
     public Vehicle getVehicle() {
-        return vehicle;
+        VehicleRepository repo = new VehicleRepository(new JsonFileDatabase());
+
+        try {
+            return repo.findById(vehicleId);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setClientName(String clientName) {
@@ -49,7 +59,7 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", clientName='" + clientName + '\'' +
-                ", vehicle=" + vehicle +
+                ", vehicle=" + getVehicle() +
                 ", repairDescription='" + repairDescription + '\'' +
                 '}';
     }

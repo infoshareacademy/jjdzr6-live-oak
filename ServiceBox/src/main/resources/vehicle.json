@@ -1,18 +1,26 @@
 [
   {
     "id": 1,
-    "plateNumber": "FNW1234",
+    "plateNumber": "PK234123",
     "manufacter": "Opel",
-    "carName": "Insignia",
-    "engineCapacity": 2.0,
-    "productionYear": 2015
+    "carName": "Corsa",
+    "engineCapacity": 1.2,
+    "productionYear": 2010
   },
   {
     "id": 2,
-    "plateNumber": "FZ4321",
-    "manufacter": "Fiat",
-    "carName": "Panda",
-    "engineCapacity": 1.0,
-    "productionYear": 2004
+    "plateNumber": "PO123123",
+    "manufacter": "Ford",
+    "carName": "Mustang",
+    "engineCapacity": 4.0,
+    "productionYear": 2001
+  },
+  {
+    "id": 3,
+    "plateNumber": "AB111111",
+    "manufacter": "Audi",
+    "carName": "TT",
+    "engineCapacity": 2.0,
+    "productionYear": 1999
   }
 ]

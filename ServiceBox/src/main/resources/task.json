@@ -30,5 +30,53 @@
     "thingsToDo": [],
     "repairsPerformed": [],
     "dateAcceptRepair": "2022-06-26"
+  },
+  {
+    "id": 3,
+    "clientName": "SSS",
+    "vehicle": {
+      "id": 3,
+      "plateNumber": "sddssd",
+      "manufacter": "ssd",
+      "carName": "dsdd",
+      "engineCapacity": 2.0,
+      "productionYear": 2022
+    },
+    "repairDescription": "ddsds",
+    "thingsToDo": [],
+    "repairsPerformed": [],
+    "dateAcceptRepair": "2022-06-29"
+  },
+  {
+    "id": 4,
+    "clientName": "ddsjsdj",
+    "vehicle": {
+      "id": 4,
+      "plateNumber": "dskddsk",
+      "manufacter": "sdksdksd",
+      "carName": "sddsdsk",
+      "engineCapacity": 2.0,
+      "productionYear": 1999
+    },
+    "repairDescription": "ssddsdskj",
+    "thingsToDo": [],
+    "repairsPerformed": [],
+    "dateAcceptRepair": "2022-06-29"
+  },
+  {
+    "id": 5,
+    "clientName": "kjsdskjdsjkd",
+    "vehicle": {
+      "id": 5,
+      "plateNumber": "dsdjsdsj",
+      "manufacter": "ddj",
+      "carName": "djsjd",
+      "engineCapacity": 111.0,
+      "productionYear": 2011
+    },
+    "repairDescription": "dsjdjdssd",
+    "thingsToDo": [],
+    "repairsPerformed": [],
+    "dateAcceptRepair": "2022-06-29"
   }
 ]

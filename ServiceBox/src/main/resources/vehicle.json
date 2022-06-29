@@ -14,5 +14,29 @@
     "carName": "Panda",
     "engineCapacity": 1.0,
     "productionYear": 2004
+  },
+  {
+    "id": 3,
+    "plateNumber": "sddssd",
+    "manufacter": "ssd",
+    "carName": "dsdd",
+    "engineCapacity": 2.0,
+    "productionYear": 2022
+  },
+  {
+    "id": 4,
+    "plateNumber": "dskddsk",
+    "manufacter": "sdksdksd",
+    "carName": "sddsdsk",
+    "engineCapacity": 2.0,
+    "productionYear": 1999
+  },
+  {
+    "id": 5,
+    "plateNumber": "dsdjsdsj",
+    "manufacter": "ddj",
+    "carName": "djsjd",
+    "engineCapacity": 111.0,
+    "productionYear": 2011
   }
 ]

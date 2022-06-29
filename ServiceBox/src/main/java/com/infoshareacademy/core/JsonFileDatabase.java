@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
+import com.infoshareacademy.model.Client;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -18,6 +19,8 @@ public class JsonFileDatabase implements DatabaseInterface {
     private final Gson gson;
     private static final Path TASK_DB_PATH = Path.of("src", "main", "resources", "task.json");
     private static final Path VEHICLE_DB_PATH = Path.of("src", "main", "resources", "vehicle.json");
+    private static final Path CLIENT_DB_PATH = Path.of("src", "main", "resources", "client.json");
+
 
     public JsonFileDatabase() {
         GsonBuilder builder = new GsonBuilder();
@@ -53,6 +56,19 @@ public class JsonFileDatabase implements DatabaseInterface {
     }
 
     @Override
+    public ArrayList<Client> getClients() {
+
+        ArrayList<Client> clients = new ArrayList<>();
+        try {
+            clients = gson.fromJson(Files.readString(CLIENT_DB_PATH), new TypeToken<List<Client>>() {
+            }.getType());
+        } catch (IOException e) {
+            System.out.println("error");
+        }
+        return clients;
+    }
+
+    @Override
     public void addTask(Task task) {
         // add (save) new Task in JSON file
         ArrayList<Task> tableTask = getTasks();
@@ -74,6 +90,20 @@ public class JsonFileDatabase implements DatabaseInterface {
         String json = gson.toJson(tableVehicle);
         try {
             Files.writeString(VEHICLE_DB_PATH, json);
+        } catch (Exception ex) {
+            System.out.println("Nie mozna zapisac do pliku.");
+        }
+
+    }
+
+    @Override
+    public void addClient(Client client) {
+        // add (save) new Client in JSON file
+        ArrayList<Client> tableClient = getClients();
+        tableClient.add(client);
+        String json = gson.toJson(tableClient);
+        try {
+            Files.writeString(CLIENT_DB_PATH, json);
         } catch (Exception ex) {
             System.out.println("Nie mozna zapisac do pliku.");
         }

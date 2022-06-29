@@ -11,6 +11,7 @@ public class MainMenu extends AbstractMenu {
         options.add(ConsoleOutput.ROW_SEPARATOR);
         options.add("1. Zlecenia naprawy");
         options.add("2. Baza pojazdow");
+        options.add("3. Baza Klientow");
         options.add("0. Zakoncz");
         options.add(ConsoleOutput.ROW_SEPARATOR);
     }
@@ -22,7 +23,7 @@ public class MainMenu extends AbstractMenu {
 
         do {
             showMainMenu(options);
-            option = ConsoleInput.getIntFromRange("Wybierz jedna z opcji (0-2): ", 0, 2);
+            option = ConsoleInput.getIntFromRange("Wybierz jedna z opcji (0-3): ", 0, 3);
 
             switch (option) {
                 case 1:
@@ -33,6 +34,11 @@ public class MainMenu extends AbstractMenu {
                 case 2:
                     VehicleMenu vehicleMenu = new VehicleMenu();
                     vehicleMenu.start();
+                    break;
+
+                case 3:
+                    ClientMenu clientMenu = new ClientMenu();
+                    clientMenu.start();
                     break;
 
                 default:

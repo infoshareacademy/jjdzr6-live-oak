@@ -1,26 +1,34 @@
 [
   {
     "id": 1,
-    "plateNumber": "PK234123",
+    "plateNumber": "PO123123",
     "manufacter": "Opel",
     "carName": "Corsa",
-    "engineCapacity": 1.2,
-    "productionYear": 2010
+    "engineCapacity": 4.0,
+    "productionYear": 2008
   },
   {
     "id": 2,
-    "plateNumber": "PO123123",
-    "manufacter": "Ford",
-    "carName": "Mustang",
-    "engineCapacity": 4.0,
-    "productionYear": 2001
+    "plateNumber": "DJ111222",
+    "manufacter": "Audi",
+    "carName": "A4",
+    "engineCapacity": 2.0,
+    "productionYear": 2000
   },
   {
     "id": 3,
-    "plateNumber": "AB111111",
-    "manufacter": "Audi",
-    "carName": "TT",
-    "engineCapacity": 2.0,
-    "productionYear": 1999
+    "plateNumber": "BB12345",
+    "manufacter": "Fiat",
+    "carName": "126p",
+    "engineCapacity": 0.8,
+    "productionYear": 1980
+  },
+  {
+    "id": 4,
+    "plateNumber": "WE23456",
+    "manufacter": "Volvo",
+    "carName": "S40",
+    "engineCapacity": 1.8,
+    "productionYear": 2009
   }
 ]

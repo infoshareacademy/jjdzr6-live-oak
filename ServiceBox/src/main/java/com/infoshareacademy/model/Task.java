@@ -1,6 +1,7 @@
 package com.infoshareacademy.model;
 
 import com.infoshareacademy.core.DatabaseInterface;
+import com.infoshareacademy.core.EntityManager;
 import com.infoshareacademy.core.JsonFileDatabase;
 import com.infoshareacademy.repository.VehicleRepository;
 
@@ -33,10 +34,8 @@ public class Task {
     }
 
     public Vehicle getVehicle() {
-        VehicleRepository repo = new VehicleRepository(new JsonFileDatabase());
-
         try {
-            return repo.findById(vehicleId);
+            return EntityManager.getInstance().getVehicleRepository().findById(vehicleId);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

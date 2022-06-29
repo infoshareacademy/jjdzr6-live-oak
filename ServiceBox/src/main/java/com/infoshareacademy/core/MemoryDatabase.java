@@ -24,4 +24,14 @@ public class MemoryDatabase implements DatabaseInterface {
     public void addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
     }
+
+    @Override
+    public void saveTasks() {
+        // nie obsługiwane w tej implementacji
+    }
+
+    @Override
+    public void saveVehicles() {
+        // nie obsługiwane w tej implementacji
+    }
 }

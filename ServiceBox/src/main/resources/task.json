@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "clientName": "Jan Kowalski",
-    "vehicleId": 2,
+    "clientName": "Adam Lis",
+    "vehicleId": 1,
     "repairDescription": "Wymiana klocków hamulcowych",
     "thingsToDo": [],
     "repairsPerformed": [],
-    "dateAcceptRepair": "2022-06-28"
+    "dateAcceptRepair": "2022-06-29"
   },
   {
     "id": 2,
@@ -15,6 +15,6 @@
     "repairDescription": "Wymiana oleju",
     "thingsToDo": [],
     "repairsPerformed": [],
-    "dateAcceptRepair": "2022-06-28"
+    "dateAcceptRepair": "2022-06-29"
   }
 ]

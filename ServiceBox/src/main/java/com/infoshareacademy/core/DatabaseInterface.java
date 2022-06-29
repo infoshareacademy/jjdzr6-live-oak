@@ -13,4 +13,8 @@ public interface DatabaseInterface {
     void addTask(Task task);
 
     void addVehicle(Vehicle vehicle);
+
+    void saveTasks();
+
+    void saveVehicles();
 }

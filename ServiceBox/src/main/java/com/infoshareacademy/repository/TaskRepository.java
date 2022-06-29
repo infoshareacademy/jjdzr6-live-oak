@@ -2,7 +2,6 @@ package com.infoshareacademy.repository;
 
 import com.infoshareacademy.core.DatabaseInterface;
 import com.infoshareacademy.model.Task;
-import com.infoshareacademy.model.Vehicle;
 
 import java.util.ArrayList;
 

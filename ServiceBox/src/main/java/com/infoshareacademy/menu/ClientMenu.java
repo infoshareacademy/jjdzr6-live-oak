@@ -34,12 +34,10 @@ public class ClientMenu extends AbstractMenu {
 
                     case 2:
                         clientService.showAllClients();
-                        System.out.println("Lista Klientow...");
                         break;
 
                     case 3:
                         clientService.findAndUpdateClient();
-                        System.out.println("Wyszukiwanie/aktualizacja Klienta...");
                         break;
 
                     default:

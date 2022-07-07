@@ -23,7 +23,7 @@ public class ClientService {
         }
 
         String name = ConsoleInput.getString("Wprowadz imie Klienta: ");
-        String email = ConsoleInput.getString("Wprowadz adres e-mail Klienta ");
+        String email = ConsoleInput.getEmail("Wprowadz adres e-mail Klienta ");
         String telephoneNumber = ConsoleInput.getString("Wprowadz nr telefonu Klienta: ");
 
         Client client = new Client(id, name, surname, email, telephoneNumber);

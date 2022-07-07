@@ -138,6 +138,22 @@ public class ConsoleInput {
         return capacity;
     }
 
+    public static String getEmail(String prompt) {
+        boolean isValid = false;
+        String email = null;
+
+        while (!isValid) {
+            email = getString(prompt);
+
+            if (email.contains("@")) {
+                isValid = true;
+            } else {
+                System.out.println("Adres e-mail musi zawierać znak: @");
+            }
+        }
+        return email;
+    }
+
     public static void waitForEnter() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nacisnij enter, aby kontynuowac...");

@@ -8,8 +8,8 @@ import java.util.Set;
 @Data
 public class RepairCard {
     private int id;
-    private Set<RepairItem> repairs = new HashSet<>();
-    private Set<RepairItem> parts = new HashSet<>();
+    private Set<Repair> repairs = new HashSet<>();
+    private Set<Part> parts = new HashSet<>();
 
     public float getTotalRepairCost()
     {
@@ -27,5 +27,4 @@ public class RepairCard {
 
         return totalCost;
     }
-
 }

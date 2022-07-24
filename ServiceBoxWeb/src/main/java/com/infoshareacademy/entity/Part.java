@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Part implements RepairItem {
-    private int id;
+    private int partId;
     private String partName;
     private float cost;
     private int quantity;

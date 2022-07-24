@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class ServiceOrder {
-    private int id;
+    private int serviceOrderId;
     private LocalDate createdAt = LocalDate.now();
     private LocalDate finishedAt;
     private ServiceOrderState state = ServiceOrderState.CREATED;

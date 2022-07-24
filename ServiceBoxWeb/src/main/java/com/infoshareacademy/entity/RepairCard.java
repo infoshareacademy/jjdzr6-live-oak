@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Data
 public class RepairCard {
-    private int id;
+    private int repairCardId;
     private Set<Repair> repairs = new HashSet<>();
     private Set<Part> parts = new HashSet<>();
 

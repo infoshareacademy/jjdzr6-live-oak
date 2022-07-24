@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Vehicle {
-    private int id;
+    private int vehicleId;
     private String make;
     private String model;
     private String plateNumber;

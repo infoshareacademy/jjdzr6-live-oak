@@ -1,9 +1,17 @@
 package com.infoshareacademy.entity;
 
-import lombok.Data;
+public enum Role {
+    ROLE_ADMIN("Administrator"),
+    ROLE_WORKER("Pracownik"),
+    ROLE_CLIENT("Klient");
 
-@Data
-public class Role {
-    private int id;
-    private String name;
+    private final String roleDescription;
+
+    Role(String roleDescription) {
+        this.roleDescription = roleDescription;
+    }
+
+    public String getRoleDescription() {
+        return roleDescription;
+    }
 }

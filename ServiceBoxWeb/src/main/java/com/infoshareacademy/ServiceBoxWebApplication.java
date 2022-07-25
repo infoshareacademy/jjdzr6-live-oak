@@ -8,6 +8,7 @@ public class ServiceBoxWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ServiceBoxWebApplication.class, args);
+
     }
 
 }

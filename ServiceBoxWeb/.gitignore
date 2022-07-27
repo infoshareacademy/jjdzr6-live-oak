@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+vehicle.json
+client.json
+service-order-json
+repair-card.json

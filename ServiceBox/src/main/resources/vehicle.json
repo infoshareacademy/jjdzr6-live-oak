@@ -30,5 +30,13 @@
     "carName": "S40",
     "engineCapacity": 1.8,
     "productionYear": 2009
+  },
+  {
+    "id": 5,
+    "plateNumber": "WOT",
+    "manufacter": "VOLVO",
+    "carName": "VOLVO",
+    "engineCapacity": 1.2,
+    "productionYear": 2020
   }
 ]

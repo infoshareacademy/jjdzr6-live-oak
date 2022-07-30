@@ -8,6 +8,8 @@ import com.infoshareacademy.repository.VehicleRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static com.infoshareacademy.model.TaskState.CREATED;
+
 
 public class Task {
     private final int id;
@@ -18,11 +20,14 @@ public class Task {
     private ArrayList<String> repairsPerformed;
     private LocalDate dateAcceptRepair;
 
-    public Task(int id, String clientName, Vehicle vehicle, String repairDescription) {
+    private TaskState state;
+
+    public Task(int id, String clientName, Vehicle vehicle, String repairDescription, TaskState state) {
         this.id = id;
         this.clientName = clientName;
         this.vehicleId = vehicle.getId();
         this.repairDescription = repairDescription;
+        this.state = state.CREATED;
 
         dateAcceptRepair = LocalDate.now();
         thingsToDo = new ArrayList<>();
@@ -39,6 +44,15 @@ public class Task {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public TaskState getState() {
+        return state;
+    }
+
+    public void setState(TaskState state) {
+        this.state = state;
     }
 
     public void setClientName(String clientName) {

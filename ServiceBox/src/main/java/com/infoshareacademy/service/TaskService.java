@@ -2,6 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.core.*;
 import com.infoshareacademy.model.Task;
+import com.infoshareacademy.model.TaskState;
 import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.TaskRepository;
 import com.infoshareacademy.repository.VehicleRepository;
@@ -15,6 +16,7 @@ public class TaskService {
 
     public void createTask() {
         int taskId = taskRepository.getNextId();
+        TaskState state = TaskState.CREATED;
         Vehicle vehicle;
 
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
@@ -35,7 +37,7 @@ public class TaskService {
         }
 
         // create a new Task
-        Task task = new Task(taskId, name, vehicle, repairDescription);
+        Task task = new Task(taskId, name, vehicle, repairDescription, state);
         // ...and add to the database
         database.addTask(task);
 

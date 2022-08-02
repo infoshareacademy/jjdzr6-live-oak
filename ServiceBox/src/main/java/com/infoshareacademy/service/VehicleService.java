@@ -7,9 +7,9 @@ import com.infoshareacademy.repository.VehicleRepository;
 import java.util.ArrayList;
 
 public class VehicleService {
+    private final DatabaseInterface database = EntityManager.getInstance().getDatabase();
+    private final VehicleRepository vehicleRepository = EntityManager.getInstance().getVehicleRepository();
 
-    private final DatabaseInterface database = new JsonFileDatabase();
-   private final VehicleRepository vehicleRepository = new VehicleRepository(database);
     public Vehicle createVehicle(String plateNumber) {
 
         int id = vehicleRepository.getNextId();
@@ -91,6 +91,8 @@ public class VehicleService {
                 default:
                     ConsoleOutput.alert("Zakonczono aktualizacje pojazdu o numerze rejestracyjnym: " + vehicle.getPlateNumber());
             }
+
+            database.saveVehicles();
             ConsoleOutput.alert("Dane zostaly zaktualizowane");
             ConsoleInput.waitForEnter();
         } while (option != 0);
@@ -112,7 +114,6 @@ public class VehicleService {
             ConsoleInput.waitForEnter();
         }
     }
-
 }
 
 

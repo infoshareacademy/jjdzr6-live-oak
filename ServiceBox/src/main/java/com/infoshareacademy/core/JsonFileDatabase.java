@@ -5,10 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
-import com.infoshareacademy.model.Client;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -16,97 +14,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonFileDatabase implements DatabaseInterface {
-    private final Gson gson;
     private static final Path TASK_DB_PATH = Path.of("src", "main", "resources", "task.json");
     private static final Path VEHICLE_DB_PATH = Path.of("src", "main", "resources", "vehicle.json");
-    private static final Path CLIENT_DB_PATH = Path.of("src", "main", "resources", "client.json");
-
+    private Gson gson;
+    private ArrayList<Task> tasks;
+    private ArrayList<Vehicle> vehicles;
 
     public JsonFileDatabase() {
+        initGson();
+        loadDataFromFiles();
+    }
+
+    @Override
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    @Override
+    public ArrayList<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    @Override
+    public void addTask(Task task) {
+        tasks.add(task);
+        saveTasks();
+    }
+
+    @Override
+    public void addVehicle(Vehicle vehicle) {
+        vehicles.add(vehicle);
+        saveVehicles();
+    }
+
+    public void saveVehicles() {
+        String json = gson.toJson(vehicles);
+
+        try {
+            Files.writeString(VEHICLE_DB_PATH, json);
+        } catch (Exception ex) {
+            System.out.println("Nie mozna zapisac do pliku " + VEHICLE_DB_PATH.toString());
+        }
+    }
+
+    public void saveTasks() {
+        String json = gson.toJson(tasks);
+
+        try {
+            Files.writeString(TASK_DB_PATH, json);
+        } catch (Exception ex) {
+            System.out.println("Nie mozna zapisac do pliku " + TASK_DB_PATH.toString());
+        }
+    }
+
+    private void initGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
         builder.registerTypeAdapter(LocalDate.class, new LocalDateConverter());
         gson = builder.create();
     }
 
-    @Override
-    public ArrayList<Task> getTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    private void loadDataFromFiles() {
         try {
-            tasks = gson.fromJson(Files.readString(TASK_DB_PATH), new TypeToken<List<Task>>() {
-            }.getType());
-        } catch (IOException e) {
-            System.out.println("error");
-        }
-
-        return tasks;
-    }
-
-    @Override
-    public ArrayList<Vehicle> getVehicles() {
-
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
-        try {
+            // load vehicles
             vehicles = gson.fromJson(Files.readString(VEHICLE_DB_PATH), new TypeToken<List<Vehicle>>() {
             }.getType());
-        } catch (IOException e) {
-            System.out.println("error");
-        }
-        return vehicles;
-    }
 
-    @Override
-    public ArrayList<Client> getClients() {
-
-        ArrayList<Client> clients = new ArrayList<>();
-        try {
-            clients = gson.fromJson(Files.readString(CLIENT_DB_PATH), new TypeToken<List<Client>>() {
+            // load tasks
+            tasks = gson.fromJson(Files.readString(TASK_DB_PATH), new TypeToken<List<Task>>() {
             }.getType());
+
+            // TODO: load clients
         } catch (IOException e) {
-            System.out.println("error");
+            System.out.println("Nie mozna zaladowac danych z plikow JSON");
         }
-        return clients;
-    }
-
-    @Override
-    public void addTask(Task task) {
-        // add (save) new Task in JSON file
-        ArrayList<Task> tableTask = getTasks();
-        tableTask.add(task);
-        String json = gson.toJson(tableTask);
-        try {
-            Files.writeString(TASK_DB_PATH, json);
-        } catch (Exception ex) {
-            System.out.println("Nie mozna zapisac do pliku.");
-        }
-
-    }
-
-    @Override
-    public void addVehicle(Vehicle vehicle) {
-        // add (save) new Vehicle in JSON file
-        ArrayList<Vehicle> tableVehicle = getVehicles();
-        tableVehicle.add(vehicle);
-        String json = gson.toJson(tableVehicle);
-        try {
-            Files.writeString(VEHICLE_DB_PATH, json);
-        } catch (Exception ex) {
-            System.out.println("Nie mozna zapisac do pliku.");
-        }
-
-    }
-
-    @Override
-    public void addClient(Client client) {
-        // add (save) new Client in JSON file
-        ArrayList<Client> tableClient = getClients();
-        tableClient.add(client);
-        String json = gson.toJson(tableClient);
-        try {
-            Files.writeString(CLIENT_DB_PATH, json);
-        } catch (Exception ex) {
-            System.out.println("Nie mozna zapisac do pliku.");
-        }
-
     }
 }

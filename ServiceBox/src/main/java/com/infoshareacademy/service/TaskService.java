@@ -9,10 +9,9 @@ import com.infoshareacademy.repository.VehicleRepository;
 import java.util.ArrayList;
 
 public class TaskService {
-
-    private final DatabaseInterface database = new JsonFileDatabase();
-    private final TaskRepository taskRepository = new TaskRepository(database);
-    private final VehicleRepository vehicleRepository = new VehicleRepository(database);
+    private final DatabaseInterface database = EntityManager.getInstance().getDatabase();
+    private final TaskRepository taskRepository = EntityManager.getInstance().getTaskRepository();
+    private final VehicleRepository vehicleRepository = EntityManager.getInstance().getVehicleRepository();
 
     public void createTask() {
         int taskId = taskRepository.getNextId();
@@ -79,6 +78,8 @@ public class TaskService {
                     ConsoleOutput.alert("Zakonczono aktualizacje zlecenia numer: " + task.getId());
             }
 
+            database.saveTasks();
+            database.saveVehicles();
             ConsoleOutput.alert("Dane zostaly zaktualizowane");
             ConsoleInput.waitForEnter();
         } while (option != 0);

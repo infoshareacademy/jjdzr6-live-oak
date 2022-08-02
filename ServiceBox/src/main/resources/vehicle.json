@@ -1,42 +1,34 @@
 [
   {
     "id": 1,
-    "plateNumber": "FNW1234",
+    "plateNumber": "PO123123",
     "manufacter": "Opel",
-    "carName": "Insignia",
-    "engineCapacity": 2.0,
-    "productionYear": 2015
+    "carName": "Corsa",
+    "engineCapacity": 4.0,
+    "productionYear": 2008
   },
   {
     "id": 2,
-    "plateNumber": "FZ4321",
-    "manufacter": "Fiat",
-    "carName": "Panda",
-    "engineCapacity": 1.0,
-    "productionYear": 2004
+    "plateNumber": "DJ111222",
+    "manufacter": "Audi",
+    "carName": "A4",
+    "engineCapacity": 2.0,
+    "productionYear": 2000
   },
   {
     "id": 3,
-    "plateNumber": "sddssd",
-    "manufacter": "ssd",
-    "carName": "dsdd",
-    "engineCapacity": 2.0,
-    "productionYear": 2022
+    "plateNumber": "BB12345",
+    "manufacter": "Fiat",
+    "carName": "126p",
+    "engineCapacity": 0.8,
+    "productionYear": 1980
   },
   {
     "id": 4,
-    "plateNumber": "dskddsk",
-    "manufacter": "sdksdksd",
-    "carName": "sddsdsk",
-    "engineCapacity": 2.0,
-    "productionYear": 1999
-  },
-  {
-    "id": 5,
-    "plateNumber": "dsdjsdsj",
-    "manufacter": "ddj",
-    "carName": "djsjd",
-    "engineCapacity": 111.0,
-    "productionYear": 2011
+    "plateNumber": "WE23456",
+    "manufacter": "Volvo",
+    "carName": "S40",
+    "engineCapacity": 1.8,
+    "productionYear": 2009
   }
 ]

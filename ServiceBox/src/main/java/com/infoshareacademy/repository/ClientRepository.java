@@ -2,6 +2,7 @@ package com.infoshareacademy.repository;
 
 import com.infoshareacademy.core.DatabaseInterface;
 import com.infoshareacademy.model.Client;
+import com.infoshareacademy.model.Vehicle;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,17 @@ public class ClientRepository {
             }
         }
 
-        throw new Exception("Nie znaleziono Klienta o podanym numerze (" + id + ")");
+        throw new Exception("Nie znaleziono pojazdu o podanym numerze (" + id + ")");
+    }
+
+    public Client findBySurname(String surname) throws Exception {
+        for (Client client : db.getClients()) {
+            if (surname.equals(client.getSurname())) {
+                return client;
+            }
+        }
+
+        throw new Exception("Nie znaleziono klienta o nazwisku (" + surname + ")");
     }
 
     public ArrayList<Client> findAll() {

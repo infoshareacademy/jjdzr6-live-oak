@@ -22,6 +22,10 @@ public class Client {
         return id;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
     @Override
     public String toString() {
         return "Client{" +

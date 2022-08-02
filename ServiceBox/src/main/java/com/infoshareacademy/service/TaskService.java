@@ -16,7 +16,6 @@ public class TaskService {
 
     public void createTask() {
         int taskId = taskRepository.getNextId();
-        TaskState state = TaskState.CREATED;
         Vehicle vehicle;
 
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
@@ -37,7 +36,7 @@ public class TaskService {
         }
 
         // create a new Task
-        Task task = new Task(taskId, name, vehicle, repairDescription, state);
+        Task task = new Task(taskId, name, vehicle, repairDescription);
         // ...and add to the database
         database.addTask(task);
 
@@ -161,5 +160,7 @@ public class TaskService {
             ConsoleInput.waitForEnter();
         }
     }
-}
+
+
+    }
 

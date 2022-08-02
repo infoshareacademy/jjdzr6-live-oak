@@ -22,12 +22,12 @@ public class Task {
 
     private TaskState state;
 
-    public Task(int id, String clientName, Vehicle vehicle, String repairDescription, TaskState state) {
+    public Task(int id, String clientName, Vehicle vehicle, String repairDescription) {
         this.id = id;
         this.clientName = clientName;
         this.vehicleId = vehicle.getId();
         this.repairDescription = repairDescription;
-        this.state = state.CREATED;
+        state = TaskState.CREATED;
 
         dateAcceptRepair = LocalDate.now();
         thingsToDo = new ArrayList<>();
@@ -75,5 +75,6 @@ public class Task {
                 ", vehicle=" + getVehicle() +
                 ", repairDescription='" + repairDescription + '\'' +
                 '}';
+
     }
 }

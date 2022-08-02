@@ -86,6 +86,7 @@ public class ClientService {
                 default:
                     ConsoleOutput.alert("Zakonczono aktualizacje Klienta o numerze ID" + client.getId());
             }
+            database.saveClients();
             ConsoleOutput.alert("Dane zostaly zaktualizowane");
             ConsoleInput.waitForEnter();
         } while (option != 0);

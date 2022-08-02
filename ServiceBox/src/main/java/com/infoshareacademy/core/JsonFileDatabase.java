@@ -50,6 +50,12 @@ public class JsonFileDatabase implements DatabaseInterface {
     }
 
     @Override
+    public void addVehicle(Vehicle vehicle) {
+        vehicles.add(vehicle);
+        saveVehicles();
+    }
+
+    @Override
     public void addClient(Client client) {
         clients.add(client);
         saveClients();

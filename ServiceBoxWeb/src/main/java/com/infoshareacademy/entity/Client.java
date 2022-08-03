@@ -1,23 +1,36 @@
 package com.infoshareacademy.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
-@Data
-public class Client {
-    private int clientId;
-    private User user;
+@Getter
+@Setter
+public class Client extends Entity {
+    // foreign key (one-to-one)
+    private int userId;
     private String name;
     private Address address;
     private String nip;
     private String phoneNumber;
     private String email;
     private boolean allowNotify = false;
-    private Set<Vehicle> vehicles = new HashSet<>();
 
+    public Client() {
+    }
+
+    public Client(String name, String phoneNumber, String email) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    /**
+     * To add a new car we must set client id in vehicle object,
+     * relation "one to many" - one client has many cars
+     *
+     * @param vehicle
+     */
     public void addVehicle(Vehicle vehicle) {
-        vehicles.add(vehicle);
+        vehicle.setClientId(getId());
     }
 }

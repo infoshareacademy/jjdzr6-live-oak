@@ -22,9 +22,6 @@ public class JsonFileHandlerConfiguration {
     @Value("${db.json.service-order:service-order.json}")
     private String orderJsonFile;
 
-    @Value("${db.json.repair-card:repair-card.json}")
-    private String repairCardJsonFile;
-
     @Bean
     public VehicleJsonFileHandler vehicleJsonFileHandler() {
         TypeReference ref = new TypeReference<ArrayList<Vehicle>>() {
@@ -44,12 +41,5 @@ public class JsonFileHandlerConfiguration {
         TypeReference ref = new TypeReference<ArrayList<ServiceOrder>>() {
         };
         return new ServiceOrderJsonFileHandler(orderJsonFile, ref);
-    }
-
-    @Bean
-    public RepairCardJsonFileHandler repairCardJsonFileHandler() {
-        TypeReference ref = new TypeReference<ArrayList<RepairCard>>() {
-        };
-        return new RepairCardJsonFileHandler(repairCardJsonFile, ref);
     }
 }

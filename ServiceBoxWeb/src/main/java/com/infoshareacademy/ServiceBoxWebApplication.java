@@ -1,9 +1,9 @@
 package com.infoshareacademy;
 
 import com.infoshareacademy.entity.*;
-import com.infoshareacademy.service.json.ClientJsonFileHandler;
-import com.infoshareacademy.service.json.ServiceOrderJsonFileHandler;
-import com.infoshareacademy.service.json.VehicleJsonFileHandler;
+import com.infoshareacademy.repository.ClientRepository;
+import com.infoshareacademy.repository.ServiceOrderRepository;
+import com.infoshareacademy.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,18 +15,18 @@ import java.io.IOException;
 public class ServiceBoxWebApplication {
     @Value("${app.createSampleDatabase:false}")
     private String createDb;
-    private final VehicleJsonFileHandler vehicleJsonFileHandler;
 
-    private final ClientJsonFileHandler clientJsonFileHandler;
-    private final ServiceOrderJsonFileHandler orderJsonFileHandler;
+    private final VehicleRepository vehicleRepository;
+    private final ClientRepository clientRepository;
+    private final ServiceOrderRepository orderRepository;
 
     public ServiceBoxWebApplication(
-            VehicleJsonFileHandler vehicleJsonFileHandler,
-            ClientJsonFileHandler clientJsonFileHandler,
-            ServiceOrderJsonFileHandler orderJsonFileHandler) {
-        this.vehicleJsonFileHandler = vehicleJsonFileHandler;
-        this.clientJsonFileHandler = clientJsonFileHandler;
-        this.orderJsonFileHandler = orderJsonFileHandler;
+            VehicleRepository vehicleRepository,
+            ClientRepository clientRepository,
+            ServiceOrderRepository orderRepository) {
+        this.vehicleRepository = vehicleRepository;
+        this.clientRepository = clientRepository;
+        this.orderRepository = orderRepository;
     }
 
     public static void main(String[] args) {
@@ -35,6 +35,8 @@ public class ServiceBoxWebApplication {
 
     @PostConstruct
     public void initDatabase() throws IOException {
+        Client c = clientRepository.find(1);
+        System.out.println(vehicleRepository.findClientVehicles(c));
         if (createDb.equals("false")) return;
 
         // create cars
@@ -49,8 +51,9 @@ public class ServiceBoxWebApplication {
         c2.setAddress(new Address("Warszawska", "10B", "", "60-685", "Poznań"));
 
         // add clients to JSON file
-        clientJsonFileHandler.add(c1);
-        clientJsonFileHandler.add(c2);
+        clientRepository.add(c1);
+        clientRepository.add(c2);
+        clientRepository.save();
 
         // create relations - assign vehicles to clients
         c1.addVehicle(opel);
@@ -58,9 +61,10 @@ public class ServiceBoxWebApplication {
         c2.addVehicle(fiat);
 
         // add (save) vehicles
-        vehicleJsonFileHandler.add(opel);
-        vehicleJsonFileHandler.add(audi);
-        vehicleJsonFileHandler.add(fiat);
+        vehicleRepository.add(opel);
+        vehicleRepository.add(audi);
+        vehicleRepository.add(fiat);
+        vehicleRepository.save();
 
         // create service order
         ServiceOrder order1 = new ServiceOrder(audi, "1/2022", true, 1000, "Wymiana klocków hamulcowych");
@@ -77,7 +81,8 @@ public class ServiceBoxWebApplication {
         ServiceOrder order2 = new ServiceOrder(fiat, "2/2022", false, 300, "Wymiana oleju");
 
         // save orders
-        orderJsonFileHandler.add(order1);
-        orderJsonFileHandler.add(order2);
+        orderRepository.add(order1);
+        orderRepository.add(order2);
+        orderRepository.save();
     }
 }

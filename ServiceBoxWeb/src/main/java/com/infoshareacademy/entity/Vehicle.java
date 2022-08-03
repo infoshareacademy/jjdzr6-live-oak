@@ -1,10 +1,12 @@
 package com.infoshareacademy.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Vehicle extends Entity {
     private String make;
     private String model;

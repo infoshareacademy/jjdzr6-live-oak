@@ -1,13 +1,25 @@
 package com.infoshareacademy.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Address {
-    private int addressId;
     private String street;
     private String houseNumber;
     private String flatNumber;
     private String zipCode;
     private String city;
+
+    public Address() {
+    }
+
+    public Address(String street, String houseNumber, String flatNumber, String zipCode, String city) {
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.flatNumber = flatNumber;
+        this.zipCode = zipCode;
+        this.city = city;
+    }
 }

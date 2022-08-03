@@ -1,10 +1,12 @@
 package com.infoshareacademy.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Client extends Entity {
     // foreign key (one-to-one)
     private int userId;

@@ -1,24 +1,42 @@
 package com.infoshareacademy.entity;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Data
-public class ServiceOrder {
-    private int serviceOrderId;
+@Getter
+@Setter
+@EqualsAndHashCode
+public class ServiceOrder extends Entity {
     private LocalDate createdAt = LocalDate.now();
     private LocalDate finishedAt;
     private ServiceOrderState state = ServiceOrderState.CREATED;
     private String orderNumber;
     private boolean onlyNewParts;
-    private float maxCost;
+    private double maxCost;
     private String description;
-    private Vehicle vehicle;
+
+    // foreign key (one-to-one)
+    private int vehicleId;
     private RepairCard repairCard;
 
-    public float getFinalCoast()
-    {
-        return repairCard.getTotalRepairCost();
+    public ServiceOrder() {
+    }
+
+    public ServiceOrder(Vehicle vehicle, String orderNumber, boolean onlyNewParts, float maxCost, String description) {
+        this.onlyNewParts = onlyNewParts;
+        this.maxCost = maxCost;
+        this.description = description;
+        this.vehicleId = vehicle.getId();
+        this.orderNumber = orderNumber;
+
+        createdAt = LocalDate.now();
+        state = ServiceOrderState.CREATED;
+    }
+
+    public void addRepairCard(RepairCard repairCard) {
+        this.repairCard = repairCard;
     }
 }

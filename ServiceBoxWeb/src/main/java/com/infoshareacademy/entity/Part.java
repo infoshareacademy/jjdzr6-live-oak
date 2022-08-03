@@ -1,16 +1,26 @@
 package com.infoshareacademy.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Part implements RepairItem {
-    private int partId;
     private String partName;
-    private float cost;
+    private double cost;
     private int quantity;
 
+    public Part() {
+    }
+
+    public Part(String partName, double cost, int quantity) {
+        this.partName = partName;
+        this.cost = cost;
+        this.quantity = quantity;
+    }
+
     @Override
-    public float getTotalCost() {
+    public double calculateTotalCost() {
         return quantity * cost;
     }
 }

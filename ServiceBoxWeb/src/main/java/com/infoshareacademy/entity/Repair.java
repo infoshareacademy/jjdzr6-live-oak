@@ -1,15 +1,24 @@
 package com.infoshareacademy.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Repair implements RepairItem {
-    private int repairId;
     private String description;
-    private float cost;
+    private double cost;
+
+    public Repair() {
+    }
+
+    public Repair(String description, double cost) {
+        this.description = description;
+        this.cost = cost;
+    }
 
     @Override
-    public float getTotalCost() {
+    public double calculateTotalCost() {
         return cost;
     }
 }

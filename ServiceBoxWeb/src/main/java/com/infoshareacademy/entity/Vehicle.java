@@ -22,7 +22,7 @@ public class Vehicle extends Entity {
     public Vehicle() {
     }
 
-    public Vehicle(String make, String model, String plateNumber, float engineCapacity, int productionYear) {
+    public Vehicle(String make, String model, String plateNumber, double engineCapacity, int productionYear) {
         this.make = make;
         this.model = model;
         this.plateNumber = plateNumber;

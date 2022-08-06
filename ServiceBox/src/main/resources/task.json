@@ -16,5 +16,15 @@
     "thingsToDo": [],
     "repairsPerformed": [],
     "dateAcceptRepair": "2022-06-29"
+  },
+  {
+    "id": 3,
+    "clientName": "Joanna Kazun",
+    "vehicleId": 5,
+    "repairDescription": "Zmiana statusu zlecenia - wymiana szyby",
+    "thingsToDo": [],
+    "repairsPerformed": [],
+    "dateAcceptRepair": "2022-07-30",
+    "state": "CREATED"
   }
 ]

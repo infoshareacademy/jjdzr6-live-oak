@@ -143,15 +143,15 @@ public class TaskService {
         }
     }
 
-    public void findTasksByOwnerName() {
+    public void findTasksByClient() {
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
-        System.out.println("Wyszukaj zlecenia po imieniu i nazwisku klienta");
+        System.out.println("Wyszukaj zlecenia po imieniu i nazwisku Klienta");
         System.out.println(ConsoleOutput.ROW_SEPARATOR);
 
-        String clientName = ConsoleInput.getString("Podaj imie i nazwisko klienta: ");
+        String clientName = ConsoleInput.getString("Podaj imie i nazwisko Klienta: ");
 
         try {
-            ArrayList<Task> foundedTasks = taskRepository.findByVehicleOwner(clientName);
+            ArrayList<Task> foundedTasks = taskRepository.findByClient(clientName);
             for (Task task : foundedTasks) {
                 System.out.println(task);
             }

@@ -48,7 +48,7 @@ public class TaskMenu extends AbstractMenu {
                     break;
 
                 case 5:
-                    taskService.findTasksByOwnerName();
+                    taskService.findTasksByClient();
                     break;
                 default:
             }

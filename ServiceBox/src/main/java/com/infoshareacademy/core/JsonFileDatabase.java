@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.infoshareacademy.model.Task;
 import com.infoshareacademy.model.Vehicle;
+import com.infoshareacademy.model.Client;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,9 +17,11 @@ import java.util.List;
 public class JsonFileDatabase implements DatabaseInterface {
     private static final Path TASK_DB_PATH = Path.of("src", "main", "resources", "task.json");
     private static final Path VEHICLE_DB_PATH = Path.of("src", "main", "resources", "vehicle.json");
+    private static final Path CLIENT_DB_PATH = Path.of("src","main", "resources", "client.json");
     private Gson gson;
     private ArrayList<Task> tasks;
     private ArrayList<Vehicle> vehicles;
+    private ArrayList<Client> clients;
 
     public JsonFileDatabase() {
         initGson();
@@ -36,6 +39,11 @@ public class JsonFileDatabase implements DatabaseInterface {
     }
 
     @Override
+    public ArrayList<Client> getClients(){
+        return clients;
+    }
+
+    @Override
     public void addTask(Task task) {
         tasks.add(task);
         saveTasks();
@@ -45,6 +53,12 @@ public class JsonFileDatabase implements DatabaseInterface {
     public void addVehicle(Vehicle vehicle) {
         vehicles.add(vehicle);
         saveVehicles();
+    }
+
+    @Override
+    public void addClient(Client client) {
+        clients.add(client);
+        saveClients();
     }
 
     public void saveVehicles() {
@@ -67,6 +81,16 @@ public class JsonFileDatabase implements DatabaseInterface {
         }
     }
 
+    public void saveClients() {
+        String json = gson.toJson(clients);
+
+        try {
+            Files.writeString(CLIENT_DB_PATH, json);
+        } catch (Exception ex) {
+            System.out.println("Nie mozna zapisac do pliku " + CLIENT_DB_PATH.toString());
+        }
+    }
+
     private void initGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
@@ -84,8 +108,10 @@ public class JsonFileDatabase implements DatabaseInterface {
             tasks = gson.fromJson(Files.readString(TASK_DB_PATH), new TypeToken<List<Task>>() {
             }.getType());
 
-            // TODO: load clients
-        } catch (IOException e) {
+            clients = gson.fromJson(Files.readString(CLIENT_DB_PATH), new TypeToken<List<Client>>() {
+            }.getType());
+
+            } catch (IOException e) {
             System.out.println("Nie mozna zaladowac danych z plikow JSON");
         }
     }

@@ -1,30 +1,41 @@
 package com.infoshareacademy.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 public class RepairCard {
-    private int repairCardId;
     private Set<Repair> repairs = new HashSet<>();
     private Set<Part> parts = new HashSet<>();
 
-    public float getTotalRepairCost()
-    {
-        float totalCost = 0;
+    public RepairCard() {
+    }
+
+    public double calculateTotalRepairCost() {
+        double totalCost = 0;
 
         // calculate repair cost
         for (RepairItem repair : repairs) {
-            totalCost += repair.getTotalCost();
+            totalCost += repair.calculateTotalCost();
         }
 
         // calculate parts cost
         for (RepairItem part : parts) {
-            totalCost += part.getTotalCost();
+            totalCost += part.calculateTotalCost();
         }
 
         return totalCost;
+    }
+
+    public void addRepair(Repair repair) {
+        repairs.add(repair);
+    }
+
+    public void addPart(Part part) {
+        parts.add(part);
     }
 }

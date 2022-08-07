@@ -17,16 +17,20 @@
             <table class="table table-bordered table-hover table-responsive">
                 <tr>
                     <th th:text="#{so.orderNumber}"></th>
+                    <th th:text="#{so.createdAt}"></th>
                     <th th:text="#{so.maxCost}"></th>
                     <th th:text="#{so.description}"></th>
                     <th th:text="#{so.onlyNewParts}"></th>
+                    <th th:text="#{so.state}"></th>
                 </tr>
                     <tr th:each="service : ${service}">
                     <td th:text="${service.orderNumber}"></td>
+                    <td th:text="${service.createdAt}"></td>
                     <td th:text="${service.maxCost}"></td>
                     <td th:text="${service.description}"></td>
                     <td th:if="${service.onlyNewParts}" th:text="#{form.yes}"></td>
                     <td th:unless="${service.onlyNewParts}" th:text="#{form.no}"></td>
+                    <td th:text="${service.state}"></td>
                 </tr>
             </table>
         </div>

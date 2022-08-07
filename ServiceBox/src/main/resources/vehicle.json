@@ -30,13 +30,5 @@
     "carName": "S40",
     "engineCapacity": 1.8,
     "productionYear": 2009
-  },
-  {
-    "id": 5,
-    "plateNumber": "sksks",
-    "manufacter": "jsjsjs",
-    "carName": "sjsdjs",
-    "engineCapacity": 2.0,
-    "productionYear": 1900
   }
 ]

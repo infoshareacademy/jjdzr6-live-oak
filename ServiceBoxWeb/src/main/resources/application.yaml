@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: dev
+
+  mail:
+    host: smtp.wp.pl
+    port: 465
+    username: servicebox-liveoak@wp.pl
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+
+mail:
+  from: servicebox-liveoak@wp.pl
+
+app:
+  createSampleDatabase: false

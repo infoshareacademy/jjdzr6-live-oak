@@ -2,6 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.core.*;
 import com.infoshareacademy.model.Task;
+import com.infoshareacademy.model.TaskState;
 import com.infoshareacademy.model.Vehicle;
 import com.infoshareacademy.repository.TaskRepository;
 import com.infoshareacademy.repository.VehicleRepository;
@@ -159,5 +160,7 @@ public class TaskService {
             ConsoleInput.waitForEnter();
         }
     }
-}
+
+
+    }
 

@@ -16,14 +16,5 @@
     "thingsToDo": [],
     "repairsPerformed": [],
     "dateAcceptRepair": "2022-06-29"
-  },
-  {
-    "id": 3,
-    "clientName": "P",
-    "vehicleId": 5,
-    "repairDescription": "jjjxsxxs",
-    "thingsToDo": [],
-    "repairsPerformed": [],
-    "dateAcceptRepair": "2022-08-02"
   }
 ]

@@ -21,7 +21,7 @@ public class ClientController {
 
     public String getClients(Model model){
 
-        model.addAttribute("client",clientRepository.findAll());
+        model.addAttribute("clients",clientRepository.findAll());
 
         return "employee/client-list";
     }

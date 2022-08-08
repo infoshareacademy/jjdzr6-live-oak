@@ -12,7 +12,24 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            Tutaj dodajemy swój kod
+            <table class="table table-bordered table-hover table-responsive">
+                <tr>
+                    <th th:text="#{cl.userId}"></th>
+                    <th th:text="#{cl.name}"></th>
+                    <th th:text="#{cl.nip}"></th>
+                    <th th:text="#{cl.address}"></th>
+                    <th th:text="#{cl.phoneNumber}"></th>
+                    <th th:text="#{cl.email}"></th>
+                </tr>
+                <tr th:each="client : ${clients}">
+                    <td th:text="${client.userID}"></td>
+                    <td th:text="${client.name}"></td>
+                    <td th:text="${client.nip}"></td>
+                    <td th:text="${client.address}"></td>
+                    <td th:text="${client.phoneNumber}"></td>
+                    <td th:text="${client.email}"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

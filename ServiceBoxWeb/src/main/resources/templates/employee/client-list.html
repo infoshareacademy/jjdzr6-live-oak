@@ -11,16 +11,18 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mt-5">
             <table class="table table-bordered table-hover table-responsive">
-                <tr>
-                    <th th:text="#{cl.userId}"></th>
-                    <th th:text="#{cl.name}"></th>
-                    <th th:text="#{cl.nip}"></th>
-                    <th th:text="#{cl.address}"></th>
-                    <th th:text="#{cl.phoneNumber}"></th>
-                    <th th:text="#{cl.email}"></th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th th:text="#{cl.userId}"></th>
+                        <th th:text="#{cl.name}"></th>
+                        <th th:text="#{cl.nip}"></th>
+                        <th th:text="#{cl.address}"></th>
+                        <th th:text="#{cl.phoneNumber}"></th>
+                        <th th:text="#{cl.email}"></th>
+                    </tr>
+                </thead>
                 <tr th:each="client : ${clients}">
                     <td th:text="${client.userId}"></td>
                     <td th:text="${client.name}"></td>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ServiceBox</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link th:href="@{/assets/fontawesome/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top" th:fragment="header">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1 fw-bold"><i class="fas fa-tools me-2"></i>ServiceBox</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 py-3">
+                    <li class="nav-item me-2">
+                        <a class="nav-link active" th:href="@{/employee}">Panel</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="nav-link" th:href="@{/employee/clients}">Baza klientów</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="nav-link" th:href="@{/employee/vehicles}">Baza pojazdów</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/employee/service-orders}">Zlecenia naprawy</a>
+                    </li>
+                </ul>
+                <a href="#" class="btn btn-secondary ms-lg-3 mb-3 mb-lg-0">Wyloguj<i class="fas fa-sign-out-alt ms-2"></i></a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

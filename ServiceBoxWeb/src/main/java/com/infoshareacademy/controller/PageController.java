@@ -14,4 +14,9 @@ public class PageController {
     public String employeeStartPage() {
         return "employee/start";
     }
+
+    @GetMapping("/template")
+    public String template() {
+        return "template";
+    }
 }

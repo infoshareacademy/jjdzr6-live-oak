@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ServiceBox</title>
+    <title>ServiceBox - panel pracownika</title>
 
     <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
     <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
@@ -29,21 +29,32 @@
                 <a th:href="@{/employee/service-orders}" class="btn  btn-primary btn-lg me-2">Zlecenia</a>
             </p>
         </div>
-
         <div class="col-md-5 offset-md-1">
             <div class="card mt-2 mt-lg-0">
                 <div class="card-header fw-bold">
                     Statystyki zleceń
                 </div>
                 <div class="card-body">
-                    <ul>
-                        <li>Nowe zlecenie: 0</li>
-                        <li>Oczekujące na części: 0</li>
-                        <li>W trakcie realizacji: 0</li>
-                        <li>Zlecenie zamknięte: 0</li>
-                    </ul>
-                    <hr>
-                    <p class="my-0">Wartość zamkniętych zleceń: 0 zł</p>
+                    <table class="table table-hover mb-0">
+                        <tbody>
+                            <tr>
+                                <td>Nowe zlecenia:</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Oczekujące na części:</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>W trakcie realizacji:</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Zakończone zlecenia:</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

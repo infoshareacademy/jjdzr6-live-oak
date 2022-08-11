@@ -8,7 +8,19 @@ body {
 }
 
 .header__options {
+}
 
+.btn-lg {
+    border-radius: 20px !important;
+    padding: 5px 25px;
+}
+
+.card tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+.navbar-nav .nav-link.active {
+    border-bottom: 2px solid #49247A;
 }
 
 .btn-primary {

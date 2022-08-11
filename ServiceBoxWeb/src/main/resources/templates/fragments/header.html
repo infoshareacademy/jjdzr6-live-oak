@@ -26,19 +26,27 @@
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 py-3">
                     <li class="nav-item me-2">
-                        <a class="nav-link active" th:href="@{/employee}">Panel</a>
+                        <a class="nav-link" th:href="@{/employee}"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/employee' ? 'active' : ''}">Panel</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="nav-link" th:href="@{/employee/clients}">Baza klientów</a>
+                        <a class="nav-link" th:href="@{/employee/clients}"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/employee/clients' ? 'active' : ''}">Baza
+                            klientów</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="nav-link" th:href="@{/employee/vehicles}">Baza pojazdów</a>
+                        <a class="nav-link" th:href="@{/employee/vehicles}"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/employee/vehicles' ? 'active' : ''}">Baza
+                            pojazdów</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/employee/service-orders}">Zlecenia naprawy</a>
+                        <a class="nav-link" th:href="@{/employee/service-orders}"
+                           th:classappend="${#httpServletRequest.getRequestURI() == '/employee/service-orders' ? 'active' : ''}">Zlecenia
+                            naprawy</a>
                     </li>
                 </ul>
-                <a href="#" class="btn btn-primary ms-lg-3 mb-3 mb-lg-0">Wyloguj<i class="fas fa-sign-out-alt ms-2"></i></a>
+                <a href="#" class="btn btn-outline-secondary ms-lg-3 mb-3 mb-lg-0">Wyloguj<i
+                        class="fas fa-sign-out-alt ms-2"></i></a>
             </div>
         </div>
     </nav>

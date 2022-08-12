@@ -10,12 +10,8 @@
 </head>
 <body>
 <div class="container">
-    <a th:href="@{/}">
-       <button type="button" class="btn btn-outline-primary me-2" th:text="#{btn.label.return}"></button>
-    </a>
     <div class="row">
-
-        <div class="col-md-12 d-flex justify-content-center align-items-left vh-100 flex-column">
+        <div class="col-md-12 d-flex justify-content-start align-items-left vh-100 flex-column">
             <h1 th:text="#{vehicle.headline}"></h1>
             <table class="table table-bordered table-hover table-responsive">
                 <thead>
@@ -37,6 +33,9 @@
                 </tr>
                 </tbody>
             </table>
+            <a th:href="@{/}">
+                <button type="button" class="btn btn-outline-primary me-2" th:text="#{btn.label.return}"></button>
+            </a>
         </div>
     </div>
 </div>

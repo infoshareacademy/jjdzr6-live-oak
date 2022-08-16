@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-md-12 d-flex mt-5">
+    <div class="col-md-12 d-flex mt-5 row-cols-lg-5 g-2">
         <table class="table table-bordered table-hover table-responsive">
            <thead>
            <tr>
@@ -31,7 +31,8 @@
                 <td th:if="${service.onlyNewParts}" th:text="#{form.yes}"></td>
                 <td th:unless="${service.onlyNewParts}" th:text="#{form.no}"></td>
                 <td th:text="${service.state.description}"></td>
-            </tr>
+                <td th:button type="button" class="btn btn-outline-primary me-2" th:text="#{btn.label.vehicles.data}"></button></td>
+             </tr>
             </tbody>
         </table>
     </div>

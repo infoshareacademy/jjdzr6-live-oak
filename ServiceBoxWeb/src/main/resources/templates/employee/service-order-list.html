@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-md-12 d-flex mt-5 justify-content-start align-items-left vh-100 flex-column">
+    <div class="col-md-12 d-flex mt-5 justify-content-start align-items-left flex-column">
         <h1 th:text="#{so.headline}"></h1>
         <table class="table table-bordered table-hover table-responsive">
            <thead>
@@ -24,7 +24,7 @@
            </tr>
            </thead>
             <tbody>
-            <tr th:each="service : ${services}">
+            <tr th:each="service : ${serviceOrders}">
                 <td th:text="${service.orderNumber}"></td>
                 <td th:text="${service.createdAt}"></td>
                 <td th:text="${service.maxCost}"></td>
@@ -32,7 +32,9 @@
                 <td th:if="${service.onlyNewParts}" th:text="#{form.yes}"></td>
                 <td th:unless="${service.onlyNewParts}" th:text="#{form.no}"></td>
                 <td th:text="${service.state.description}"></td>
-                <td th:button type="button" class="btn btn-outline-primary me-2" th:text="#{btn.label.vehicles.data}"></button></td>
+                <td>
+                    <a th:href="@{/}" class="btn btn-outline-primary me-2" th:text="#{btn.label.vehicles.data}"></a>
+                </td>
              </tr>
             </tbody>
         </table>

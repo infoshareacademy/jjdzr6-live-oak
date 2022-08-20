@@ -41,4 +41,5 @@ public class ServiceOrder extends Entity {
     public void addRepairCard(RepairCard repairCard) {
         this.repairCard = repairCard;
     }
+
 }

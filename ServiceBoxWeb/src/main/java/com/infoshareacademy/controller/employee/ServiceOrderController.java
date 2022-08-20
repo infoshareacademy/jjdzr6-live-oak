@@ -1,5 +1,6 @@
 package com.infoshareacademy.controller.employee;
 
+
 import com.infoshareacademy.repository.ServiceOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,9 @@ public class ServiceOrderController {
 
     @GetMapping("service-orders")
 
-    public String getOrders(Model model){
-
-        model.addAttribute("services",serviceOrderRepository.findAll());
-
+    public String getOrders(Model model) {
+        model.addAttribute("serviceOrders", serviceOrderRepository.findAll());
         return "employee/service-order-list";
     }
+
 }

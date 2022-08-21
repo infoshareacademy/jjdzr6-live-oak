@@ -22,9 +22,9 @@
         <div class="col-md-12">
 
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <h1>Baza klientów</h1>
+                <h1 th:text="#{cl.headline}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee}" class="btn btn-primary btn-lg">Powrót</a>
+                    <a th:href="@{/employee}" class="btn btn-primary btn-lg" th:text="#{btn.label.return}"></a>
                 </div>
             </header>
 

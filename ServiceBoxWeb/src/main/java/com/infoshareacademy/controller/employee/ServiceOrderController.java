@@ -1,7 +1,7 @@
 package com.infoshareacademy.controller.employee;
 
 
-import com.infoshareacademy.repository.ServiceOrderRepository;
+import com.infoshareacademy.service.ServiceOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("employee/")
 public class ServiceOrderController {
-    private final ServiceOrderRepository serviceOrderRepository;
+
+    private final ServiceOrderService serviceOrderService;
 
     @Autowired
-    public ServiceOrderController(ServiceOrderRepository serviceOrderRepository) {
-        this.serviceOrderRepository = serviceOrderRepository;
+    public ServiceOrderController(ServiceOrderService serviceOrderService) {
+        this.serviceOrderService = serviceOrderService;
     }
+
 
     @GetMapping("service-orders")
 
     public String getOrders(Model model) {
-        model.addAttribute("serviceOrders", serviceOrderRepository.findAll());
+        model.addAttribute("serviceOrders", serviceOrderService.findAll());
         return "employee/service-order-list";
     }
 

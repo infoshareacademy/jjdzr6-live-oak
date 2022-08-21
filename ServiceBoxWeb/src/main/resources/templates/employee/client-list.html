@@ -3,17 +3,34 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ServiceBox - Lista klientów</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    <title>ServiceBox</title>
+
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Inter&display=swap}" rel="stylesheet">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css}" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link th:href="@{/assets/fontawesome/css/all.min.css}" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container">
     <div class="row">
-        <div class="col-md-12 mt-5">
-            <table class="table table-bordered table-hover table-responsive">
-                <thead>
+        <div class="col-md-12">
+
+            <header class="d-flex justify-content-between mt-5 mb-3">
+                <h1>Baza klientów</h1>
+                <div class="header__options">
+                    <a th:href="@{/employee}" class="btn btn-primary btn-lg">Powrót</a>
+                </div>
+            </header>
+
+            <section class="py-3">
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
                     <tr>
                         <th th:text="#{cl.userId}"></th>
                         <th th:text="#{cl.name}"></th>
@@ -22,20 +39,22 @@
                         <th th:text="#{cl.phoneNumber}"></th>
                         <th th:text="#{cl.email}"></th>
                     </tr>
-                </thead>
-                <tr th:each="client : ${clients}">
-                    <td th:text="${client.userId}"></td>
-                    <td th:text="${client.name}"></td>
-                    <td th:text="${client.nip}"></td>
-                    <td th:text="${client.address}"></td>
-                    <td th:text="${client.phoneNumber}"></td>
-                    <td th:text="${client.email}"></td>
-                </tr>
-            </table>
+                    </thead>
+                    <tr th:each="client : ${clients}">
+                        <td th:text="${client.userId}"></td>
+                        <td th:text="${client.name}"></td>
+                        <td th:text="${client.nip}"></td>
+                        <td th:text="${client.address}"></td>
+                        <td th:text="${client.phoneNumber}"></td>
+                        <td th:text="${client.email}"></td>
+                    </tr>
+                </table>
+            </section>
         </div>
     </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+</main>
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js}"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
 </body>

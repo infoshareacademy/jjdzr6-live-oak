@@ -29,29 +29,33 @@
             </header>
 
             <section class="py-3">
+                <div th:if="${#lists.isEmpty(vehicles)}">
+                    <p class="alert alert-info" th:text="#{vehicle.list}"></p>
+                </div>
+                <div th:if="${not #lists.isEmpty(vehicles)}">
                 <table class="table table-bordered table-hover table-responsive">
-                    <thead>
-                    <tr>
-                        <th th:text="#{vehicle.make}"></th>
-                        <th th:text="#{vehicle.model}"></th>
-                        <th th:text="#{vehicle.plateNumber}"></th>
-                        <th th:text="#{vehicle.engineCapacity}"></th>
-                        <th th:text="#{vehicle.productionYear}"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="vehicle:${vehicles}">
-                        <td th:text="${vehicle.make}"></td>
-                        <td th:text="${vehicle.model}"></td>
-                        <td th:text="${vehicle.plateNumber}"></td>
-                        <td th:text="${vehicle.engineCapacity}"></td>
-                        <td th:text="${vehicle.productionYear}"></td>
-                    </tr>
-                    </tbody>
+                        <thead>
+                        <tr>
+                            <th th:text="#{vehicle.make}"></th>
+                            <th th:text="#{vehicle.model}"></th>
+                            <th th:text="#{vehicle.plateNumber}"></th>
+                            <th th:text="#{vehicle.engineCapacity}"></th>
+                            <th th:text="#{vehicle.productionYear}"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="vehicle:${vehicles}">
+                            <td th:text="${vehicle.make}"></td>
+                            <td th:text="${vehicle.model}"></td>
+                            <td th:text="${vehicle.plateNumber}"></td>
+                            <td th:text="${vehicle.engineCapacity}"></td>
+                            <td th:text="${vehicle.productionYear}"></td>
+                        </tr>
+                        </tbody>
                 </table>
-
-            </section>
         </div>
+        </section>
+    </div>
     </div>
 </main>
 

@@ -1,7 +1,10 @@
 package com.infoshareacademy.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.ArrayList;
 
 @Controller
 public class PageController {
@@ -16,7 +19,9 @@ public class PageController {
     }
 
     @GetMapping("/template")
-    public String template() {
+    public String template(Model model) {
+        ArrayList<String> vehicles = new ArrayList<>();
+        model.addAttribute("lista", vehicles);
         return "template";
     }
 }

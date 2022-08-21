@@ -28,33 +28,42 @@
                 </div>
             </header>
 
+
             <section class="py-3">
-                <table class="table table-bordered table-hover table-responsive">
-                    <thead>
-                    <tr>
-                        <th th:text="#{so.orderNumber}"></th>
-                        <th th:text="#{so.createdAt}"></th>
-                        <th th:text="#{so.maxCost}"></th>
-                        <th th:text="#{so.description}"></th>
-                        <th th:text="#{so.onlyNewParts}"></th>
-                        <th th:text="#{so.state}"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="service : ${serviceOrders}">
-                        <td th:text="${service.orderNumber}"></td>
-                        <td th:text="${service.createdAt}"></td>
-                        <td th:text="${service.maxCost}"></td>
-                        <td th:text="${service.description}"></td>
-                        <td th:if="${service.onlyNewParts}" th:text="#{form.yes}"></td>
-                        <td th:unless="${service.onlyNewParts}" th:text="#{form.no}"></td>
-                        <td th:text="${service.state.description}"></td>
-                        <td>
-                            <a th:href="@{/}" class="btn btn-outline-primary me-2" th:text="#{btn.label.vehicles.data}"></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div th:if="${#lists.isEmpty(serviceOrders)}">
+                    <p class="alert alert-info" th:text="#{so.list}">
+                    </p>
+                </div>
+
+                <div th:if="${not #lists.isEmpty(serviceOrders)}">
+                    <table class="table table-bordered table-hover table-responsive">
+                        <thead>
+                        <tr>
+                            <th th:text="#{so.orderNumber}"></th>
+                            <th th:text="#{so.createdAt}"></th>
+                            <th th:text="#{so.maxCost}"></th>
+                            <th th:text="#{so.description}"></th>
+                            <th th:text="#{so.onlyNewParts}"></th>
+                            <th th:text="#{so.state}"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="service : ${serviceOrders}">
+                            <td th:text="${service.orderNumber}"></td>
+                            <td th:text="${service.createdAt}"></td>
+                            <td th:text="${service.maxCost}"></td>
+                            <td th:text="${service.description}"></td>
+                            <td th:if="${service.onlyNewParts}" th:text="#{form.yes}"></td>
+                            <td th:unless="${service.onlyNewParts}" th:text="#{form.no}"></td>
+                            <td th:text="${service.state.description}"></td>
+                            <td>
+                                <a th:href="@{/}" class="btn btn-outline-primary me-2"
+                                   th:text="#{btn.label.vehicles.data}"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
         </div>
     </div>

@@ -1,7 +1,6 @@
 package com.infoshareacademy.controller.employee;
 
-import com.infoshareacademy.repository.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.infoshareacademy.service.VehicleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,17 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class VehicleController {
 
-    private final VehicleRepository vehicleRepository;
+    private final VehicleService vehicleService;
 
-    @Autowired
-    public VehicleController(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
+    public VehicleController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
     }
-
 
     @GetMapping("/vehicles")
     public String getVehicles(Model model) {
-        model.addAttribute("vehicles", vehicleRepository.findAll());
+        model.addAttribute("vehicles", vehicleService.findAll());
         return "employee/vehicle-list";
     }
 }

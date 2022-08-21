@@ -18,8 +18,13 @@ public class Address {
     public Address(String street, String houseNumber, String flatNumber, String zipCode, String city) {
         this.street = street;
         this.houseNumber = houseNumber;
-        this.flatNumber = flatNumber;
+        this.flatNumber =  flatNumber;
         this.zipCode = zipCode;
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "ul. " + street + " " + houseNumber  + " " + flatNumber + ", " + zipCode + " " + city;
     }
 }

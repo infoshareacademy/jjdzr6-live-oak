@@ -6,7 +6,10 @@ import com.infoshareacademy.service.ServiceOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -32,4 +35,15 @@ public class ServiceOrderController {
         model.addAttribute("newServiceOrder", new ServiceOrder());
         return "employee/service-order-add";
     }
+
+    @PostMapping("add")
+    public String addNewServiceOrder(@ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "employee/service-order-add";
+        }
+
+        serviceOrderService.addServiceOrder(serviceOrder);
+        return "redirect:/employee/service-orders";
+    }
+
 }

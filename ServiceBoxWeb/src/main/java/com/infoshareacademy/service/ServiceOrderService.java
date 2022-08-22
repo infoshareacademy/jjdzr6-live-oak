@@ -19,4 +19,8 @@ public class ServiceOrderService {
     public List<ServiceOrder> findAll(){
         return serviceOrderRepository.findAll();
     }
+
+    public void addServiceOrder(ServiceOrder serviceOrder){
+        serviceOrderRepository.add(serviceOrder);
+    }
 }

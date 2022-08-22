@@ -21,21 +21,55 @@
     <div class="row">
         <div class="col-md-12">
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <h1>Treść nagłówka</h1>
-                <div class="header__options">
-                    <a href="#" class="btn btn-primary btn-lg">Przycisk</a>
-                </div>
-
+                <h1 th:text="#{so.addServiceOrder}"></h1>
             </header>
             <div>
                 <form th:object="${newServiceOrder}" th:action="@{/employee/add}" method="post">
 
                     <section class="py-3">
+                        <div class="col-md-2 mb-3 mt-3">
+                            <label for="orderNumber" class="form-label" th:text="#{so.orderNumber}"></label>
+                            <input type="text" class="form-control form-control-lg" id="orderNumber"
+                                   th:field="*{orderNumber}" th:errorclass="is-invalid">
+                            <div class="form-text text-danger" th:if="${#fields.hasErrors('description')}"
+                                 th:text="#{errors.required}"></div>
+                        </div>
 
-                        Tutaj dodajemy swój kod
+                        <div class="col-md-3 mb-3 mt-3">
+                            <label th:text="#{so.onlyNewParts}"></label>
+                        </div>
 
+                        <div class="form-check mb-3 mt-3">
+                            <input class="form-check-input" type="checkbox" value="" id="so.yes.onlyNewParts">
+                            <label class="form-check-label" for="so.yes.onlyNewParts" th:text="#{so.yes.onlyNewParts}">
+                            </label></div>
+
+                        <div class="form-check mb-3 mt-3">
+                            <input class="form-check-input" type="checkbox" value="" id="so.no.onlyNewParts">
+                            <label class="form-check-label" for="so.no.onlyNewParts" th:text="#{so.no.onlyNewParts}">
+                            </label>
+                        </div>
+
+                        <div class="col-md-2 mb-3 mt-3">
+                            <label for="maxCost" class="form-label" th:text="#{so.maxCost}"></label>
+                            <input type="text" class="form-control form-control-lg" id="maxCost" th:field="*{maxCost}"
+                                   placeholder="00.00" th:errorclass="is-invalid">
+                            <div class="form-text text-danger" th:if="${#fields.hasErrors('description')}"
+                                 th:text="#{errors.required}"></div>
+                        </div>
+
+                        <div class="col-md-5 mb-3 mt-3">
+                            <label for="orderDescription" class="form-label" th:text="#{so.description}"></label>
+                            <textarea class="form-control" id="orderDescription" rows="3" th:field="*{description}"
+                                      th:errorclass="is-invalid"></textarea>
+                            <div class="form-text text-danger" th:if="${#fields.hasErrors('description')}"
+                                 th:text="#{errors.required}"></div>
+                        </div>
+
+                        <div class="col-md-12 mb-3 mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg" th:text="#{submit.button}"></button>
+                        </div>
                     </section>
-
                 </form>
             </div>
         </div>

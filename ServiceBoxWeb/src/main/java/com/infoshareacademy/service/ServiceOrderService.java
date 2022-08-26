@@ -23,4 +23,8 @@ public class ServiceOrderService {
     public void addServiceOrder(ServiceOrder serviceOrder){
         serviceOrderRepository.add(serviceOrder);
     }
+
+    public ServiceOrder findId(Integer id){
+        return  serviceOrderRepository.find(id);
+    }
 }

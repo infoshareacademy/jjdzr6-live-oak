@@ -3,8 +3,10 @@ package com.infoshareacademy.entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Getter
@@ -15,9 +17,17 @@ public class ServiceOrder extends Entity {
     private LocalDate createdAt = LocalDate.now();
     private LocalDate finishedAt;
     private ServiceOrderState state = ServiceOrderState.CREATED;
+
+    @NotNull
     private String orderNumber;
+
+    @NotNull
     private boolean onlyNewParts;
+    @NotNull
     private double maxCost;
+
+    @NotBlank
+    @Size(min = 8, max = 400)
     private String description;
 
     // foreign key (one-to-one)

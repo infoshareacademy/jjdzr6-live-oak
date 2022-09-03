@@ -1,10 +1,14 @@
 package com.infoshareacademy.controller.employee;
 
+import com.infoshareacademy.entity.Client;
 import com.infoshareacademy.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,5 +28,22 @@ public class ClientController {
         model.addAttribute("clients",clientService.findAll());
 
         return "employee/client-list";
+    }
+
+    @GetMapping("add")
+    public String getNewClient(Model model) {
+        model.addAttribute("newClient", new Client());
+        return "employee/service-order-add";
+    }
+
+    @PostMapping("add")
+    public String addNewClient(@ModelAttribute("newClient") Client client, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "employee/client-add";
+        }
+
+        clientService.addClient(client);
+        return "redirect:/employee/clients";
     }
 }

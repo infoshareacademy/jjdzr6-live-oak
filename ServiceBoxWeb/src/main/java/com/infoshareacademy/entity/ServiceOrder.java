@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,12 +19,14 @@ public class ServiceOrder extends Entity {
     private LocalDate finishedAt;
     private ServiceOrderState state = ServiceOrderState.CREATED;
 
-    @NotNull
+    @NotBlank
     private String orderNumber;
 
     @NotNull
     private boolean onlyNewParts;
+
     @NotNull
+    @Min(1)
     private double maxCost;
 
     @NotBlank

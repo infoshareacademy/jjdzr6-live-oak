@@ -30,36 +30,37 @@
 
                         <div class="col-md-2 mb-3 mt-3">
                             <label for="orderNumber" class="form-label" th:text="#{so.orderNumber}"></label>
-                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('description')}"
+                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('orderNumber')}"
                                  th:text="#{errors.orderNumber}">
                             </div>
                             <input type="text" class="form-control form-control-lg" id="orderNumber"
                                    th:field="*{orderNumber}" th:errorclass="is-invalid">
                         </div>
 
-                        <div class="col-md-3 mb-3 mt-3">
+                       <!-- <div class="col-md-3 mb-3 mt-3">
                             <label th:text="#{so.onlyNewParts}"></label>
-
-                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('description')}"
+&lt;!&ndash;
+                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('onlyNewParts')}"
                                  th:text="#{errors.onlyNewParts}">
-                            </div>
-                        </div>
+                            </div>&ndash;&gt;
+                        </div>-->
 
                         <div class="form-check mb-3 mt-3">
-                            <input class="form-check-input" type="checkbox" value="" id="so.yes.onlyNewParts">
-                            <label class="form-check-label" for="so.yes.onlyNewParts" th:text="#{so.yes.onlyNewParts}">
+                            <input name = "onlyNewParts" class="form-check-input" type="checkbox" value="" id="so.onlyNewParts"
+                                   th:field="*{onlyNewParts}">
+                            <label class="form-check-label" for="so.onlyNewParts" th:text="#{so.onlyNewParts}">
                             </label>
                         </div>
 
-                        <div class="form-check mb-3 mt-3">
-                            <input class="form-check-input" type="checkbox" value="" id="so.no.onlyNewParts">
+                     <!--   <div class="form-check mb-3 mt-3">
+                            <input name = "onlyNewParts" class="form-check-input" type="radio" value="" id="so.no.onlyNewParts">
                             <label class="form-check-label" for="so.no.onlyNewParts" th:text="#{so.no.onlyNewParts}">
                             </label>
-                        </div>
+                        </div>-->
 
                         <div class="col-md-2 mb-3 mt-3">
                             <label for="maxCost" class="form-label" th:text="#{so.maxCost}"></label>
-                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('description')}"
+                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('maxCost')}"
                                  th:text="#{errors.required}"></div>
                             <input type="text" class="form-control form-control-lg" id="maxCost" th:field="*{maxCost}"
                                    th:placeholder="00.00" th:errorclass="is-invalid">

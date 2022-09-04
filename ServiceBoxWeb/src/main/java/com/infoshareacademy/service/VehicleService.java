@@ -19,4 +19,7 @@ public class VehicleService {
     public List<Vehicle> findAll() {
         return vehicleRepository.findAll();
     }
+    public void addVehicle(Vehicle vehicle) {
+        vehicleRepository.add(vehicle);
+    }
 }

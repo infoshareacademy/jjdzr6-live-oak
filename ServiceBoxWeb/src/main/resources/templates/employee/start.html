@@ -23,6 +23,9 @@
             <h1>Panel pracownika</h1>
             <p>Znajdujesz się w panelu pracownika. Jako pracownik tego warsztatu możesz zarządzać bazą klientów,
                 pojazdów oraz tworzyć nowe zlecenia naprawy.</p>
+            <p>
+                Zalogowany jako: <span sec:authentication="name" class="fw-bold">Bob</span>
+            </p>
             <p class="mt-2 mt-lg-5">
                 <a th:href="@{/employee/clients}" class="btn btn-outline-secondary btn-lg me-2">Klienci</a>
                 <a th:href="@{/employee/vehicles}" class="btn btn-outline-secondary btn-lg me-2">Pojazdy</a>

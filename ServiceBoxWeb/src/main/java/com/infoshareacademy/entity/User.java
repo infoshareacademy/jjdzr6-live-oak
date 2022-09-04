@@ -10,7 +10,7 @@ import java.util.Set;
 public class User extends Entity {
     private String username;
     private String password;
-    private Set<Role> roles;
+    private Set<UserRole> roles;
 
     public User() {
     }
@@ -19,6 +19,6 @@ public class User extends Entity {
         this.username = username;
         this.password = password;
 
-        roles.add(Role.ROLE_CLIENT);
+        roles.add(UserRole.CLIENT);
     }
 }

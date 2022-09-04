@@ -38,7 +38,7 @@
                     <table class="table table-bordered table-hover table-responsive">
                         <thead>
                         <tr>
-                            <th th:text="#{cl.userId}"></th>
+                            <th th:text="#{cl.id}"></th>
                             <th th:text="#{cl.name}"></th>
                             <th th:text="#{cl.nip}"></th>
                             <th th:text="#{cl.address}"></th>
@@ -47,7 +47,7 @@
                         </tr>
                         </thead>
                         <tr th:each="client : ${clients}">
-                            <td th:text="${client.userId}"></td>
+                            <td th:text="${client.id}"></td>
                             <td th:text="${client.name}"></td>
                             <td th:text="${client.nip}"></td>
                             <td th:text="${client.address}"></td>

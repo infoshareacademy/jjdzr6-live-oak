@@ -33,7 +33,7 @@ public class ClientController {
     @GetMapping("add")
     public String getNewClient(Model model) {
         model.addAttribute("newClient", new Client());
-        return "employee/service-order-add";
+        return "employee/client-add";
     }
 
     @PostMapping("add")

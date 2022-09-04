@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ServiceBox</title>
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Inter&display=swap}" rel="stylesheet">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css}" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link th:href="@{/assets/fontawesome/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<main class="container">
+    <main class="row">
+        <div class="col-md-12">
+            <header class="d-flex justify-content-between mt-5 mb-3">
+                <h1 th:text="#{vehicle.addVehicle}"></h1>
+            </header>
+            <div>
+                <form th:object="${newVehicle}" th:action="@{/employee/add}" method="post">
+                    <div class="py-3">
+                        <div class="col-md-3 mb-3 mt-3">
+                            <label for="make" class="form-label" th:text="#{vehicle.make}"></label>
+                            <textarea class="form-control" id="make" rows="1" th:field="*{make}"
+                                      th:errorclass="is-invalid"></textarea>
+                        </div>
+                        <div class="col-md-3 mb-3 mt-3">
+                            <label for="plateNumber" class="form-label" th:text="#{vehicle.plateNumber}"></label>
+                            <textarea class="form-control" id="plateNumber" rows="1" th:field="*{plateNumber}"
+                                      th:errorclass="is-invalid"></textarea>
+                        </div>
+                        <div class="col-md-3 mb-3 mt-3">
+                            <label for="model" class="form-label" th:text="#{vehicle.model}"></label>
+                            <textarea class="form-control" id="model" rows="1" th:field="*{model}"
+                                      th:errorclass="is-invalid"></textarea>
+                        </div>
+                        <div class="col-md-3 mb-3 mt-3">
+                            <label for="engineCapacity" class="form-label" th:text="#{vehicle.engineCapacity}"></label>
+                            <textarea type="number" class="form-control" id="engineCapacity" rows="1" th:field="*{engineCapacity}"
+                                      th:errorclass="is-invalid"></textarea>
+                        </div>
+                        <div class="col-md-3 mb-3 mt-3">
+                            <label for="productionYear" class="form-label" th:text="#{vehicle.productionYear}"></label>
+                            <input type="number" class="form-control" id="productionYear" rows="1" th:field="*{productionYear}"
+                                   th:errorclass="is-invalid">
+
+                        <div class="col-md-12 mb-3 mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                    th:text="#{submit.button}"></button>
+                            <a th:href="@{/employee/vehicles}" class="btn btn-outline-secondary btn-lg"
+                               th:text="#{btn.label.reject}"></a>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js}"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+</body>
+</html>

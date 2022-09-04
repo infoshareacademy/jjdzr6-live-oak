@@ -68,3 +68,14 @@ fieldset[disabled] .btn-primary.active {
     color: #611BBD;
     background-color: #ffffff;
 }
+
+.form-control:focus {
+    outline: none !important;
+    border: 1px solid #ced4da !important;
+    border-bottom: 3px solid #611BBD !important;
+    box-shadow: none !important;
+}
+
+.form-control {
+    padding: 10px !important;
+}

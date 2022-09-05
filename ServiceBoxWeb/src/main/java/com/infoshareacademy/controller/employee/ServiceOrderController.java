@@ -3,6 +3,7 @@ package com.infoshareacademy.controller.employee;
 
 import com.infoshareacademy.entity.ServiceOrder;
 import com.infoshareacademy.service.ServiceOrderService;
+import com.infoshareacademy.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +17,13 @@ import javax.validation.Valid;
 public class ServiceOrderController {
 
     private final ServiceOrderService serviceOrderService;
+    private final VehicleService vehicleService;
 
 
     @Autowired
-    public ServiceOrderController(ServiceOrderService serviceOrderService) {
+    public ServiceOrderController(ServiceOrderService serviceOrderService, VehicleService vehicleService) {
         this.serviceOrderService = serviceOrderService;
+        this.vehicleService = vehicleService;
     }
 
     @GetMapping("service-orders")
@@ -32,12 +35,14 @@ public class ServiceOrderController {
     @GetMapping("add")
     public String getNewServiceOrder(Model model) {
         model.addAttribute("newServiceOrder", new ServiceOrder());
+        model.addAttribute("vehicles", vehicleService.findAll());
         return "employee/service-order-add";
     }
 
     @PostMapping("add")
-    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult) {
+    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult,  Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("vehicles", vehicleService.findAll());
             return "employee/service-order-add";
         }
 

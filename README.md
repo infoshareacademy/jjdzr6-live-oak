@@ -1,7 +1,7 @@
-## ServiceBox
+# ServiceBox
 
 ### Create Docker image
-1. Go to the directory with the Dockerfile is
+1. Go to the directory where the Dockerfile is
 2. Run command `docker build -t servicebox .` to create a docker image
 
 ### Run docker container and application

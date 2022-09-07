@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+    app:
+      container_name: servicebox_app
+      image: servicebox:1.0
+      build:
+        context: ./
+        dockerfile: Dockerfile
+
+      ports:
+        - "8081:8080"
+
+      restart: always

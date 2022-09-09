@@ -50,11 +50,11 @@ public class ServiceOrderController {
         return "redirect:/employee/service-orders";
     }
 
-    @GetMapping("service-order/{id}")
+    @GetMapping("service-orders/{id}")
     public String getServiceOrderId(@PathVariable Integer id, Model model){
-        model.addAttribute("serviceOrderDetails", serviceOrderService.findId(id));
+        model.addAttribute("serviceOrderDetails" , serviceOrderService.findServiceOrder(id));
         model.addAttribute("prevPath", "service-orders");
-        return "/employee/service-orders-details";
+        return "employee/service-order-details";
     }
 
 }

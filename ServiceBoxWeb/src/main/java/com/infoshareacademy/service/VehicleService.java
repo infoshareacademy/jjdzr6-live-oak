@@ -1,6 +1,7 @@
 package com.infoshareacademy.service;
 
 
+import com.infoshareacademy.entity.ServiceOrder;
 import com.infoshareacademy.entity.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +20,5 @@ public class VehicleService {
     public List<Vehicle> findAll() {
         return vehicleRepository.findAll();
     }
+
 }

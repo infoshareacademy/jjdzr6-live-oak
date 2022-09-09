@@ -16,53 +16,33 @@
 <body>
 
 <div th:replace="fragments/header :: header"></div>
-<div th:insert="~{fragments/prev :: prev}"></div>
-
-<header class="d-flex justify-content-between mt-5 mb-3">
-    <h1 th:text="#{so.details}"></h1>
-    <div class="header__options">
-        <a th:href="@{/employee/service-orders/{id}}" class="btn btn-primary btn-lg"
-           th:text="#{so.serviceOrderDetails}"></a>
-    </div>
-</header>
 
 <main class="container">
     <div class="row">
-        <section class="py-3">
-            <form th:object="${serviceOrderDetails}" th:action="@{/employee/service-order-details}">
-                <div class="card">
-                    <div class="card-body">
-                        <ul>
-                            <li th:text="#{so.orderNumber} + ': ' + ${serviceOrderDetails.orderNumber}"></li>
-                        </ul>
-                            <thead>
-                            <tr>
-                                <th th:text="#{so.orderNumber}"></th>
-                                <th th:text="#{so.createdAt}"></th>
-                                <th th:text="#{so.maxCost}"></th>
-                                <th th:text="#{so.description}"></th>
-                                <th th:text="#{so.onlyNewParts}"></th>
-                                <th th:text="#{so.state}"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="service : ${serviceOrders}">
-                                <td th:text="${service.orderNumber}"></td>
-                                <td th:text="${service.createdAt}"></td>
-                                <td th:text="${service.maxCost}"></td>
-                                <td th:text="${service.description}"></td>
-                                <td th:if="${service.onlyNewParts}" th:text="#{form.yes}"></td>
-                                <td th:unless="${service.onlyNewParts}" th:text="#{form.no}"></td>
-                                <td th:text="${service.state.description}"></td>
-                                <td>
-                                    <a th:href="@{/employee/service-order-details}" class="btn btn-primary btn-md"
-                                       th:text="#{so.serviceOrderDetails}"></a>
-                                </td>
-                            </tr>
-                    </div>
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header" th:text="#{so.serviceOrderDetails} + ': ' + ${serviceOrderDetails.id}">
+            </div>
+            <div class="card-body">
+                <p class="card-text" th:text="#{so.orderNumber} + ': ' + ${serviceOrderDetails.orderNumber}"></p>
+                <p class="card-text" th:text="#{so.createdAt} + ': ' + ${serviceOrderDetails.createdAt}"></p>
+                <p class="card-text" th:text="#{so.state} + ': ' + ${serviceOrderDetails.state.description}"></p>
+                <p class="card-text" th:text="#{so.maxCost} + ': ' + ${serviceOrderDetails.maxCost}"></p>
+                <p class="card-text" th:text="#{so.onlyNewParts} + ': '"></p>
+                <p th:if="${serviceOrderDetails.onlyNewParts}" th:text="#{form.yes}"></p>
+                <p th:unless="${serviceOrderDetails.onlyNewParts}" th:text="#{form.no}"></p>
+                <p class="card-text" th:text="#{so.description} + ': ' + ${serviceOrderDetails.description}"></p>
+            </div>
+        </div>
+            <div class="card">
+                <div class="card-header" th:text="#{vehicle.details} + ': ' + ${serviceOrderDetails.vehicleId}">
                 </div>
-            </form>
-        </section>
+
+                <div class="card-body">
+                    <p class="card-text" th:text="#{vehicle.plateNumber}"></p>
+                </div>
+        </div>
+    </div>
     </div>
 </main>
 

@@ -45,7 +45,7 @@ public class ServiceOrderController {
     }
 
     @PostMapping("add")
-    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult,  Model model) {
+    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("vehicles", vehicleService.findAll());
             return "employee/service-order-add";
@@ -56,17 +56,18 @@ public class ServiceOrderController {
     }
 
     @GetMapping("service-orders/{id}")
-    public String getServiceOrderId(@PathVariable Integer id, Model model){
+    public String getServiceOrderId(@PathVariable Integer id, Model model) {
         ServiceOrder serviceOrder = serviceOrderService.findServiceOrder(id);
+
         int vehicleId = serviceOrder.getVehicleId();
         Vehicle vehicleById = vehicleService.findVehicleById(vehicleId);
 
         int clientId = vehicleById.getClientId();
         Client clientById = clientService.findClientById(clientId);
 
-        model.addAttribute("serviceOrderDetails" , serviceOrder);
-        model.addAttribute("vehicle" , vehicleById);
-        model.addAttribute("client" , clientById);
+        model.addAttribute("serviceOrderDetails", serviceOrder);
+        model.addAttribute("vehicle", vehicleById);
+        model.addAttribute("client", clientById);
         model.addAttribute("prevPath", "service-orders");
         return "employee/service-order-details";
     }

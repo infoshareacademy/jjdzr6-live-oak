@@ -19,30 +19,43 @@
 
 <main class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
-            <div class="card-header" th:text="#{so.serviceOrderDetails} + ': ' + ${serviceOrderDetails.id}">
-            </div>
-            <div class="card-body">
-                <p class="card-text" th:text="#{so.orderNumber} + ': ' + ${serviceOrderDetails.orderNumber}"></p>
-                <p class="card-text" th:text="#{so.createdAt} + ': ' + ${serviceOrderDetails.createdAt}"></p>
-                <p class="card-text" th:text="#{so.state} + ': ' + ${serviceOrderDetails.state.description}"></p>
-                <p class="card-text" th:text="#{so.maxCost} + ': ' + ${serviceOrderDetails.maxCost}"></p>
-                <p class="card-text" th:text="#{so.onlyNewParts} + ': '"></p>
-                <p th:if="${serviceOrderDetails.onlyNewParts}" th:text="#{form.yes}"></p>
-                <p th:unless="${serviceOrderDetails.onlyNewParts}" th:text="#{form.no}"></p>
-                <p class="card-text" th:text="#{so.description} + ': ' + ${serviceOrderDetails.description}"></p>
-            </div>
-        </div>
-            <div class="card">
-                <div class="card-header" th:text="#{vehicle.details} + ': ' + ${serviceOrderDetails.vehicleId}">
+                <div class="card-header" th:text="#{so.serviceOrderDetails} + ': ' + ${serviceOrderDetails.id}">
                 </div>
-
                 <div class="card-body">
-                    <p class="card-text" th:text="#{vehicle.plateNumber}"></p>
+                    <p class="card-text" th:text="#{so.orderNumber} + ': ' + ${serviceOrderDetails.orderNumber}"></p>
+                    <p class="card-text" th:text="#{so.createdAt} + ': ' + ${serviceOrderDetails.createdAt}"></p>
+                    <p class="card-text" th:text="#{so.state} + ': ' + ${serviceOrderDetails.state.description}"></p>
+                    <p class="card-text" th:text="#{so.maxCost} + ': ' + ${serviceOrderDetails.maxCost}"></p>
+                    <p class="card-text" th:text="#{so.onlyNewParts} + ': '"></p>
+                    <p th:if="${serviceOrderDetails.onlyNewParts}" th:text="#{form.yes}"></p>
+                    <p th:unless="${serviceOrderDetails.onlyNewParts}" th:text="#{form.no}"></p>
+                    <p class="card-text" th:text="#{so.description} + ': ' + ${serviceOrderDetails.description}"></p>
                 </div>
+            </div>
+            <div class="card">
+                <div class="card-header" th:text="#{vehicle.details} + ': ' + ${vehicle.plateNumber}">
+                </div>
+                <div class="card-body">
+                    <p class="card-text" th:text="#{vehicle.make} + ': ' + ${vehicle.make}"></p>
+                    <p class="card-text" th:text="#{vehicle.model} + ': ' +${vehicle.model}"></p>
+                    <p class="card-text" th:text="#{vehicle.engineCapacity} + ': ' +${vehicle.engineCapacity}"></p>
+                    <p class="card-text" th:text="#{vehicle.productionYear} + ': ' +${vehicle.productionYear}"></p>
+                </div>
+            </div>
+                <div class="card">
+                    <div class="card-header" th:text="#{cl.userId} + ': ' + ${client.userId}">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" th:text="#{cl.name} + ': ' + ${client.name}"></p>
+                        <p class="card-text" th:text="#{cl.address} + ': ' + ${client.address}"></p>
+                        <p class="card-text" th:text="#{cl.phoneNumber} + ': ' + ${client.phoneNumber}"></p>
+                        <p class="card-text" th:text="#{cl.email} + ': ' + ${client.email}"></p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 </main>
 

@@ -45,9 +45,10 @@ public class ServiceBoxWebApplication {
         Vehicle fiat = new Vehicle("Fiat", "126p", "WD123987", 0.6, 1990);
 
         // create clients
-        Client c1 = new Client("Dawid Górecki", "500600700", "mail@wp.pl");
-        Client c2 = new Client("Jan Kowalski", "567567898", "mail.test@wp.pl");
+        Client c1 = new Client("Anna Nowak", "500600700", "anna.nowak@wp.pl");
+        Client c2 = new Client("Jan Kowalski", "567567898", "jan.kowalski@wp.pl");
 
+        c1.setAddress(new Address("Krakowska", "179A", "", "60-685", "Poznań"));
         c2.setAddress(new Address("Warszawska", "10B", "", "60-685", "Poznań"));
 
         // add clients to JSON file

@@ -28,13 +28,13 @@ public class VehicleController {
         return "employee/vehicle-list";
     }
 
-    @GetMapping("add")
-    public String getNewVehicle(Model model) {
+    @GetMapping("/vehicles/add")
+    public String addNewVehicle(Model model) {
         model.addAttribute("newVehicle", new Vehicle());
         return "employee/vehicle-add";
     }
 
-    @PostMapping("add")
+    @PostMapping("/vehiclesadd")
     public String addNewVehicle(@Valid @ModelAttribute("newVehicle") Vehicle vehicle, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "employee/vehicle-add";

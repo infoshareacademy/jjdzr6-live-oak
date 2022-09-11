@@ -20,4 +20,8 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
+    public Client findClientById(int id){
+        return clientRepository.find(id);
+    }
+
 }

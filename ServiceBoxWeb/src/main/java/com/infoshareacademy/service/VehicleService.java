@@ -21,4 +21,8 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
+    public Vehicle findVehicleById(int id){
+        return vehicleRepository.find(id);
+
+    }
 }

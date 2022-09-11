@@ -1,7 +1,10 @@
 package com.infoshareacademy.controller.employee;
 
 
+import com.infoshareacademy.entity.Client;
 import com.infoshareacademy.entity.ServiceOrder;
+import com.infoshareacademy.entity.Vehicle;
+import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,13 @@ public class ServiceOrderController {
     private final ServiceOrderService serviceOrderService;
     private final VehicleService vehicleService;
 
+    private final ClientService clientService;
 
     @Autowired
-    public ServiceOrderController(ServiceOrderService serviceOrderService, VehicleService vehicleService) {
+    public ServiceOrderController(ServiceOrderService serviceOrderService, VehicleService vehicleService, ClientService clientService) {
         this.serviceOrderService = serviceOrderService;
         this.vehicleService = vehicleService;
+        this.clientService = clientService;
     }
 
     @GetMapping("service-orders")
@@ -52,7 +57,16 @@ public class ServiceOrderController {
 
     @GetMapping("service-orders/{id}")
     public String getServiceOrderId(@PathVariable Integer id, Model model){
-        model.addAttribute("serviceOrderDetails" , serviceOrderService.findServiceOrder(id));
+        ServiceOrder serviceOrder = serviceOrderService.findServiceOrder(id);
+        int vehicleId = serviceOrder.getVehicleId();
+        Vehicle vehicleById = vehicleService.findVehicleById(vehicleId);
+
+        int clientId = vehicleById.getClientId();
+        Client clientById = clientService.findClientById(clientId);
+
+        model.addAttribute("serviceOrderDetails" , serviceOrder);
+        model.addAttribute("vehicle" , vehicleById);
+        model.addAttribute("client" , clientById);
         model.addAttribute("prevPath", "service-orders");
         return "employee/service-order-details";
     }

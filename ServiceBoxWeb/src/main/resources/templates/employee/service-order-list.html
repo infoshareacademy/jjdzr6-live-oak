@@ -24,10 +24,10 @@
             <header class="d-flex justify-content-between mt-5 mb-3">
                 <h1 th:text="#{so.headline}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee}" class="btn btn-primary btn-lg" th:text="#{btn.label.return}"></a>
+                    <a th:href="@{/employee/add}" class="btn btn-primary btn-lg" th:text="#{so.addServiceOrder}"></a>
+                    <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg" th:text="#{btn.label.return}"></a>
                 </div>
             </header>
-
 
             <section class="py-3">
                 <div th:if="${#lists.isEmpty(serviceOrders)}">
@@ -57,8 +57,8 @@
                             <td th:unless="${service.onlyNewParts}" th:text="#{form.no}"></td>
                             <td th:text="${service.state.description}"></td>
                             <td>
-                                <a th:href="@{/}" class="btn btn-outline-primary me-2"
-                                   th:text="#{btn.label.vehicles.data}"></a>
+                                <a th:href="@{/employee/service-order-details}" class="btn btn-primary btn-md"
+                                   th:text="#{so.serviceOrderDetails}"></a>
                             </td>
                         </tr>
                         </tbody>

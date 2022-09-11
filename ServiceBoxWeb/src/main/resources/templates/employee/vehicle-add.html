@@ -21,7 +21,7 @@
                 <h1 th:text="#{vehicle.addVehicle}"></h1>
             </header>
             <div>
-                <form th:object="${newVehicle}" th:action="@{/employee/add}" method="post">
+                <form th:object="${newVehicle}" th:action="@{/employee/vehicles/add}" method="post">
                     <div class="py-3">
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="make" class="form-label" th:text="#{vehicle.make}"></label>

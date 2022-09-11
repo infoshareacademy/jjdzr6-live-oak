@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-@RequestMapping("/employee")
+@RequestMapping("/employee/vehicles")
 @Controller
 public class VehicleController {
 
@@ -22,19 +22,19 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @GetMapping("/vehicles")
+    @GetMapping
     public String getVehicles(Model model) {
         model.addAttribute("vehicles", vehicleService.findAll());
         return "employee/vehicle-list";
     }
 
-    @GetMapping("/vehicles/add")
+    @GetMapping("add")
     public String addNewVehicle(Model model) {
         model.addAttribute("newVehicle", new Vehicle());
         return "employee/vehicle-add";
     }
 
-    @PostMapping("/vehiclesadd")
+    @PostMapping("add")
     public String addNewVehicle(@Valid @ModelAttribute("newVehicle") Vehicle vehicle, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "employee/vehicle-add";

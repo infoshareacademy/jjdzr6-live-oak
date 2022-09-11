@@ -32,13 +32,13 @@ public class ClientController {
         return "employee/client-list";
     }
 
-    @GetMapping("add")
+    @GetMapping("addClient")
     public String getNewClient(Model model) {
         model.addAttribute("newClient", new Client());
         return "employee/client-add";
     }
 
-    @PostMapping("add")
+    @PostMapping("addClient")
     public String addNewClient(@Valid @ModelAttribute("newClient") Client client, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {

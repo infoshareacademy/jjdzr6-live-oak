@@ -21,7 +21,7 @@
                 <h1 th:text="#{cl.addClient}"></h1>
             </header>
             <div>
-                <form th:object="${newClient}" th:action="@{/employee/add}" method="post">
+                <form th:object="${newClient}" th:action="@{/employee/addClient}" method="post">
                     <div class="py-3">
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="name" class="form-label" th:text="#{cl.name}"></label>
@@ -85,6 +85,12 @@
                                    th:errorclass="is-invalid"></textarea>
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('email')}"
                                  th:text="#{errors.email}"></div>
+                        </div>
+                        <div class="col-md-3 mb-3 mt-3">
+                            <label for="allowNotify" class="form-label" th:text="#{cl.allowNotify}"></label>
+                            <input type="checkbox" class="user-select-none" id="allowNotify" rows="1"
+                                   th:field="*{allowNotify}"
+                                   th:errorclass="is-invalid">
                         </div>
                         <div class="col-md-12 mb-3 mt-5">
                             <button type="submit" class="btn btn-primary btn-lg"

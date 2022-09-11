@@ -24,7 +24,7 @@
             <header class="d-flex justify-content-between mt-5 mb-3">
                 <h1 th:text="#{cl.headline}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee/add}" class="btn btn-primary btn-lg" th:text="#{cl.addClient}"></a>
+                    <a th:href="@{/employee/addClient}" class="btn btn-primary btn-lg" th:text="#{cl.addClient}"></a>
                     <a th:href="@{/}" class="btn btn-primary btn-lg" th:text="#{btn.label.return}"></a>
                 </div>
             </header>
@@ -44,6 +44,7 @@
                             <th th:text="#{cl.address}"></th>
                             <th th:text="#{cl.phoneNumber}"></th>
                             <th th:text="#{cl.email}"></th>
+                            <th th:text="#{cl.allowNotify}"></th>
                         </tr>
                         </thead>
                         <tr th:each="client : ${clients}">
@@ -53,6 +54,8 @@
                             <td th:text="${client.address}"></td>
                             <td th:text="${client.phoneNumber}"></td>
                             <td th:text="${client.email}"></td>
+                            <td th:if="${client.allowNotify}" th:text="#{form.yes}"></td>
+                            <td th:unless="${client.allowNotify}" th:text="#{form.no}"></td>
                         </tr>
                     </table>
                 </div>

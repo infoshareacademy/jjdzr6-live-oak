@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @RequestMapping("/employee")
 @Controller
 public class VehicleController {
@@ -33,7 +35,7 @@ public class VehicleController {
     }
 
     @PostMapping("add")
-    public String addNewVehicle(@ModelAttribute("newVehicle") Vehicle vehicle, BindingResult bindingResult) {
+    public String addNewVehicle(@Valid @ModelAttribute("newVehicle") Vehicle vehicle, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "employee/vehicle-add";
         }

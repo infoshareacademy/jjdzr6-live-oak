@@ -1,27 +1,25 @@
 package com.infoshareacademy.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
+import static com.infoshareacademy.entity.UserRole.EMPLOYEE;
 
 @Controller
 public class PageController {
     @GetMapping("/")
-    public String startPage() {
-        return "redirect:/employee";
+    public String startPage(Authentication auth) {
+        if (auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals(EMPLOYEE.getRoleNameWithPrefix()))) {
+            return "redirect:/employee";
+        }
+
+        return "client/start";
     }
 
     @GetMapping("/employee")
     public String employeeStartPage() {
         return "employee/start";
-    }
-
-    @GetMapping("/template")
-    public String template(Model model) {
-        ArrayList<String> vehicles = new ArrayList<>();
-        model.addAttribute("lista", vehicles);
-        return "template";
     }
 }

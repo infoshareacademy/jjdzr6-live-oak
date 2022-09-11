@@ -25,28 +25,44 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 py-3">
-                    <li class="nav-item me-2">
-                        <a class="nav-link" th:href="@{/employee}"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/employee' ? 'active' : ''}">Panel</a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link" th:href="@{/employee/clients}"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/employee/clients' ? 'active' : ''}">Baza
-                            klientów</a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link" th:href="@{/employee/vehicles}"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/employee/vehicles' ? 'active' : ''}">Baza
-                            pojazdów</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/employee/service-orders}"
-                           th:classappend="${#httpServletRequest.getRequestURI() == '/employee/service-orders' ? 'active' : ''}">Zlecenia
-                            naprawy</a>
-                    </li>
+                    <th:block sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                        <li class="nav-item me-2">
+                            <a class="nav-link" th:href="@{/employee}"
+                               th:classappend="${#httpServletRequest.getRequestURI() == '/employee' ? 'active' : ''}">Start</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="nav-link" th:href="@{/employee/clients}"
+                               th:classappend="${#httpServletRequest.getRequestURI() == '/employee/clients' ? 'active' : ''}">Baza
+                                klientów</a>
+                        </li>
+                        <li class="nav-item me-2">
+                            <a class="nav-link" th:href="@{/employee/vehicles}"
+                               th:classappend="${#httpServletRequest.getRequestURI() == '/employee/vehicles' ? 'active' : ''}">Baza
+                                pojazdów</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/employee/service-orders}"
+                               th:classappend="${#httpServletRequest.getRequestURI() == '/employee/service-orders' ? 'active' : ''}">Zlecenia
+                                naprawy</a>
+                        </li>
+                    </th:block>
+
+                    <th:block sec:authorize="hasRole('ROLE_CLIENT')">
+                        <li class="nav-item me-2">
+                            <a class="nav-link" th:href="@{/}"
+                               th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active' : ''}">Start</a>
+                        </li>
+
+                        <li class="nav-item me-2">
+                            <a class="nav-link" href="#"
+                               th:classappend="${#httpServletRequest.getRequestURI() == '/service-orders' ? 'active' : ''}">Naprawy</a>
+                        </li>
+                    </th:block>
                 </ul>
-                <a href="#" class="btn btn-outline-secondary ms-lg-3 mb-3 mb-lg-0">Wyloguj<i
-                        class="fas fa-sign-out-alt ms-2"></i></a>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-outline-secondary ms-lg-3 mb-3 mb-lg-0">Wyloguj<i
+                            class="fas fa-sign-out-alt ms-2"></i></button>
+                </form>
             </div>
         </div>
     </nav>

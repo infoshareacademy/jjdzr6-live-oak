@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,48 +25,66 @@
                     <div class="py-3">
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="name" class="form-label" th:text="#{cl.name}"></label>
-                            <textarea class="form-control" id="name" rows="1" th:field="*{name}"
+                            <textarea class="form-control" id="name" rows="1"
+                                      th:field="*{name}"
                                       th:errorclass="is-invalid"></textarea>
+                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('name')}"
+                                 th:text="#{errors.required}"></div>
                         </div>
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="nip" class="form-label" th:text="#{cl.nip}"></label>
-                            <input type="number" class="form-control" id="nip" rows="1" th:field="*{nip}"
-                                      th:errorclass="is-invalid">
+                            <textarea type="number" class="form-control" id="nip" rows="1"
+                                      th:field="*{nip}"
+                                      th:errorclass="is-invalid"></textarea>
+                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('nip')}"
+                                 th:text="#{errors.nip}"></div>
                         </div>
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="address.street" class="form-label" th:text="#{cl.street}"></label>
-                            <textarea class="form-control" id="address.street" rows="1" th:field="*{address.street}"
+                            <textarea class="form-control" id="address.street" rows="1"
+                                      th:field="*{address.street}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="address.houseNumber" class="form-label" th:text="#{cl.houseNumber}"></label>
-                            <textarea type="number" class="form-control" id="address.houseNumber" rows="1" th:field="*{address.houseNumber}"
+                            <textarea type="number" class="form-control" id="address.houseNumber" rows="1"
+                                      th:field="*{address.houseNumber}"
                                       th:errorclass="is-invalid"></textarea>
+
                         </div>
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="address.flatNumber" class="form-label" th:text="#{cl.flatNumber}"></label>
-                            <input type="number" class="form-control" id="address.flatNumber" rows="1" th:field="*{address.flatNumber}"
+                            <input type="number" class="form-control" id="address.flatNumber" rows="1"
+                                   th:field="*{address.flatNumber}"
                                    th:errorclass="is-invalid">
                         </div>
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="address.zipCode" class="form-label" th:text="#{cl.zipCode}"></label>
-                            <textarea class="form-control" id="address.zipCode" rows="1" th:field="*{address.zipCode}"
+                            <textarea class="form-control" id="address.zipCode" rows="1"
+                                      th:field="*{address.zipCode}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="address.city" class="form-label" th:text="#{cl.city}"></label>
-                            <textarea class="form-control" id="address.city" rows="1" th:field="*{address.city}"
+                            <textarea class="form-control" id="address.city" rows="1"
+                                      th:field="*{address.city}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="phoneNumber" class="form-label" th:text="#{cl.phoneNumber}"></label>
-                            <input type="number" class="form-control" id="phoneNumber" rows="1" th:field="*{phoneNumber}"
-                                      th:errorclass="is-invalid">
+                            <input type="number" class="form-control" id="phoneNumber" rows="1"
+                                   th:field="*{phoneNumber}"
+                                   th:errorclass="is-invalid">
+                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('phoneNumber')}"
+                                 th:text="#{errors.phoneNumber}"></div>
                         </div>
                         <div class="col-md-3 mb-3 mt-3">
                             <label for="email" class="form-label" th:text="#{cl.email}"></label>
-                            <input type="email" class="form-control" id="email" rows="1" th:field="*{email}"
-                                      th:errorclass="is-invalid">
+                            <textarea type="email" class="form-control" id="email" rows="1"
+                                   th:field="*{email}"
+                                   th:errorclass="is-invalid"></textarea>
+                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('email')}"
+                                 th:text="#{errors.email}"></div>
                         </div>
                         <div class="col-md-12 mb-3 mt-5">
                             <button type="submit" class="btn btn-primary btn-lg"
@@ -76,6 +94,8 @@
                         </div>
                     </div>
                     </section>
+                </form>
+            </div>
                 </form>
             </div>
         </div>

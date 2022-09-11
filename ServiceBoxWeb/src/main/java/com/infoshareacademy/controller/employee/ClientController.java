@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("employee/")
 public class ClientController {
@@ -37,7 +39,7 @@ public class ClientController {
     }
 
     @PostMapping("add")
-    public String addNewClient(@ModelAttribute("newClient") Client client, BindingResult bindingResult) {
+    public String addNewClient(@Valid @ModelAttribute("newClient") Client client, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "employee/client-add";

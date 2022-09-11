@@ -4,6 +4,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -11,10 +16,16 @@ import lombok.Setter;
 public class Client extends Entity {
     // foreign key (one-to-one)
     private int userId;
+    @NotBlank
     private String name;
     private Address address;
+    @Pattern(regexp = "(^$)|[0-9]{10}")
     private String nip;
+    @Pattern(regexp = "[0-9]{9}")
+    @NotBlank
     private String phoneNumber;
+    @Email
+    @NotBlank
     private String email;
     private boolean allowNotify = false;
 

@@ -3,6 +3,7 @@ package com.infoshareacademy.entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @EqualsAndHashCode
-
+@ToString
 public class ServiceOrder extends Entity {
     private LocalDate createdAt = LocalDate.now();
     private LocalDate finishedAt;

@@ -27,8 +27,14 @@ public class ServiceOrderController {
     }
 
     @GetMapping("service-orders")
-    public String getOrders(Model model) {
-        model.addAttribute("serviceOrders", serviceOrderService.findAll());
+    public String getOrders(Model model, @RequestParam(name = "search", required = false, defaultValue = "") String searchQuery) {
+        if (searchQuery.isBlank()) {
+            model.addAttribute("serviceOrders", serviceOrderService.findAll());
+        } else {
+            model.addAttribute("serviceOrders", serviceOrderService.findByQuery(searchQuery));
+            model.addAttribute("search", searchQuery);
+        }
+
         return "employee/service-order-list";
     }
 

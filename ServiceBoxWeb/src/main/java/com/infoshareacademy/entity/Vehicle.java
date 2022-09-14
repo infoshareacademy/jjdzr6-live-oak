@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @ToString
 public class Vehicle extends Entity {
     @NotBlank

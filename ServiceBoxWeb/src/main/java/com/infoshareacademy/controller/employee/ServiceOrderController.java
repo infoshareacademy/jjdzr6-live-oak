@@ -1,7 +1,10 @@
 package com.infoshareacademy.controller.employee;
 
 
+import com.infoshareacademy.entity.Client;
 import com.infoshareacademy.entity.ServiceOrder;
+import com.infoshareacademy.entity.Vehicle;
+import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,13 @@ public class ServiceOrderController {
     private final ServiceOrderService serviceOrderService;
     private final VehicleService vehicleService;
 
+    private final ClientService clientService;
 
     @Autowired
-    public ServiceOrderController(ServiceOrderService serviceOrderService, VehicleService vehicleService) {
+    public ServiceOrderController(ServiceOrderService serviceOrderService, VehicleService vehicleService, ClientService clientService) {
         this.serviceOrderService = serviceOrderService;
         this.vehicleService = vehicleService;
+        this.clientService = clientService;
     }
 
     @GetMapping("service-orders")
@@ -46,7 +51,7 @@ public class ServiceOrderController {
     }
 
     @PostMapping("add")
-    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult,  Model model) {
+    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("vehicles", vehicleService.findAll());
             return "employee/service-order-add";
@@ -56,11 +61,21 @@ public class ServiceOrderController {
         return "redirect:/employee/service-orders";
     }
 
-    @GetMapping("service-order/{id}")
-    public String getServiceOrderId(@PathVariable Integer id, Model model){
-        model.addAttribute("serviceOrderDetails", serviceOrderService.findId(id));
+    @GetMapping("service-orders/{id}")
+    public String getServiceOrderId(@PathVariable Integer id, Model model) {
+        ServiceOrder serviceOrder = serviceOrderService.findServiceOrder(id);
+
+        int vehicleId = serviceOrder.getVehicleId();
+        Vehicle vehicleById = vehicleService.findVehicleById(vehicleId);
+
+        int clientId = vehicleById.getClientId();
+        Client clientById = clientService.findClientById(clientId);
+
+        model.addAttribute("serviceOrderDetails", serviceOrder);
+        model.addAttribute("vehicle", vehicleById);
+        model.addAttribute("client", clientById);
         model.addAttribute("prevPath", "service-orders");
-        return "/employee/service-orders-details";
+        return "employee/service-order-details";
     }
 
 }

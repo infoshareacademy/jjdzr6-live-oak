@@ -21,8 +21,16 @@ public class VehicleService {
         return vehicleRepository.findAll();
     }
 
+
     public Vehicle findVehicleById(int id){
         return vehicleRepository.find(id);
+
+
+    public void addVehicle(Vehicle vehicle) {
+        vehicleRepository.add(vehicle);
+    }
+    public List<Vehicle> findByQuery(String query) {
+        return vehicleRepository.findBy(query);
 
     }
 }

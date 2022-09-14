@@ -4,6 +4,8 @@ import com.infoshareacademy.entity.Client;
 import com.infoshareacademy.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
 import java.util.List;
 
 @Service
@@ -20,8 +22,13 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
+
     public Client findClientById(int id){
         return clientRepository.find(id);
+
+    public void addClient(Client client){
+        clientRepository.add(client);
+
     }
 
 }

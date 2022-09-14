@@ -1,6 +1,9 @@
 package com.infoshareacademy.entity;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -17,6 +20,7 @@ public class ServiceOrder extends Entity {
     private LocalDate finishedAt;
     private ServiceOrderState state = ServiceOrderState.CREATED;
 
+    private int id;
     @NotBlank
     private String orderNumber;
 
@@ -38,7 +42,8 @@ public class ServiceOrder extends Entity {
     public ServiceOrder() {
     }
 
-    public ServiceOrder(Vehicle vehicle, String orderNumber, boolean onlyNewParts, float maxCost, String description) {
+    public ServiceOrder(Integer id, Vehicle vehicle, String orderNumber, boolean onlyNewParts, float maxCost, String description) {
+       this.id = id;
         this.onlyNewParts = onlyNewParts;
         this.maxCost = maxCost;
         this.description = description;
@@ -52,4 +57,7 @@ public class ServiceOrder extends Entity {
     public void addRepairCard(RepairCard repairCard) {
         this.repairCard = repairCard;
     }
+
 }
+
+

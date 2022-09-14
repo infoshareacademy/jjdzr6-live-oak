@@ -53,7 +53,7 @@ public class ServiceOrderController {
     @PostMapping("add")
     public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("vehicles", vehicleService.findAll());
+          model.addAttribute("vehicles", vehicleService.findAll());
             return "employee/service-order-add";
         }
 

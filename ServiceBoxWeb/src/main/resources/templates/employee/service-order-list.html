@@ -73,7 +73,7 @@
                             <td th:unless="${service.onlyNewParts}" th:text="Nie"></td>
                             <td th:text="${service.state.description}"></td>
                             <td>
-                                <a th:href="@{service-orders/{id}(id=${service.orderNumber})}" class="btn btn-primary btn-md"
+                                <a th:href="@{service-orders/{id}(id=${service.id})}" class="btn btn-primary btn-md"
                                    th:text="#{so.serviceOrderDetails}"></a>
                             </td>
                         </tr>

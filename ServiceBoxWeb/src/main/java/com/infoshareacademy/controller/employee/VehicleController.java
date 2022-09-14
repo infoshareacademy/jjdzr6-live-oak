@@ -4,6 +4,9 @@ import com.infoshareacademy.entity.Vehicle;
 import com.infoshareacademy.service.VehicleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +33,7 @@ public class VehicleController {
 
         return "employee/vehicle-list";
     }
+
 
     @GetMapping("add")
     public String addNewVehicle(Model model) {

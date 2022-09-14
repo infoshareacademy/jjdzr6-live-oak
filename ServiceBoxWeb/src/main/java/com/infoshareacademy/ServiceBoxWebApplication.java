@@ -45,9 +45,10 @@ public class ServiceBoxWebApplication {
         Vehicle fiat = new Vehicle("Fiat", "126p", "WD123987", 0.6, 1990);
 
         // create clients
-        Client c1 = new Client("Dawid Górecki", "500600700", "mail@wp.pl");
-        Client c2 = new Client("Jan Kowalski", "567567898", "mail.test@wp.pl");
+        Client c1 = new Client("Anna Nowak", "500600700", "anna.nowak@wp.pl");
+        Client c2 = new Client("Jan Kowalski", "567567898", "jan.kowalski@wp.pl");
 
+        c1.setAddress(new Address("Krakowska", "179A", "", "60-685", "Poznań"));
         c2.setAddress(new Address("Warszawska", "10B", "", "60-685", "Poznań"));
 
         // add clients to JSON file
@@ -67,7 +68,7 @@ public class ServiceBoxWebApplication {
         vehicleRepository.save();
 
         // create service order
-        ServiceOrder order1 = new ServiceOrder(audi, "1/2022", true, 1000, "Wymiana klocków hamulcowych");
+        ServiceOrder order1 = new ServiceOrder(audi, "1", true, 1000, "Wymiana klocków hamulcowych");
 
         // create repair card
         RepairCard repairCard1 = new RepairCard();
@@ -78,7 +79,7 @@ public class ServiceBoxWebApplication {
         order1.addRepairCard(repairCard1);
 
         // create another order
-        ServiceOrder order2 = new ServiceOrder(fiat, "2/2022", false, 300, "Wymiana oleju");
+        ServiceOrder order2 = new ServiceOrder(fiat, "2", false, 300, "Wymiana oleju");
 
         // save orders
         orderRepository.add(order1);

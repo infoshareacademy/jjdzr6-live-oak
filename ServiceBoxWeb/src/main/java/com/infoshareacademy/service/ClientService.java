@@ -22,8 +22,13 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
+
+    public Client findClientById(int id){
+        return clientRepository.find(id);
+
     public void addClient(Client client){
         clientRepository.add(client);
+
     }
 
 }

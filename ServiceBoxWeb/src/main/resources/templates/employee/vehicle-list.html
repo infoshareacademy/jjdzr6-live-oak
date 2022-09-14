@@ -22,19 +22,33 @@
         <div class="col-md-12">
 
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <h1 th:text="#{vehicle.headline}"></h1>
+                <div th:if="${search}">
+                    <h1>Wyniki wyszukiwania: <span th:text="${search}"></span></h1><br>
+                </div>
+                <h1 th:unless="${search}" th:text="#{vehicle.headline}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee/vehicles/add}" class="btn btn-primary btn-lg" th:text="#{vehicle.addVehicle}"></a>
-                    <a th:href="@{/employee}" class="btn btn-primary btn-lg" th:text="#{btn.label.return}"></a>
+                    <a th:href="@{/employee/vehicles/add}" class="btn btn-primary btn-lg"
+                       th:text="#{vehicle.addVehicle}"></a>
+                    <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg" th:text="#{btn.label.return}"></a>
                 </div>
             </header>
 
+            <div class="row">
+                <div class="col-6">
+                    <form method="get" class="input-group mb-3" id="searchForm">
+                        <input type="text" class="form-control" name="search" id="search" minlength="3"
+                               placeholder="Wyszukaj pojazd" th:value="${search}" autofocus autocomplete="off" required>
+                    </form>
+                    <a th:if="${search}" th:href="@{/employee/vehicles}" class="btn btn-outline-secondary">Pokaż wszystkie</a>
+                </div>
+            </div>
             <section class="py-3">
                 <div th:if="${#lists.isEmpty(vehicles)}">
                     <p class="alert alert-info" th:text="#{vehicle.list}"></p>
                 </div>
                 <div th:if="${not #lists.isEmpty(vehicles)}">
-                <table class="table table-bordered table-hover table-responsive">
+
+                    <table class="table table-bordered table-hover table-responsive">
                         <thead>
                         <tr>
                             <th th:text="#{vehicle.make}"></th>
@@ -53,10 +67,10 @@
                             <td th:text="${vehicle.productionYear}"></td>
                         </tr>
                         </tbody>
-                </table>
+                    </table>
+                </div>
+            </section>
         </div>
-        </section>
-    </div>
     </div>
 </main>
 

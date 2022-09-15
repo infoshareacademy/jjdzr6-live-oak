@@ -20,7 +20,6 @@ public class ServiceOrder extends Entity {
     private LocalDate finishedAt;
     private ServiceOrderState state = ServiceOrderState.CREATED;
 
-    private int id;
     @NotBlank
     private String orderNumber;
 
@@ -42,8 +41,7 @@ public class ServiceOrder extends Entity {
     public ServiceOrder() {
     }
 
-    public ServiceOrder(Integer id, Vehicle vehicle, String orderNumber, boolean onlyNewParts, float maxCost, String description) {
-       this.id = id;
+    public ServiceOrder(Vehicle vehicle, String orderNumber, boolean onlyNewParts, float maxCost, String description) {
         this.onlyNewParts = onlyNewParts;
         this.maxCost = maxCost;
         this.description = description;
@@ -57,7 +55,6 @@ public class ServiceOrder extends Entity {
     public void addRepairCard(RepairCard repairCard) {
         this.repairCard = repairCard;
     }
-
 }
 
 

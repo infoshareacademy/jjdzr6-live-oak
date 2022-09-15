@@ -68,7 +68,7 @@ public class ServiceBoxWebApplication {
         vehicleRepository.save();
 
         // create service order
-        ServiceOrder order1 = new ServiceOrder(1, audi, "1", true, 1000, "Wymiana klocków hamulcowych");
+        ServiceOrder order1 = new ServiceOrder(audi, "1", true, 1000, "Wymiana klocków hamulcowych");
 
         // create repair card
         RepairCard repairCard1 = new RepairCard();
@@ -79,7 +79,7 @@ public class ServiceBoxWebApplication {
         order1.addRepairCard(repairCard1);
 
         // create another order
-        ServiceOrder order2 = new ServiceOrder(2, fiat, "2", false, 300, "Wymiana oleju");
+        ServiceOrder order2 = new ServiceOrder(fiat, "2", false, 300, "Wymiana oleju");
 
         // save orders
         orderRepository.add(order1);

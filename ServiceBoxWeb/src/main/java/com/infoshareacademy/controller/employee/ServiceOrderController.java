@@ -47,7 +47,6 @@ public class ServiceOrderController {
     public String getNewServiceOrder(Model model, @RequestParam(name = "vehicle", required = false, defaultValue = "0") int vehicleId) {
         model.addAttribute("newServiceOrder", new ServiceOrder());
         model.addAttribute("vehicles", vehicleService.findAll());
-        System.out.println(vehicleId);
         model.addAttribute("vid", vehicleId);
         return "employee/service-order-add";
     }
@@ -64,7 +63,7 @@ public class ServiceOrderController {
         return "redirect:/employee/service-orders";
     }
 
-    @GetMapping("service-orders/{id}")
+    @GetMapping("/{id}")
     public String getServiceOrderId(@PathVariable Integer id, Model model) {
         ServiceOrder serviceOrder = serviceOrderService.findServiceOrder(id);
 

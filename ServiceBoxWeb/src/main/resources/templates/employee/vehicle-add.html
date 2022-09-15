@@ -23,29 +23,29 @@
             <div>
                 <form th:object="${newVehicle}" th:action="@{/employee/vehicles/add}" method="post">
                     <div class="py-3">
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="make" class="form-label" th:text="#{vehicle.make}"></label>
                             <textarea class="form-control" id="make" rows="1" th:field="*{make}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="plateNumber" class="form-label" th:text="#{vehicle.plateNumber}"></label>
                             <textarea class="form-control" id="plateNumber" rows="1" th:field="*{plateNumber}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="model" class="form-label" th:text="#{vehicle.model}"></label>
                             <textarea class="form-control" id="model" rows="1" th:field="*{model}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="engineCapacity" class="form-label" th:text="#{vehicle.engineCapacity}"></label>
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('engineCapacity')}"
                                  th:text="#{errors.required}"></div>
                             <input type="text" class="form-control form-control-lg" id="engineCapacity" th:field="*{engineCapacity}"
                                    th:placeholder="00.00" th:errorclass="is-invalid">
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="productionYear" class="form-label" th:text="#{vehicle.productionYear}"></label>
                             <input type="text" class="form-control form-control-lg" id="productionYear" th:field="*{productionYear}"
                                    th:errorclass="is-invalid">

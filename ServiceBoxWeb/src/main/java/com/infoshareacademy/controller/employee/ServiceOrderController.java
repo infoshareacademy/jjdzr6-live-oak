@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("employee/")
+@RequestMapping("/employee/service-orders")
 public class ServiceOrderController {
 
     private final ServiceOrderService serviceOrderService;
@@ -31,7 +31,7 @@ public class ServiceOrderController {
         this.clientService = clientService;
     }
 
-    @GetMapping("service-orders")
+    @GetMapping
     public String getOrders(Model model, @RequestParam(name = "search", required = false, defaultValue = "") String searchQuery) {
         if (searchQuery.isBlank()) {
             model.addAttribute("serviceOrders", serviceOrderService.findAll());
@@ -44,16 +44,19 @@ public class ServiceOrderController {
     }
 
     @GetMapping("add")
-    public String getNewServiceOrder(Model model) {
+    public String getNewServiceOrder(Model model, @RequestParam(name = "vehicle", required = false, defaultValue = "0") int vehicleId) {
         model.addAttribute("newServiceOrder", new ServiceOrder());
         model.addAttribute("vehicles", vehicleService.findAll());
+        System.out.println(vehicleId);
+        model.addAttribute("vid", vehicleId);
         return "employee/service-order-add";
     }
 
     @PostMapping("add")
-    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult, Model model) {
+    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult, Model model, @RequestParam(name = "vehicle", required = false, defaultValue = "0") int vehicleId) {
         if (bindingResult.hasErrors()) {
-          model.addAttribute("vehicles", vehicleService.findAll());
+            model.addAttribute("vehicles", vehicleService.findAll());
+            model.addAttribute("vid", vehicleId);
             return "employee/service-order-add";
         }
 

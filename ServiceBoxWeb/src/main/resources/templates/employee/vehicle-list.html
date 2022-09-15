@@ -56,6 +56,7 @@
                             <th th:text="#{vehicle.plateNumber}"></th>
                             <th th:text="#{vehicle.engineCapacity}"></th>
                             <th th:text="#{vehicle.productionYear}"></th>
+                            <th>Opcje</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -66,7 +67,7 @@
                             <td th:text="${vehicle.engineCapacity}"></td>
                             <td th:text="${vehicle.productionYear}"></td>
                         <td>
-                            <a th:href="@{/employee/add}" class="btn btn-primary btn-md"
+                            <a th:href="@{/employee/service-orders/add(vehicle=${vehicle.id})}" class="btn btn-primary btn-md"
                                th:text="#{so.addServiceOrder}"></a>
                         </td>
                         </tr>

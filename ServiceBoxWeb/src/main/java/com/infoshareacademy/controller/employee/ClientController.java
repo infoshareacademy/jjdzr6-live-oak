@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -26,11 +23,19 @@ public class ClientController {
 
     @GetMapping("clients")
 
-    public String getClients(Model model){
-        model.addAttribute("clients",clientService.findAll());
+    public String getClients(Model model, @RequestParam(name = "search", required = false, defaultValue = "") String searchQuery) {
+        if (searchQuery.isBlank()) {
+            model.addAttribute("clients", clientService.findAll());
+        } else {
+            model.addAttribute("clients", clientService.findByQuery(searchQuery));
+            model.addAttribute("search", searchQuery);
+        }
 
         return "employee/client-list";
     }
+
+
+
 
     @GetMapping("addClient")
     public String getNewClient(Model model) {

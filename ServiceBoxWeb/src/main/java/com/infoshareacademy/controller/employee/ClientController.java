@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@RequestMapping("employee/clients")
 @Controller
-@RequestMapping("employee/")
 public class ClientController {
 
     private final ClientService clientService;
 
-    @Autowired
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 
-    @GetMapping("clients")
+    @GetMapping
 
     public String getClients(Model model, @RequestParam(name = "search", required = false, defaultValue = "") String searchQuery) {
         if (searchQuery.isBlank()) {
@@ -33,9 +32,6 @@ public class ClientController {
 
         return "employee/client-list";
     }
-
-
-
 
     @GetMapping("addClient")
     public String getNewClient(Model model) {

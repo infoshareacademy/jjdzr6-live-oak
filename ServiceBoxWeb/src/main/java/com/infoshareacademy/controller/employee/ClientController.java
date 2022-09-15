@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RequestMapping("employee/clients")
+@RequestMapping("employee/")
 @Controller
 public class ClientController {
 
     private final ClientService clientService;
 
+    @Autowired
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 
-    @GetMapping
-
+    @GetMapping("clients")
     public String getClients(Model model, @RequestParam(name = "search", required = false, defaultValue = "") String searchQuery) {
         if (searchQuery.isBlank()) {
             model.addAttribute("clients", clientService.findAll());

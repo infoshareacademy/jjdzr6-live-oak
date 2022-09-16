@@ -79,3 +79,8 @@ fieldset[disabled] .btn-primary.active {
 .form-control {
     padding: 10px !important;
 }
+
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+}

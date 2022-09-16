@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("employee/")
@@ -51,16 +52,15 @@ public class ClientController {
         return "redirect:/employee/clients";
     }
 
-    @GetMapping("/clients{Id}vehicles")
+    @GetMapping("/clients/{id}/vehicles")
     public String getClientId(@PathVariable Integer id, Model model) {
         Client client = clientService.findClient(id);
 
-        int vehicleId = client.getVehicleId();
-        Vehicle vehicleById = vehicleService.findVehicleById(id);
+        // find client vehicles
+        List<Vehicle> clientVehicles = vehicleService.getClientVehicles(client);
 
-        model.addAttribute("clients", "Id");
-        model.addAttribute("vehicles", "vehicleId");
-        model.addAttribute("prevPath", "clients");
+        model.addAttribute("vehicles", clientVehicles);
+        model.addAttribute("client", client);
         return "employee/client-vehicle-list";
     }
 }

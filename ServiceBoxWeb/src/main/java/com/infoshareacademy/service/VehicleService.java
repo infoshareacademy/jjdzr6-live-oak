@@ -1,6 +1,7 @@
 package com.infoshareacademy.service;
 
 
+import com.infoshareacademy.entity.Client;
 import com.infoshareacademy.entity.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,9 @@ public class VehicleService {
 
     public Vehicle findVehicleById(int id) {
         return vehicleRepository.find(id);
+    }
+
+    public List<Vehicle> getClientVehicles(Client client) {
+        return vehicleRepository.findClientVehicles(client);
     }
 }

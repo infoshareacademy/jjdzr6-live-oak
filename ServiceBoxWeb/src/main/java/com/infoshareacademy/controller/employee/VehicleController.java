@@ -1,6 +1,8 @@
 package com.infoshareacademy.controller.employee;
 
+import com.infoshareacademy.entity.Client;
 import com.infoshareacademy.entity.Vehicle;
+import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.VehicleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,11 @@ import javax.validation.Valid;
 @RequestMapping("/employee/vehicles")
 @Controller
 public class VehicleController {
-
+    private final ClientService clientService;
     private final VehicleService vehicleService;
 
-    public VehicleController(VehicleService vehicleService) {
+    public VehicleController(ClientService clientService, VehicleService vehicleService) {
+        this.clientService = clientService;
         this.vehicleService = vehicleService;
     }
 
@@ -36,8 +39,10 @@ public class VehicleController {
 
 
     @GetMapping("add")
-    public String addNewVehicle(Model model) {
+    public String addNewVehicle(Model model, @RequestParam(name = "client", required = false, defaultValue = "0") int clientId) {
+        Client client = clientService.findClient(clientId);
         model.addAttribute("newVehicle", new Vehicle());
+        model.addAttribute("client", client);
         return "employee/vehicle-add";
     }
 

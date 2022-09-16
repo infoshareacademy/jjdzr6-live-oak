@@ -18,10 +18,12 @@
     <main class="row">
         <div class="col-md-12">
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <h1 th:text="#{vehicle.addVehicle}"></h1>
+                <h1 class="heading" th:text="#{vehicle.addVehicle}"></h1>
             </header>
+            <p th:if="${client != null}" th:text="'Klient: ' + ${client.name}"></p>
             <div>
                 <form th:object="${newVehicle}" th:action="@{/employee/vehicles/add}" method="post">
+                    <input th:if="${client != null}" type="hidden" name="clientId" th:value="${client.id}">
                     <div class="py-3">
                         <div class="col-md-4 mb-3 mt-3">
                             <label for="make" class="form-label" th:text="#{vehicle.make}"></label>

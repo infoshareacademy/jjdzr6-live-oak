@@ -1,6 +1,9 @@
 package com.infoshareacademy.entity;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -53,3 +56,5 @@ public class ServiceOrder extends Entity {
         this.repairCard = repairCard;
     }
 }
+
+

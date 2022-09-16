@@ -23,7 +23,7 @@
             <div>
                 <form th:object="${newClient}" th:action="@{/employee/addClient}" method="post">
                     <div class="py-3">
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="name" class="form-label" th:text="#{cl.name}"></label>
                             <textarea class="form-control" id="name" rows="1"
                                       th:field="*{name}"
@@ -31,7 +31,7 @@
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('name')}"
                                  th:text="#{errors.required}"></div>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="nip" class="form-label" th:text="#{cl.nip}"></label>
                             <textarea type="number" class="form-control" id="nip" rows="1"
                                       th:field="*{nip}"
@@ -39,38 +39,38 @@
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('nip')}"
                                  th:text="#{errors.nip}"></div>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="address.street" class="form-label" th:text="#{cl.street}"></label>
                             <textarea class="form-control" id="address.street" rows="1"
                                       th:field="*{address.street}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="address.houseNumber" class="form-label" th:text="#{cl.houseNumber}"></label>
                             <textarea type="number" class="form-control" id="address.houseNumber" rows="1"
                                       th:field="*{address.houseNumber}"
                                       th:errorclass="is-invalid"></textarea>
 
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="address.flatNumber" class="form-label" th:text="#{cl.flatNumber}"></label>
                             <input type="number" class="form-control" id="address.flatNumber" rows="1"
                                    th:field="*{address.flatNumber}"
                                    th:errorclass="is-invalid">
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="address.zipCode" class="form-label" th:text="#{cl.zipCode}"></label>
                             <textarea class="form-control" id="address.zipCode" rows="1"
                                       th:field="*{address.zipCode}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="address.city" class="form-label" th:text="#{cl.city}"></label>
                             <textarea class="form-control" id="address.city" rows="1"
                                       th:field="*{address.city}"
                                       th:errorclass="is-invalid"></textarea>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="phoneNumber" class="form-label" th:text="#{cl.phoneNumber}"></label>
                             <input type="number" class="form-control" id="phoneNumber" rows="1"
                                    th:field="*{phoneNumber}"
@@ -78,7 +78,7 @@
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('phoneNumber')}"
                                  th:text="#{errors.phoneNumber}"></div>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="email" class="form-label" th:text="#{cl.email}"></label>
                             <textarea type="email" class="form-control" id="email" rows="1"
                                    th:field="*{email}"
@@ -86,7 +86,7 @@
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('email')}"
                                  th:text="#{errors.email}"></div>
                         </div>
-                        <div class="col-md-3 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="allowNotify" class="form-label" th:text="#{cl.allowNotify}"></label>
                             <input type="checkbox" class="user-select-none" id="allowNotify" rows="1"
                                    th:field="*{allowNotify}"

@@ -41,20 +41,20 @@
                     <table class="table table-hover mb-0">
                         <tbody>
                             <tr>
-                                <td>Nowe zlecenia:</td>
-                                <td>0</td>
+                                <td><i class="fas fa-plus me-2"></i> Nowe zlecenia:</td>
+                                <td th:text="${stats[0]}" class="fw-bold"></td>
                             </tr>
                             <tr>
-                                <td>Oczekujące na części:</td>
-                                <td>0</td>
+                                <td><i class="far fa-clock me-2"></i> Oczekujące na części:</td>
+                                <td th:text="${stats[1]}" class="fw-bold"></td>
                             </tr>
                             <tr>
-                                <td>W trakcie realizacji:</td>
-                                <td>0</td>
+                                <td><i class="fas fa-cogs me-2"></i> W trakcie realizacji:</td>
+                                <td th:text="${stats[2]}" class="fw-bold"></td>
                             </tr>
                             <tr>
-                                <td>Zakończone zlecenia:</td>
-                                <td>0</td>
+                                <td><i class="fas fa-check me-2"></i> Zakończone zlecenia:</td>
+                                <td th:text="${stats[3]}" class="fw-bold"></td>
                             </tr>
                         </tbody>
                     </table>

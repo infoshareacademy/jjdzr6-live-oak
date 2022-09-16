@@ -30,8 +30,13 @@ public class ClientService {
         clientRepository.add(client);
     }
 
-    public Client findClient(int id){
-        return  clientRepository.find(id);
+
+    public Client findClient(int id) {
+        return clientRepository.find(id);
+    }
+
+    public List<Client> findByQuery(String query) {
+        return clientRepository.findBy(query);
     }
 
 }

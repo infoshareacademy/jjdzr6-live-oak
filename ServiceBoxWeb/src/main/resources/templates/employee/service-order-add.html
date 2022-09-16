@@ -24,11 +24,11 @@
                 <h1 th:text="#{so.addServiceOrder}"></h1>
             </header>
             <div>
-                <form th:object="${newServiceOrder}" th:action="@{/employee/add}" method="post">
+                <form th:object="${newServiceOrder}" th:action="@{/employee/service-orders/add}" method="post">
 
                     <div class="py-3">
 
-                        <div class="col-md-2 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="orderNumber" class="form-label" th:text="#{so.orderNumber}"></label>
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('orderNumber')}"
                                  th:text="#{errors.orderNumber}">
@@ -37,12 +37,13 @@
                                    th:field="*{orderNumber}" th:errorclass="is-invalid">
                         </div>
 
-                        <div class="col-md-2 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                         <label class="form-label" th:text="#{vehicle.plateNumber}"></label>
-                        <select class="form-select form-control-lg py-3" th:field="*{vehicleId}">
+                        <select class="form-select form-control-lg" name="vehicleId" id="vehicleId">
                             <option th:each="vehicle : ${vehicles}"
                                     th:value="${vehicle.id}"
-                                    th:text="${vehicle.plateNumber}"></option>
+                                    th:text="${vehicle.plateNumber}"
+                                    th:selected="${vehicle.id == vid}"></option>
                         </select>
                         </div>
 
@@ -53,7 +54,7 @@
                             </label>
                         </div>
 
-                        <div class="col-md-2 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="maxCost" class="form-label" th:text="#{so.maxCost}"></label>
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('maxCost')}"
                                  th:text="#{errors.required}"></div>
@@ -62,7 +63,7 @@
                         </div>
 
 
-                        <div class="col-md-5 mb-3 mt-3">
+                        <div class="col-md-4 mb-3 mt-3">
                             <label for="orderDescription" class="form-label" th:text="#{so.description}"></label>
                             <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('description')}"
                                  th:text="#{errors.orderDescription}">
@@ -74,7 +75,7 @@
                         <div class="col-md-12 mb-3 mt-5">
                             <button type="submit" class="btn btn-primary btn-lg"
                                     th:text="#{submit.button}"></button>
-                            <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg"
+                            <a th:href="@{/employee/service-orders}" class="btn btn-outline-secondary btn-lg"
                                th:text="#{btn.label.reject}"></a>
                         </div>
                     </div>

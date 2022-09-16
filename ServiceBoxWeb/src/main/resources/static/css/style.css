@@ -77,10 +77,14 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .form-control {
-    padding: 10px !important;
+    padding: 12px !important;
 }
 
 .heading {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
+}
+
+tbody tr {
+    min-height: 60px;
 }

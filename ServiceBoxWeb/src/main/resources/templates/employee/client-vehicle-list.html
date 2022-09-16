@@ -22,9 +22,9 @@
         <div class="col-md-12">
 
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <h1 class="heading">Pojazdy klienta: <span th:text="${client.name}"></span></h1>
+                <h1 class="heading"><span th:text="${client.name}"></span> - lista pojazdów</h1>
                 <div class="header__options">
-                    <a th:href="@{/employee/clients}" class="btn btn-primary btn-lg" th:text="#{btn.label.return}"></a>
+                    <a th:href="@{/employee/clients}" class="btn btn-outline-secondary btn-lg" th:text="#{btn.label.return}"></a>
                 </div>
             </header>
 
@@ -41,7 +41,7 @@
                             <th th:text="#{vehicle.plateNumber}"></th>
                             <th th:text="#{vehicle.engineCapacity}"></th>
                             <th th:text="#{vehicle.productionYear}"></th>
-                            <th class="text-end">Opcje</th>
+                            <th class="text-end" style="width: 150px;">Opcje</th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -52,7 +52,7 @@
                             <td th:text="${vehicle.engineCapacity}"></td>
                             <td th:text="${vehicle.productionYear}"></td>
                             <td class="text-end">
-                                <a th:href="@{/employee/service-orders/add(vehicle=${vehicle.id})}" class="btn btn-outline-secondary">Napraw</a>
+                                <a th:href="@{/employee/service-orders/add(vehicle=${vehicle.id})}" class="btn btn-primary"><i class="fas fa-wrench me-2"></i>Napraw</a>
                         </tr>
                         </tbody>
                     </table>

@@ -29,6 +29,8 @@ public class Client extends Entity {
     private String email;
     private boolean allowNotify = false;
 
+    private int vehicleId;
+
     public Client() {
     }
 

@@ -1,8 +1,6 @@
 package com.infoshareacademy.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -12,8 +10,8 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@EqualsAndHashCode
-
+@ToString
+@EqualsAndHashCode(callSuper = false)
 public class ServiceOrder extends Entity {
     private LocalDate createdAt = LocalDate.now();
     private LocalDate finishedAt;
@@ -54,5 +52,4 @@ public class ServiceOrder extends Entity {
     public void addRepairCard(RepairCard repairCard) {
         this.repairCard = repairCard;
     }
-
 }

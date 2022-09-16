@@ -11,8 +11,7 @@ import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
-@EqualsAndHashCode
-
+@EqualsAndHashCode(callSuper = false)
 public class Client extends Entity {
     // foreign key (one-to-one)
     private int userId;

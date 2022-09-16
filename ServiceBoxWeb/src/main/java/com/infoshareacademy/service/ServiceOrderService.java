@@ -24,7 +24,11 @@ public class ServiceOrderService {
         serviceOrderRepository.add(serviceOrder);
     }
 
-    public ServiceOrder findId(Integer id){
+    public ServiceOrder findServiceOrder(int id){
         return  serviceOrderRepository.find(id);
+    }
+
+    public List<ServiceOrder> findByQuery(String query) {
+        return serviceOrderRepository.findBy(query);
     }
 }

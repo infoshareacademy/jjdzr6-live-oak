@@ -17,6 +17,7 @@ public class VehicleService {
     public VehicleService(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
+
     public List<Vehicle> findAll() {
         return vehicleRepository.findAll();
     }
@@ -25,7 +26,16 @@ public class VehicleService {
         return vehicleRepository.find(id);
     }
 
+
     public List<Vehicle> getClientVehicles(Client client) {
         return vehicleRepository.findClientVehicles(client);
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        vehicleRepository.add(vehicle);
+    }
+    
+    public List<Vehicle> findByQuery(String query) {
+        return vehicleRepository.findBy(query);
     }
 }

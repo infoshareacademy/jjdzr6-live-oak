@@ -24,4 +24,10 @@ public class VehicleRepository extends Repository<Vehicle> {
                 .filter(e -> e.getClientId() == client.getId())
                 .toList();
     }
+
+    public List<Vehicle> findBy(String search) {
+        return objects.stream()
+                .filter(e -> e.toString().toLowerCase().contains(search.toLowerCase()))
+                .toList();
+    }
 }

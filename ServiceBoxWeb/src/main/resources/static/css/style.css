@@ -11,8 +11,8 @@ body {
 }
 
 .btn-lg {
-    border-radius: 20px !important;
-    padding: 5px 25px;
+    border-radius: 5px !important;
+    padding: 5px 20px;
 }
 
 .card tbody > tr:last-child > td {

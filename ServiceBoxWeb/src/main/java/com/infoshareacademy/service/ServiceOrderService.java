@@ -6,7 +6,9 @@ import com.infoshareacademy.repository.ServiceOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceOrderService {
@@ -38,5 +40,12 @@ public class ServiceOrderService {
                 .stream()
                 .filter(order -> order.getState().equals(state))
                 .count();
+    }
+
+    public Optional<ServiceOrder> getLastOrder() {
+        return serviceOrderRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(ServiceOrder::getCreatedAt).reversed())
+                .findFirst();
     }
 }

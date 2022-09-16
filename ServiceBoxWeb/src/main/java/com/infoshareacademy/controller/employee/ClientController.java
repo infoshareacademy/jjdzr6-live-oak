@@ -51,7 +51,7 @@ public class ClientController {
         return "redirect:/employee/clients";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{Id}")
     public String getClientId(@PathVariable Integer id, Model model) {
         Client client = clientService.findClient(id);
 

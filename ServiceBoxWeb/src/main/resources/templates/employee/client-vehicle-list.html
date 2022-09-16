@@ -19,18 +19,27 @@
 
 <main class="container">
     <div class="row">
-        <div class="col-md-12">
-
-            <header class="d-flex justify-content-between mt-5 mb-3">
-                <h1>Treść nagłówka</h1>
-                <div class="header__options">
-                    <a href="#" class="btn btn-primary btn-lg">Przycisk</a>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header" th:text="#{cl.clientVehicles} + ': ' + ${clientVehicles.clientId}">
                 </div>
-            </header>
-
-            <section class="py-3">
-                Tutaj dodajemy swój kod
-            </section>
+                <div class="card-body">
+                    <p class="card-text" th:text="#{cl.name} + ': ' + ${client.name}"></p>
+                    <p class="card-text" th:text="#{cl.phoneNumber} + ': ' + ${client.phoneNumber}"></p>
+                    <p class="card-text" th:text="#{cl.email} + ': ' + ${client.email}"></p>
+                    <p class="card-text" th:text="#{so.onlyNewParts} + ': '"></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" th:text="#{vehicle.details} + ': ' + ${vehicle.plateNumber}">
+                </div>
+                <div class="card-body">
+                    <p class="card-text" th:text="#{vehicle.make} + ': ' + ${vehicle.make}"></p>
+                    <p class="card-text" th:text="#{vehicle.model} + ': ' +${vehicle.model}"></p>
+                    <p class="card-text" th:text="#{vehicle.engineCapacity} + ': ' +${vehicle.engineCapacity}"></p>
+                    <p class="card-text" th:text="#{vehicle.productionYear} + ': ' +${vehicle.productionYear}"></p>
+                </div>
+            </div>
         </div>
     </div>
 </main>

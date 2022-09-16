@@ -30,4 +30,8 @@ public class ClientService {
         clientRepository.add(client);
     }
 
+    public List<Client> findByQuery(String query) {
+        return clientRepository.findBy(query);
+    }
+
 }

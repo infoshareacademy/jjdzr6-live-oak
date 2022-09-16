@@ -3,15 +3,16 @@ package com.infoshareacademy.entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
+@ToString
 public class Client extends Entity {
     // foreign key (one-to-one)
     private int userId;

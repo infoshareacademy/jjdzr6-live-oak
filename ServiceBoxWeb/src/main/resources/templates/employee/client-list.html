@@ -23,11 +23,11 @@
 
             <header class="d-flex justify-content-between mt-5 mb-3">
                 <div th:if="${search}">
-                    <h1>Wyniki wyszukiwania: <span th:text="${search}"></span></h1><br>
+                    <h1 class="heading">Wyniki wyszukiwania: <span th:text="${search}"></span></h1><br>
                 </div>
-                <h1 th:unless="${search}" th:text="#{cl.headline}"></h1>
+                <h1 class="heading" th:unless="${search}" th:text="#{cl.headline}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee/addClient}" class="btn btn-primary btn-lg" th:text="#{cl.addClient}"></a>
+                    <a th:href="@{/employee/addClient}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Dodaj</a>
                     <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg"
                        th:text="#{btn.label.return}"></a>
                 </div>
@@ -37,7 +37,8 @@
                 <div class="col-6">
                     <form method="get" class="input-group mb-3" id="searchForm">
                         <input type="text" class="form-control" name="search" id="search" minlength="3"
-                               placeholder="Wyszukaj klienta" th:value="${search}" autofocus autocomplete="off" required>
+                               placeholder="Wyszukaj klienta" th:value="${search}" autofocus autocomplete="off"
+                               required>
                     </form>
                     <a th:if="${search}" th:href="@{/employee/clients}" class="btn btn-outline-secondary">Pokaż
                         wszystkie</a>
@@ -50,28 +51,32 @@
                     </p>
                 </div>
                 <div th:if="${not #lists.isEmpty(clients)}">
-                    <table class="table table-bordered table-hover table-responsive">
+                    <table class="table align-middle table-hover">
                         <thead>
                         <tr>
-                            <th th:text="#{cl.id}"></th>
+                            <th>Lp.</th>
                             <th th:text="#{cl.name}"></th>
-                            <th th:text="#{cl.nip}"></th>
-                            <th th:text="#{cl.address}"></th>
-                            <th th:text="#{cl.phoneNumber}"></th>
                             <th th:text="#{cl.email}"></th>
-                            <th th:text="#{cl.allowNotify}"></th>
+                            <th th:text="#{cl.phoneNumber}" style="width: 120px"></th>
+                            <th th:text="#{cl.address}"></th>
+                            <th th:text="#{cl.nip}" style="width: 120px"></th>
+                            <th class="text-end" style="width: 150px;">Opcje</th>
                         </tr>
                         </thead>
-                        <tr th:each="client : ${clients}">
-                            <td th:text="${client.id}"></td>
+                        <tbody class="table-group-divider">
+                        <tr th:each="client, iter : ${clients}">
+                            <td th:text="${iter.count}"></td>
                             <td th:text="${client.name}"></td>
-                            <td th:text="${client.nip}"></td>
-                            <td th:text="${client.address}"></td>
-                            <td th:text="${client.phoneNumber}"></td>
                             <td th:text="${client.email}"></td>
-                            <td th:if="${client.allowNotify}" th:text="Tak"></td>
-                            <td th:unless="${client.allowNotify}" th:text="Nie"></td>
+                            <td th:text="${client.phoneNumber}"></td>
+                            <td th:text="${client.address}"></td>
+                            <td th:text="${client.nip}"></td>
+                            <td class="text-end">
+                                <a th:href="@{/employee/clients/{id}/vehicles(id=${client.id})}"
+                                   class="btn btn-primary btn-md"><i class="fas fa-car me-2"></i>Pojazdy</a>
+                            </td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </section>

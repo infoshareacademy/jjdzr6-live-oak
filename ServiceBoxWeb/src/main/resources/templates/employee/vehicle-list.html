@@ -23,12 +23,11 @@
 
             <header class="d-flex justify-content-between mt-5 mb-3">
                 <div th:if="${search}">
-                    <h1>Wyniki wyszukiwania: <span th:text="${search}"></span></h1><br>
+                    <h1 class="heading">Wyniki wyszukiwania: <span th:text="${search}"></span></h1><br>
                 </div>
-                <h1 th:unless="${search}" th:text="#{vehicle.headline}"></h1>
+                <h1 class="heading" th:unless="${search}" th:text="#{vehicle.headline}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee/vehicles/add}" class="btn btn-primary btn-lg"
-                       th:text="#{vehicle.addVehicle}"></a>
+                    <a th:href="@{/employee/vehicles/add}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Dodaj pojazd</a>
                     <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg" th:text="#{btn.label.return}"></a>
                 </div>
             </header>
@@ -48,28 +47,28 @@
                 </div>
                 <div th:if="${not #lists.isEmpty(vehicles)}">
 
-                    <table class="table table-bordered table-hover table-responsive">
+                    <table class="table align-middle table-hover">
                         <thead>
                         <tr>
+                            <th style="width: 50px;">Lp.</th>
                             <th th:text="#{vehicle.make}"></th>
                             <th th:text="#{vehicle.model}"></th>
                             <th th:text="#{vehicle.plateNumber}"></th>
                             <th th:text="#{vehicle.engineCapacity}"></th>
                             <th th:text="#{vehicle.productionYear}"></th>
-                            <th>Opcje</th>
+                            <th class="text-end" style="width: 150px;">Opcje</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr th:each="vehicle:${vehicles}">
+                        <tbody class="table-group-divider">
+                        <tr th:each="vehicle, iter :${vehicles}">
+                            <td th:text="${iter.count}"></td>
                             <td th:text="${vehicle.make}"></td>
                             <td th:text="${vehicle.model}"></td>
                             <td th:text="${vehicle.plateNumber}"></td>
                             <td th:text="${vehicle.engineCapacity}"></td>
                             <td th:text="${vehicle.productionYear}"></td>
-                        <td>
-                            <a th:href="@{/employee/service-orders/add(vehicle=${vehicle.id})}" class="btn btn-primary btn-md"
-                               th:text="#{so.addServiceOrder}"></a>
-                        </td>
+                            <td class="text-end">
+                                <a th:href="@{/employee/service-orders/add(vehicle=${vehicle.id})}" class="btn btn-primary">Napraw</a>
                         </tr>
                         </tbody>
                     </table>

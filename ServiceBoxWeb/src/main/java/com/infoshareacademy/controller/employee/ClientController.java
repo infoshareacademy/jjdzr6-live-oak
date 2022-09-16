@@ -51,15 +51,15 @@ public class ClientController {
         return "redirect:/employee/clients";
     }
 
-    @GetMapping("/{Id}")
+    @GetMapping("/clients{Id}vehicles")
     public String getClientId(@PathVariable Integer id, Model model) {
         Client client = clientService.findClient(id);
 
         int vehicleId = client.getVehicleId();
-        Vehicle vehicleById = vehicleService.findVehicleById(vehicleId);
+        Vehicle vehicleById = vehicleService.findVehicleById(id);
 
-        model.addAttribute("clientVehicles", client);
-        model.addAttribute("vehicle", vehicleById);
+        model.addAttribute("clients", "Id");
+        model.addAttribute("vehicles", "vehicleId");
         model.addAttribute("prevPath", "clients");
         return "employee/client-vehicle-list";
     }

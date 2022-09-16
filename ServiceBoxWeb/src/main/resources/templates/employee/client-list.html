@@ -57,8 +57,8 @@
                             <td th:if="${client.allowNotify}" th:text="Tak"></td>
                             <td th:unless="${client.allowNotify}" th:text="Nie"></td>
                             <td>
-                                <a th:href="@{/employee/client-vehicle-list}" class="btn btn-primary btn-md"
-                               th:text="#{cl.clientVehicles}"></a>
+                                <a th:href="@{/employee/clients/{id}/vehicles(id=${client.id})}" class="btn btn-primary btn-md"
+                                   th:text="#{cl.clientVehicles}"></a>
                             </td>
                         </tr>
                     </table>

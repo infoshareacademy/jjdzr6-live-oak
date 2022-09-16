@@ -27,7 +27,7 @@
                 </div>
                 <h1 class="heading" th:unless="${search}" th:text="#{cl.headline}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee/addClient}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Dodaj</a>
+                    <a th:href="@{/employee/addClient}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Dodaj klienta</a>
                     <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg"
                        th:text="#{btn.label.return}"></a>
                 </div>
@@ -54,7 +54,7 @@
                     <table class="table align-middle table-hover">
                         <thead>
                         <tr>
-                            <th>Lp.</th>
+                            <th style="width: 50px;">Lp.</th>
                             <th th:text="#{cl.name}"></th>
                             <th th:text="#{cl.email}"></th>
                             <th th:text="#{cl.phoneNumber}" style="width: 120px"></th>
@@ -73,7 +73,7 @@
                             <td th:text="${client.nip}"></td>
                             <td class="text-end">
                                 <a th:href="@{/employee/clients/{id}/vehicles(id=${client.id})}"
-                                   class="btn btn-primary btn-md"><i class="fas fa-car me-2"></i>Pojazdy</a>
+                                   class="btn btn-primary btn-md">Pojazdy</a>
                             </td>
                         </tr>
                         </tbody>

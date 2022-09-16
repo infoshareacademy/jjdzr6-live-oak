@@ -24,12 +24,12 @@
             <p>Znajdujesz się w panelu pracownika. Jako pracownik tego warsztatu możesz zarządzać bazą klientów,
                 pojazdów oraz tworzyć nowe zlecenia naprawy.</p>
             <p>
-                Zalogowany jako: <span sec:authentication="name" class="fw-bold">Bob</span>
+                <i class="far fa-user me-2"></i>Zalogowany jako: <span sec:authentication="name" class="fw-bold">Bob</span>
             </p>
-            <p class="mt-2 mt-lg-5">
-                <a th:href="@{/employee/clients}" class="btn btn-outline-secondary btn-lg me-2">Klienci</a>
-                <a th:href="@{/employee/vehicles}" class="btn btn-outline-secondary btn-lg me-2">Pojazdy</a>
-                <a th:href="@{/employee/service-orders}" class="btn  btn-primary btn-lg me-2">Zlecenia</a>
+            <p class="mt-1 mt-lg-4">
+<!--                <a th:href="@{/employee/clients}" class="btn btn-outline-secondary btn-lg me-2">Klienci</a>-->
+<!--                <a th:href="@{/employee/vehicles}" class="btn btn-outline-secondary btn-lg me-2">Pojazdy</a>-->
+                <a th:href="@{/employee/service-orders/add}" class="btn  btn-primary btn-lg me-2"><i class="fas fa-plus me-2"></i>Nowe zlecenie</a>
             </p>
         </div>
         <div class="col-md-5 offset-md-1">
@@ -62,7 +62,37 @@
             </div>
         </div>
     </div>
+
+    <th:block th:if="${lastOrder != null}">
+        <section class="mt-2 mt-md-5">
+            <h4 class="mt-2"><i class="fas fa-history me-2"></i>Ostatnie zlecenie</h4>
+
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th>Numer zlecenia</th>
+                    <th>Data utworzenia</th>
+                    <th>Opis naprawy</th>
+                    <th>Status</th>
+                    <th class="text-end" style="width: 100px;">Opcje</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr>
+                    <td th:text="${lastOrder.orderNumber}"></td>
+                    <td th:text="${lastOrder.createdAt}"></td>
+                    <td th:text="${lastOrder.description}"></td>
+                    <td th:text="${lastOrder.state.description}"></td>
+                    <td class="text-end">
+                        <a th:href="@{/employee/service-orders/{id}(id=${lastOrder.id})}" class="btn btn-primary">Szczegóły</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </th:block>
 </main>
+
 
 <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js}"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

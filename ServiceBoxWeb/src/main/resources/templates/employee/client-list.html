@@ -54,8 +54,8 @@
                             <td th:text="${client.address}"></td>
                             <td th:text="${client.phoneNumber}"></td>
                             <td th:text="${client.email}"></td>
-                            <td th:if="${client.allowNotify}" th:text="#{form.yes}"></td>
-                            <td th:unless="${client.allowNotify}" th:text="#{form.no}"></td>
+                            <td th:if="${client.allowNotify}" th:text="Tak"></td>
+                            <td th:unless="${client.allowNotify}" th:text="Nie"></td>
                         </tr>
                     </table>
                 </div>

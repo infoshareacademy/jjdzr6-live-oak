@@ -19,4 +19,8 @@ public class VehicleService {
     public List<Vehicle> findAll() {
         return vehicleRepository.findAll();
     }
+
+    public Vehicle findVehicleById(int id) {
+        return vehicleRepository.find(id);
+    }
 }

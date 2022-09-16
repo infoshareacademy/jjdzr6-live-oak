@@ -1,15 +1,15 @@
 package com.infoshareacademy.controller.employee;
 
 import com.infoshareacademy.entity.Client;
+import com.infoshareacademy.entity.ServiceOrder;
+import com.infoshareacademy.entity.Vehicle;
 import com.infoshareacademy.service.ClientService;
+import com.infoshareacademy.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -18,10 +18,12 @@ import javax.validation.Valid;
 public class ClientController {
 
     private final ClientService clientService;
+    private final VehicleService vehicleService;
 
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, VehicleService vehicleService) {
         this.clientService = clientService;
+        this.vehicleService = vehicleService;
     }
 
     @GetMapping("clients")
@@ -47,5 +49,18 @@ public class ClientController {
 
         clientService.addClient(client);
         return "redirect:/employee/clients";
+    }
+
+    @GetMapping("/{id}")
+    public String getClientId(@PathVariable Integer id, Model model) {
+        Client client = clientService.findClient(id);
+
+        int vehicleId = client.getVehicleId();
+        Vehicle vehicleById = vehicleService.findVehicleById(vehicleId);
+
+        model.addAttribute("clientVehicles", client);
+        model.addAttribute("vehicle", vehicleById);
+        model.addAttribute("prevPath", "clients");
+        return "employee/client-vehicle-list";
     }
 }

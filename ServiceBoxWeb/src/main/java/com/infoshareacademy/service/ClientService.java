@@ -26,4 +26,8 @@ public class ClientService {
         clientRepository.add(client);
     }
 
+    public Client findClient(int id){
+        return  clientRepository.find(id);
+    }
+
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -48,13 +49,14 @@ public class ClientController {
     }
 
     @PostMapping("addClient")
-    public String addNewClient(@Valid @ModelAttribute("newClient") Client client, BindingResult bindingResult) {
+    public String addNewClient(@Valid @ModelAttribute("newClient") Client client, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             return "employee/client-add";
         }
 
         clientService.addClient(client);
+        redirectAttributes.addFlashAttribute("success", "Dodano nowego klienta.");
         return "redirect:/employee/clients";
     }
 

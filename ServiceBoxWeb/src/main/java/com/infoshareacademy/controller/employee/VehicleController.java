@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -49,7 +50,7 @@ public class VehicleController {
     }
 
     @PostMapping("add")
-    public String addNewVehicle(@Valid @ModelAttribute("newVehicle") Vehicle vehicle, BindingResult bindingResult, Model model, @RequestParam(name = "client", required = false, defaultValue = "0") int clientId) {
+    public String addNewVehicle(@Valid @ModelAttribute("newVehicle") Vehicle vehicle, BindingResult bindingResult, Model model, @RequestParam(name = "client", required = false, defaultValue = "0") int clientId, RedirectAttributes redirectAttributes) {
         Client client = clientService.findClient(clientId);
         model.addAttribute("client", client);
 
@@ -58,6 +59,7 @@ public class VehicleController {
         }
 
         vehicleService.addVehicle(vehicle);
+        redirectAttributes.addFlashAttribute("success", "Dodano nowy pojazd.");
         return "redirect:/employee/clients/" + clientId + "/vehicles";
     }
 }

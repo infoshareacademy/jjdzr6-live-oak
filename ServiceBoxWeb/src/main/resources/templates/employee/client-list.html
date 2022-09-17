@@ -59,8 +59,8 @@
                             <th th:text="#{cl.email}"></th>
                             <th th:text="#{cl.phoneNumber}" style="width: 120px"></th>
                             <th th:text="#{cl.address}"></th>
-                            <th th:text="#{cl.nip}" style="width: 120px"></th>
-                            <th class="text-end" style="width: 150px;">Opcje</th>
+                            <th th:text="#{cl.nip}" style="width: 140px"></th>
+                            <th class="text-end" style="width: 160px;">Opcje</th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -73,7 +73,7 @@
                             <td th:text="${client.nip}"></td>
                             <td class="text-end">
                                 <a th:href="@{/employee/clients/{id}/vehicles(id=${client.id})}"
-                                   class="btn btn-primary btn-md">Pojazdy</a>
+                                   style="width: 120px;" class="btn btn-primary btn-md" th:text="'Pojazdy / ' + ${vehicleService.getClientVehicles(client).size}"></a>
                             </td>
                         </tr>
                         </tbody>

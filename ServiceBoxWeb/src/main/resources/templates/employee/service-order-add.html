@@ -21,67 +21,66 @@
     <div class="row">
         <div class="col-md-12">
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <h1 th:text="#{so.addServiceOrder}"></h1>
+                <h1 class="heading" th:text="#{so.addServiceOrder}"></h1>
             </header>
-            <div>
-                <form th:object="${newServiceOrder}" th:action="@{/employee/service-orders/add}" method="post">
 
-                    <div class="py-3">
+            <form th:object="${newServiceOrder}" th:action="@{/employee/service-orders/add}" method="post" class="row">
 
-                        <div class="col-md-4 mb-3 mt-3">
-                            <label for="orderNumber" class="form-label" th:text="#{so.orderNumber}"></label>
-                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('orderNumber')}"
-                                 th:text="#{errors.orderNumber}">
-                            </div>
-                            <input type="text" class="form-control form-control-lg" id="orderNumber"
-                                   th:field="*{orderNumber}" th:errorclass="is-invalid">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="orderNumber" class="form-label" th:text="#{so.orderNumber}"></label>
+                        <input type="text" class="form-control" id="orderNumber"
+                               th:field="*{orderNumber}" th:errorclass="is-invalid">
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('orderNumber')}">To pole jest
+                            wymagane
                         </div>
+                    </div>
 
-                        <div class="col-md-4 mb-3 mt-3">
+                    <div class="mb-3">
                         <label class="form-label" th:text="#{vehicle.plateNumber}"></label>
-                        <select class="form-select form-control-lg" name="vehicleId" id="vehicleId">
+                        <select class="form-select" name="vehicleId" id="vehicleId">
                             <option th:each="vehicle : ${vehicles}"
                                     th:value="${vehicle.id}"
                                     th:text="${vehicle.plateNumber}"
                                     th:selected="${vehicle.id == vid}"></option>
                         </select>
-                        </div>
+                    </div>
 
-                        <div class="form-check mb-3 mt-3">
-                            <input name = "onlyNewParts" class="form-check-input" type="checkbox" value="" id="so.onlyNewParts"
-                                   th:field="*{onlyNewParts}">
-                            <label class="form-check-label" for="so.onlyNewParts" th:text="#{so.onlyNewParts}">
-                            </label>
-                        </div>
-
-                        <div class="col-md-4 mb-3 mt-3">
-                            <label for="maxCost" class="form-label" th:text="#{so.maxCost}"></label>
-                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('maxCost')}"
-                                 th:text="#{errors.required}"></div>
-                            <input type="text" class="form-control form-control-lg" id="maxCost" th:field="*{maxCost}"
-                                   th:placeholder="00.00" th:errorclass="is-invalid">
-                        </div>
-
-
-                        <div class="col-md-4 mb-3 mt-3">
-                            <label for="orderDescription" class="form-label" th:text="#{so.description}"></label>
-                            <div th:class="'alert alert-danger'" th:if="${#fields.hasErrors('description')}"
-                                 th:text="#{errors.orderDescription}">
-                            </div>
-                            <textarea class="form-control" id="orderDescription" rows="3" th:field="*{description}"
-                                      th:errorclass="is-invalid"></textarea>
-                        </div>
-
-                        <div class="col-md-12 mb-3 mt-5">
-                            <button type="submit" class="btn btn-primary btn-lg"
-                                    th:text="#{submit.button}"></button>
-                            <a th:href="@{/employee/service-orders}" class="btn btn-outline-secondary btn-lg"
-                               th:text="#{btn.label.reject}"></a>
+                    <div class="mb-3">
+                        <label for="maxCost" class="form-label" th:text="#{so.maxCost}"></label>
+                        <input type="text" class="form-control form-control-lg" id="maxCost" th:field="*{maxCost}"
+                               th:errorclass="is-invalid">
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('maxCost')}">To pole jest
+                            wymagane
                         </div>
                     </div>
-                    </section>
-                </form>
-            </div>
+
+                    <div class="mb-3">
+                        <label for="orderDescription" class="form-label" th:text="#{so.description}"></label>
+                        <textarea class="form-control" id="orderDescription" rows="3" th:field="*{description}"
+                                  th:errorclass="is-invalid"></textarea>
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('description')}">To pole jest
+                            wymagane
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input name="onlyNewParts" class="form-check-input" type="checkbox" value=""
+                               id="so.onlyNewParts"
+                               th:field="*{onlyNewParts}">
+                        <label class="form-check-label" for="so.onlyNewParts" th:text="#{so.onlyNewParts}">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-primary btn-lg" th:text="#{submit.button}"></button>
+                    <a th:href="@{/employee/service-orders}" class="btn btn-outline-secondary btn-lg"
+                       th:text="#{btn.label.reject}"></a>
+                </div>
+
+            </form>
+
         </div>
     </div>
 

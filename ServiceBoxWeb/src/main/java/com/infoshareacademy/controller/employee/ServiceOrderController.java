@@ -40,6 +40,7 @@ public class ServiceOrderController {
             model.addAttribute("search", searchQuery);
         }
 
+        model.addAttribute("vehicleService", vehicleService);
         return "employee/service-order-list";
     }
 

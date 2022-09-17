@@ -5,6 +5,7 @@ import com.infoshareacademy.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -28,6 +29,11 @@ public class ClientService {
 
     public void addClient(Client client) {
         clientRepository.add(client);
+        try {
+            clientRepository.save();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

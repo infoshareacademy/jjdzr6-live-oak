@@ -25,6 +25,10 @@ public class Address {
 
     @Override
     public String toString() {
-        return street + " " + houseNumber  + "/" + flatNumber + ", " + zipCode + " " + city;
+        String address = street;
+        if (!houseNumber.isBlank()) address += " " + houseNumber;
+        if (!flatNumber.isBlank()) address += " m. " + flatNumber;
+        if (!zipCode.isBlank() && !city.isBlank()) address += ", " + zipCode + " " + city;
+        return address.isBlank() ? "Nie podano" : address;
     }
 }

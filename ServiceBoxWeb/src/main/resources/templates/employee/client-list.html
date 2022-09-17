@@ -46,6 +46,7 @@
             </div>
 
             <section class="py-3">
+                <p th:if="${success}" th:text="${success}" class="alert alert-success"></p>
                 <div th:if="${#lists.isEmpty(clients)}">
                     <p class="alert alert-info" th:text="#{cl.list}">
                     </p>

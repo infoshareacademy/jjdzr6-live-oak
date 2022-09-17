@@ -30,6 +30,7 @@
             </header>
 
             <section class="py-3">
+                <p th:if="${success}" th:text="${success}" class="alert alert-success"></p>
                 <div th:if="${#lists.isEmpty(vehicles)}">
                     <p class="alert alert-info" th:text="#{vehicle.list}"></p>
                 </div>

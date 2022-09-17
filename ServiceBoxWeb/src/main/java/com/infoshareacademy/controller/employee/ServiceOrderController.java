@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -53,7 +54,7 @@ public class ServiceOrderController {
     }
 
     @PostMapping("add")
-    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult, Model model, @RequestParam(name = "vehicle", required = false, defaultValue = "0") int vehicleId) {
+    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult, Model model, @RequestParam(name = "vehicle", required = false, defaultValue = "0") int vehicleId, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("vehicles", vehicleService.findAll());
             model.addAttribute("vid", vehicleId);
@@ -61,6 +62,7 @@ public class ServiceOrderController {
         }
 
         serviceOrderService.addServiceOrder(serviceOrder);
+        redirectAttributes.addFlashAttribute("success", "Utworzono nowe zlecenie naprawy.");
         return "redirect:/employee/service-orders";
     }
 

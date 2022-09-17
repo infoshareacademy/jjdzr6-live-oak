@@ -34,6 +34,8 @@ public class VehicleController {
             model.addAttribute("search", searchQuery);
         }
 
+        model.addAttribute("clientService", clientService);
+
         return "employee/vehicle-list";
     }
 

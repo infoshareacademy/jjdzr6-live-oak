@@ -55,6 +55,7 @@
                             <th th:text="#{vehicle.plateNumber}"></th>
                             <th th:text="#{vehicle.engineCapacity}"></th>
                             <th th:text="#{vehicle.productionYear}"></th>
+                            <th>Właściciel</th>
                             <th class="text-end" style="width: 150px;">Opcje</th>
                         </tr>
                         </thead>
@@ -66,6 +67,7 @@
                             <td th:text="${vehicle.plateNumber}"></td>
                             <td th:text="${vehicle.engineCapacity}"></td>
                             <td th:text="${vehicle.productionYear}"></td>
+                            <td th:text="${clientService.findClient(vehicle.clientId).name}"></td>
                             <td class="text-end">
                                 <a th:href="@{/employee/service-orders/add(vehicle=${vehicle.id})}" class="btn btn-primary">Napraw</a>
                         </tr>

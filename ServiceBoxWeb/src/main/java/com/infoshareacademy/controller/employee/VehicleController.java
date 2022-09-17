@@ -49,13 +49,16 @@ public class VehicleController {
     }
 
     @PostMapping("add")
-    public String addNewVehicle(@Valid @ModelAttribute("newVehicle") Vehicle vehicle, BindingResult bindingResult) {
+    public String addNewVehicle(@Valid @ModelAttribute("newVehicle") Vehicle vehicle, BindingResult bindingResult, Model model, @RequestParam(name = "client", required = false, defaultValue = "0") int clientId) {
+        Client client = clientService.findClient(clientId);
+        model.addAttribute("client", client);
+
         if (bindingResult.hasErrors()) {
             return "employee/vehicle-add";
         }
 
         vehicleService.addVehicle(vehicle);
-        return "redirect:/employee/vehicles";
+        return "redirect:/employee/clients/" + clientId + "/vehicles";
     }
 }
 

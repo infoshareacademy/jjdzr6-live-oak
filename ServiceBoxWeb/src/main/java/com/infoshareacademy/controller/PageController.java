@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static com.infoshareacademy.entity.user.UserRole.EMPLOYEE;
 
 @Controller
 public class PageController {
@@ -20,7 +19,7 @@ public class PageController {
     @GetMapping("/")
     public String startPage(Authentication auth) {
         if (auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals(EMPLOYEE.getRoleNameWithPrefix()))) {
+                .anyMatch(a -> a.getAuthority().equals("ROLE_EMPLOYEE"))) {
             return "redirect:/employee";
         }
 

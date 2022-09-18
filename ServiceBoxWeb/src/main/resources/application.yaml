@@ -2,6 +2,15 @@ spring:
   profiles:
     active: dev
 
+  datasource:
+    url: jdbc:mysql://localhost:3307/servicebox
+    username: sbuser
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
   mail:
     host: smtp.wp.pl
     port: 465
@@ -18,3 +27,4 @@ mail:
 
 app:
   createSampleDatabase: false
+

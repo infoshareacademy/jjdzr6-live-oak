@@ -1,8 +1,8 @@
 package com.infoshareacademy.service;
 
 
-import com.infoshareacademy.entity.Client;
-import com.infoshareacademy.entity.Vehicle;
+import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

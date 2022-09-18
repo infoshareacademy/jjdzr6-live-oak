@@ -1,7 +1,7 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.entity.ServiceOrder;
-import com.infoshareacademy.entity.ServiceOrderState;
+import com.infoshareacademy.entity.serviceorder.ServiceOrder;
+import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.repository.ServiceOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

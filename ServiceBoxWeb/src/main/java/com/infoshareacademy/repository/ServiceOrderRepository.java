@@ -1,7 +1,7 @@
 package com.infoshareacademy.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.infoshareacademy.entity.ServiceOrder;
+import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 
 import java.util.ArrayList;
 import java.util.List;

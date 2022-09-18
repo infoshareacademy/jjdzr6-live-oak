@@ -1,5 +1,6 @@
-package com.infoshareacademy.entity;
+package com.infoshareacademy.entity.vehicle;
 
+import com.infoshareacademy.entity.Entity;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;

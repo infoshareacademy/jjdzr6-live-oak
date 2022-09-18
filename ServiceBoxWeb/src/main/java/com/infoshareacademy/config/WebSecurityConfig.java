@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static com.infoshareacademy.entity.UserRole.*;
+import static com.infoshareacademy.entity.user.UserRole.*;
 
 @Configuration
 @EnableWebSecurity

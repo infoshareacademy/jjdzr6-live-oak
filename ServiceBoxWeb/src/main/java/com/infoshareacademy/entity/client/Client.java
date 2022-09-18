@@ -1,5 +1,8 @@
-package com.infoshareacademy.entity;
+package com.infoshareacademy.entity.client;
 
+import com.infoshareacademy.entity.Entity;
+import com.infoshareacademy.entity.client.Address;
+import com.infoshareacademy.entity.vehicle.Vehicle;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

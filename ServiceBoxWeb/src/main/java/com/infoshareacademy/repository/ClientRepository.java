@@ -1,7 +1,7 @@
 package com.infoshareacademy.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.infoshareacademy.entity.Client;
+import com.infoshareacademy.entity.client.Client;
 import java.util.List;
 
 import java.util.ArrayList;

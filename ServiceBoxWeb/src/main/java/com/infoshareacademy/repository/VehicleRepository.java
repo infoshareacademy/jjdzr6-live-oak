@@ -1,8 +1,8 @@
 package com.infoshareacademy.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.infoshareacademy.entity.Client;
-import com.infoshareacademy.entity.Vehicle;
+import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.entity.vehicle.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;

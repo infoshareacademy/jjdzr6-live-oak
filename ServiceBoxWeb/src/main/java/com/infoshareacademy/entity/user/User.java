@@ -1,5 +1,6 @@
-package com.infoshareacademy.entity;
+package com.infoshareacademy.entity.user;
 
+import com.infoshareacademy.entity.Entity;
 import lombok.Getter;
 import lombok.Setter;
 

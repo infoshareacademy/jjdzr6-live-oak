@@ -1,4 +1,4 @@
-package com.infoshareacademy.entity;
+package com.infoshareacademy.entity.user;
 
 public enum UserRole {
     ADMIN("Administrator"),

@@ -1,14 +1,13 @@
 package com.infoshareacademy.controller;
 
-import com.infoshareacademy.entity.ServiceOrderState;
+import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.service.ServiceOrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static com.infoshareacademy.entity.UserRole.EMPLOYEE;
+import static com.infoshareacademy.entity.user.UserRole.EMPLOYEE;
 
 @Controller
 public class PageController {

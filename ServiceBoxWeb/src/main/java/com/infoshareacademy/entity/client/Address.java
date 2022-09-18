@@ -1,4 +1,4 @@
-package com.infoshareacademy.entity;
+package com.infoshareacademy.entity.client;
 
 import lombok.Getter;
 import lombok.Setter;

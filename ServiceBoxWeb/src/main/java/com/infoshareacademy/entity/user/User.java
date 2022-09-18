@@ -1,25 +1,33 @@
 package com.infoshareacademy.entity.user;
 
-import com.infoshareacademy.entity.Entity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table(name = "users")
 @Getter
 @Setter
-public class User extends Entity {
+@NoArgsConstructor
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false)
     private String password;
-    private Set<UserRole> roles;
 
-    public User() {
-    }
+    private boolean enabled = true;
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-
-        roles.add(UserRole.CLIENT);
-    }
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles;
 }

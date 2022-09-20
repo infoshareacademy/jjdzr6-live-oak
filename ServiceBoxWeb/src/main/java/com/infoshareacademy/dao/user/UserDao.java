@@ -1,5 +1,6 @@
 package com.infoshareacademy.dao.user;
 
+import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.entity.user.User;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class UserDao {
+public class UserDao implements Dao<User> {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -25,5 +26,34 @@ public class UserDao {
         }
 
         return resultList.get(0);
+    }
+
+    @Override
+    public User find(Long id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public List<User> findAll() {
+        TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public void save(User user) {
+        entityManager.persist(user);
+    }
+
+    @Override
+    public User update(User user) {
+        entityManager.merge(user);
+        return user;
+    }
+
+    @Override
+    public void delete(User user) {
+        if (user != null) {
+            entityManager.remove(user);
+        }
     }
 }

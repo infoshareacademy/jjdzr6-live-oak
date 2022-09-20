@@ -1,14 +1,12 @@
 package com.infoshareacademy.controller;
 
-import com.infoshareacademy.entity.ServiceOrderState;
+import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.service.ServiceOrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static com.infoshareacademy.entity.UserRole.EMPLOYEE;
 
 @Controller
 public class PageController {
@@ -21,7 +19,7 @@ public class PageController {
     @GetMapping("/")
     public String startPage(Authentication auth) {
         if (auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals(EMPLOYEE.getRoleNameWithPrefix()))) {
+                .anyMatch(a -> a.getAuthority().equals("ROLE_EMPLOYEE"))) {
             return "redirect:/employee";
         }
 

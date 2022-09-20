@@ -1,6 +1,12 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.entity.*;
+import com.infoshareacademy.entity.client.Address;
+import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.entity.serviceorder.Part;
+import com.infoshareacademy.entity.serviceorder.Repair;
+import com.infoshareacademy.entity.serviceorder.RepairCard;
+import com.infoshareacademy.entity.serviceorder.ServiceOrder;
+import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.repository.ClientRepository;
 import com.infoshareacademy.repository.ServiceOrderRepository;
 import com.infoshareacademy.repository.VehicleRepository;

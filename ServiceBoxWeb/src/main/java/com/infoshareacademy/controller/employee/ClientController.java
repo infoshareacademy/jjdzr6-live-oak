@@ -1,8 +1,7 @@
 package com.infoshareacademy.controller.employee;
 
-import com.infoshareacademy.entity.Client;
-import com.infoshareacademy.entity.ServiceOrder;
-import com.infoshareacademy.entity.Vehicle;
+import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;

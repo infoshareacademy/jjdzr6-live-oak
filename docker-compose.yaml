@@ -1,14 +1,43 @@
 version: '3.3'
 
 services:
-    app:
-      container_name: servicebox_app
-      image: servicebox:1.0
-      build:
-        context: ./
-        dockerfile: Dockerfile
+  db:
+    image: mysql:8
+    container_name: servicebox_mysql_db
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootPassword
+      MYSQL_DATABASE: servicebox
+      MYSQL_USER: sb_user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    networks:
+      - backend
 
-      ports:
-        - "8081:8080"
+  app:
+    container_name: servicebox_app
+    image: servicebox:1.0
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/servicebox
+      SPRING_DATASOURCE_USERNAME: sb_user
+      SPRING_DATASOURCE_PASSWORD: password
 
-      restart: always
+    networks:
+      - backend
+
+volumes:
+  db_data:
+
+networks:
+  backend:

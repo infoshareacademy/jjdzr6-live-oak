@@ -4,7 +4,6 @@ import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -31,7 +30,7 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
     @Override
     public void save(ServiceOrder serviceOrder) {
         entityManager.persist(serviceOrder);
-   }
+    }
 
     @Override
     public ServiceOrder update(ServiceOrder serviceOrder) {

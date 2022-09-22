@@ -21,7 +21,7 @@ public class Address {
 
     @Column(name = "house_number", nullable = false)
     private String houseNumber;
-    
+
     @Column(name = "flat_number")
     private String flatNumber;
 

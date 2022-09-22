@@ -70,8 +70,7 @@ public class ServiceOrderController {
     public String getServiceOrderId(@PathVariable Integer id, Model model) {
         ServiceOrder serviceOrder = serviceOrderService.findServiceOrder(id);
 
-        int vehicleId = serviceOrder.getVehicleId();
-        Vehicle vehicleById = vehicleService.findVehicleById(vehicleId);
+        Vehicle vehicleById = serviceOrder.getVehicle();
 
         int clientId = vehicleById.getClientId();
         Client clientById = clientService.findClientById(clientId);

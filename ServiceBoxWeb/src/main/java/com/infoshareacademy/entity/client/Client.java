@@ -43,6 +43,6 @@ public class Client {
     private boolean allowNotify = false;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vehicle_id")
+    @JoinColumn(name = "client_id")
     private List<Vehicle> vehicles;
 }

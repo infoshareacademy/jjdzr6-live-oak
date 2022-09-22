@@ -24,7 +24,3 @@ spring:
 
 mail:
   from: servicebox-liveoak@wp.pl
-
-app:
-  createSampleDatabase: false
-

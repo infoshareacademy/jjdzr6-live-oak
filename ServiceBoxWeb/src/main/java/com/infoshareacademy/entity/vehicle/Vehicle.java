@@ -33,5 +33,5 @@ public class Vehicle {
     private String vin;
 
     @OneToMany(mappedBy="vehicle", fetch = FetchType.LAZY)
-     private List<ServiceOrder> serviceOrderList;
+    private List<ServiceOrder> serviceOrderList;
 }

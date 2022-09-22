@@ -1,6 +1,4 @@
 debug: false
-app:
-  createSampleDatabase: false
 
 spring:
   jpa:

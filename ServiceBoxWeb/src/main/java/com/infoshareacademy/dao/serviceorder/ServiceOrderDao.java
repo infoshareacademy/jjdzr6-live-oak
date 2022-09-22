@@ -40,6 +40,8 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
 
     @Override
     public void delete(ServiceOrder serviceOrder) {
-        entityManager.remove(serviceOrder);
+        if (serviceOrder != null) {
+            entityManager.remove(serviceOrder);
+        }
     }
 }

@@ -1,10 +1,12 @@
 package com.infoshareacademy.entity.vehicle;
 
+import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "vehicle")
@@ -29,4 +31,7 @@ public class Vehicle {
     private int mileage;
     @Column(name = "vin", columnDefinition = "VARCHAR(17)")
     private String vin;
+
+    @OneToMany(mappedBy="vehicle", fetch = FetchType.LAZY)
+     private List<ServiceOrder> serviceOrderList;
 }

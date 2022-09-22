@@ -1,3 +1,4 @@
+/*
 package com.infoshareacademy;
 
 import com.infoshareacademy.entity.client.Address;
@@ -46,9 +47,11 @@ public class ServiceBoxWebApplication {
         if (createDb.equals("false")) return;
 
         // create cars
-        Vehicle opel = new Vehicle("Opel", "Astra", "PK123456", 1.2, 2010);
+       */
+/* Vehicle opel = new Vehicle("Opel", "Astra", "PK123456", 1.2, 2010);
         Vehicle audi = new Vehicle("Audi", "TT", "PO234566", 2.0, 2001);
-        Vehicle fiat = new Vehicle("Fiat", "126p", "WD123987", 0.6, 1990);
+        Vehicle fiat = new Vehicle("Fiat", "126p", "WD123987", 0.6, 1990);*//*
+
 
         // create clients
         Client c1 = new Client("Anna Nowak", "500600700", "anna.nowak@wp.pl");
@@ -74,22 +77,23 @@ public class ServiceBoxWebApplication {
         vehicleRepository.save();
 
         // create service order
-        ServiceOrder order1 = new ServiceOrder(audi, "1", true, 1000, "Wymiana klocków hamulcowych");
+       // ServiceOrder order1 = new ServiceOrder(audi, "1", true, 1000, "Wymiana klocków hamulcowych");
 
         // create repair card
-        RepairCard repairCard1 = new RepairCard();
-        repairCard1.addRepair(new Repair("Wymiana klocków", 250));
-        repairCard1.addPart(new Part("Klocki hamulcowe", 150, 1));
+       // RepairCard repairCard1 = new RepairCard();
+       // repairCard1.addRepair(new Repair("Wymiana klocków", 250));
+       // repairCard1.addPart(new Part("Klocki hamulcowe", 150, 1));
 
         // add repair card to order
-        order1.addRepairCard(repairCard1);
+       // order1.addRepairCard(repairCard1);
 
         // create another order
-        ServiceOrder order2 = new ServiceOrder(fiat, "2", false, 300, "Wymiana oleju");
+       // ServiceOrder order2 = new ServiceOrder(fiat, "2", false, 300, "Wymiana oleju");
 
         // save orders
-        orderRepository.add(order1);
+       // orderRepository.add(order1);
         orderRepository.add(order2);
         orderRepository.save();
     }
 }
+*/

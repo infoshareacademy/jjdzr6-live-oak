@@ -1,34 +1,32 @@
 package com.infoshareacademy.entity.vehicle;
 
-import com.infoshareacademy.entity.Entity;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "vehicle")
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false)
-@ToString
 @NoArgsConstructor
-public class Vehicle extends Entity {
-    @NotBlank
+public class Vehicle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "make", nullable = false)
     private String make;
-    @NotBlank
+    @Column(name = "model", nullable = false)
     private String model;
-    @NotBlank
+    @Column(name = "plate_number", nullable = false, unique = true)
     private String plateNumber;
+    @Column(name = "engine_capacity")
     private double engineCapacity;
+    @Column(name = "production_year")
     private int productionYear;
+    @Column(name = "mileage")
     private int mileage;
+    @Column(name = "vin", columnDefinition = "VARCHAR(17)")
     private String vin;
-    // foreign key (many-to-one)
-    private int clientId;
-
-    public Vehicle(String make, String model, String plateNumber, double engineCapacity, int productionYear) {
-        this.make = make;
-        this.model = model;
-        this.plateNumber = plateNumber;
-        this.engineCapacity = engineCapacity;
-        this.productionYear = productionYear;
-    }
 }

@@ -1,47 +1,39 @@
 package com.infoshareacademy.service;
 
 
+import com.infoshareacademy.dao.vehicle.VehicleDao;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.vehicle.Vehicle;
-import com.infoshareacademy.repository.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class VehicleService {
-    private final VehicleRepository vehicleRepository;
+    private final VehicleDao vehicleDao;
 
-    @Autowired
-    public VehicleService(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
-    }
 
     public List<Vehicle> findAll() {
-        return vehicleRepository.findAll();
+        return vehicleDao.findAll();
     }
 
-    public Vehicle findVehicleById(int id) {
-        return vehicleRepository.find(id);
+    public Vehicle findVehicleById(long id) {
+        return vehicleDao.find(id);
     }
 
 
     public List<Vehicle> getClientVehicles(Client client) {
-        return vehicleRepository.findClientVehicles(client);
+        return new ArrayList<>();
     }
 
     public void addVehicle(Vehicle vehicle) {
-        vehicleRepository.add(vehicle);
-        try {
-            vehicleRepository.save();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        vehicleDao.save(vehicle);
     }
-    
+
     public List<Vehicle> findByQuery(String query) {
-        return vehicleRepository.findBy(query);
+        return new ArrayList<>();
     }
 }

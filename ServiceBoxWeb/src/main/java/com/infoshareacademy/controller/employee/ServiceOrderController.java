@@ -70,15 +70,12 @@ public class ServiceOrderController {
     public String getServiceOrderId(@PathVariable Integer id, Model model) {
         ServiceOrder serviceOrder = serviceOrderService.findServiceOrder(id);
 
-        int vehicleId = serviceOrder.getVehicleId();
-        Vehicle vehicleById = vehicleService.findVehicleById(vehicleId);
-
-        int clientId = vehicleById.getClientId();
-        Client clientById = clientService.findClientById(clientId);
+        Vehicle vehicle = serviceOrder.getVehicle();
+//        Client client = clientService.findClientById(clientId);
 
         model.addAttribute("serviceOrderDetails", serviceOrder);
-        model.addAttribute("vehicle", vehicleById);
-        model.addAttribute("client", clientById);
+        model.addAttribute("vehicle", vehicle);
+//        model.addAttribute("client", client);
         model.addAttribute("prevPath", "service-orders");
         return "employee/service-order-details";
     }

@@ -1,48 +1,32 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.dao.client.ClientDao;
 import com.infoshareacademy.entity.client.Client;
-import com.infoshareacademy.repository.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ClientService {
-
-    private final ClientRepository clientRepository;
-
-    @Autowired
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
+    private final ClientDao clientDao;
 
     public List<Client> findAll() {
-        return clientRepository.findAll();
-    }
-
-
-    public Client findClientById(int id) {
-        return clientRepository.find(id);
+        return clientDao.findAll();
     }
 
     public void addClient(Client client) {
-        clientRepository.add(client);
-        try {
-            clientRepository.save();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        clientDao.save(client);
     }
 
-
-    public Client findClient(int id) {
-        return clientRepository.find(id);
+    public Client findClient(long id) {
+        return clientDao.find(id);
     }
 
     public List<Client> findByQuery(String query) {
-        return clientRepository.findBy(query);
+        return new ArrayList<>();
     }
 
 }

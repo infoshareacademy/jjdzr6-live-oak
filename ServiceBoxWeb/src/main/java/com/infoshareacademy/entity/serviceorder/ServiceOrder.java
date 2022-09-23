@@ -4,9 +4,11 @@ import com.infoshareacademy.entity.vehicle.Vehicle;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.aspectj.weaver.ast.Not;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "service_order")
@@ -39,7 +41,7 @@ public class ServiceOrder {
 
     @Column(name = "description", nullable = false)
     private String description;
-    
+
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
@@ -47,6 +49,10 @@ public class ServiceOrder {
     @OneToOne
     @JoinColumn(name = "repair_card_id")
     private RepairCard repairCard;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "service_order_id")
+    private List<Notes> notes;
 }
 
 

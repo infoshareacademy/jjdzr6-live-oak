@@ -54,8 +54,6 @@ public class VehicleController {
         model.addAttribute("client", client);
 
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult);
-            System.out.println("err");
             return "employee/vehicle-add";
         }
 

@@ -21,7 +21,7 @@ public class ClientDao implements Dao<Client> {
 
     @Override
     public List<Client> findAll() {
-        TypedQuery<Client> query = entityManager.createQuery("select c from Client c", Client.class);
+        TypedQuery<Client> query = entityManager.createQuery("SELECT c FROM Client c", Client.class);
         return query.getResultList();
     }
 
@@ -32,8 +32,7 @@ public class ClientDao implements Dao<Client> {
 
     @Override
     public Client update(Client client) {
-        entityManager.merge(client);
-        return client;
+        return entityManager.merge(client);
     }
 
     @Override

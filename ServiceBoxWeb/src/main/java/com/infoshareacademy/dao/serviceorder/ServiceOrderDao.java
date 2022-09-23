@@ -11,10 +11,8 @@ import java.util.List;
 
 @Repository
 public class ServiceOrderDao implements Dao<ServiceOrder> {
-
     @PersistenceContext
     private EntityManager entityManager;
-
 
     @Override
     public ServiceOrder find(Long id) {
@@ -23,7 +21,7 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
 
     @Override
     public List<ServiceOrder> findAll() {
-        TypedQuery<ServiceOrder> query = entityManager.createQuery("select s from ServiceOrder s", ServiceOrder.class);
+        TypedQuery<ServiceOrder> query = entityManager.createQuery("SELECT s FROM ServiceOrder s", ServiceOrder.class);
         return query.getResultList();
     }
 
@@ -34,8 +32,7 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
 
     @Override
     public ServiceOrder update(ServiceOrder serviceOrder) {
-        entityManager.merge(serviceOrder);
-        return serviceOrder;
+        return entityManager.merge(serviceOrder);
     }
 
     @Override

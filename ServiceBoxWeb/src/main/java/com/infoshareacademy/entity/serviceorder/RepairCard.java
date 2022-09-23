@@ -1,41 +1,28 @@
 package com.infoshareacademy.entity.serviceorder;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "repair_card")
 @Getter
 @Setter
+@NoArgsConstructor
 public class RepairCard {
-    private Set<Repair> repairs = new HashSet<>();
-    private Set<Part> parts = new HashSet<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public RepairCard() {
-    }
+    @OneToMany
+    @JoinColumn(name = "repair_card_id")
+    private Set<Repair> repairs;
 
-    public double calculateTotalRepairCost() {
-        double totalCost = 0;
-
-        // calculate repair cost
-        for (RepairItem repair : repairs) {
-            totalCost += repair.calculateTotalCost();
-        }
-
-        // calculate parts cost
-        for (RepairItem part : parts) {
-            totalCost += part.calculateTotalCost();
-        }
-
-        return totalCost;
-    }
-
-    public void addRepair(Repair repair) {
-        repairs.add(repair);
-    }
-
-    public void addPart(Part part) {
-        parts.add(part);
-    }
+    @OneToMany
+    @JoinColumn(name = "repair_card_id")
+    private Set<Part> parts;
 }

@@ -1,24 +1,24 @@
 package com.infoshareacademy.entity.serviceorder;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "repair")
 @Getter
 @Setter
-public class Repair implements RepairItem {
+@NoArgsConstructor
+public class Repair {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "cost", nullable = false)
     private double cost;
-
-    public Repair() {
-    }
-
-    public Repair(String description, double cost) {
-        this.description = description;
-        this.cost = cost;
-    }
-
-    @Override
-    public double calculateTotalCost() {
-        return cost;
-    }
 }

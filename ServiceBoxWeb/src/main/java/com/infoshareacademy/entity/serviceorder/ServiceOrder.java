@@ -21,7 +21,7 @@ public class ServiceOrder {
     @Column(name = "order_number", nullable = false, unique = true)
     private String orderNumber;
 
-    @Column(name = "created_at", columnDefinition = "DATETIME default CURRENT_DATETIME")
+    @Column(name = "created_at", columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
     @Column(name = "finished_at")
@@ -39,18 +39,14 @@ public class ServiceOrder {
 
     @Column(name = "description", nullable = false)
     private String description;
-
-    // FK: vehicle_id -> vehicle (id) / bidirectional
+    
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-    //private RepairCard repairCard;
-
-
- /*   public void addRepairCard(RepairCard repairCard) {
-        this.repairCard = repairCard;
-    }*/
+    @OneToOne
+    @JoinColumn(name = "repair_card_id")
+    private RepairCard repairCard;
 }
 
 

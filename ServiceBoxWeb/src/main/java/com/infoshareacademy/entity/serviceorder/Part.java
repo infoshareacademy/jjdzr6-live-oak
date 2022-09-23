@@ -14,14 +14,14 @@ import javax.persistence.*;
 public class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String partName;
 
     @Column(name = "cost", nullable = false)
-    private double cost;
+    private Double cost;
 
     @Column(name = "quantity", nullable = false)
-    private int quantity;
+    private Integer quantity;
 }

@@ -7,6 +7,7 @@ import com.infoshareacademy.entity.vehicle.Vehicle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class VehicleService {
         return new ArrayList<>();
     }
 
+    @Transactional
     public void addVehicle(Vehicle vehicle) {
         vehicleDao.save(vehicle);
     }

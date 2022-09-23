@@ -17,7 +17,7 @@ import java.util.List;
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "make", nullable = false)
     private String make;
@@ -29,13 +29,13 @@ public class Vehicle {
     private String plateNumber;
 
     @Column(name = "engine_capacity")
-    private double engineCapacity;
+    private Double engineCapacity;
 
     @Column(name = "production_year")
-    private int productionYear;
+    private Integer productionYear;
 
     @Column(name = "mileage")
-    private int mileage;
+    private Integer mileage;
 
     @Column(name = "vin", columnDefinition = "varchar(17)")
     private String vin;
@@ -43,7 +43,7 @@ public class Vehicle {
     @OneToMany(mappedBy="vehicle", fetch = FetchType.LAZY)
     private List<ServiceOrder> serviceOrders;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "client_id")
     private Client client;
 }

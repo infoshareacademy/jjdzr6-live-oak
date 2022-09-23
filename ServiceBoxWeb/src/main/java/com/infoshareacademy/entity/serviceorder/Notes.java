@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Notes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "created_at", columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;

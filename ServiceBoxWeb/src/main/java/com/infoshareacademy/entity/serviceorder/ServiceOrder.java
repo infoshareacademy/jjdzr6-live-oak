@@ -18,7 +18,7 @@ import java.util.List;
 public class ServiceOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "order_number", nullable = false, unique = true)
     private String orderNumber;
@@ -37,7 +37,7 @@ public class ServiceOrder {
     private boolean onlyNewParts;
 
     @Column(name = "max_cost", nullable = false)
-    private int maxCost;
+    private Integer maxCost;
 
     @Column(name = "description", nullable = false)
     private String description;

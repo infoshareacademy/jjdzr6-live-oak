@@ -16,7 +16,7 @@ import java.util.Set;
 public class RepairCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToMany
     @JoinColumn(name = "repair_card_id")

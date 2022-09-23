@@ -14,11 +14,11 @@ import javax.persistence.*;
 public class Repair {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "description", nullable = false)
     private String description;
 
     @Column(name = "cost", nullable = false)
-    private double cost;
+    private Double cost;
 }

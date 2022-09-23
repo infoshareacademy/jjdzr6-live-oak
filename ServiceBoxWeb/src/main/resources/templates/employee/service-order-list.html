@@ -71,7 +71,7 @@
                             <td th:text="${service.orderNumber}"></td>
                             <td th:text="${service.createdAt}"></td>
                             <td th:text="${service.description}"></td>
-                            <td th:text="${vehicleService.findVehicleById(service.vehicleId).plateNumber}"></td>
+                            <td th:text="${service.vehicle.plateNumber}"></td>
 <!--                            <td th:text="${service.maxCost}"></td>-->
                             <td th:text="${service.state.description}"></td>
                             <td class="text-end">

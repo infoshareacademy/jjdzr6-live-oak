@@ -6,6 +6,7 @@ import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ServiceOrderService {
         return serviceOrderDao.findAll();
     }
 
+    @Transactional
     public void addServiceOrder(ServiceOrder serviceOrder) {
         serviceOrderDao.save(serviceOrder);
     }

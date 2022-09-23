@@ -1,5 +1,6 @@
 package com.infoshareacademy.entity.vehicle;
 
+import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,21 +18,32 @@ public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "make", nullable = false)
     private String make;
+
     @Column(name = "model", nullable = false)
     private String model;
+
     @Column(name = "plate_number", nullable = false, unique = true)
     private String plateNumber;
+
     @Column(name = "engine_capacity")
     private double engineCapacity;
+
     @Column(name = "production_year")
     private int productionYear;
+
     @Column(name = "mileage")
     private int mileage;
-    @Column(name = "vin", columnDefinition = "VARCHAR(17)")
+
+    @Column(name = "vin", columnDefinition = "varchar(17)")
     private String vin;
 
     @OneToMany(mappedBy="vehicle", fetch = FetchType.LAZY)
-    private List<ServiceOrder> serviceOrderList;
+    private List<ServiceOrder> serviceOrders;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 }

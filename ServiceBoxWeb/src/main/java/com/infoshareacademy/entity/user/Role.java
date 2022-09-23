@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +17,9 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name")
     private String name;
+
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
 }

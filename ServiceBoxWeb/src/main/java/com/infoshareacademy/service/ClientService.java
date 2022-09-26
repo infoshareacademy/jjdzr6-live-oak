@@ -5,6 +5,7 @@ import com.infoshareacademy.entity.client.Client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class ClientService {
         return clientDao.findAll();
     }
 
+    @Transactional
     public void addClient(Client client) {
         clientDao.save(client);
     }

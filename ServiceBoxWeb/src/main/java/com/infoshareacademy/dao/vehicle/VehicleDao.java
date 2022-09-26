@@ -21,8 +21,7 @@ public class VehicleDao implements Dao<Vehicle> {
 
     @Override
     public List<Vehicle> findAll() {
-        TypedQuery<Vehicle> query = entityManager.createQuery(
-                "SELECT v from Vehicle v ", Vehicle.class);
+        TypedQuery<Vehicle> query = entityManager.createQuery("SELECT v FROM Vehicle v ", Vehicle.class);
         return query.getResultList();
     }
 
@@ -33,8 +32,7 @@ public class VehicleDao implements Dao<Vehicle> {
 
     @Override
     public Vehicle update(Vehicle vehicle) {
-        entityManager.merge(vehicle);
-        return vehicle;
+        return entityManager.merge(vehicle);
     }
 
     @Override

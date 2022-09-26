@@ -17,7 +17,7 @@ import java.util.List;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -26,11 +26,11 @@ public class Client {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @Column(name = "nip", columnDefinition = "VARCHAR(10)", unique = true)
+    @Column(name = "nip", columnDefinition = "varchar(10)", unique = true)
     private String nip;
 
     @Column(name = "phone", unique = true, nullable = false)
@@ -39,10 +39,9 @@ public class Client {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "notify")
-    private boolean allowNotify = false;
+    @Column(name = "notifications", columnDefinition = "boolean default false")
+    private boolean allowNotify;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Vehicle> vehicles;
 }

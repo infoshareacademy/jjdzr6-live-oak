@@ -2,8 +2,10 @@ package com.infoshareacademy.service;
 
 
 import com.infoshareacademy.dao.vehicle.VehicleDao;
+import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.vehicle.Vehicle;
+import com.infoshareacademy.mappers.vehicle.VehicleMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleService {
     private final VehicleDao vehicleDao;
+    private final VehicleMapper vehicleMapper;
 
-
-    public List<Vehicle> findAll() {
-        return vehicleDao.findAll();
+    public List<VehicleDto> findAll() {
+        List<Vehicle> vehicleList = vehicleDao.findAll();
+        return vehicleList.stream()
+                .map(v->vehicleMapper.toDto(v))
+                .toList();
     }
 
     public Vehicle findVehicleById(long id) {

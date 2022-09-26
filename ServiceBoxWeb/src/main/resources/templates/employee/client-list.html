@@ -70,11 +70,11 @@
                             <td th:text="${client.name}"></td>
                             <td th:text="${client.email}"></td>
                             <td th:text="${client.phoneNumber}"></td>
-                            <td th:text="${client.address}"></td>
+                            <td th:text="${client.clientAddress}"></td>
                             <td th:text="${client.nip}"></td>
                             <td class="text-end">
                                 <a th:href="@{/employee/clients/{id}/vehicles(id=${client.id})}"
-                                   style="width: 120px;" class="btn btn-primary btn-md" th:text="'Pojazdy / ' + ${vehicleService.getClientVehicles(client).size}"></a>
+                                   style="width: 120px;" class="btn btn-primary btn-md" th:text="'Pojazdy / '"></a>
                             </td>
                         </tr>
                         </tbody>

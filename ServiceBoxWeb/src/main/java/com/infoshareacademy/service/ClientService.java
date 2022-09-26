@@ -1,7 +1,9 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.client.ClientDao;
+import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.mappers.client.ClientMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientService {
     private final ClientDao clientDao;
+    private final ClientMapper clientMapper;
 
-    public List<Client> findAll() {
-        return clientDao.findAll();
+    public List<ClientDto> findAll() {
+        List<Client> clientList = clientDao.findAll();
+        return clientList.stream()
+                .map(c->clientMapper.toDto(c))
+                .toList();
     }
 
     @Transactional

@@ -8,19 +8,11 @@ import lombok.Getter;
 @AllArgsConstructor
 
 public class ClientDto {
-
     private Long id;
     private String name;
-    private Address address;
+    private String address;
     private String nip;
     private String phoneNumber;
     private String email;
     private boolean allowNotify;
-
-    public String getClientAddress() {
-
-        return "ul. " + address.getStreet() + " " + address.getHouseNumber()  + " " + address.getFlatNumber() + ", " + address.getZipCode() + " " + address.getCity();
-
-    }
-
 }

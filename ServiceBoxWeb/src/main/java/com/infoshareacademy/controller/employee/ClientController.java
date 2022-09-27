@@ -1,10 +1,11 @@
 package com.infoshareacademy.controller.employee;
 
+import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.VehicleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,16 +17,10 @@ import java.util.List;
 
 @RequestMapping("employee/")
 @Controller
+@RequiredArgsConstructor
 public class ClientController {
-
     private final ClientService clientService;
     private final VehicleService vehicleService;
-
-    @Autowired
-    public ClientController(ClientService clientService, VehicleService vehicleService) {
-        this.clientService = clientService;
-        this.vehicleService = vehicleService;
-    }
 
     @GetMapping("clients")
     public String getClients(Model model, @RequestParam(name = "search", required = false, defaultValue = "") String searchQuery) {
@@ -37,24 +32,32 @@ public class ClientController {
         }
 
         model.addAttribute("vehicleService", vehicleService);
-
         return "employee/client-list";
     }
 
     @GetMapping("addClient")
     public String getNewClient(Model model) {
-        model.addAttribute("newClient", new Client());
+        model.addAttribute("newClient", new ClientDto());
         return "employee/client-add";
     }
 
     @PostMapping("addClient")
-    public String addNewClient(@Valid @ModelAttribute("newClient") Client client, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addNewClient(
+            @Valid @ModelAttribute("newClient") ClientDto clientDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        // validate email
+        String email = clientDto.getEmail();
+        if (clientService.emailExists(email)) {
+            bindingResult.rejectValue("email", "email.exists", "Podany adres email już istnieje");
+        }
 
         if (bindingResult.hasErrors()) {
             return "employee/client-add";
         }
 
-        clientService.addClient(client);
+        clientService.addClient(clientDto);
         redirectAttributes.addFlashAttribute("success", "Dodano nowego klienta.");
         return "redirect:/employee/clients";
     }

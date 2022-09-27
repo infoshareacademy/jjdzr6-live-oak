@@ -6,7 +6,7 @@ INSERT INTO servicebox.user (id, username, password, enabled) VALUES (1, 'test',
 --
 INSERT INTO servicebox.user_role (user_id, role_id) VALUES (1, 2);
 
-INSERT INTO servicebox.address (city, flat_number, house_number, street, zip_code) VALUES ('Poznań', null, '10', 'Poznańska', '60-685');
+INSERT INTO servicebox.address (city, flat_number, house_number, street, zip_code) VALUES ('Poznań', '', '10', 'Poznańska', '60-685');
 
 INSERT INTO servicebox.client (notifications, email, name, nip, phone, address_id, user_id) VALUES (DEFAULT, 'test@wp.pl', 'Jan', null, '603654848', 1, null);
 

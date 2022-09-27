@@ -18,14 +18,14 @@ public class ClientService {
     private final ClientMapper clientMapper;
 
     public List<ClientDto> findAll() {
-        List<Client> clientList = clientDao.findAll();
-        return clientList.stream()
-                .map(c->clientMapper.toDto(c))
+        return clientDao.findAll().stream()
+                .map(clientMapper::toDto)
                 .toList();
     }
 
     @Transactional
-    public void addClient(Client client) {
+    public void addClient(ClientDto clientDto) {
+        Client client = clientMapper.fromDto(clientDto);
         clientDao.save(client);
     }
 
@@ -33,8 +33,13 @@ public class ClientService {
         return clientDao.find(id);
     }
 
-    public List<Client> findByQuery(String query) {
-        return new ArrayList<>();
+    public List<ClientDto> findByQuery(String query) {
+        return clientDao.findByQuery(query).stream()
+                .map(clientMapper::toDto)
+                .toList();
     }
 
+    public boolean emailExists(String email) {
+        return clientDao.findByEmail(email).isPresent();
+    }
 }

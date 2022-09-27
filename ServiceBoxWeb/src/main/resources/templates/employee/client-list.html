@@ -37,7 +37,7 @@
                 <div class="col-6">
                     <form method="get" class="input-group mb-3" id="searchForm">
                         <input type="text" class="form-control" name="search" id="search" minlength="3"
-                               placeholder="Wyszukaj klienta" th:value="${search}" autofocus autocomplete="off"
+                               placeholder="Wyszukaj po nazwie lub mailu" th:value="${search}" autofocus autocomplete="off"
                                required>
                     </form>
                     <a th:if="${search}" th:href="@{/employee/clients}" class="btn btn-outline-secondary">Pokaż
@@ -60,7 +60,7 @@
                             <th th:text="#{cl.email}"></th>
                             <th th:text="#{cl.phoneNumber}" style="width: 120px"></th>
                             <th th:text="#{cl.address}"></th>
-                            <th th:text="#{cl.nip}" style="width: 140px"></th>
+                            <th th:text="#{cl.nip}"></th>
                             <th class="text-end" style="width: 160px;">Opcje</th>
                         </tr>
                         </thead>
@@ -70,11 +70,11 @@
                             <td th:text="${client.name}"></td>
                             <td th:text="${client.email}"></td>
                             <td th:text="${client.phoneNumber}"></td>
-                            <td th:text="${client.address}"></td>
-                            <td th:text="${client.nip}"></td>
+                            <td th:text="${client.address ?: 'nie podano'}"></td>
+                            <td th:text="${client.nip ?: 'nie podano'}"></td>
                             <td class="text-end">
                                 <a th:href="@{/employee/clients/{id}/vehicles(id=${client.id})}"
-                                   style="width: 120px;" class="btn btn-primary btn-md" th:text="'Pojazdy / '"></a>
+                                   class="btn btn-primary btn-md">Pojazdy</a>
                             </td>
                         </tr>
                         </tbody>

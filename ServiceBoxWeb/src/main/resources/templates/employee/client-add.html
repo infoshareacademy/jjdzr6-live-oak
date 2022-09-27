@@ -95,7 +95,7 @@
                             <div class="mb-3">
                                 <label for="address.zipCode" class="form-label" th:text="#{cl.zipCode}"></label>
                                 <input type="text" class="form-control" id="address.zipCode"
-                                       th:field="*{addressZipCode}">
+                                       th:field="*{addressZipCode}" th:errorclass="is-invalid">
                                 <div class="form-text text-danger" th:if="${#fields.hasErrors('addressZipCode')}" th:errors="*{addressZipCode}">
                                 </div>
                             </div>

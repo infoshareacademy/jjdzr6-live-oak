@@ -65,8 +65,8 @@
                             <td th:text="${vehicle.make}"></td>
                             <td th:text="${vehicle.model}"></td>
                             <td th:text="${vehicle.plateNumber}"></td>
-                            <td th:text="${vehicle.engineCapacity}"></td>
-                            <td th:text="${vehicle.productionYear}"></td>
+                            <td th:text="${vehicle.engineCapacity ?: '-'}"></td>
+                            <td th:text="${vehicle.productionYear ?: '-'}"></td>
                             <td th:text="${vehicle.clientName}"></td>
                             <td class="text-end">
                                 <a th:href="@{/employee/service-orders/add(vehicle=${vehicle.id})}" class="btn btn-primary">Napraw</a>

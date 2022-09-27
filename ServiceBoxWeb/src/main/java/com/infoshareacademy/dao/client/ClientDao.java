@@ -44,7 +44,7 @@ public class ClientDao implements Dao<Client> {
     }
 
     public Optional<Client> findByEmail(String email) {
-        TypedQuery<Client> query = entityManager.createQuery("SELECT c FROM Client c where c.email = :email", Client.class)
+        TypedQuery<Client> query = entityManager.createQuery("SELECT c FROM Client c where LOWER(c.email) = LOWER(:email)", Client.class)
                 .setParameter("email", email);
 
         return query.getResultStream().findFirst();

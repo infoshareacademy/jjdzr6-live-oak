@@ -1,8 +1,11 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
+import com.infoshareacademy.dto.client.ClientDto;
+import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
+import com.infoshareacademy.mappers.serviceorder.ServiceOrderMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +19,17 @@ import java.util.Optional;
 public class ServiceOrderService {
 
     private final ServiceOrderDao serviceOrderDao;
+    private final ServiceOrderMapper serviceOrderMapper;
 
-    public List<ServiceOrder> findAll() {
-        return serviceOrderDao.findAll();
+    public List<ServiceOrderDto> findAll() {
+        return serviceOrderDao.findAll().stream()
+                .map(serviceOrderMapper::toDto)
+                .toList();
     }
 
     @Transactional
-    public void addServiceOrder(ServiceOrder serviceOrder) {
+    public void addServiceOrder(ServiceOrderDto serviceOrderDto) {
+        ServiceOrder serviceOrder = serviceOrderMapper.fromDto(serviceOrderDto);
         serviceOrderDao.save(serviceOrder);
     }
 
@@ -30,8 +37,10 @@ public class ServiceOrderService {
         return serviceOrderDao.find(id);
     }
 
-    public List<ServiceOrder> findByQuery(String query) {
-        return new ArrayList<>();
+    public List<ServiceOrderDto> findByQuery(String query) {
+        return serviceOrderDao.findByQuery(query).stream()
+                .map(serviceOrderMapper::toDto)
+                .toList();
     }
 
     public long countByState(ServiceOrderState state) {

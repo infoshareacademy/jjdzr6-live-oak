@@ -42,4 +42,8 @@ public class VehicleService {
     public boolean plateNumberExists(String plateNumber) {
         return vehicleDao.findByPlateNumber(plateNumber).isPresent();
     }
+
+    public Vehicle findVehicle(Long id) {
+        return vehicleDao.find(id);
+    }
 }

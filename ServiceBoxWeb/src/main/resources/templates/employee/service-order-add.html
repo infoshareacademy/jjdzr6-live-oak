@@ -33,6 +33,21 @@
 
                 <div class="col-md-6 col-lg-5">
                     <div class="mb-3">
+                        <label for="orderNumber" class="form-label">Numer zlecenia</label>
+                        <input type="text" class="form-control" id="orderNumber" th:value="${newServiceOrder.orderNumber}" readonly
+                               disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="plateNumber" class="form-label">Numer rejestracyjny pojazdu</label>
+                        <input type="text" class="form-control" id="plateNumber" th:value="${newServiceOrder.plateNumber}" readonly
+                               disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="owner" class="form-label">Właściciel pojazdu</label>
+                        <input type="text" class="form-control" id="owner" th:value="${newServiceOrder.clientName}" readonly
+                               disabled>
+                    </div>
+                    <div class="mb-3">
                         <label for="orderDescription" class="form-label" th:text="#{so.description}"></label>
                         <textarea class="form-control" id="orderDescription" rows="3" th:field="*{description}"
                                   th:errorclass="is-invalid" autofocus></textarea>
@@ -56,24 +71,10 @@
                         </label>
                     </div>
                 </div>
-
-                <div class="col-md-6 col-lg-5">
-                    <div class="mb-3">
-                        <label for="orderNumber" class="form-label">Numer zlecenia</label>
-                        <input type="text" class="form-control" id="orderNumber" th:value="${newServiceOrder.orderNumber}" readonly
-                               disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label for="plateNumber" class="form-label">Numer rejestracyjny pojazdu</label>
-                        <input type="text" class="form-control" id="plateNumber" th:value="${newServiceOrder.plateNumber}" readonly
-                               disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label for="owner" class="form-label">Właściciel pojazdu</label>
-                        <input type="text" class="form-control" id="owner" th:value="${newServiceOrder.clientName}" readonly
-                               disabled>
-                    </div>
-                </div>
+<!--                -->
+<!--                <div class="col-md-6 col-lg-5">-->
+<!--                   -->
+<!--                </div>-->
 
                 <div class="col-12 mt-3">
                     <button type="submit" class="btn btn-primary btn-lg" th:text="#{submit.button}"></button>

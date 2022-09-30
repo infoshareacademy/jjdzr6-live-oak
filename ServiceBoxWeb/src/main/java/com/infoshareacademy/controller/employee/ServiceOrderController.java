@@ -55,7 +55,7 @@ public class ServiceOrderController {
         ServiceOrderDto serviceOrderDto = new ServiceOrderDto();
         serviceOrderDto.setVehicleId(vehicle.getId());
         serviceOrderDto.setPlateNumber(vehicle.getPlateNumber());
-        serviceOrderDto.setOrderNumber("2/2022");
+        serviceOrderDto.setOrderNumber(serviceOrderService.generateOrderNumber());
         serviceOrderDto.setClientName(vehicle.getClient().getName());
 
         model.addAttribute("newServiceOrder", serviceOrderDto);

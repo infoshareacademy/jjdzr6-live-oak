@@ -1,7 +1,6 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
-import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
@@ -10,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +48,9 @@ public class ServiceOrderService {
 
     public Optional<ServiceOrder> getLastOrder() {
         return Optional.empty();
+    }
+
+    public String generateOrderNumber() {
+        return serviceOrderDao.countServiceOrders() + 1 + "/" + LocalDateTime.now().getMonth().getValue() + "/" + LocalDateTime.now().getYear();
     }
 }

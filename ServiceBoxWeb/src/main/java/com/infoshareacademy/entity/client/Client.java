@@ -40,7 +40,7 @@ public class Client {
     private String email;
 
     @Column(name = "notifications", columnDefinition = "boolean default false")
-    private boolean allowNotify;
+    private boolean allowNotify = false;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Vehicle> vehicles;

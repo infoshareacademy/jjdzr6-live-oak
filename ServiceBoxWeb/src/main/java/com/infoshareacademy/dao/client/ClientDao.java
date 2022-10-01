@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ClientDao implements Dao<Client> {
@@ -40,5 +41,17 @@ public class ClientDao implements Dao<Client> {
         if (client != null) {
             entityManager.remove(client);
         }
+    }
+
+    public Optional<Client> findByEmail(String email) {
+        TypedQuery<Client> query = entityManager.createQuery("SELECT c FROM Client c where LOWER(c.email) = LOWER(:email)", Client.class)
+                .setParameter("email", email);
+
+        return query.getResultStream().findFirst();
+    }
+
+    public List<Client> findByQuery(String query) {
+        return entityManager.createQuery("SELECT c FROM Client c WHERE LOWER(c.name) LIKE LOWER(:query) OR LOWER(c.email) LIKE LOWER(:query)", Client.class)
+                .setParameter("query", "%" + query + "%").getResultList();
     }
 }

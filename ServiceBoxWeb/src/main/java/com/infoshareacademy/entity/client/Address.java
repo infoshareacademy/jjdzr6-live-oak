@@ -30,4 +30,13 @@ public class Address {
 
     @Column(name = "city", nullable = false)
     private String city;
+
+    @OneToOne(optional = false, mappedBy = "address")
+    private Client client;
+
+    public void setClient(Client client) {
+        this.client = client;
+        // set owning side
+        client.setAddress(this);
+    }
 }

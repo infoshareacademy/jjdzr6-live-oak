@@ -1,7 +1,9 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.client.ClientDao;
+import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.mappers.client.ClientMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +15,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientService {
     private final ClientDao clientDao;
+    private final ClientMapper clientMapper;
 
-    public List<Client> findAll() {
-        return clientDao.findAll();
+    public List<ClientDto> findAll() {
+        return clientDao.findAll().stream()
+                .map(clientMapper::toDto)
+                .toList();
     }
 
     @Transactional
-    public void addClient(Client client) {
+    public void addClient(ClientDto clientDto) {
+        Client client = clientMapper.fromDto(clientDto);
         clientDao.save(client);
     }
 
@@ -27,8 +33,13 @@ public class ClientService {
         return clientDao.find(id);
     }
 
-    public List<Client> findByQuery(String query) {
-        return new ArrayList<>();
+    public List<ClientDto> findByQuery(String query) {
+        return clientDao.findByQuery(query).stream()
+                .map(clientMapper::toDto)
+                .toList();
     }
 
+    public boolean emailExists(String email) {
+        return clientDao.findByEmail(email).isPresent();
+    }
 }

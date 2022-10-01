@@ -1,11 +1,14 @@
 package com.infoshareacademy.dao.serviceorder;
 
 import com.infoshareacademy.dao.Dao;
+import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
+import com.infoshareacademy.entity.vehicle.Vehicle;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -40,5 +43,15 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
         if (serviceOrder != null) {
             entityManager.remove(serviceOrder);
         }
+    }
+
+    public List<ServiceOrder> findByQuery(String query) {
+        return entityManager.createQuery("SELECT so FROM ServiceOrder so WHERE LOWER(so.orderNumber) LIKE LOWER(:query)", ServiceOrder.class)
+                .setParameter("query", "%" + query + "%").getResultList();
+    }
+
+    public Long countServiceOrders() {
+        Query query = entityManager.createQuery("SELECT count(so) FROM ServiceOrder so");
+        return (Long) query.getSingleResult();
     }
 }

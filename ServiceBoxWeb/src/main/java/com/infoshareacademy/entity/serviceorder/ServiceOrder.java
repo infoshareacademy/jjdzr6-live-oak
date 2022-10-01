@@ -24,7 +24,7 @@ public class ServiceOrder {
     private String orderNumber;
 
     @Column(name = "created_at", columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "finished_at")
     private LocalDateTime finishedAt;
@@ -34,7 +34,7 @@ public class ServiceOrder {
     private ServiceOrderState state = ServiceOrderState.CREATED;
 
     @Column(name = "new_parts", columnDefinition = "boolean default false")
-    private boolean onlyNewParts;
+    private boolean onlyNewParts = false;
 
     @Column(name = "max_cost", nullable = false)
     private Integer maxCost;

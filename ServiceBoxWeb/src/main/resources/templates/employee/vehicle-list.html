@@ -35,7 +35,7 @@
                 <div class="col-6">
                     <form method="get" class="input-group mb-3" id="searchForm">
                         <input type="text" class="form-control" name="search" id="search" minlength="3"
-                               placeholder="Wyszukaj pojazd" th:value="${search}" autofocus autocomplete="off" required>
+                               placeholder="Wyszukaj pojazd po numerze rejestracyjnym" th:value="${search}" autofocus autocomplete="off" required>
                     </form>
                     <a th:if="${search}" th:href="@{/employee/vehicles}" class="btn btn-outline-secondary">Pokaż wszystkie</a>
                 </div>
@@ -65,9 +65,9 @@
                             <td th:text="${vehicle.make}"></td>
                             <td th:text="${vehicle.model}"></td>
                             <td th:text="${vehicle.plateNumber}"></td>
-                            <td th:text="${vehicle.engineCapacity}"></td>
-                            <td th:text="${vehicle.productionYear}"></td>
-                            <td th:text="${vehicle.client.name}"></td>
+                            <td th:text="${vehicle.engineCapacity ?: '-'}"></td>
+                            <td th:text="${vehicle.productionYear ?: '-'}"></td>
+                            <td th:text="${vehicle.clientName}"></td>
                             <td class="text-end">
                                 <a th:href="@{/employee/service-orders/add(vehicle=${vehicle.id})}" class="btn btn-primary">Napraw</a>
                         </tr>

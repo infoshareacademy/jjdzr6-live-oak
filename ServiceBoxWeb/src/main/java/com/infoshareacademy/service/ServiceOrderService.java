@@ -1,57 +1,56 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
+import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
-import com.infoshareacademy.repository.ServiceOrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.infoshareacademy.mappers.serviceorder.ServiceOrderMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.Comparator;
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ServiceOrderService {
-    private final ServiceOrderRepository serviceOrderRepository;
 
-    @Autowired
-    public ServiceOrderService(ServiceOrderRepository serviceOrderRepository) {
-        this.serviceOrderRepository = serviceOrderRepository;
+    private final ServiceOrderDao serviceOrderDao;
+    private final ServiceOrderMapper serviceOrderMapper;
+
+    public List<ServiceOrderDto> findAll() {
+        return serviceOrderDao.findAll().stream()
+                .map(serviceOrderMapper::toDto)
+                .toList();
     }
 
-    public List<ServiceOrder> findAll(){
-        return serviceOrderRepository.findAll();
+    @Transactional
+    public void addServiceOrder(ServiceOrderDto serviceOrderDto) {
+        ServiceOrder serviceOrder = serviceOrderMapper.fromDto(serviceOrderDto);
+        serviceOrderDao.save(serviceOrder);
     }
 
-    public void addServiceOrder(ServiceOrder serviceOrder){
-        serviceOrderRepository.add(serviceOrder);
-        try {
-            serviceOrderRepository.save();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public ServiceOrder findServiceOrder(long id) {
+        return serviceOrderDao.find(id);
     }
 
-    public ServiceOrder findServiceOrder(int id){
-        return  serviceOrderRepository.find(id);
-    }
-
-    public List<ServiceOrder> findByQuery(String query) {
-        return serviceOrderRepository.findBy(query);
+    public List<ServiceOrderDto> findByQuery(String query) {
+        return serviceOrderDao.findByQuery(query).stream()
+                .map(serviceOrderMapper::toDto)
+                .toList();
     }
 
     public long countByState(ServiceOrderState state) {
-        return serviceOrderRepository.findAll()
-                .stream()
-                .filter(order -> order.getState().equals(state))
-                .count();
+        return 0;
     }
 
     public Optional<ServiceOrder> getLastOrder() {
-        return serviceOrderRepository.findAll()
-                .stream()
-                .sorted(Comparator.comparing(ServiceOrder::getCreatedAt).reversed())
-                .findFirst();
+        return Optional.empty();
+    }
+
+    public String generateOrderNumber() {
+        return serviceOrderDao.countServiceOrders() + 1 + "/" + LocalDateTime.now().getMonth().getValue() + "/" + LocalDateTime.now().getYear();
     }
 }

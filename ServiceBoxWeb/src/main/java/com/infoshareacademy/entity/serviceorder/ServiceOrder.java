@@ -1,62 +1,58 @@
 package com.infoshareacademy.entity.serviceorder;
 
-import com.infoshareacademy.entity.Entity;
 import com.infoshareacademy.entity.vehicle.Vehicle;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.aspectj.weaver.ast.Not;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
+@Entity
+@Table(name = "service_order")
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(callSuper = false)
-public class ServiceOrder extends Entity {
-    private LocalDate createdAt = LocalDate.now();
-    private LocalDate finishedAt;
-    private ServiceOrderState state = ServiceOrderState.CREATED;
+@NoArgsConstructor
+public class ServiceOrder {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotBlank
+    @Column(name = "order_number", nullable = false, unique = true)
     private String orderNumber;
 
-    @NotNull
-    private boolean onlyNewParts;
+    @Column(name = "created_at", columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @NotNull
-    @Min(1)
-    private double maxCost;
+    @Column(name = "finished_at")
+    private LocalDateTime finishedAt;
 
-    @NotBlank
-    @Size(min = 8, max = 400)
+    @Column(name = "state", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ServiceOrderState state = ServiceOrderState.CREATED;
+
+    @Column(name = "new_parts", columnDefinition = "boolean default false")
+    private boolean onlyNewParts = false;
+
+    @Column(name = "max_cost", nullable = false)
+    private Integer maxCost;
+
+    @Column(name = "description", nullable = false)
     private String description;
 
-    // foreign key (one-to-one)
-    private int vehicleId;
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
+
+    @OneToOne
+    @JoinColumn(name = "repair_card_id")
     private RepairCard repairCard;
 
-    public ServiceOrder() {
-    }
-
-    public ServiceOrder(Vehicle vehicle, String orderNumber, boolean onlyNewParts, float maxCost, String description) {
-        this.onlyNewParts = onlyNewParts;
-        this.maxCost = maxCost;
-        this.description = description;
-        this.vehicleId = vehicle.getId();
-        this.orderNumber = orderNumber;
-
-        createdAt = LocalDate.now();
-        state = ServiceOrderState.CREATED;
-    }
-
-    public void addRepairCard(RepairCard repairCard) {
-        this.repairCard = repairCard;
-    }
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "service_order_id")
+    private List<Notes> notes;
 }
 
 

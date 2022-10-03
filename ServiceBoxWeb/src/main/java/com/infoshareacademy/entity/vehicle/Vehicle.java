@@ -1,34 +1,49 @@
 package com.infoshareacademy.entity.vehicle;
 
-import com.infoshareacademy.entity.Entity;
-import lombok.*;
+import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.entity.serviceorder.ServiceOrder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name = "vehicle")
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false)
-@ToString
 @NoArgsConstructor
-public class Vehicle extends Entity {
-    @NotBlank
-    private String make;
-    @NotBlank
-    private String model;
-    @NotBlank
-    private String plateNumber;
-    private double engineCapacity;
-    private int productionYear;
-    private int mileage;
-    private String vin;
-    // foreign key (many-to-one)
-    private int clientId;
+public class Vehicle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Vehicle(String make, String model, String plateNumber, double engineCapacity, int productionYear) {
-        this.make = make;
-        this.model = model;
-        this.plateNumber = plateNumber;
-        this.engineCapacity = engineCapacity;
-        this.productionYear = productionYear;
-    }
+    @Column(name = "make", nullable = false)
+    private String make;
+
+    @Column(name = "model", nullable = false)
+    private String model;
+
+    @Column(name = "plate_number", nullable = false, unique = true)
+    private String plateNumber;
+
+    @Column(name = "engine_capacity")
+    private Double engineCapacity;
+
+    @Column(name = "production_year")
+    private Integer productionYear;
+
+    @Column(name = "mileage")
+    private Integer mileage;
+
+    @Column(name = "vin", columnDefinition = "varchar(17)")
+    private String vin;
+
+    @OneToMany(mappedBy="vehicle", fetch = FetchType.LAZY)
+    private List<ServiceOrder> serviceOrders;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "client_id")
+    private Client client;
 }

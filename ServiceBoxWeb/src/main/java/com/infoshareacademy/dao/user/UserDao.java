@@ -16,7 +16,7 @@ public class UserDao implements Dao<User> {
 
     public User findByUsername(String username) {
         TypedQuery<User> query = entityManager.createQuery(
-                        "SELECT u from User u WHERE u.username = :username", User.class)
+                        "SELECT u FROM User u WHERE u.username = :username", User.class)
                 .setParameter("username", username);
 
         List<User> resultList = query.getResultList();

@@ -24,46 +24,58 @@
                 <h1 class="heading" th:text="#{vehicle.addVehicle}"></h1>
             </header>
 
-            <form th:object="${newVehicle}" th:action="@{/employee/vehicles/add(client=${client.id})}" method="post" class="row">
+            <form th:object="${newVehicle}" th:action="@{/employee/vehicles/add}" method="post" class="row">
 
-                <input th:if="${client != null}" type="hidden" name="clientId" th:value="${client.id}">
+                <input type="hidden" name="clientName" th:field="*{clientName}">
+                <input type="hidden" name="clientId" th:field="*{clientId}">
 
                 <div class="col-md-6 col-lg-5">
                     <div class="mb-3">
                         <label for="owner" class="form-label">Właściciel pojazdu</label>
-                        <input type="text" class="form-control" id="owner" th:value="${client.name}" readonly disabled>
+                        <input type="text" class="form-control" id="owner" th:value="${newVehicle.clientName}" readonly
+                               disabled>
                     </div>
                     <div class="mb-3">
                         <label for="make" class="form-label">Marka</label>
                         <input type="text" class="form-control" id="make" th:field="*{make}" th:errorclass="is-invalid"
                                autofocus>
-                        <div class="form-text text-danger" th:if="${#fields.hasErrors('make')}">To pole jest wymagane
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('make')}" th:errors="*{make}">
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="model" class="form-label">Marka</label>
+                        <label for="model" class="form-label">Model</label>
                         <input type="text" class="form-control" id="model" th:field="*{model}"
                                th:errorclass="is-invalid">
-                        <div class="form-text text-danger" th:if="${#fields.hasErrors('model')}">To pole jest wymagane
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="plateNumber" class="form-label">Numer rejestracyjny</label>
                         <input type="text" class="form-control" id="plateNumber" th:field="*{plateNumber}"
                                th:errorclass="is-invalid">
-                        <div class="form-text text-danger" th:if="${#fields.hasErrors('plateNumber')}">To pole jest
-                            wymagane
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('plateNumber')}"
+                             th:errors="*{plateNumber}">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-5">
                     <div class="mb-3">
                         <label for="engineCapacity" class="form-label">Pojemność silnika</label>
                         <input type="text" class="form-control" id="engineCapacity" th:field="*{engineCapacity}">
                     </div>
                     <div class="mb-3">
                         <label for="productionYear" class="form-label">Rok produkcji</label>
-                        <input type="text" class="form-control" id="productionYear" th:field="*{productionYear}">
+                        <input type="text" class="form-control" id="productionYear" th:field="*{productionYear}"
+                               th:errorclass="is-invalid">
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('productionYear')}"
+                             th:errors="*{productionYear}">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="vin" class="form-label">Numer nadwozia (VIN)</label>
+                        <input type="text" class="form-control" id="vin" th:field="*{vin}" th:errorclass="is-invalid">
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('vin')}" th:errors="*{vin}">
+                        </div>
                     </div>
                 </div>
 

@@ -1,6 +1,7 @@
 package com.infoshareacademy.controller.employee;
 
 
+import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.vehicle.Vehicle;
@@ -8,10 +9,12 @@ import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -41,27 +44,35 @@ public class ServiceOrderController {
             model.addAttribute("search", searchQuery);
         }
 
-        model.addAttribute("vehicleService", vehicleService);
         return "employee/service-order-list";
     }
 
     @GetMapping("add")
-    public String getNewServiceOrder(Model model, @RequestParam(name = "vehicle", required = false, defaultValue = "0") int vehicleId) {
-        model.addAttribute("newServiceOrder", new ServiceOrder());
-        model.addAttribute("vehicles", vehicleService.findAll());
-        model.addAttribute("vid", vehicleId);
+    public String getNewServiceOrder(Model model, @RequestParam(name = "vehicle", required = false, defaultValue = "0") Long vehicleId) {
+        Vehicle vehicle = vehicleService.findVehicle(vehicleId);
+        if (vehicle == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pojazd o id " + vehicleId + " nie istnieje");
+
+        ServiceOrderDto serviceOrderDto = new ServiceOrderDto();
+        serviceOrderDto.setVehicleId(vehicle.getId());
+        serviceOrderDto.setPlateNumber(vehicle.getPlateNumber());
+        serviceOrderDto.setOrderNumber(serviceOrderService.generateOrderNumber());
+        serviceOrderDto.setClientName(vehicle.getClient().getName());
+
+        model.addAttribute("newServiceOrder", serviceOrderDto);
         return "employee/service-order-add";
     }
 
     @PostMapping("add")
-    public String addNewServiceOrder(@Valid @ModelAttribute("newServiceOrder") ServiceOrder serviceOrder, BindingResult bindingResult, Model model, @RequestParam(name = "vehicle", required = false, defaultValue = "0") int vehicleId, RedirectAttributes redirectAttributes) {
+    public String addNewServiceOrder(
+            @Valid @ModelAttribute("newServiceOrder") ServiceOrderDto serviceOrderDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("vehicles", vehicleService.findAll());
-            model.addAttribute("vid", vehicleId);
             return "employee/service-order-add";
         }
 
-        serviceOrderService.addServiceOrder(serviceOrder);
+        serviceOrderService.addServiceOrder(serviceOrderDto);
         redirectAttributes.addFlashAttribute("success", "Utworzono nowe zlecenie naprawy.");
         return "redirect:/employee/service-orders";
     }
@@ -70,15 +81,12 @@ public class ServiceOrderController {
     public String getServiceOrderId(@PathVariable Integer id, Model model) {
         ServiceOrder serviceOrder = serviceOrderService.findServiceOrder(id);
 
-        int vehicleId = serviceOrder.getVehicleId();
-        Vehicle vehicleById = vehicleService.findVehicleById(vehicleId);
-
-        int clientId = vehicleById.getClientId();
-        Client clientById = clientService.findClientById(clientId);
+        Vehicle vehicle = serviceOrder.getVehicle();
+//        Client client = clientService.findClientById(clientId);
 
         model.addAttribute("serviceOrderDetails", serviceOrder);
-        model.addAttribute("vehicle", vehicleById);
-        model.addAttribute("client", clientById);
+        model.addAttribute("vehicle", vehicle);
+//        model.addAttribute("client", client);
         model.addAttribute("prevPath", "service-orders");
         return "employee/service-order-details";
     }

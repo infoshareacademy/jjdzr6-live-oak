@@ -1,48 +1,45 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.dao.client.ClientDao;
+import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.entity.client.Client;
-import com.infoshareacademy.repository.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.infoshareacademy.mappers.client.ClientMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ClientService {
+    private final ClientDao clientDao;
+    private final ClientMapper clientMapper;
 
-    private final ClientRepository clientRepository;
-
-    @Autowired
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public List<ClientDto> findAll() {
+        return clientDao.findAll().stream()
+                .map(clientMapper::toDto)
+                .toList();
     }
 
-    public List<Client> findAll() {
-        return clientRepository.findAll();
+    @Transactional
+    public void addClient(ClientDto clientDto) {
+        Client client = clientMapper.fromDto(clientDto);
+        clientDao.save(client);
     }
 
-
-    public Client findClientById(int id) {
-        return clientRepository.find(id);
+    public Client findClient(long id) {
+        return clientDao.find(id);
     }
 
-    public void addClient(Client client) {
-        clientRepository.add(client);
-        try {
-            clientRepository.save();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public List<ClientDto> findByQuery(String query) {
+        return clientDao.findByQuery(query).stream()
+                .map(clientMapper::toDto)
+                .toList();
     }
 
-
-    public Client findClient(int id) {
-        return clientRepository.find(id);
+    public boolean emailExists(String email) {
+        return clientDao.findByEmail(email).isPresent();
     }
-
-    public List<Client> findByQuery(String query) {
-        return clientRepository.findBy(query);
-    }
-
 }

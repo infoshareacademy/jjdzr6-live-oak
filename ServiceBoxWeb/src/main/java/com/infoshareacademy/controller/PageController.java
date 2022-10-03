@@ -30,9 +30,8 @@ public class PageController {
     public String employeeStartPage(Model model) {
         long[] stats = new long[4];
         stats[0] = orderService.countByState(ServiceOrderState.CREATED);
-        stats[1] = orderService.countByState(ServiceOrderState.WAITING_FOR_PARTS);
-        stats[2] = orderService.countByState(ServiceOrderState.IN_PROGRESS);
-        stats[3] = orderService.countByState(ServiceOrderState.FINISHED);
+        stats[1] = orderService.countByState(ServiceOrderState.IN_PROGRESS);
+        stats[2] = orderService.countByState(ServiceOrderState.FINISHED);
 
         model.addAttribute("stats", stats);
         model.addAttribute("lastOrder", orderService.getLastOrder().orElse(null));

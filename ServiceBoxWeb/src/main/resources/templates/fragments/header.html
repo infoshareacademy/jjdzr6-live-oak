@@ -40,7 +40,7 @@
                                th:classappend="${#httpServletRequest.getRequestURI() == '/employee/vehicles' ? 'active' : ''}">Baza
                                 pojazdów</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item me-2">
                             <a class="nav-link" th:href="@{/employee/service-orders}"
                                th:classappend="${#httpServletRequest.getRequestURI() == '/employee/service-orders' ? 'active' : ''}">Zlecenia
                                 naprawy</a>
@@ -58,11 +58,22 @@
                                th:classappend="${#httpServletRequest.getRequestURI() == '/service-orders' ? 'active' : ''}">Naprawy</a>
                         </li>
                     </th:block>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i><span sec:authentication="name" class="fw-bold">Bob</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <form th:action="@{/logout}" method="post" id="logout-form">
+                                    <a href="#" onclick="document.getElementById('logout-form').submit()" class="dropdown-item">Wyloguj</a>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-outline-secondary ms-lg-3 mb-3 mb-lg-0">Wyloguj<i
-                            class="fas fa-sign-out-alt ms-2"></i></button>
-                </form>
+
+
             </div>
         </div>
     </nav>

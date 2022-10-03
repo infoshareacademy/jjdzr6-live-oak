@@ -29,14 +29,14 @@
                         <label for="name" class="form-label" th:text="#{cl.name}"></label>
                         <input type="text" class="form-control" id="name" th:field="*{name}" th:errorclass="is-invalid"
                                autofocus>
-                        <div class="form-text text-danger" th:if="${#fields.hasErrors('name')}">To pole jest wymagane
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="nip" class="form-label" th:text="#{cl.nip}"></label>
                         <input type="text" class="form-control" id="nip" th:field="*{nip}" th:errorclass="is-invalid">
-                        <div class="form-text text-danger" th:if="${#fields.hasErrors('nip')}">To pole jest wymagane
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('nip')}" th:errors="*{nip}">
                         </div>
                     </div>
 
@@ -44,8 +44,8 @@
                         <label for="phoneNumber" class="form-label" th:text="#{cl.phoneNumber}"></label>
                         <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}"
                                th:errorclass="is-invalid">
-                        <div class="form-text text-danger" th:if="${#fields.hasErrors('phoneNumber')}">To pole jest
-                            wymagane
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('phoneNumber')}"
+                             th:errors="*{phoneNumber}">
                         </div>
                     </div>
 
@@ -53,7 +53,7 @@
                         <label for="email" class="form-label" th:text="#{cl.email}"></label>
                         <input type="email" class="form-control" id="email" th:field="*{email}"
                                th:errorclass="is-invalid">
-                        <div class="form-text text-danger" th:if="${#fields.hasErrors('email')}">To pole jest wymagane
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
                         </div>
                     </div>
 
@@ -71,21 +71,21 @@
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="address.street" class="form-label" th:text="#{cl.street}"></label>
-                                <input type="text" class="form-control" id="address.street" th:field="*{address.street}">
+                                <input type="text" class="form-control" id="address.street" th:field="*{addressStreet}">
                             </div>
                         </div>
                         <div class="col-12 col-lg-4">
                             <div class="mb-3">
                                 <label for="address.houseNumber" class="form-label" th:text="#{cl.houseNumber}"></label>
                                 <input type="number" class="form-control" id="address.houseNumber"
-                                       th:field="*{address.houseNumber}">
+                                       th:field="*{addressHouseNumber}">
                             </div>
                         </div>
                         <div class="col-12 col-lg-4">
                             <div class="mb-3">
                                 <label for="address.flatNumber" class="form-label" th:text="#{cl.flatNumber}"></label>
                                 <input type="number" class="form-control" id="address.flatNumber"
-                                       th:field="*{address.flatNumber}">
+                                       th:field="*{addressFlatNumber}">
                             </div>
                         </div>
                     </div>
@@ -94,24 +94,19 @@
                         <div class="col-12 col-lg-4">
                             <div class="mb-3">
                                 <label for="address.zipCode" class="form-label" th:text="#{cl.zipCode}"></label>
-                                <input type="text" class="form-control" id="address.zipCode" th:field="*{address.zipCode}">
+                                <input type="text" class="form-control" id="address.zipCode"
+                                       th:field="*{addressZipCode}" th:errorclass="is-invalid">
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('addressZipCode')}" th:errors="*{addressZipCode}">
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-8">
                             <div class="mb-3">
                                 <label for="address.city" class="form-label" th:text="#{cl.city}"></label>
-                                <input type="text" class="form-control" id="address.city" th:field="*{address.city}">
+                                <input type="text" class="form-control" id="address.city" th:field="*{addressCity}">
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
                 </div>
 
                 <div class="col-12 mt-3">

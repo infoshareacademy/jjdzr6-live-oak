@@ -29,7 +29,7 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public User find(Long id) {
+    public User findById(Long id) {
         return entityManager.find(User.class, id);
     }
 

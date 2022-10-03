@@ -24,29 +24,16 @@
                 <h1 class="heading" th:text="#{so.addServiceOrder}"></h1>
             </header>
 
-            <form th:object="${newServiceOrder}" th:action="@{/employee/service-orders/add}" method="post" class="row">
-
-                <input type="hidden" name="clientName" th:field="*{clientName}">
-                <input type="hidden" name="vehicleId" th:field="*{vehicleId}">
-                <input type="hidden" name="plateNumber" th:field="*{plateNumber}">
-                <input type="hidden" name="orderNumber" th:field="*{orderNumber}">
+            <form th:object="${serviceOrder}" th:action="@{/employee/vehicles/{id}/create-service-order(id=${vehicle.id})}" method="post" class="row">
 
                 <div class="col-md-6 col-lg-5">
                     <div class="mb-3">
                         <label for="orderNumber" class="form-label">Numer zlecenia</label>
-                        <input type="text" class="form-control" id="orderNumber" th:value="${newServiceOrder.orderNumber}" readonly
-                               disabled>
+                        <input type="text" class="form-control" id="orderNumber" th:field="*{orderNumber}" th:errorclass="is-invalid">
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('orderNumber')}"  th:errors="*{orderNumber}">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="plateNumber" class="form-label">Numer rejestracyjny pojazdu</label>
-                        <input type="text" class="form-control" id="plateNumber" th:value="${newServiceOrder.plateNumber}" readonly
-                               disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label for="owner" class="form-label">Właściciel pojazdu</label>
-                        <input type="text" class="form-control" id="owner" th:value="${newServiceOrder.clientName}" readonly
-                               disabled>
-                    </div>
+
                     <div class="mb-3">
                         <label for="orderDescription" class="form-label" th:text="#{so.description}"></label>
                         <textarea class="form-control" id="orderDescription" rows="3" th:field="*{description}"
@@ -57,7 +44,7 @@
 
                     <div class="mb-3">
                         <label for="maxCost" class="form-label" th:text="#{so.maxCost}"></label>
-                        <input type="text" class="form-control form-control-lg" id="maxCost" th:field="*{maxCost}"
+                        <input type="text" class="form-control" id="maxCost" th:field="*{maxCost}"
                                th:errorclass="is-invalid">
                         <div class="form-text text-danger" th:if="${#fields.hasErrors('maxCost')}" th:errors="*{maxCost}">
                         </div>
@@ -71,10 +58,14 @@
                         </label>
                     </div>
                 </div>
-<!--                -->
-<!--                <div class="col-md-6 col-lg-5">-->
-<!--                   -->
-<!--                </div>-->
+
+                <div class="col-md-6 col-lg-5">
+                    <div class="mb-3">
+                        <label for="plateNumber" class="form-label">Numer rejestracyjny pojazdu</label>
+                        <input type="text" class="form-control" id="plateNumber" th:value="${vehicle.plateNumber}" readonly
+                               disabled>
+                    </div>
+                </div>
 
                 <div class="col-12 mt-3">
                     <button type="submit" class="btn btn-primary btn-lg" th:text="#{submit.button}"></button>

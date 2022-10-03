@@ -18,7 +18,7 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
     private EntityManager entityManager;
 
     @Override
-    public ServiceOrder find(Long id) {
+    public ServiceOrder findById(Long id) {
         return entityManager.find(ServiceOrder.class, id);
     }
 

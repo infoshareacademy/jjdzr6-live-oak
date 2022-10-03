@@ -1,48 +1,82 @@
 package com.infoshareacademy.dto.client;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.infoshareacademy.entity.client.Address;
+import com.infoshareacademy.entity.client.Client;
+import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-
-@NoArgsConstructor
-@Getter
-@Setter
+/**
+ * A DTO for the {@link Client} entity
+ */
+@Data
 public class ClientDto {
-    private Long id;
-    @NotBlank(message = "To pole jest wymagane")
-    private String name;
-    private String addressStreet = "";
-    private String addressHouseNumber = "";
-    private String addressFlatNumber = "";
-    @Pattern(regexp="(^$|\\d{2}-\\d{3})", message = "Podaj kod pocztowy w formacie xx-xxx")
-    private String addressZipCode = "";
-    private String addressCity = "";
-    @Pattern(regexp="(^$|\\d{10})", message = "Niepoprawny NIP")
-    private String nip = "";
-    @NotBlank(message = "To pole jest wymagane")
-    @Pattern(regexp="(^$|\\d{9})", message = "Niepoprawny numer telefonu")
-    private String phoneNumber;
-    @NotBlank(message = "To pole jest wymagane")
-    private String email;
-    private boolean allowNotify;
+    private final Long id;
+    private final String username;
+    private final String name;
+    private final AddressDto address;
+    private final String nip;
+    private final String phoneNumber;
+    private final String email;
+    private final boolean allowNotifications;
 
-    public String getAddress() {
-        StringBuilder builder = new StringBuilder(addressStreet);
-        // add house number
-        if (!addressHouseNumber.isBlank()) builder.append(" ").append(addressHouseNumber);
+    /**
+     * A DTO for the {@link Address} entity
+     */
+    @Data
+    public static class AddressDto {
+        private final Long id;
+        private final String street;
+        private final String houseNumber;
+        private final String flatNumber;
+        private final String zipCode;
+        private final String city;
 
-        // add flat number
-        if (!addressFlatNumber.isBlank()) builder.append("/").append(addressFlatNumber);
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder(street);
 
-        // add zipcode and city
-        if (!addressZipCode.isBlank() && !addressCity.isBlank()) {
-            if (!builder.isEmpty()) builder.append(", ");
-            builder.append(addressZipCode).append(" ").append(addressCity);
+            if (!houseNumber.isBlank()) builder.append(" ").append(houseNumber);
+            if (!flatNumber.isBlank()) builder.append("/").append(flatNumber);
+            if (!zipCode.isBlank() && !city.isBlank()) {
+                if (!builder.isEmpty()) builder.append(", ");
+                builder.append(zipCode).append(" ").append(city);
+            }
+
+            return builder.toString();
+        }
+    }
+
+    public static ClientDto fromClient(Client client) {
+        if (client == null) {
+            return null;
         }
 
-        return builder.toString();
+        ClientDto.AddressDto addressDto = null;
+        if (client.getAddress() != null) {
+            Address clientAddress = client.getAddress();
+            addressDto = new AddressDto(
+                    clientAddress.getId(),
+                    clientAddress.getStreet(),
+                    clientAddress.getHouseNumber(),
+                    clientAddress.getFlatNumber(),
+                    clientAddress.getZipCode(),
+                    clientAddress.getCity()
+            );
+        }
+
+        String username = null;
+        if (client.getUser() != null) {
+            username = client.getUser().getUsername();
+        }
+
+        return new ClientDto(
+                client.getId(),
+                username,
+                client.getName(),
+                addressDto,
+                client.getNip(),
+                client.getPhoneNumber(),
+                client.getEmail(),
+                client.isAllowNotifications()
+        );
     }
 }

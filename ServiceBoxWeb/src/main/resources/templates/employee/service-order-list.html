@@ -22,10 +22,10 @@
         <div class="col-md-12">
 
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <div th:if="${search}">
-                    <h1 class="heading">Wyniki wyszukiwania: <span th:text="${search}"></span></h1><br>
+                <div th:if="${searchQuery}">
+                    <h1 class="heading">Wyniki wyszukiwania: <span th:text="${searchQuery}"></span></h1><br>
                 </div>
-                <h1 class="heading" th:unless="${search}" th:text="#{so.headline}"></h1>
+                <h1 class="heading" th:unless="${searchQuery}" th:text="#{so.headline}"></h1>
                 <div class="header__options">
 <!--                    <a th:href="@{/employee/service-orders/add}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Nowe zlecenie</a>-->
                     <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg"
@@ -36,10 +36,10 @@
             <div class="row">
                 <div class="col-6">
                     <form method="get" class="input-group mb-3" id="searchForm">
-                        <input type="text" class="form-control" name="search" id="search" minlength="3"
-                               placeholder="Wyszukaj po numerze zlecenia" th:value="${search}" autofocus autocomplete="off" required>
+                        <input type="text" class="form-control" name="s" id="search" minlength="3"
+                               placeholder="Wyszukaj po numerze zlecenia" th:value="${searchQuery}" autofocus autocomplete="off" required>
                     </form>
-                    <a th:if="${search}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
+                    <a th:if="${searchQuery}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
                         wszystkie</a>
                 </div>
             </div>
@@ -71,8 +71,8 @@
                             <td th:text="${service.orderNumber}"></td>
                             <td th:text="${#temporals.format(service.createdAt, 'dd-MM-yyyy')}"></td>
                             <td th:text="${service.description}"></td>
-                            <td th:text="${service.plateNumber}"></td>
-                            <td th:utext="${service.clientName} + ', ' + ${service.clientPhone}"></td>
+                            <td th:text="${service.vehiclePlateNumber}"></td>
+                            <td th:utext="${service.vehicleClientName} + ', ' + ${service.vehicleClientPhoneNumber}"></td>
                             <td th:text="${service.state.description}"></td>
                             <td class="text-end">
                                 <a th:href="@{service-orders/{id}(id=${service.id})}" class="btn btn-primary">Szczegóły</a>

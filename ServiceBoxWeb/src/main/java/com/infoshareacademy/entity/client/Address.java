@@ -31,12 +31,14 @@ public class Address {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @OneToOne(optional = false, mappedBy = "address")
+    @OneToOne(mappedBy = "address")
     private Client client;
 
-    public void setClient(Client client) {
-        this.client = client;
-        // set owning side
-        client.setAddress(this);
+    public Address(String street, String houseNumber, String flatNumber, String zipCode, String city) {
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.flatNumber = flatNumber;
+        this.zipCode = zipCode;
+        this.city = city;
     }
 }

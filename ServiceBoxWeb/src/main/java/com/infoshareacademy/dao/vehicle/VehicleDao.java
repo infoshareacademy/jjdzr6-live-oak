@@ -1,7 +1,6 @@
 package com.infoshareacademy.dao.vehicle;
 
 import com.infoshareacademy.dao.Dao;
-import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.vehicle.Vehicle;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +16,7 @@ public class VehicleDao implements Dao<Vehicle> {
     private EntityManager entityManager;
 
     @Override
-    public Vehicle find(Long id) {
+    public Vehicle findById(Long id) {
         return entityManager.find(Vehicle.class, id);
     }
 
@@ -54,5 +53,11 @@ public class VehicleDao implements Dao<Vehicle> {
                 .setParameter("plateNumber", plateNumber);
 
         return query.getResultStream().findFirst();
+    }
+
+    public List<Vehicle> findByClientId(Long id) {
+        TypedQuery<Vehicle> query = entityManager.createQuery("SELECT v FROM Vehicle v WHERE v.client.id = :id", Vehicle.class);
+        query.setParameter("id", id);
+        return query.getResultList();
     }
 }

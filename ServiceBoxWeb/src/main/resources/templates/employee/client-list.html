@@ -22,12 +22,12 @@
         <div class="col-md-12">
 
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <div th:if="${search}">
-                    <h1 class="heading">Wyniki wyszukiwania: <span th:text="${search}"></span></h1><br>
+                <div th:if="${searchQuery}">
+                    <h1 class="heading">Wyniki wyszukiwania: <span th:text="${searchQuery}"></span></h1><br>
                 </div>
-                <h1 class="heading" th:unless="${search}" th:text="#{cl.headline}"></h1>
+                <h1 class="heading" th:unless="${searchQuery}" th:text="#{cl.headline}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee/addClient}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Dodaj klienta</a>
+                    <a th:href="@{/employee/clients/new}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Dodaj klienta</a>
                     <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg"
                        th:text="#{btn.label.return}"></a>
                 </div>
@@ -36,11 +36,11 @@
             <div class="row">
                 <div class="col-6">
                     <form method="get" class="input-group mb-3" id="searchForm">
-                        <input type="text" class="form-control" name="search" id="search" minlength="3"
-                               placeholder="Wyszukaj po nazwie lub mailu" th:value="${search}" autofocus autocomplete="off"
+                        <input type="text" class="form-control" name="s" id="search" minlength="3"
+                               placeholder="Wyszukaj po nazwie lub mailu" th:value="${searchQuery}" autofocus autocomplete="off"
                                required>
                     </form>
-                    <a th:if="${search}" th:href="@{/employee/clients}" class="btn btn-outline-secondary">Pokaż
+                    <a th:if="${searchQuery}" th:href="@{/employee/clients}" class="btn btn-outline-secondary">Pokaż
                         wszystkie</a>
                 </div>
             </div>

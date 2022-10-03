@@ -1,6 +1,9 @@
 package com.infoshareacademy.controller.employee;
 
 
+import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
+import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
+import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
@@ -8,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,5 +33,16 @@ public class ServiceOrderController {
         }
 
         return "employee/service-order-list";
+    }
+
+    @GetMapping("/{id}/details")
+    public String showServiceOrderDetails(@PathVariable("id") Long serviceOrderId, Model model) {
+        ServiceOrderDetailsDto serviceOrderDetails = serviceOrderService.getServiceOrderDetails(serviceOrderId);
+        VehicleDto vehicleDto = vehicleService.findById(serviceOrderDetails.getVehicleId());
+
+        model.addAttribute("serviceOrderDetails", serviceOrderDetails);
+        model.addAttribute("vehicle", vehicleDto);
+
+        return "employee/service-order-details";
     }
 }

@@ -1,11 +1,7 @@
 package com.infoshareacademy.controller.employee;
 
-import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
-import com.infoshareacademy.dto.vehicle.CreateVehicleDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
-import com.infoshareacademy.entity.serviceorder.CreateServiceOrderDto;
-import com.infoshareacademy.entity.serviceorder.ServiceOrder;
-import com.infoshareacademy.entity.vehicle.Vehicle;
+import com.infoshareacademy.dto.serviceorder.CreateServiceOrderDto;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
 import lombok.RequiredArgsConstructor;
@@ -59,29 +55,32 @@ public class VehicleController {
     public String newServiceOrder(
             @Valid @ModelAttribute("serviceOrder") CreateServiceOrderDto createServiceOrderDto,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes
+            RedirectAttributes redirectAttributes,
+            @PathVariable("id") Long vehicleId,
+            Model model
     ) {
+        VehicleDto vehicleDto = vehicleService.findById(vehicleId);
+
+        if (vehicleDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        // check order number
+        String orderNumber = createServiceOrderDto.getOrderNumber();
+        if (serviceOrderService.isOrderExists(orderNumber)) {
+            bindingResult.rejectValue("orderNumber", "orderNumber.exists",
+                    "Zlecenie o numerze " + orderNumber + " już istnieje");
+        }
+
         if (bindingResult.hasErrors()) {
+            model.addAttribute("vehicle", vehicleDto);
             return "employee/service-order-add";
         }
 
-//        serviceOrderService.addServiceOrder(serviceOrderDto);
-//        redirectAttributes.addFlashAttribute("success", "Utworzono nowe zlecenie naprawy.");
+        vehicleService.createServiceOrder(vehicleId, createServiceOrderDto);
+        redirectAttributes.addFlashAttribute("success", "Utworzono nowe zlecenie naprawy numer " +
+                orderNumber);
         return "redirect:/employee/service-orders";
-    }
-
-    @GetMapping("/{id}")
-    public String getServiceOrderId(@PathVariable Integer id, Model model) {
-//        ServiceOrder serviceOrder = serviceOrderService.findServiceOrder(id);
-//
-//        Vehicle vehicle = serviceOrder.getVehicle();
-////        Client client = clientService.findClientById(clientId);
-//
-//        model.addAttribute("serviceOrderDetails", serviceOrder);
-//        model.addAttribute("vehicle", vehicle);
-////        model.addAttribute("client", client);
-//        model.addAttribute("prevPath", "service-orders");
-        return "employee/service-order-details";
     }
 }
 

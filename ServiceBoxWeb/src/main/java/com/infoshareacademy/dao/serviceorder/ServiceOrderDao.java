@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ServiceOrderDao implements Dao<ServiceOrder> {
@@ -53,5 +54,12 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
     public Long countServiceOrders() {
         Query query = entityManager.createQuery("SELECT count(so) FROM ServiceOrder so");
         return (Long) query.getSingleResult();
+    }
+
+    public Optional<ServiceOrder> findByOrderNumber(String orderNumber) {
+        TypedQuery<ServiceOrder> query = entityManager.createQuery("SELECT so FROM ServiceOrder so where LOWER(so.orderNumber) = LOWER(:orderNumber)", ServiceOrder.class)
+                .setParameter("orderNumber", orderNumber);
+
+        return query.getResultStream().findFirst();
     }
 }

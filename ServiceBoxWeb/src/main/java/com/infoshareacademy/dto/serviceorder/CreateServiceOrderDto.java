@@ -1,5 +1,6 @@
-package com.infoshareacademy.entity.serviceorder;
+package com.infoshareacademy.dto.serviceorder;
 
+import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

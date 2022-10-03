@@ -75,7 +75,7 @@
                             <td th:utext="${service.vehicleClientName} + ', ' + ${service.vehicleClientPhoneNumber}"></td>
                             <td th:text="${service.state.description}"></td>
                             <td class="text-end">
-                                <a th:href="@{service-orders/{id}(id=${service.id})}" class="btn btn-primary">Szczegóły</a>
+                                <a th:href="@{service-orders/{id}/details(id=${service.id})}" class="btn btn-primary">Szczegóły</a>
                             </td>
                         </tr>
                         </tbody>

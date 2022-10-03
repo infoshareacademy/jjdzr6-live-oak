@@ -1,8 +1,11 @@
 package com.infoshareacademy.service;
 
 
+import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
 import com.infoshareacademy.dao.vehicle.VehicleDao;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
+import com.infoshareacademy.dto.serviceorder.CreateServiceOrderDto;
+import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.vehicle.Vehicle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleService {
     private final VehicleDao vehicleDao;
+    private final ServiceOrderDao serviceOrderDao;
 
     public List<VehicleDto> findAll() {
         List<Vehicle> vehicleList = vehicleDao.findAll();
@@ -42,5 +46,13 @@ public class VehicleService {
         return vehicleList.stream()
                 .map(VehicleDto::fromVehicle)
                 .toList();
+    }
+
+    @Transactional
+    public void createServiceOrder(Long vehicleId, CreateServiceOrderDto createServiceOrderDto) {
+        Vehicle vehicle = vehicleDao.findById(vehicleId);
+        ServiceOrder serviceOrder = createServiceOrderDto.toServiceOrder();
+        serviceOrder.setVehicle(vehicle);
+        serviceOrderDao.save(serviceOrder);
     }
 }

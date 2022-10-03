@@ -1,6 +1,7 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
+import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
@@ -28,10 +29,19 @@ public class ServiceOrderService {
         return ServiceOrderDto.fromServiceOrder(serviceOrder);
     }
 
+    public ServiceOrderDetailsDto getServiceOrderDetails(Long id) {
+        ServiceOrder serviceOrder = serviceOrderDao.findById(id);
+        return ServiceOrderDetailsDto.fromServiceOrder(serviceOrder);
+    }
+
     public List<ServiceOrderDto> findByQuery(String query) {
         return serviceOrderDao.findByQuery(query).stream()
                 .map(ServiceOrderDto::fromServiceOrder)
                 .toList();
+    }
+
+    public boolean isOrderExists(String orderNumber) {
+        return serviceOrderDao.findByOrderNumber(orderNumber).isPresent();
     }
 
 

@@ -1,14 +1,12 @@
 package com.infoshareacademy.dto.vehicle;
 
 import com.infoshareacademy.entity.vehicle.Vehicle;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 
 /**
  * A DTO for the {@link Vehicle} entity

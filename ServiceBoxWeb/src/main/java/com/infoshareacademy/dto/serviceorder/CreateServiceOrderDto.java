@@ -1,7 +1,6 @@
 package com.infoshareacademy.dto.serviceorder;
 
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +8,6 @@ import lombok.Setter;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 /**
  * A DTO for the {@link ServiceOrder} entity

@@ -13,19 +13,11 @@
     <link th:href="@{/assets/fontawesome/css/all.min.css}" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script th:src="@{/js/addNote.js}"></script>
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"></div>
-<script>
-    $('document').ready(function () {
-        $('.add-note-js').on('click', function (event) {
-            event.preventDefault();
-            let id = $(this).attr('data-id');
-            $('#orderId').val(id);
-        });
-    });
-</script>
 
 <div class="modal" tabindex="-1" id="addNote">
     <form th:action="@{/employee/service-orders/add-note}" method="post">

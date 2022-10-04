@@ -4,6 +4,7 @@ package com.infoshareacademy.controller.employee;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
+import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
@@ -49,6 +50,11 @@ public class ServiceOrderController {
 
         serviceOrderService.addNote(serviceOrderId, note);
         redirectAttributes.addFlashAttribute("success", "Notatka została zapisana.");
+        return "redirect:/employee/service-orders";
+    }
+    @GetMapping("/{id}/change-state")
+    public String changeServiceOrderState(@PathVariable("id") Long serviceOrderId) {
+        serviceOrderService.updateStatus(serviceOrderId);
         return "redirect:/employee/service-orders";
     }
 }

@@ -1,5 +1,6 @@
 package com.infoshareacademy.dto.serviceorder;
 
+import com.infoshareacademy.entity.serviceorder.Note;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class ServiceOrderDetailsDto {
     private final List<NotesDto> notes;
 
     /**
-     * A DTO for the {@link com.infoshareacademy.entity.serviceorder.Notes} entity
+     * A DTO for the {@link Note} entity
      */
     @AllArgsConstructor
     @Getter

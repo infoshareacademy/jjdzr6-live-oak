@@ -3,11 +3,13 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
+import com.infoshareacademy.entity.serviceorder.Note;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -44,14 +46,6 @@ public class ServiceOrderService {
         return serviceOrderDao.findByOrderNumber(orderNumber).isPresent();
     }
 
-
-//    @Transactional
-//    public void addServiceOrder(ServiceOrderDto serviceOrderDto) {
-//        ServiceOrder serviceOrder = serviceOrderMapper.(serviceOrderDto);
-//        serviceOrderDao.save(serviceOrder);
-//    }
-
-
     public long countByState(ServiceOrderState state) {
         // TODO
         return 0;
@@ -69,5 +63,15 @@ public class ServiceOrderService {
                 LocalDateTime.now().getMonth().getValue() +
                 "/" +
                 LocalDateTime.now().getYear();
+    }
+
+    @Transactional
+    public void addNote(Long orderId, String note) {
+        ServiceOrder serviceOrder = serviceOrderDao.findById(orderId);
+
+        Note newNote = new Note(note);
+        serviceOrder.getNotes().add(newNote);
+
+        serviceOrderDao.update(serviceOrder);
     }
 }

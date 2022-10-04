@@ -10,10 +10,8 @@ import com.infoshareacademy.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/employee/service-orders")
@@ -44,5 +42,13 @@ public class ServiceOrderController {
         model.addAttribute("vehicle", vehicleDto);
 
         return "employee/service-order-details";
+    }
+
+    @PostMapping("add-note")
+    public String addNote(@RequestParam("id") Long serviceOrderId, @RequestParam("note") String note, RedirectAttributes redirectAttributes){
+
+        serviceOrderService.addNote(serviceOrderId, note);
+        redirectAttributes.addFlashAttribute("success", "Notatka została zapisana.");
+        return "redirect:/employee/service-orders";
     }
 }

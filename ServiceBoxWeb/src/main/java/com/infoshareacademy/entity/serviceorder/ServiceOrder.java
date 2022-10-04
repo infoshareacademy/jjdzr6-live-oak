@@ -4,10 +4,10 @@ import com.infoshareacademy.entity.vehicle.Vehicle;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.aspectj.weaver.ast.Not;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -50,9 +50,9 @@ public class ServiceOrder {
     @JoinColumn(name = "repair_card_id", unique = true)
     private RepairCard repairCard;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "service_order_id")
-    private List<Notes> notes;
+    private List<Note> notes = new ArrayList<>();
 
     public ServiceOrder(String orderNumber, String description, boolean onlyNewParts, Integer maxCost) {
         this.orderNumber = orderNumber;

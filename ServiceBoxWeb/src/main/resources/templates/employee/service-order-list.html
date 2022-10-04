@@ -12,22 +12,46 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link th:href="@{/assets/fontawesome/css/all.min.css}" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script th:src="@{/js/addNote.js}"></script>
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"></div>
 
+<div class="modal" tabindex="-1" id="addNote">
+    <form th:action="@{/employee/service-orders/add-note}" method="post">
+        <input type="hidden" name="id" value="0" id="orderId">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dodaj notatke</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="note" class="form-label">Treść notatki</label>
+                        <textarea class="form-control" id="note" rows="3" name="note" autofocus></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="submit" class="btn btn-primary">Dodaj notatkę</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 <main class="container">
     <div class="row">
         <div class="col-md-12">
-
             <header class="d-flex justify-content-between mt-5 mb-3">
                 <div th:if="${searchQuery}">
                     <h1 class="heading">Wyniki wyszukiwania: <span th:text="${searchQuery}"></span></h1><br>
                 </div>
                 <h1 class="heading" th:unless="${searchQuery}" th:text="#{so.headline}"></h1>
                 <div class="header__options">
-<!--                    <a th:href="@{/employee/service-orders/add}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Nowe zlecenie</a>-->
+                    <!--                    <a th:href="@{/employee/service-orders/add}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Nowe zlecenie</a>-->
                     <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg"
                        th:text="#{btn.label.return}"></a>
                 </div>
@@ -37,7 +61,8 @@
                 <div class="col-6">
                     <form method="get" class="input-group mb-3" id="searchForm">
                         <input type="text" class="form-control" name="s" id="search" minlength="3"
-                               placeholder="Wyszukaj po numerze zlecenia" th:value="${searchQuery}" autofocus autocomplete="off" required>
+                               placeholder="Wyszukaj po numerze zlecenia" th:value="${searchQuery}" autofocus
+                               autocomplete="off" required>
                     </form>
                     <a th:if="${searchQuery}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
                         wszystkie</a>
@@ -75,7 +100,19 @@
                             <td th:utext="${service.vehicleClientName} + ', ' + ${service.vehicleClientPhoneNumber}"></td>
                             <td th:text="${service.state.description}"></td>
                             <td class="text-end">
-                                <a th:href="@{service-orders/{id}/details(id=${service.id})}" class="btn btn-primary">Szczegóły</a>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Opcje
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a th:href="@{service-orders/{id}/details(id=${service.id})}"
+                                               class="dropdown-item">Szczegóły zlecenia</a></li>
+                                        <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
+                                               class="dropdown-item add-note-js">Dodaj notatkę</a></li>
+
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                         </tbody>

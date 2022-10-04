@@ -8,18 +8,22 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "notes")
+@Table(name = "note")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Notes {
+public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "created_at", columnDefinition = "DATETIME default CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "note", nullable = false)
     private String note;
+
+    public Note(String note) {
+        this.note = note;
+    }
 }

@@ -110,6 +110,8 @@
                                                class="dropdown-item">Szczegóły zlecenia</a></li>
                                         <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
                                                class="dropdown-item add-note-js">Dodaj notatkę</a></li>
+                                        <li><a th:href="@{service-orders/{id}/change-state(id=${service.id})}"
+                                               class="dropdown-item">Zmień status</a></li>
 
                                     </ul>
                                 </div>

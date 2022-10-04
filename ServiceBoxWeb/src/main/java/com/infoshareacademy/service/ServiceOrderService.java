@@ -74,4 +74,17 @@ public class ServiceOrderService {
 
         serviceOrderDao.update(serviceOrder);
     }
+    @Transactional
+    public void updateStatus (Long orderId) {
+        ServiceOrder serviceOrder = serviceOrderDao.findById(orderId);
+        if(ServiceOrderState.FINISHED.equals(serviceOrder.getState())){
+            return;
+        }
+        if (ServiceOrderState.CREATED.equals(serviceOrder.getState())){
+            serviceOrder.setState(ServiceOrderState.IN_PROGRESS);
+        }else {
+            serviceOrder.setState(ServiceOrderState.FINISHED);
+        }
+        serviceOrderDao.update(serviceOrder);
+    }
 }

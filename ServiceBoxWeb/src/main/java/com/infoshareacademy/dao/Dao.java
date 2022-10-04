@@ -3,7 +3,7 @@ package com.infoshareacademy.dao;
 import java.util.List;
 
 public interface Dao<T> {
-    T find(Long id);
+    T findById(Long id);
 
     List<T> findAll();
 

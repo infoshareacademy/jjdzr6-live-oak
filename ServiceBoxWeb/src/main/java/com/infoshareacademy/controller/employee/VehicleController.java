@@ -1,87 +1,86 @@
 package com.infoshareacademy.controller.employee;
 
 import com.infoshareacademy.dto.vehicle.VehicleDto;
-import com.infoshareacademy.entity.client.Client;
-import com.infoshareacademy.entity.vehicle.Vehicle;
-import com.infoshareacademy.service.ClientService;
+import com.infoshareacademy.dto.serviceorder.CreateServiceOrderDto;
+import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 
 @RequestMapping("/employee/vehicles")
+@RequiredArgsConstructor
 @Controller
 public class VehicleController {
-    private final ClientService clientService;
     private final VehicleService vehicleService;
-
-    public VehicleController(ClientService clientService, VehicleService vehicleService) {
-        this.clientService = clientService;
-        this.vehicleService = vehicleService;
-    }
+    private final ServiceOrderService serviceOrderService;
 
     @GetMapping
-    public String getVehicles(Model model, @RequestParam(name = "search", required = false, defaultValue = "") String searchQuery) {
+    public String getVehicles(Model model, @RequestParam(name = "s", required = false, defaultValue = "") String searchQuery) {
         if (searchQuery.isBlank()) {
             model.addAttribute("vehicles", vehicleService.findAll());
         } else {
             model.addAttribute("vehicles", vehicleService.findByQuery(searchQuery));
-            model.addAttribute("search", searchQuery);
+            model.addAttribute("searchQuery", searchQuery);
         }
 
-        model.addAttribute("clientService", clientService);
         return "employee/vehicle-list";
     }
 
 
-    @GetMapping("add")
-    public String addNewVehicle(Model model, @RequestParam(name = "client", required = false, defaultValue = "0") Long clientId) {
-        Client client = clientService.findClient(clientId);
-        if (client == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Klient o id " + clientId + " nie istnieje");
+    @GetMapping("/{id}/create-service-order")
+    public String newServiceOrderForm(Model model, @PathVariable("id") Long vehicleId) {
+        VehicleDto vehicleDto = vehicleService.findById(vehicleId);
 
-        VehicleDto vehicleDto = new VehicleDto();
-        vehicleDto.setClientId(client.getId());
-        vehicleDto.setClientName(client.getName());
-        model.addAttribute("newVehicle", vehicleDto);
-        return "employee/vehicle-add";
-    }
-
-    @PostMapping("add")
-    public String addNewVehicle(
-            @Valid @ModelAttribute("newVehicle") VehicleDto vehicleDto,
-            BindingResult bindingResult,
-            RedirectAttributes redirectAttributes
-    ) {
-        // validate plate number
-        String plateNumber = vehicleDto.getPlateNumber();
-        if (vehicleService.plateNumberExists(plateNumber)) {
-            bindingResult.rejectValue("plateNumber", "plateNumber.exists", "Pojazd o podanym numerze rejestracyjnym już istnieje");
+        if (vehicleDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
-        // validate year
-        if (vehicleDto.getProductionYear() != null) {
-            Integer productionYear = vehicleDto.getProductionYear();
-            if (productionYear < 1900 || productionYear > LocalDateTime.now().getYear()) {
-                bindingResult.rejectValue("productionYear", "wrongYear", "Niepoprawny rok produkcji");
-            }
+        CreateServiceOrderDto orderDto = new CreateServiceOrderDto();
+        orderDto.setOrderNumber(serviceOrderService.generateOrderNumber());
+
+        model.addAttribute("serviceOrder", orderDto);
+        model.addAttribute("vehicle", vehicleDto);
+        return "employee/service-order-add";
+    }
+
+    @PostMapping("/{id}/create-service-order")
+    public String newServiceOrder(
+            @Valid @ModelAttribute("serviceOrder") CreateServiceOrderDto createServiceOrderDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            @PathVariable("id") Long vehicleId,
+            Model model
+    ) {
+        VehicleDto vehicleDto = vehicleService.findById(vehicleId);
+
+        if (vehicleDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        // check order number
+        String orderNumber = createServiceOrderDto.getOrderNumber();
+        if (serviceOrderService.isOrderExists(orderNumber)) {
+            bindingResult.rejectValue("orderNumber", "orderNumber.exists",
+                    "Zlecenie o numerze " + orderNumber + " już istnieje");
         }
 
         if (bindingResult.hasErrors()) {
-            return "employee/vehicle-add";
+            model.addAttribute("vehicle", vehicleDto);
+            return "employee/service-order-add";
         }
 
-        vehicleService.addVehicle(vehicleDto);
-        redirectAttributes.addFlashAttribute("success", "Dodano nowy pojazd.");
-        return "redirect:/employee/clients/" + vehicleDto.getClientId() + "/vehicles";
+        vehicleService.createServiceOrder(vehicleId, createServiceOrderDto);
+        redirectAttributes.addFlashAttribute("success", "Utworzono nowe zlecenie naprawy numer " +
+                orderNumber);
+        return "redirect:/employee/service-orders";
     }
 }
 

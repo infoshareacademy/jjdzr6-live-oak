@@ -26,22 +26,41 @@ public class Client {
     @Column(name = "name", nullable = false)
     private String name;
 
+    // fetch EAGER (default)
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", unique = true)
     private Address address;
 
     @Column(name = "nip", columnDefinition = "varchar(10)")
     private String nip;
 
-    @Column(name = "phone", unique = true, nullable = false)
+    @Column(name = "phone", nullable = false)
     private String phoneNumber;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "notifications", columnDefinition = "boolean default false")
-    private boolean allowNotify = false;
+    @Column(name = "allow_notifications", columnDefinition = "boolean default false")
+    private boolean allowNotifications = false;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    // fetch LAZY (default)
+    @OneToMany(mappedBy = "client")
     private List<Vehicle> vehicles;
+
+    public Client(String name, String nip, String phoneNumber, String email, boolean allowNotifications) {
+        this.name = name;
+        this.nip = nip;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.allowNotifications = allowNotifications;
+    }
+
+    public Client(String name, Address address, String nip, String phoneNumber, String email, boolean allowNotifications) {
+        this.name = name;
+        this.address = address;
+        this.nip = nip;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.allowNotifications = allowNotifications;
+    }
 }

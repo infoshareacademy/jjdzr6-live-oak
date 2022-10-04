@@ -24,15 +24,12 @@
                 <h1 class="heading" th:text="#{vehicle.addVehicle}"></h1>
             </header>
 
-            <form th:object="${newVehicle}" th:action="@{/employee/vehicles/add}" method="post" class="row">
-
-                <input type="hidden" name="clientName" th:field="*{clientName}">
-                <input type="hidden" name="clientId" th:field="*{clientId}">
+            <form th:object="${vehicle}" th:action="@{/employee/clients/{id}/vehicles/add(id=${client.id})}" method="post" class="row">
 
                 <div class="col-md-6 col-lg-5">
                     <div class="mb-3">
                         <label for="owner" class="form-label">Właściciel pojazdu</label>
-                        <input type="text" class="form-control" id="owner" th:value="${newVehicle.clientName}" readonly
+                        <input type="text" class="form-control" id="owner" th:value="${client.name}" readonly
                                disabled>
                     </div>
                     <div class="mb-3">

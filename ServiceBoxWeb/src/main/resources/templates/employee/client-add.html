@@ -22,7 +22,7 @@
                 <h1 class="heading" th:text="#{cl.addClient}"></h1>
             </header>
 
-            <form th:object="${newClient}" th:action="@{/employee/addClient}" method="post" class="row">
+            <form th:object="${client}" th:action="@{/employee/clients/new}" method="post" class="row">
 
                 <div class="col-md-6 col-lg-5">
                     <div class="mb-3">
@@ -60,7 +60,7 @@
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="allowNotify"
-                                   th:field="*{allowNotify}">
+                                   th:field="*{allowNotifications}">
                             <label class="form-check-label" for="allowNotify" th:text="#{cl.allowNotify}"></label>
                         </div>
                     </div>
@@ -71,21 +71,21 @@
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="address.street" class="form-label" th:text="#{cl.street}"></label>
-                                <input type="text" class="form-control" id="address.street" th:field="*{addressStreet}">
+                                <input type="text" class="form-control" id="address.street" th:field="*{address.street}">
                             </div>
                         </div>
                         <div class="col-12 col-lg-4">
                             <div class="mb-3">
                                 <label for="address.houseNumber" class="form-label" th:text="#{cl.houseNumber}"></label>
                                 <input type="number" class="form-control" id="address.houseNumber"
-                                       th:field="*{addressHouseNumber}">
+                                       th:field="*{address.houseNumber}">
                             </div>
                         </div>
                         <div class="col-12 col-lg-4">
                             <div class="mb-3">
                                 <label for="address.flatNumber" class="form-label" th:text="#{cl.flatNumber}"></label>
                                 <input type="number" class="form-control" id="address.flatNumber"
-                                       th:field="*{addressFlatNumber}">
+                                       th:field="*{address.flatNumber}">
                             </div>
                         </div>
                     </div>
@@ -95,15 +95,15 @@
                             <div class="mb-3">
                                 <label for="address.zipCode" class="form-label" th:text="#{cl.zipCode}"></label>
                                 <input type="text" class="form-control" id="address.zipCode"
-                                       th:field="*{addressZipCode}" th:errorclass="is-invalid">
-                                <div class="form-text text-danger" th:if="${#fields.hasErrors('addressZipCode')}" th:errors="*{addressZipCode}">
+                                       th:field="*{address.zipCode}" th:errorclass="is-invalid">
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('address.zipCode')}" th:errors="*{address.zipCode}">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-8">
                             <div class="mb-3">
                                 <label for="address.city" class="form-label" th:text="#{cl.city}"></label>
-                                <input type="text" class="form-control" id="address.city" th:field="*{addressCity}">
+                                <input type="text" class="form-control" id="address.city" th:field="*{address.city}">
                             </div>
                         </div>
                     </div>

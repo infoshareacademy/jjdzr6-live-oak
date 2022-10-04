@@ -47,12 +47,19 @@ public class ServiceOrder {
     private Vehicle vehicle;
 
     @OneToOne
-    @JoinColumn(name = "repair_card_id")
+    @JoinColumn(name = "repair_card_id", unique = true)
     private RepairCard repairCard;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_order_id")
     private List<Notes> notes;
+
+    public ServiceOrder(String orderNumber, String description, boolean onlyNewParts, Integer maxCost) {
+        this.orderNumber = orderNumber;
+        this.onlyNewParts = onlyNewParts;
+        this.maxCost = maxCost;
+        this.description = description;
+    }
 }
 
 

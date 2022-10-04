@@ -1,37 +1,46 @@
 package com.infoshareacademy.dto.serviceorder;
 
+import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+/**
+ * A DTO for the {@link com.infoshareacademy.entity.serviceorder.ServiceOrder} entity
+ */
+@Data
 public class ServiceOrderDto {
-    private Long id;
-    @NotBlank(message = "To pole jest wymagane")
-    private String orderNumber;
-    private LocalDateTime createdAt;
-    private LocalDateTime finishedAt;
-    private ServiceOrderState state = ServiceOrderState.CREATED;
-    private boolean onlyNewParts;
-    @NotNull(message = "To pole jest wymagane")
-    @Min(message = "Niepoprawny koszt naprawy", value = 1)
-    private Integer maxCost;
-    @NotBlank(message = "To pole jest wymagane")
-    private String description;
-    @NotBlank(message = "To pole jest wymagane")
-    private String plateNumber;
-    private Long cardId;
-    private String clientName;
-    private String clientPhone;
-    private Long vehicleId;
+    private final Long id;
+    private final String orderNumber;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime finishedAt;
+    private final ServiceOrderState state;
+    private final boolean onlyNewParts;
+    private final Integer maxCost;
+    private final String description;
+    private final String vehiclePlateNumber;
+    private final String vehicleClientName;
+    private final String vehicleClientPhoneNumber;
+
+    public static ServiceOrderDto fromServiceOrder(ServiceOrder serviceOrder) {
+        if (serviceOrder == null) {
+            return null;
+        }
+
+        return new ServiceOrderDto(
+                serviceOrder.getId(),
+                serviceOrder.getOrderNumber(),
+                serviceOrder.getCreatedAt(),
+                serviceOrder.getFinishedAt(),
+                serviceOrder.getState(),
+                serviceOrder.isOnlyNewParts(),
+                serviceOrder.getMaxCost(),
+                serviceOrder.getDescription(),
+                serviceOrder.getVehicle().getPlateNumber(),
+                serviceOrder.getVehicle().getClient().getName(),
+                serviceOrder.getVehicle().getClient().getPhoneNumber()
+        );
+    }
 }

@@ -40,10 +40,20 @@ public class Vehicle {
     @Column(name = "vin", columnDefinition = "varchar(17)")
     private String vin;
 
-    @OneToMany(mappedBy="vehicle", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="vehicle")
     private List<ServiceOrder> serviceOrders;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
+
+    public Vehicle(String make, String model, String plateNumber, Double engineCapacity, Integer productionYear, Integer mileage, String vin) {
+        this.make = make;
+        this.model = model;
+        this.plateNumber = plateNumber;
+        this.engineCapacity = engineCapacity;
+        this.productionYear = productionYear;
+        this.mileage = mileage;
+        this.vin = vin;
+    }
 }

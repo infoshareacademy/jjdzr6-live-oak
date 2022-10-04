@@ -18,13 +18,13 @@
 
 <div th:replace="fragments/header :: header"></div>
 <script>
-    $('document').ready(function() {
-        $('.add-note-js').on('click', function(event) {
+    $('document').ready(function () {
+        $('.add-note-js').on('click', function (event) {
             event.preventDefault();
             let id = $(this).attr('data-id');
             $('#orderId').val(id);
         });
-    }) ;
+    });
 </script>
 
 <div class="modal" tabindex="-1" id="addNote">
@@ -59,7 +59,7 @@
                 </div>
                 <h1 class="heading" th:unless="${searchQuery}" th:text="#{so.headline}"></h1>
                 <div class="header__options">
-<!--                    <a th:href="@{/employee/service-orders/add}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Nowe zlecenie</a>-->
+                    <!--                    <a th:href="@{/employee/service-orders/add}" class="btn btn-primary btn-lg"><i class="fas fa-plus me-2"></i>Nowe zlecenie</a>-->
                     <a th:href="@{/employee}" class="btn btn-outline-secondary btn-lg"
                        th:text="#{btn.label.return}"></a>
                 </div>
@@ -69,7 +69,8 @@
                 <div class="col-6">
                     <form method="get" class="input-group mb-3" id="searchForm">
                         <input type="text" class="form-control" name="s" id="search" minlength="3"
-                               placeholder="Wyszukaj po numerze zlecenia" th:value="${searchQuery}" autofocus autocomplete="off" required>
+                               placeholder="Wyszukaj po numerze zlecenia" th:value="${searchQuery}" autofocus
+                               autocomplete="off" required>
                     </form>
                     <a th:if="${searchQuery}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
                         wszystkie</a>
@@ -107,9 +108,19 @@
                             <td th:utext="${service.vehicleClientName} + ', ' + ${service.vehicleClientPhoneNumber}"></td>
                             <td th:text="${service.state.description}"></td>
                             <td class="text-end">
-                                <a th:href="@{service-orders/{id}/details(id=${service.id})}" class="btn btn-primary">Szczegóły</a>
-                                <a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
-                                   class="btn btn-primary add-note-js">Notatka</a>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Opcje
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a th:href="@{service-orders/{id}/details(id=${service.id})}"
+                                               class="dropdown-item">Szczegóły zlecenia</a></li>
+                                        <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
+                                               class="dropdown-item add-note-js">Dodaj notatkę</a></li>
+
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                         </tbody>

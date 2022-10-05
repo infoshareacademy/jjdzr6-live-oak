@@ -24,7 +24,10 @@ public class User {
     private String password;
 
     @Column(name = "enabled", columnDefinition = "boolean default true")
-    private boolean enabled;
+    private boolean enabled = true;
+
+    @Column(name = "initial_password", columnDefinition = "boolean default true")
+    private boolean initialPassword = true;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",

@@ -2,6 +2,7 @@ package com.infoshareacademy.dto.client;
 
 import com.infoshareacademy.entity.client.Address;
 import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.entity.user.UserDto;
 import lombok.Data;
 
 /**
@@ -10,7 +11,7 @@ import lombok.Data;
 @Data
 public class ClientDto {
     private final Long id;
-    private final String username;
+    private final UserDto user;
     private final String name;
     private final AddressDto address;
     private final String nip;
@@ -63,14 +64,9 @@ public class ClientDto {
             );
         }
 
-        String username = null;
-        if (client.getUser() != null) {
-            username = client.getUser().getUsername();
-        }
-
         return new ClientDto(
                 client.getId(),
-                username,
+                UserDto.fromUser(client.getUser()),
                 client.getName(),
                 addressDto,
                 client.getNip(),

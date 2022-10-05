@@ -1,9 +1,10 @@
-package com.infoshareacademy.entity.user;
+package com.infoshareacademy.dto.user;
 
+import com.infoshareacademy.entity.user.Role;
+import com.infoshareacademy.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.io.Serializable;
 import java.util.Set;
 import java.util.stream.Collectors;
 

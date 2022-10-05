@@ -2,7 +2,7 @@ package com.infoshareacademy.dto.client;
 
 import com.infoshareacademy.entity.client.Address;
 import com.infoshareacademy.entity.client.Client;
-import com.infoshareacademy.entity.user.UserDto;
+import com.infoshareacademy.dto.user.UserDto;
 import lombok.Data;
 
 /**

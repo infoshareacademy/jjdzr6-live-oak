@@ -3,6 +3,7 @@ package com.infoshareacademy.dao.serviceorder;
 import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
+import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.entity.vehicle.Vehicle;
 import org.springframework.stereotype.Repository;
 
@@ -61,5 +62,10 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
                 .setParameter("orderNumber", orderNumber);
 
         return query.getResultStream().findFirst();
+    }
+
+    public List<ServiceOrder> filterByState(ServiceOrderState state) {
+        return entityManager.createQuery("SELECT so FROM ServiceOrder so WHERE so.state=:state", ServiceOrder.class)
+                .setParameter("state", state).getResultList();
     }
 }

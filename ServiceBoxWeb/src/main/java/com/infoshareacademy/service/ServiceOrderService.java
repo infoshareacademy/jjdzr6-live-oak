@@ -87,4 +87,10 @@ public class ServiceOrderService {
         }
         serviceOrderDao.update(serviceOrder);
     }
+
+    public List<ServiceOrderDto> filterByState(ServiceOrderState state) {
+        return serviceOrderDao.filterByState(state).stream()
+                .map(ServiceOrderDto::fromServiceOrder)
+                .toList();
+    }
 }

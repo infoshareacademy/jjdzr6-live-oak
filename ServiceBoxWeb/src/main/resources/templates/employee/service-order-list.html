@@ -69,9 +69,9 @@
                 </div>
             </div>
             <p>
-                <span th:text="${param.f}"></span><a th:href="@{/employee/service-orders(f='created')}" class="me-2" th:classappend="${param.f == 'created' ? 'fw-bold' : ''}">Nowe</a>
-                <span th:text="${param.f}"></span><a th:href="@{/employee/service-orders(f='inprogress')}" class="me-2" th:classappend="${param.f == 'inprogress' ? 'fw-bold' : ''}">Otwarte</a>
-                <span th:text="${param.f}"></span><a th:href="@{/employee/service-orders(f='finished')}" th:classappend="${param.f == 'finished' ? 'fw-bold' : ''}">Zamknięte</a>
+                <a th:href="@{/employee/service-orders(f='created')}" class="me-2" th:classappend="${#httpServletRequest.getParameter('f') == 'created' ? 'fw-bold text-danger' : ''}">Nowe</a>
+                <a th:href="@{/employee/service-orders(f='inprogress')}" class="me-2" th:classappend="${#httpServletRequest.getParameter('f') == 'inprogress' ? 'fw-bold text-danger' : ''}">Otwarte</a>
+                <a th:href="@{/employee/service-orders(f='finished')}" th:classappend="${#httpServletRequest.getParameter('f') == 'finished' ? 'fw-bold text-danger' : ''}">Zamknięte</a>
             </p>
 
             <section class="py-3">

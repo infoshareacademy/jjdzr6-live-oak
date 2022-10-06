@@ -23,12 +23,24 @@ public class ServiceOrderController {
     private final ClientService clientService;
 
     @GetMapping
-    public String getOrders(Model model, @RequestParam(name = "s", required = false, defaultValue = "") String searchQuery) {
-        if (searchQuery.isBlank()) {
+    public String getOrders(Model model, @RequestParam(name = "s", required = false, defaultValue = "") String searchQuery, @RequestParam(name = "f", required = false, defaultValue = "") String filter) {
+        if (searchQuery.isBlank() && filter.isBlank()) {
             model.addAttribute("serviceOrders", serviceOrderService.findAll());
-        } else {
+        }
+
+        if (filter.isBlank() && !searchQuery.isBlank()) {
             model.addAttribute("serviceOrders", serviceOrderService.findByQuery(searchQuery));
             model.addAttribute("searchQuery", searchQuery);
+        }
+
+        if (searchQuery.isBlank() && !filter.isBlank()) {
+            ServiceOrderState state = ServiceOrderState.CREATED;
+            if (filter.equals("inprogress")) {
+                state = ServiceOrderState.IN_PROGRESS;
+            } else if (filter.equals("finished")) {
+                state = ServiceOrderState.FINISHED;
+            }
+            model.addAttribute("serviceOrders", serviceOrderService.filterByState(state));
         }
 
         return "employee/service-order-list";
@@ -46,12 +58,13 @@ public class ServiceOrderController {
     }
 
     @PostMapping("add-note")
-    public String addNote(@RequestParam("id") Long serviceOrderId, @RequestParam("note") String note, RedirectAttributes redirectAttributes){
+    public String addNote(@RequestParam("id") Long serviceOrderId, @RequestParam("note") String note, RedirectAttributes redirectAttributes) {
 
         serviceOrderService.addNote(serviceOrderId, note);
         redirectAttributes.addFlashAttribute("success", "Notatka została zapisana.");
         return "redirect:/employee/service-orders";
     }
+
     @GetMapping("/{id}/change-state")
     public String changeServiceOrderState(@PathVariable("id") Long serviceOrderId) {
         serviceOrderService.updateStatus(serviceOrderId);

@@ -68,6 +68,14 @@
                         wszystkie</a>
                 </div>
             </div>
+            <p>
+                <a th:href="@{/employee/service-orders(f='created')}" class="me-2"
+                   th:classappend="${#httpServletRequest.getParameter('f') == 'created' ? 'fw-bold text-danger' : ''}">Nowe</a>
+                <a th:href="@{/employee/service-orders(f='inprogress')}" class="me-2"
+                   th:classappend="${#httpServletRequest.getParameter('f') == 'inprogress' ? 'fw-bold text-danger' : ''}">Otwarte</a>
+                <a th:href="@{/employee/service-orders(f='finished')}"
+                   th:classappend="${#httpServletRequest.getParameter('f') == 'finished' ? 'fw-bold text-danger' : ''}">Zamknięte</a>
+            </p>
 
             <section class="py-3">
                 <p th:if="${success}" th:text="${success}" class="alert alert-success"></p>

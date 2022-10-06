@@ -88,3 +88,7 @@ fieldset[disabled] .btn-primary.active {
 tbody tr {
     min-height: 60px;
 }
+
+a {
+    text-decoration: none;
+}

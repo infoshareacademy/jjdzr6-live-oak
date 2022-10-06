@@ -46,7 +46,7 @@
             </div>
 
             <section class="py-3">
-                <p th:if="${success}" th:text="${success}" class="alert alert-success"></p>
+                <div th:if="${success}" th:utext="${success}" class="alert alert-success"></div>
                 <div th:if="${#lists.isEmpty(clients)}">
                     <p class="alert alert-info" th:text="#{cl.list}">
                     </p>
@@ -61,6 +61,7 @@
                             <th th:text="#{cl.phoneNumber}" style="width: 120px"></th>
                             <th th:text="#{cl.address}"></th>
                             <th th:text="#{cl.nip}"></th>
+                            <th class="text-center" style="width: 50px;">Konto</th>
                             <th class="text-end" style="width: 160px;">Opcje</th>
                         </tr>
                         </thead>
@@ -72,9 +73,30 @@
                             <td th:text="${client.phoneNumber}"></td>
                             <td th:text="${client.address ?: '-'}"></td>
                             <td th:text="${client.nip ?: '-'}"></td>
+                            <td th:if="${client.user != null}" class="text-center">
+                                <i class="fas fa-check text-success"></i>
+                            </td>
+                            <td th:if="${client.user == null}" class="text-center">
+                                <i class="fas fa-times text-danger"></i>
+                            </td>
                             <td class="text-end">
-                                <a th:href="@{/employee/clients/{id}/vehicles(id=${client.id})}"
-                                   class="btn btn-primary btn-md">Pojazdy</a>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Opcje
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <a th:href="@{/employee/clients/{id}/vehicles(id=${client.id})}"
+                                               class="dropdown-item">Lista pojazdów</a>
+                                        </li>
+                                        <li th:if="${client.user == null}">
+                                            <a th:href="@{/employee/clients/{id}/create-user-account(id=${client.id})}"
+                                               class="dropdown-item">Utwórz konto</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </td>
                         </tr>
                         </tbody>

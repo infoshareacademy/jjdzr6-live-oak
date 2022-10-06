@@ -6,6 +6,7 @@ import com.infoshareacademy.dto.vehicle.CreateVehicleDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.VehicleService;
+import com.infoshareacademy.utils.PasswordGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -131,5 +132,25 @@ public class ClientController {
         model.addAttribute("client", clientDto);
 
         return "employee/client-vehicle-list";
+    }
+
+    @GetMapping("/{id}/create-user-account")
+    public String createUserAccount(@PathVariable("id") Long clientId, RedirectAttributes redirectAttributes) {
+        ClientDto clientDto = clientService.findById(clientId);
+
+        if (clientDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        String password = PasswordGenerator.generateRandomPassword(6);
+        clientService.createUserAccount(clientId, password);
+
+        redirectAttributes.addFlashAttribute("success", "Utworzono konto klienta. Login: <strong>" +
+                clientDto.getEmail() +
+                "</strong>, Hasło: <strong>" +
+                password +
+                "</strong>");
+
+        return "redirect:/employee/clients";
     }
 }

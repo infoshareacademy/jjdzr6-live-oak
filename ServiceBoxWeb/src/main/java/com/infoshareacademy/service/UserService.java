@@ -1,12 +1,14 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.user.UserDao;
+import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.user.User;
 import com.infoshareacademy.security.SecureUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service

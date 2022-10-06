@@ -1,7 +1,7 @@
 INSERT INTO servicebox.role(id, name) VALUES (1, 'ROLE_ADMIN');
 INSERT INTO servicebox.role(id, name) VALUES (2, 'ROLE_EMPLOYEE');
 INSERT INTO servicebox.role(id, name) VALUES (3, 'ROLE_CLIENT');
-INSERT INTO servicebox.user (id, username, password, enabled) VALUES (1, 'test', '{bcrypt}$2a$12$yglrSabJuXl072PDpLCDXeieEnGrvc25d.48g6Focb7Z7/CLWFpP2', true);
+INSERT INTO servicebox.user (id, username, password, enabled) VALUES (1, 'test', '$2a$12$yglrSabJuXl072PDpLCDXeieEnGrvc25d.48g6Focb7Z7/CLWFpP2', true);
 INSERT INTO servicebox.user_role (user_id, role_id) VALUES (1, 2);
 INSERT INTO servicebox.address (id, city, flat_number, house_number, street, zip_code) VALUES (1, 'Poznań', '', '10', 'Poznańska', '60-685');
 INSERT INTO servicebox.address (id, city, flat_number, house_number, street, zip_code) VALUES (2, '', '', '', '', '');

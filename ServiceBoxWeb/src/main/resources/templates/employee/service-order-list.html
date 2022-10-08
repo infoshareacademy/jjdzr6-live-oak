@@ -64,7 +64,7 @@
                                placeholder="Wyszukaj po numerze zlecenia" th:value="${searchQuery}" autofocus
                                autocomplete="off" required>
                     </form>
-                    <a th:if="${searchQuery != null}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
+                    <a th:if="${searchQuery}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
                         wszystkie</a>
                 </div>
                 <div class="col-6 d-flex justify-content-end align-items-end">

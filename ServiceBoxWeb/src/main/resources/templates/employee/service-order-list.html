@@ -60,22 +60,23 @@
             <div class="row">
                 <div class="col-6">
                     <form method="get" class="input-group mb-3" id="searchForm">
-                        <input type="text" class="form-control" name="s" id="search" minlength="3"
+                        <input type="text" class="form-control" name="q" id="search" minlength="3"
                                placeholder="Wyszukaj po numerze zlecenia" th:value="${searchQuery}" autofocus
                                autocomplete="off" required>
                     </form>
-                    <a th:if="${searchQuery}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
+                    <a th:if="${searchQuery != null}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
                         wszystkie</a>
                 </div>
+                <div class="col-6 d-flex justify-content-end align-items-end">
+                    <a th:href="@{?(filter='created')}" class="filter me-3"
+                       th:classappend="${#httpServletRequest.getParameter('filter') == 'created' ? 'fw-bold' : ''}"><i class="fas fa-caret-right me-1"></i>Nowe</a>
+                    <a th:href="@{?(filter='in-progress')}" class="filter me-3"
+                       th:classappend="${#httpServletRequest.getParameter('filter') == 'in-progress' ? 'fw-bold' : ''}"><i class="fas fa-caret-right me-1"></i>Otwarte</a>
+                    <a th:href="@{?(filter='finished')}" class="filter"
+                       th:classappend="${#httpServletRequest.getParameter('filter') == 'finished' ? 'fw-bold' : ''}"><i class="fas fa-caret-right me-1"></i>Zamknięte</a>
+                </div>
             </div>
-            <p>
-                <a th:href="@{/employee/service-orders(f='created')}" class="me-2"
-                   th:classappend="${#httpServletRequest.getParameter('f') == 'created' ? 'fw-bold text-danger' : ''}">Nowe</a>
-                <a th:href="@{/employee/service-orders(f='inprogress')}" class="me-2"
-                   th:classappend="${#httpServletRequest.getParameter('f') == 'inprogress' ? 'fw-bold text-danger' : ''}">Otwarte</a>
-                <a th:href="@{/employee/service-orders(f='finished')}"
-                   th:classappend="${#httpServletRequest.getParameter('f') == 'finished' ? 'fw-bold text-danger' : ''}">Zamknięte</a>
-            </p>
+
 
             <section class="py-3">
                 <p th:if="${success}" th:text="${success}" class="alert alert-success"></p>

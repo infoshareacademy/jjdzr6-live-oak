@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -92,5 +94,29 @@ public class ServiceOrderService {
         return serviceOrderDao.filterByState(state).stream()
                 .map(ServiceOrderDto::fromServiceOrder)
                 .toList();
+    }
+
+    public List<ServiceOrderDto> findByCriteria(String searchQuery, String filter) {
+        List<ServiceOrderDto> serviceOrders = null;
+
+        if (searchQuery.isBlank()) {
+            serviceOrders = findAll();
+        } else {
+            serviceOrders = findByQuery(searchQuery);
+        }
+
+        Map<String, ServiceOrderState> filters = Map.of(
+                "created", ServiceOrderState.CREATED,
+                "in-progress", ServiceOrderState.IN_PROGRESS,
+                "finished", ServiceOrderState.FINISHED
+        );
+
+        if (!filter.isBlank() && filters.containsKey(filter)) {
+            serviceOrders = serviceOrders.stream()
+                    .filter(serviceOrderDto -> serviceOrderDto.getState().equals(filters.get(filter)))
+                    .toList();
+        }
+
+        return serviceOrders;
     }
 }

@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
+
 @Controller
 @RequestMapping("/employee/service-orders")
 @RequiredArgsConstructor
@@ -23,24 +26,16 @@ public class ServiceOrderController {
     private final ClientService clientService;
 
     @GetMapping
-    public String getOrders(Model model, @RequestParam(name = "s", required = false, defaultValue = "") String searchQuery, @RequestParam(name = "f", required = false, defaultValue = "") String filter) {
-        if (searchQuery.isBlank() && filter.isBlank()) {
-            model.addAttribute("serviceOrders", serviceOrderService.findAll());
-        }
+    public String getOrders(
+            Model model,
+            @RequestParam(name = "q", required = false, defaultValue = "") String searchQuery,
+            @RequestParam(name = "filter", required = false, defaultValue = "") String filter,
+            HttpServletRequest request
+    ) {
+        model.addAttribute("serviceOrders", serviceOrderService.findByCriteria(searchQuery, filter));
 
-        if (filter.isBlank() && !searchQuery.isBlank()) {
-            model.addAttribute("serviceOrders", serviceOrderService.findByQuery(searchQuery));
+        if (!searchQuery.isBlank()) {
             model.addAttribute("searchQuery", searchQuery);
-        }
-
-        if (searchQuery.isBlank() && !filter.isBlank()) {
-            ServiceOrderState state = ServiceOrderState.CREATED;
-            if (filter.equals("inprogress")) {
-                state = ServiceOrderState.IN_PROGRESS;
-            } else if (filter.equals("finished")) {
-                state = ServiceOrderState.FINISHED;
-            }
-            model.addAttribute("serviceOrders", serviceOrderService.filterByState(state));
         }
 
         return "employee/service-order-list";

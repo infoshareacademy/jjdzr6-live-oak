@@ -89,6 +89,11 @@ tbody tr {
     min-height: 60px;
 }
 
-a {
+.filter {
+    color: #611BBD;
     text-decoration: none;
+}
+
+.filter:hover {
+    color: #dc3545;
 }

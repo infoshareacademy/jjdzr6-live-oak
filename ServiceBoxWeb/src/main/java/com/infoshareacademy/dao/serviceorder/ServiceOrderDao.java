@@ -68,5 +68,4 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
         return entityManager.createQuery("SELECT so FROM ServiceOrder so WHERE so.state=:state", ServiceOrder.class)
                 .setParameter("state", state).getResultList();
     }
-
 }

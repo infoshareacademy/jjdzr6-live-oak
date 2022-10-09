@@ -46,29 +46,21 @@
                                 naprawy</a>
                         </li>
                     </th:block>
-
-<!--                    <th:block sec:authorize="hasRole('ROLE_CLIENT')">-->
-<!--                        <li class="nav-item me-2">-->
-<!--                            <a class="nav-link" href="#"-->
-<!--                               th:classappend="${#httpServletRequest.getRequestURI() == '/service-orders' ? 'active' : ''}">Naprawy</a>-->
-<!--                        </li>-->
-<!--                    </th:block>-->
-
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="color: #5f20b9;" >
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false" style="color: #5f20b9;">
                             <i class="fas fa-user me-2"></i><span sec:authentication="name" class="fw-bold">Bob</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <form th:action="@{/logout}" method="post" id="logout-form">
-                                    <a href="#" onclick="document.getElementById('logout-form').submit()" class="dropdown-item">Wyloguj</a>
+                                    <a href="#" onclick="document.getElementById('logout-form').submit()"
+                                       class="dropdown-item">Wyloguj</a>
                                 </form>
                             </li>
                         </ul>
                     </li>
                 </ul>
-
-
             </div>
         </div>
     </nav>

@@ -74,11 +74,4 @@ public class ClientService {
         clientDao.update(client);
     }
 
-    public ClientDto findByEmail(String email) {
-        Optional<Client> client = clientDao.findByEmail(email);
-        if (client.isEmpty()){
-            return null;
-        }
-        return ClientDto.fromClient(client.get());
-    }
 }

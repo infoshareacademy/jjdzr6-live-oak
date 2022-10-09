@@ -13,8 +13,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -48,14 +46,14 @@ public class ServiceOrderService {
         return serviceOrderDao.findByOrderNumber(orderNumber).isPresent();
     }
 
-    public long countByState(ServiceOrderState state) {
-        // TODO
-        return 0;
+    public Long countByState(ServiceOrderState state) {
+        return serviceOrderDao.countServiceOrderWithState(state);
     }
 
-    public Optional<ServiceOrder> getLastOrder() {
-        // TODO
-        return Optional.empty();
+    public List<ServiceOrderDto> getLastOrders(int limit) {
+        return serviceOrderDao.getLastServiceOrders(limit).stream()
+                .map(ServiceOrderDto::fromServiceOrder)
+                .toList();
     }
 
     public String generateOrderNumber() {

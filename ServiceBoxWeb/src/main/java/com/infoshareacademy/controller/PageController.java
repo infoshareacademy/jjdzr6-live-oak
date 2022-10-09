@@ -28,13 +28,13 @@ public class PageController {
 
     @GetMapping("/employee")
     public String employeeStartPage(Model model) {
-        long[] stats = new long[4];
+        long[] stats = new long[3];
         stats[0] = orderService.countByState(ServiceOrderState.CREATED);
         stats[1] = orderService.countByState(ServiceOrderState.IN_PROGRESS);
         stats[2] = orderService.countByState(ServiceOrderState.FINISHED);
 
         model.addAttribute("stats", stats);
-        model.addAttribute("lastOrder", orderService.getLastOrder().orElse(null));
+        model.addAttribute("lastServiceOrders", orderService.getLastOrders(3));
         return "employee/start";
     }
 }

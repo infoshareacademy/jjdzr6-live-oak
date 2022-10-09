@@ -1,10 +1,8 @@
 package com.infoshareacademy.dao.serviceorder;
 
 import com.infoshareacademy.dao.Dao;
-import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
-import com.infoshareacademy.entity.vehicle.Vehicle;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -67,5 +65,16 @@ public class ServiceOrderDao implements Dao<ServiceOrder> {
     public List<ServiceOrder> filterByState(ServiceOrderState state) {
         return entityManager.createQuery("SELECT so FROM ServiceOrder so WHERE so.state=:state", ServiceOrder.class)
                 .setParameter("state", state).getResultList();
+    }
+
+    public Long countServiceOrderWithState(ServiceOrderState state) {
+        Query query = entityManager.createQuery("SELECT count(so) FROM ServiceOrder so WHERE so.state = :state");
+        query.setParameter("state", state);
+        return (Long) query.getSingleResult();
+    }
+
+    public List<ServiceOrder> getLastServiceOrders(int limit) {
+        TypedQuery<ServiceOrder> query = entityManager.createQuery("SELECT so FROM ServiceOrder so ORDER BY so.id DESC", ServiceOrder.class);
+        return query.setMaxResults(limit).getResultList();
     }
 }

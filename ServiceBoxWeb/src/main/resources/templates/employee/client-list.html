@@ -62,7 +62,7 @@
                             <th th:text="#{cl.phoneNumber}" style="width: 120px"></th>
                             <th th:text="#{cl.address}"></th>
                             <th th:text="#{cl.nip}"></th>
-                            <th class="text-center" style="width: 50px;">Konto</th>
+                            <th class="text-center" style="width: 70px;">Konto</th>
                             <th class="text-end" style="width: 160px;">Opcje</th>
                         </tr>
                         </thead>
@@ -78,7 +78,7 @@
                                 <i class="fas fa-check text-success"></i>
                             </td>
                             <td th:if="${client.user == null}" class="text-center">
-                                <i class="fas fa-times text-danger"></i>
+                                <i class="fas fa-times text-danger me-1"></i>brak
                             </td>
                             <td class="text-end">
                                 <div class="dropdown">

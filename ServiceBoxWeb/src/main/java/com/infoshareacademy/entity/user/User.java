@@ -24,10 +24,10 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "enabled", columnDefinition = "boolean default true")
+    @Column(name = "enabled")
     private boolean enabled = true;
 
-    @Column(name = "initial_password", columnDefinition = "boolean default true")
+    @Column(name = "initial_password")
     private boolean initialPassword = true;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

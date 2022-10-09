@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -71,5 +72,13 @@ public class ClientService {
         // add account to client and update
         client.setUser(account);
         clientDao.update(client);
+    }
+
+    public ClientDto findByEmail(String email) {
+        Optional<Client> client = clientDao.findByEmail(email);
+        if (client.isEmpty()){
+            return null;
+        }
+        return ClientDto.fromClient(client.get());
     }
 }

@@ -2,6 +2,7 @@ package com.infoshareacademy.controller.employee;
 
 import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.client.CreateClientDto;
+import com.infoshareacademy.dto.client.UpdateClientDto;
 import com.infoshareacademy.dto.vehicle.CreateVehicleDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.service.ClientService;
@@ -151,6 +152,33 @@ public class ClientController {
                 password +
                 "</strong>");
 
+        return "redirect:/employee/clients";
+    }
+
+    @GetMapping("/{id}/update")
+    public String updateClient(Model model) {
+        model.addAttribute("client", new UpdateClientDto());
+        return "employee/client-update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateClient(
+            @Valid @ModelAttribute("client") UpdateClientDto updateClientDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        // check if email is unique
+        String email = updateClientDto.getEmail();
+        if (clientService.isEmailExists(email)) {
+            bindingResult.rejectValue("email", "email.exists", "Podany adres email już istnieje");
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "employee/client-update";
+        }
+
+        clientService.updateClient(updateClientDto);
+        redirectAttributes.addFlashAttribute("success", "Zaktualizowano dane klienta.");
         return "redirect:/employee/clients";
     }
 }

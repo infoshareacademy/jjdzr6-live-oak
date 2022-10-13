@@ -5,6 +5,7 @@ import com.infoshareacademy.dao.user.RoleDao;
 import com.infoshareacademy.dao.vehicle.VehicleDao;
 import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.client.CreateClientDto;
+import com.infoshareacademy.dto.client.UpdateClientDto;
 import com.infoshareacademy.dto.vehicle.CreateVehicleDto;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.user.Role;
@@ -29,6 +30,11 @@ public class ClientService {
     public void addClient(CreateClientDto createClientDto) {
         Client client = createClientDto.toClient();
         clientDao.save(client);
+    }
+    @Transactional
+    public void updateClient(UpdateClientDto updateClientDto) {
+        Client client = updateClient();ClientDto.toClient();
+        clientDao.update(client);
     }
 
     public List<ClientDto> findAll() {

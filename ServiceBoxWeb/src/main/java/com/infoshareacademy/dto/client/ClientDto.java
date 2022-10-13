@@ -18,6 +18,7 @@ public class ClientDto {
     private final String phoneNumber;
     private final String email;
     private final boolean allowNotifications;
+    public Client toClient;
 
     /**
      * A DTO for the {@link Address} entity

@@ -20,15 +20,16 @@ public class UpdateClientDto {
     @NotBlank(message = "To pole jest wymagane")
     private String name;
     private AddressDto address;
-    @Pattern(regexp="(^$|\\d{10})", message = "Niepoprawny NIP")
+    @Pattern(regexp = "(^$|\\d{10})", message = "Niepoprawny NIP")
     private String nip;
     @NotBlank(message = "To pole jest wymagane")
-    @Pattern(regexp="(^$|\\d{9})", message = "Niepoprawny numer telefonu")
+    @Pattern(regexp = "(^$|\\d{9})", message = "Niepoprawny numer telefonu")
     private String phoneNumber;
     @NotBlank(message = "To pole jest wymagane")
     @Email
     private String email;
     private boolean allowNotifications;
+    private long id;
 
     /**
      * A DTO for the {@link Address} entity
@@ -40,7 +41,7 @@ public class UpdateClientDto {
         private String street;
         private String houseNumber;
         private String flatNumber;
-        @Pattern(regexp="(^$|\\d{2}-\\d{3})", message = "Podaj kod pocztowy w formacie xx-xxx")
+        @Pattern(regexp = "(^$|\\d{2}-\\d{3})", message = "Podaj kod pocztowy w formacie xx-xxx")
         private String zipCode;
         private String city;
     }
@@ -57,8 +58,7 @@ public class UpdateClientDto {
                     this.address.city
             );
         }
-
-        return new Client(
+        Client client = new Client(
                 this.name,
                 clientAddress,
                 this.nip,
@@ -66,5 +66,8 @@ public class UpdateClientDto {
                 this.email,
                 this.allowNotifications
         );
+        client.setId(this.id);
+        return client;
+
     }
 }

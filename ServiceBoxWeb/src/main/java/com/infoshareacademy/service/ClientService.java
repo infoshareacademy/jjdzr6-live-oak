@@ -31,9 +31,10 @@ public class ClientService {
         Client client = createClientDto.toClient();
         clientDao.save(client);
     }
+
     @Transactional
-    public void updateClient(UpdateClientDto updateClientDto) {
-        Client client = updateClient();ClientDto.toClient();
+    public void updateClient(ClientDto clientDto) {
+        Client client = clientDto.toClient;
         clientDao.update(client);
     }
 

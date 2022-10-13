@@ -19,10 +19,10 @@
         <div class="col-md-12">
 
             <header class="d-flex justify-content-between mt-5 mb-3">
-                <h1 class="heading" th:text="#{cl.addClient}"></h1>
+                <h1 class="heading" th:text="#{cl.updateClient}"></h1>
             </header>
 
-            <form th:object="${client}" th:action="@{/employee/clients/update}" method="post" class="row">
+            <form th:object="${client}" th:action="@{/employee/clients/{id}/update(id=${client.id})}" method="post" class="row">
 
                 <div class="col-md-6 col-lg-5">
                     <div class="mb-3">
@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="col-12 mt-3">
-                    <button type="submit" class="btn btn-primary btn-lg" th:text="#{submit.button}"></button>
+                    <button type="submit" class="btn btn-primary btn-lg" th:text="#{update.button}"></button>
                     <a th:href="@{/employee/clients}" class="btn btn-outline-secondary btn-lg"
                        th:text="#{btn.label.reject}"></a>
                 </div>

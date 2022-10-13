@@ -3,34 +3,41 @@ package com.infoshareacademy.dto.client;
 import com.infoshareacademy.entity.client.Address;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.dto.user.UserDto;
-import lombok.Data;
+import lombok.*;
 
 /**
  * A DTO for the {@link Client} entity
  */
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class ClientDto {
-    private final Long id;
-    private final UserDto user;
-    private final String name;
-    private final AddressDto address;
-    private final String nip;
-    private final String phoneNumber;
-    private final String email;
-    private final boolean allowNotifications;
-    public Client toClient;
+    private Long id;
+    private UserDto user;
+    private String name;
+    private AddressDto address;
+    private String nip;
+    private String phoneNumber;
+    private String email;
+    private boolean allowNotifications;
 
     /**
      * A DTO for the {@link Address} entity
      */
-    @Data
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+
     public static class AddressDto {
-        private final Long id;
-        private final String street;
-        private final String houseNumber;
-        private final String flatNumber;
-        private final String zipCode;
-        private final String city;
+        private Long id;
+        private String street;
+        private String houseNumber;
+        private String flatNumber;
+        private String zipCode;
+        private String city;
 
         @Override
         public String toString() {

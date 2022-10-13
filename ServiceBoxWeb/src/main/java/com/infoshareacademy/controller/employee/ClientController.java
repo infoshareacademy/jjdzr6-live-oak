@@ -165,22 +165,20 @@ public class ClientController {
 
     @PostMapping("/{id}/update")
     public String updateClient(
-            @Valid @ModelAttribute("client") UpdateClientDto updateClientDto,
+            @Valid @ModelAttribute("client") ClientDto clientDto,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes
+            RedirectAttributes redirectAttributes,
+            @PathVariable("id") Long clientId, Model model
+
     ) {
-        // check if email is unique
-        String email = updateClientDto.getEmail();
-        if (clientService.isEmailExists(email)) {
-            bindingResult.rejectValue("email", "email.exists", "Podany adres email już istnieje");
-        }
 
         if (bindingResult.hasErrors()) {
             return "employee/client-update";
         }
 
-//        clientService.updateClient(updateClientDto);
-//        redirectAttributes.addFlashAttribute("success", "Zaktualizowano dane klienta.");
+        clientService.updateClient(clientId, clientDto);
+
+        redirectAttributes.addFlashAttribute("success", "Zaktualizowano dane klienta.");
         return "redirect:/employee/clients";
     }
 

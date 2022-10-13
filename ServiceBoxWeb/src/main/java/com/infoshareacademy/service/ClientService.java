@@ -33,8 +33,11 @@ public class ClientService {
     }
 
     @Transactional
-    public void updateClient(ClientDto clientDto) {
-        Client client = clientDto.toClient;
+    public void updateClient(long id, ClientDto clientDto) {
+        Client client = clientDao.findById(id);
+        client.setName(clientDto.getName());
+        client.setEmail(clientDto.getEmail());
+        client.setPhoneNumber(clientDto.getPhoneNumber());
         clientDao.update(client);
     }
 

@@ -48,14 +48,14 @@ public class ServiceOrderService {
         return serviceOrderDao.findByOrderNumber(orderNumber).isPresent();
     }
 
-    public long countByState(ServiceOrderState state) {
-        // TODO
-        return 0;
+    public Long countByState(ServiceOrderState state) {
+        return serviceOrderDao.countServiceOrderWithState(state);
     }
 
-    public Optional<ServiceOrder> getLastOrder() {
-        // TODO
-        return Optional.empty();
+    public List<ServiceOrderDto> getLastOrders(int limit) {
+        return serviceOrderDao.getLastServiceOrders(limit).stream()
+                .map(ServiceOrderDto::fromServiceOrder)
+                .toList();
     }
 
     public String generateOrderNumber() {

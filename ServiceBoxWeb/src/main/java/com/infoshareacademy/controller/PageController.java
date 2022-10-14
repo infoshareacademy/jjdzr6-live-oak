@@ -23,7 +23,7 @@ public class PageController {
             return "redirect:/employee";
         }
 
-        return "client/start";
+        return "redirect:/service-orders";
     }
 
     @GetMapping("/employee")

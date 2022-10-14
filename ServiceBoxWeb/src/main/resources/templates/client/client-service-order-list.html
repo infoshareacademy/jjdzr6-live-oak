@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ServiceBox</title>
+
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Inter&display=swap}" rel="stylesheet">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css}" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link th:href="@{/assets/fontawesome/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script th:src="@{/js/addNote.js}"></script>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <header class="d-flex justify-content-between mt-5 mb-3">
+                <h1 class="heading" th:text="#{so.headline}"></h1>
+            </header>
+            <section class="py-3">
+                <div th:if="${#lists.isEmpty(serviceOrders)}">
+                    <p class="alert alert-info" th:text="#{so.list}">
+                    </p>
+                </div>
+                <div th:if="${not #lists.isEmpty(serviceOrders)}">
+                    <table class="table align-middle table-hover">
+                        <thead>
+                        <tr>
+                            <th style="width: 50px;">Lp.</th>
+                            <th th:text="#{so.orderNumber}"></th>
+                            <th th:text="#{so.createdAt}"></th>
+                            <th th:text="#{so.description}"></th>
+                            <th>Pojazd</th>
+                            <th th:text="#{so.state}"></th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                        <tr th:each="service, iter : ${serviceOrders}">
+                            <td th:text="${iter.count}"></td>
+                            <td th:text="${service.orderNumber}"></td>
+                            <td th:text="${#temporals.format(service.createdAt, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${service.description}"></td>
+                            <td th:text="${service.vehiclePlateNumber}"></td>
+                            <td th:text="${service.state.description}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js}"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

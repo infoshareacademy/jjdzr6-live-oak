@@ -33,7 +33,7 @@ public class ServiceOrder {
     @Enumerated(EnumType.STRING)
     private ServiceOrderState state = ServiceOrderState.CREATED;
 
-    @Column(name = "new_parts", columnDefinition = "boolean default false")
+    @Column(name = "new_parts")
     private boolean onlyNewParts = false;
 
     @Column(name = "max_cost", nullable = false)

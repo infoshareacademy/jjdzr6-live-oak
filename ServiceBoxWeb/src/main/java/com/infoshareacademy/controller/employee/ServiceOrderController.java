@@ -2,9 +2,8 @@ package com.infoshareacademy.controller.employee;
 
 
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
-import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
-import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
+import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Set;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/employee/service-orders")
@@ -64,5 +63,25 @@ public class ServiceOrderController {
     public String changeServiceOrderState(@PathVariable("id") Long serviceOrderId) {
         serviceOrderService.updateStatus(serviceOrderId);
         return "redirect:/employee/service-orders";
+    }
+
+    @GetMapping("/create")
+    public String newServiceOrder() {
+        return "employee/create-service-order";
+    }
+
+    @PostMapping("/create")
+    public String createServiceOrder(
+            @RequestParam("plateNumber") String plateNumber,
+            RedirectAttributes redirectAttributes
+    ) {
+        Optional<Vehicle> vehicle = vehicleService.findByPlateNumber(plateNumber);
+
+        if (vehicle.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Nie znaleziono pojazdu o numerze rejestracyjnym <strong>" + plateNumber + "</strong>");
+            return "redirect:/employee/service-orders/create";
+        }
+
+        return "redirect:/employee/vehicles/" + vehicle.get().getId() + "/create-service-order";
     }
 }

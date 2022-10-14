@@ -2,6 +2,7 @@ package com.infoshareacademy.dao.serviceorder;
 
 import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.entity.client.Client;
+import com.infoshareacademy.entity.serviceorder.Note;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.entity.vehicle.Vehicle;

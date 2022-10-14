@@ -97,3 +97,9 @@ tbody tr {
 .filter:hover {
     color: #dc3545;
 }
+
+h2.section-header {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+}

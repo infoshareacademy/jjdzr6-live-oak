@@ -35,7 +35,8 @@
         <div class="col-md-7">
             <h2 class="section-header border-bottom">Informacje o zleceniu</h2>
             <p class="card-text">
-            <p class="card-text" th:text="#{so.createdAt} + ': ' + ${serviceOrderDetails.createdAt}"></p>
+            <p class="card-text"
+               th:text="#{so.createdAt} + ': ' + ${#temporals.format(serviceOrderDetails.createdAt, 'dd-MM-yyyy')}"></p>
             <p class="card-text" th:text="#{so.state} + ': '+  ${serviceOrderDetails.state.description}"></p>
             <p class="card-text" th:text="#{so.maxCost} + ': '+  ${serviceOrderDetails.maxCost}"></p>
             <p class="card-text" th:text="#{so.description} + ': '+  ${serviceOrderDetails.description}"></p>
@@ -43,13 +44,10 @@
 
             <h2 class="section-header border-bottom mt-4">Notatki</h2>
             <ul>
-
-                <li>2022-10-05: uwaga 1</li>
-                <p class="card-text">
-                <p class="card-text" th:text="#{so.createdAt} + ': ' + ${serviceOrderDetails.notes}"></p>
-                </li>
-                <li>2022-10-01: uwaga 2</li>
+                <li th:each="note : ${serviceOrderDetails.notes}"
+                    th:text="${#temporals.format(note.createdAt, 'dd-MM-yyyy')} + ': ' + ${note.note}"></li>
             </ul>
+
         </div>
         <div class="col-md-5">
             <div class="card mt-2 mt-lg-0 shadow-sm">
@@ -61,7 +59,8 @@
                     <p class="card-text" th:text="#{vehicle.make} + ': ' + ${vehicle.make}"></p>
                     <p class="card-text" th:text="#{vehicle.model} + ': ' +${vehicle.model}"></p>
                     <p class="card-text" th:text="#{vehicle.engineCapacity} + ': ' +${vehicle.engineCapacity}"></p>
-                    <p class="card-text" th:text="#{vehicle.productionYear} + ': ' +${vehicle.productionYear}"></p>
+                    <p class="card-text"
+                       th:text="#{vehicle.productionYear} + ': ' +${vehicle.productionYear ?: '-'}"></p>
                     </p>
                 </div>
             </div>

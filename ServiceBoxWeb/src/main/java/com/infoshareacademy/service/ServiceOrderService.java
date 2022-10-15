@@ -1,27 +1,27 @@
 package com.infoshareacademy.service;
 
+import com.infoshareacademy.dao.client.ClientDao;
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
 import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
+import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.serviceorder.Note;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
+import com.infoshareacademy.entity.vehicle.Vehicle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class ServiceOrderService {
     private final ServiceOrderDao serviceOrderDao;
-
+    private final ClientDao clientDao;
 
     public List<ServiceOrderDto> findAll() {
         return serviceOrderDao.findAll().stream()
@@ -50,14 +50,14 @@ public class ServiceOrderService {
         return serviceOrderDao.findByOrderNumber(orderNumber).isPresent();
     }
 
-    public long countByState(ServiceOrderState state) {
-        // TODO
-        return 0;
+    public Long countByState(ServiceOrderState state) {
+        return serviceOrderDao.countServiceOrderWithState(state);
     }
 
-    public Optional<ServiceOrder> getLastOrder() {
-        // TODO
-        return Optional.empty();
+    public List<ServiceOrderDto> getLastOrders(int limit) {
+        return serviceOrderDao.getLastServiceOrders(limit).stream()
+                .map(ServiceOrderDto::fromServiceOrder)
+                .toList();
     }
 
     public String generateOrderNumber() {
@@ -122,5 +122,26 @@ public class ServiceOrderService {
 
         return serviceOrders;
     }
+
+
+    public List<ServiceOrderDto> findServiceOrdersByClientEmail(String email) {
+        Optional<Client> client = clientDao.findByEmail(email);
+        List<ServiceOrder> serviceOrders = new ArrayList<>();
+
+        if (client.isPresent()) {
+            List<Vehicle> vehicles = client.get().getVehicles();
+
+            for (Vehicle vehicle : vehicles) {
+                serviceOrders.addAll(vehicle.getServiceOrders());
+            }
+
+            return serviceOrders.stream()
+                    .map(ServiceOrderDto::fromServiceOrder)
+                    .toList();
+        }
+
+        return new ArrayList<>();
+    }
+
 }
 

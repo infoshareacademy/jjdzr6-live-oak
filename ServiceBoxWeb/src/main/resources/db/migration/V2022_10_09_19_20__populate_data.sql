@@ -1,0 +1,23 @@
+INSERT INTO role(id, name) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO role(id, name) VALUES (2, 'ROLE_EMPLOYEE');
+INSERT INTO role(id, name) VALUES (3, 'ROLE_CLIENT');
+INSERT INTO user (id, username, password, enabled) VALUES (1, 'test', '$2a$12$yglrSabJuXl072PDpLCDXeieEnGrvc25d.48g6Focb7Z7/CLWFpP2', true);
+INSERT INTO user_role (user_id, role_id) VALUES (1, 2);
+INSERT INTO address (id, city, flat_number, house_number, street, zip_code) VALUES (1, 'Poznań', '', '10', 'Poznańska', '60-685');
+INSERT INTO address (id, city, flat_number, house_number, street, zip_code) VALUES (2, '', '', '', '', '');
+INSERT INTO address (id, city, flat_number, house_number, street, zip_code) VALUES (3, '', '', '', '', '');
+INSERT INTO address (id, city, flat_number, house_number, street, zip_code) VALUES (4, '', '', '', '', '');
+INSERT INTO address (id, city, flat_number, house_number, street, zip_code) VALUES (5, 'Poznań', '', '', '', '60-685');
+INSERT INTO address (id, city, flat_number, house_number, street, zip_code) VALUES (6, '', '', '', '', '');
+INSERT INTO client (id, allow_notifications, email, name, nip, phone, address_id, user_id) VALUES (1, 1, 'kazun@gmail.com', 'Joanna Kazun', '', '500500500', 2, null);
+INSERT INTO client (id, allow_notifications, email, name, nip, phone, address_id, user_id) VALUES (2, 1, 'bukowski@gmail.com', 'Przemysław Bukowski', '', '564789789', 3, null);
+INSERT INTO client (id, allow_notifications, email, name, nip, phone, address_id, user_id) VALUES (3, 0, 'kusiak@wp.pl', 'Maciej Kusiak', '', '800900500', 4, null);
+INSERT INTO client (id, allow_notifications, email, name, nip, phone, address_id, user_id) VALUES (4, 0, 'gorecki@gmail.com', 'Dawid Górecki', '', '603069333', 5, null);
+INSERT INTO client (id, allow_notifications, email, name, nip, phone, address_id, user_id) VALUES (5, 0, 'szablewski@gmail.com', 'Bartosz Szablewski', '', '700800500', 6, null);
+INSERT INTO vehicle (id, engine_capacity, make, mileage, model, plate_number, production_year, vin, client_id) VALUES (1, 2, 'Audi', null, 'A8', 'PO123456', null, '', 5);
+INSERT INTO vehicle (id, engine_capacity, make, mileage, model, plate_number, production_year, vin, client_id) VALUES (2, null, 'Fiat', null, '126p', 'PO123789', 1980, '', 2);
+INSERT INTO vehicle (id, engine_capacity, make, mileage, model, plate_number, production_year, vin, client_id) VALUES (3, 2, 'Volvo', null, 'S40', 'WD789456', 2018, '', 1);
+INSERT INTO vehicle (id, engine_capacity, make, mileage, model, plate_number, production_year, vin, client_id) VALUES (4, null, 'Nissan', null, 'GTR', 'PK478965', null, '', 3);
+INSERT INTO service_order (id, created_at, description, finished_at, max_cost, new_parts, order_number, state, repair_card_id, vehicle_id) VALUES (2, '2022-10-04 12:22:02', 'Wymiana opon', null, 100, 1, '1/10/2022', 'CREATED', null, 1);
+INSERT INTO service_order (id, created_at, description, finished_at, max_cost, new_parts, order_number, state, repair_card_id, vehicle_id) VALUES (3, '2022-10-04 12:23:50', 'Wymiana świec', null, 2000, 1, '2/10/2022', 'CREATED', null, 4);
+

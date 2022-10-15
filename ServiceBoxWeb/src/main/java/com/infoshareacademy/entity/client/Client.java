@@ -40,7 +40,7 @@ public class Client {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "allow_notifications", columnDefinition = "boolean default false")
+    @Column(name = "allow_notifications")
     private boolean allowNotifications = false;
 
     // fetch LAZY (default)

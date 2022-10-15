@@ -115,15 +115,15 @@
                                         Opcje
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a th:href="@{service-orders/{id}/details(id=${service.id})}"
+                                        <li><a th:href="@{/employee/service-orders/{id}/details(id=${service.id})}"
                                                class="dropdown-item">Szczegóły zlecenia</a></li>
                                         <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
                                                class="dropdown-item add-note-js">Dodaj notatkę</a></li>
                                         <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).CREATED}">
-                                            <a th:href="@{service-orders/{id}/change-state(id=${service.id})}"
+                                            <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
                                                class="dropdown-item">Rozpocznij</a></li>
                                         <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).IN_PROGRESS}">
-                                            <a th:href="@{service-orders/{id}/change-state(id=${service.id})}"
+                                            <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
                                                class="dropdown-item">Zakończ</a></li>
 
                                     </ul>

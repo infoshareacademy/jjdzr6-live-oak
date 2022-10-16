@@ -59,6 +59,8 @@
                     <p class="card-text" th:text="#{vehicle.make} + ': ' + ${vehicle.make}"></p>
                     <p class="card-text" th:text="#{vehicle.model} + ': ' +${vehicle.model}"></p>
                     <p class="card-text" th:text="#{vehicle.engineCapacity} + ': ' +${vehicle.engineCapacity}"></p>
+                    <p class="card-text" th:text="#{vehicle.vin} + ': ' +${vehicle.vin ?: '-'}"></p>
+                    <p class="card-text" th:text="#{vehicle.mileage} + ': ' +${vehicle.mileage ?: '-'}"></p>
                     <p class="card-text"
                        th:text="#{vehicle.productionYear} + ': ' +${vehicle.productionYear ?: '-'}"></p>
                     </p>

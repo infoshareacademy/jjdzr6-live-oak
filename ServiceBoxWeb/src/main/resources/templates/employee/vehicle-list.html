@@ -69,7 +69,24 @@
                             <td th:text="${vehicle.productionYear ?: '-'}"></td>
                             <td th:text="${vehicle.clientName}"></td>
                             <td class="text-end">
-                                <a th:href="@{/employee/vehicles/{id}/create-service-order(id=${vehicle.id})}" class="btn btn-primary">Napraw</a>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Opcje
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <a th:href="@{/employee/vehicles/{id}/update(id=${vehicle.id})}"
+                                               class="dropdown-item">Aktualizacja danych</a>
+                                        </li>
+                                        <li>
+                                            <a th:href="@{/employee/vehicles/{id}/create-service-order(id=${vehicle.id})}"
+                                               class="dropdown-item">Napraw</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
                         </tr>
                         </tbody>
                     </table>

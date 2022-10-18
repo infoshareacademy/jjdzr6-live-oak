@@ -97,3 +97,7 @@ tbody tr {
 .filter:hover {
     color: #dc3545;
 }
+
+.nav-link {
+    color: #49247A;
+}

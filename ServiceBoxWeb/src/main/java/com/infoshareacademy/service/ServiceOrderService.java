@@ -2,6 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.client.ClientDao;
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
+import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.client.Client;
@@ -38,6 +39,7 @@ public class ServiceOrderService {
         return ServiceOrderDetailsDto.fromServiceOrder(serviceOrder);
     }
 
+
     public List<ServiceOrderDto> findByQuery(String query) {
         return serviceOrderDao.findByQuery(query).stream()
                 .map(ServiceOrderDto::fromServiceOrder)
@@ -48,14 +50,14 @@ public class ServiceOrderService {
         return serviceOrderDao.findByOrderNumber(orderNumber).isPresent();
     }
 
-    public long countByState(ServiceOrderState state) {
-        // TODO
-        return 0;
+    public Long countByState(ServiceOrderState state) {
+        return serviceOrderDao.countServiceOrderWithState(state);
     }
 
-    public Optional<ServiceOrder> getLastOrder() {
-        // TODO
-        return Optional.empty();
+    public List<ServiceOrderDto> getLastOrders(int limit) {
+        return serviceOrderDao.getLastServiceOrders(limit).stream()
+                .map(ServiceOrderDto::fromServiceOrder)
+                .toList();
     }
 
     public String generateOrderNumber() {
@@ -76,15 +78,16 @@ public class ServiceOrderService {
 
         serviceOrderDao.update(serviceOrder);
     }
+
     @Transactional
-    public void updateStatus (Long orderId) {
+    public void updateStatus(Long orderId) {
         ServiceOrder serviceOrder = serviceOrderDao.findById(orderId);
-        if(ServiceOrderState.FINISHED.equals(serviceOrder.getState())){
+        if (ServiceOrderState.FINISHED.equals(serviceOrder.getState())) {
             return;
         }
-        if (ServiceOrderState.CREATED.equals(serviceOrder.getState())){
+        if (ServiceOrderState.CREATED.equals(serviceOrder.getState())) {
             serviceOrder.setState(ServiceOrderState.IN_PROGRESS);
-        }else {
+        } else {
             serviceOrder.setState(ServiceOrderState.FINISHED);
         }
         serviceOrderDao.update(serviceOrder);
@@ -141,3 +144,4 @@ public class ServiceOrderService {
     }
 
 }
+

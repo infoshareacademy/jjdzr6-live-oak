@@ -3,7 +3,6 @@ package com.infoshareacademy.controller.employee;
 
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
-import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
@@ -12,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/employee/service-orders")

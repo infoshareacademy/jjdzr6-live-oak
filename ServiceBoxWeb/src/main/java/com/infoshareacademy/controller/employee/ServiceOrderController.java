@@ -2,7 +2,6 @@ package com.infoshareacademy.controller.employee;
 
 
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
-import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.service.ClientService;
@@ -13,9 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/employee/service-orders")
@@ -28,14 +24,15 @@ public class ServiceOrderController {
     @GetMapping
     public String getOrders(
             Model model,
-            @RequestParam(name = "q", required = false, defaultValue = "") String searchQuery,
-            @RequestParam(name = "filter", required = false, defaultValue = "") String filter,
-            HttpServletRequest request
+            @RequestParam(name = "q", required = false, defaultValue = "") String searchQuery
     ) {
-        model.addAttribute("serviceOrders", serviceOrderService.findByCriteria(searchQuery, filter));
-
         if (!searchQuery.isBlank()) {
+            model.addAttribute("serviceOrders", serviceOrderService.findByQuery(searchQuery));
             model.addAttribute("searchQuery", searchQuery);
+        } else {
+            model.addAttribute("created", serviceOrderService.findByState(ServiceOrderState.CREATED));
+            model.addAttribute("inProgress", serviceOrderService.findByState(ServiceOrderState.IN_PROGRESS));
+            model.addAttribute("finished", serviceOrderService.findByState(ServiceOrderState.FINISHED));
         }
 
         return "employee/service-order-list";

@@ -96,28 +96,10 @@ public class ServiceOrderService {
                 .toList();
     }
 
-    public List<ServiceOrderDto> findByCriteria(String searchQuery, String filter) {
-        List<ServiceOrderDto> serviceOrders = null;
-
-        if (searchQuery.isBlank()) {
-            serviceOrders = findAll();
-        } else {
-            serviceOrders = findByQuery(searchQuery);
-        }
-
-        Map<String, ServiceOrderState> filters = Map.of(
-                "created", ServiceOrderState.CREATED,
-                "in-progress", ServiceOrderState.IN_PROGRESS,
-                "finished", ServiceOrderState.FINISHED
-        );
-
-        if (!filter.isBlank() && filters.containsKey(filter)) {
-            serviceOrders = serviceOrders.stream()
-                    .filter(serviceOrderDto -> serviceOrderDto.getState().equals(filters.get(filter)))
-                    .toList();
-        }
-
-        return serviceOrders;
+    public List<ServiceOrderDto> findByState(ServiceOrderState state) {
+        return findAll().stream()
+                .filter(serviceOrderDto -> serviceOrderDto.getState().equals(state))
+                .toList();
     }
 
 

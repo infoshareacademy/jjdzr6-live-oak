@@ -67,18 +67,10 @@
                     <a th:if="${searchQuery}" th:href="@{/employee/service-orders}" class="btn btn-outline-secondary">Pokaż
                         wszystkie</a>
                 </div>
-                <div class="col-6 d-flex justify-content-end align-items-end">
-                    <a th:href="@{?(filter='created')}" class="filter me-3"
-                       th:classappend="${#httpServletRequest.getParameter('filter') == 'created' ? 'fw-bold' : ''}"><i class="fas fa-caret-right me-1"></i>Nowe</a>
-                    <a th:href="@{?(filter='in-progress')}" class="filter me-3"
-                       th:classappend="${#httpServletRequest.getParameter('filter') == 'in-progress' ? 'fw-bold' : ''}"><i class="fas fa-caret-right me-1"></i>Otwarte</a>
-                    <a th:href="@{?(filter='finished')}" class="filter"
-                       th:classappend="${#httpServletRequest.getParameter('filter') == 'finished' ? 'fw-bold' : ''}"><i class="fas fa-caret-right me-1"></i>Zamknięte</a>
-                </div>
             </div>
 
 
-            <section class="py-3">
+            <section class="py-3" th:if="${searchQuery}">
                 <p th:if="${success}" th:text="${success}" class="alert alert-success"></p>
                 <div th:if="${#lists.isEmpty(serviceOrders)}">
                     <p class="alert alert-info" th:text="#{so.list}">
@@ -132,6 +124,185 @@
                         </tr>
                         </tbody>
                     </table>
+                </div>
+            </section>
+
+            <section class="py-3" th:unless="${searchQuery}">
+                <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="created-tab" data-bs-toggle="tab" data-bs-target="#created-tab-pane" type="button" role="tab" aria-controls="created-tab-pane" aria-selected="true"><i class="fas fa-plus me-2"></i>Nowe</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="in-progress-tab" data-bs-toggle="tab" data-bs-target="#in-progress-tab-pane" type="button" role="tab" aria-controls="in-progress-tab-pane" aria-selected="false"><i class="far fa-clock me-2"></i>W trakcie realizacji</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="finished-tab" data-bs-toggle="tab" data-bs-target="#finished-tab-pane" type="button" role="tab" aria-controls="finished-tab-pane" aria-selected="false"><i class="fas fa-check me-2"></i>Zakończone</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="created-tab-pane" role="tabpanel" aria-labelledby="created-tab" tabindex="0">
+                        <div th:if="${#lists.isEmpty(created)}">
+                            <p class="alert alert-info" th:text="#{so.list}">
+                            </p>
+                        </div>
+                        <div th:if="${not #lists.isEmpty(created)}">
+                            <table class="table align-middle table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="width: 50px;">Lp.</th>
+                                    <th th:text="#{so.orderNumber}"></th>
+                                    <th th:text="#{so.createdAt}"></th>
+                                    <th th:text="#{so.description}"></th>
+                                    <th>Pojazd</th>
+                                    <th>Klient</th>
+                                    <th th:text="#{so.state}"></th>
+                                    <th class="text-end" style="width: 150px;">Opcje</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                <tr th:each="service, iter : ${created}">
+                                    <td th:text="${iter.count}"></td>
+                                    <td th:text="${service.orderNumber}"></td>
+                                    <td th:text="${#temporals.format(service.createdAt, 'dd-MM-yyyy')}"></td>
+                                    <td th:text="${service.description}"></td>
+                                    <td th:text="${service.vehiclePlateNumber}"></td>
+                                    <td th:utext="${service.vehicleClientName} + ', ' + ${service.vehicleClientPhoneNumber}"></td>
+                                    <td th:text="${service.state.description}"></td>
+                                    <td class="text-end">
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Opcje
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><a th:href="@{/employee/service-orders/{id}/details(id=${service.id})}"
+                                                       class="dropdown-item">Szczegóły zlecenia</a></li>
+                                                <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
+                                                       class="dropdown-item add-note-js">Dodaj notatkę</a></li>
+                                                <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).CREATED}">
+                                                    <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
+                                                       class="dropdown-item">Rozpocznij</a></li>
+                                                <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).IN_PROGRESS}">
+                                                    <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
+                                                       class="dropdown-item">Zakończ</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="in-progress-tab-pane" role="tabpanel" aria-labelledby="in-progress-tab" tabindex="0">
+                        <div th:if="${#lists.isEmpty(inProgress)}">
+                            <p class="alert alert-info" th:text="#{so.list}">
+                            </p>
+                        </div>
+                        <div th:if="${not #lists.isEmpty(inProgress)}">
+                            <table class="table align-middle table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="width: 50px;">Lp.</th>
+                                    <th th:text="#{so.orderNumber}"></th>
+                                    <th th:text="#{so.createdAt}"></th>
+                                    <th th:text="#{so.description}"></th>
+                                    <th>Pojazd</th>
+                                    <th>Klient</th>
+                                    <th th:text="#{so.state}"></th>
+                                    <th class="text-end" style="width: 150px;">Opcje</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                <tr th:each="service, iter : ${inProgress}">
+                                    <td th:text="${iter.count}"></td>
+                                    <td th:text="${service.orderNumber}"></td>
+                                    <td th:text="${#temporals.format(service.createdAt, 'dd-MM-yyyy')}"></td>
+                                    <td th:text="${service.description}"></td>
+                                    <td th:text="${service.vehiclePlateNumber}"></td>
+                                    <td th:utext="${service.vehicleClientName} + ', ' + ${service.vehicleClientPhoneNumber}"></td>
+                                    <td th:text="${service.state.description}"></td>
+                                    <td class="text-end">
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Opcje
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><a th:href="@{/employee/service-orders/{id}/details(id=${service.id})}"
+                                                       class="dropdown-item">Szczegóły zlecenia</a></li>
+                                                <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
+                                                       class="dropdown-item add-note-js">Dodaj notatkę</a></li>
+                                                <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).CREATED}">
+                                                    <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
+                                                       class="dropdown-item">Rozpocznij</a></li>
+                                                <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).IN_PROGRESS}">
+                                                    <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
+                                                       class="dropdown-item">Zakończ</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="finished-tab-pane" role="tabpanel" aria-labelledby="finished-tab" tabindex="0">
+                        <div th:if="${#lists.isEmpty(finished)}">
+                            <p class="alert alert-info" th:text="#{so.list}">
+                            </p>
+                        </div>
+                        <div th:if="${not #lists.isEmpty(finished)}">
+                            <table class="table align-middle table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="width: 50px;">Lp.</th>
+                                    <th th:text="#{so.orderNumber}"></th>
+                                    <th th:text="#{so.createdAt}"></th>
+                                    <th th:text="#{so.description}"></th>
+                                    <th>Pojazd</th>
+                                    <th>Klient</th>
+                                    <th th:text="#{so.state}"></th>
+                                    <th class="text-end" style="width: 150px;">Opcje</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                <tr th:each="service, iter : ${finished}">
+                                    <td th:text="${iter.count}"></td>
+                                    <td th:text="${service.orderNumber}"></td>
+                                    <td th:text="${#temporals.format(service.createdAt, 'dd-MM-yyyy')}"></td>
+                                    <td th:text="${service.description}"></td>
+                                    <td th:text="${service.vehiclePlateNumber}"></td>
+                                    <td th:utext="${service.vehicleClientName} + ', ' + ${service.vehicleClientPhoneNumber}"></td>
+                                    <td th:text="${service.state.description}"></td>
+                                    <td class="text-end">
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Opcje
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><a th:href="@{/employee/service-orders/{id}/details(id=${service.id})}"
+                                                       class="dropdown-item">Szczegóły zlecenia</a></li>
+                                                <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
+                                                       class="dropdown-item add-note-js">Dodaj notatkę</a></li>
+                                                <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).CREATED}">
+                                                    <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
+                                                       class="dropdown-item">Rozpocznij</a></li>
+                                                <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).IN_PROGRESS}">
+                                                    <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
+                                                       class="dropdown-item">Zakończ</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/employee/service-orders")
+@RequestMapping("/employee")
 @RequiredArgsConstructor
 public class ServiceOrderController {
     private final ServiceOrderService serviceOrderService;
     private final VehicleService vehicleService;
     private final ClientService clientService;
 
-    @GetMapping
+    @GetMapping("/service-orders")
     public String getOrders(
             Model model,
             @RequestParam(name = "q", required = false, defaultValue = "") String searchQuery,
@@ -39,7 +39,7 @@ public class ServiceOrderController {
         return "employee/service-order-list";
     }
 
-    @GetMapping("/{id}/details")
+    @GetMapping("/service-orders/{id}/details")
     public String showServiceOrderDetails(@PathVariable("id") Long serviceOrderId, Model model) {
         ServiceOrderDetailsDto serviceOrderDetails = serviceOrderService.getServiceOrderDetails(serviceOrderId);
         VehicleDto vehicleDto = vehicleService.findById(serviceOrderDetails.getVehicleId());
@@ -50,7 +50,7 @@ public class ServiceOrderController {
         return "employee/service-order-details";
     }
 
-    @PostMapping("add-note")
+    @PostMapping("/service-orders/add-note")
     public String addNote(@RequestParam("id") Long serviceOrderId, @RequestParam("note") String note, RedirectAttributes redirectAttributes) {
 
         serviceOrderService.addNote(serviceOrderId, note);
@@ -58,18 +58,18 @@ public class ServiceOrderController {
         return "redirect:/employee/service-orders";
     }
 
-    @GetMapping("/{id}/change-state")
+    @GetMapping("/service-orders/{id}/change-state")
     public String changeServiceOrderState(@PathVariable("id") Long serviceOrderId) {
         serviceOrderService.updateStatus(serviceOrderId);
         return "redirect:/employee/service-orders";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/service-order")
     public String newServiceOrder() {
         return "employee/create-service-order";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/service-order")
     public String createServiceOrder(
             @RequestParam("plateNumber") String plateNumber,
             RedirectAttributes redirectAttributes
@@ -78,7 +78,7 @@ public class ServiceOrderController {
 
         if (vehicle.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "Nie znaleziono pojazdu o numerze rejestracyjnym <strong>" + plateNumber + "</strong>");
-            return "redirect:/employee/service-orders/create";
+            return "redirect:/employee/service-order";
         }
 
         return "redirect:/employee/vehicles/" + vehicle.get().getId() + "/create-service-order";

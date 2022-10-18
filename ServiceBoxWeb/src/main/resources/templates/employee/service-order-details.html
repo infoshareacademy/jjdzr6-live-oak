@@ -22,55 +22,65 @@
     <div class="row">
         <div class="col-md-12">
             <header class="d-flex justify-content-between mt-5 mb-4">
-                <h1 class="heading" th:text="'Informacje o zleceniu: ' + ${serviceOrderDetails.orderNumber}"></h1>
+                <h1 class="heading" th:text="'Szczegóły zlecenia nr ' + ${serviceOrderDetails.orderNumber}"></h1>
                 <div class="header__options">
-                    <a th:href="@{/employee/service-orders}" class="btn btn-outline-secondary btn-lg">Lista zleceń</a>
+                    <a th:href="@{/employee/service-orders}" class="btn btn-outline-secondary btn-lg"
+                       th:text="#{btn.label.return}"></a>
                 </div>
             </header>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-7">
-            <div class="card mt-2 mt-lg-0 shadow-sm">
-                <div class="card-header" th:text="#{so.serviceOrderDetails} + ': ' + ${serviceOrderDetails.orderNumber}">
-                </div>
-                <div class="card-body">
-<!--                    <p class="card-text" th:text="#{so.orderNumber} + ': ' + ${serviceOrderDetails.orderNumber}"></p>-->
-                    <p class="card-text" th:text="#{so.createdAt} + ': ' + ${serviceOrderDetails.createdAt}"></p>
-                    <p class="card-text" th:text="#{so.state} + ': ' + ${serviceOrderDetails.state.description}"></p>
-                    <p class="card-text" th:text="#{so.maxCost} + ': ' + ${serviceOrderDetails.maxCost}"></p>
-                    <p class="card-text" th:text="#{so.onlyNewParts} + ': '"></p>
-<!--                    <p th:if="${serviceOrderDetails.onlyNewParts}" th:text="#{form.yes}"></p>-->
-<!--                    <p th:unless="${serviceOrderDetails.onlyNewParts}" th:text="#{form.no}"></p>-->
-                    <p class="card-text" th:text="#{so.description} + ': ' + ${serviceOrderDetails.description}"></p>
-                </div>
-            </div>
+            <h2 class="section-header border-bottom">Informacje o zleceniu</h2>
+            <p class="card-text">
+            <p class="card-text"
+               th:text="#{so.createdAt} + ': ' + ${#temporals.format(serviceOrderDetails.createdAt, 'dd-MM-yyyy')}"></p>
+            <p class="card-text" th:text="#{so.state} + ': '+  ${serviceOrderDetails.state.description}"></p>
+            <p class="card-text" th:text="#{so.maxCost} + ': '+  ${serviceOrderDetails.maxCost}"></p>
+            <p class="card-text" th:text="#{so.description} + ': '+  ${serviceOrderDetails.description}"></p>
+            </p>
+
+            <h2 class="section-header border-bottom mt-4">Notatki</h2>
+            <ul>
+                <li th:each="note : ${serviceOrderDetails.notes}"
+                    th:text="${#temporals.format(note.createdAt, 'dd-MM-yyyy')} + ': ' + ${note.note}"></li>
+            </ul>
+
         </div>
         <div class="col-md-5">
-
             <div class="card mt-2 mt-lg-0 shadow-sm">
-                <div class="card-header" th:text="#{vehicle.details} + ': ' + ${vehicle.plateNumber}">
+                <div class="card-header fw-bold">Dane pojazdu
                 </div>
                 <div class="card-body">
+                    <p class="card-text">
+                    <p class="card-text" th:text="#{vehicle.plateNumber} + ': ' + ${vehicle.plateNumber}"></p>
                     <p class="card-text" th:text="#{vehicle.make} + ': ' + ${vehicle.make}"></p>
                     <p class="card-text" th:text="#{vehicle.model} + ': ' +${vehicle.model}"></p>
                     <p class="card-text" th:text="#{vehicle.engineCapacity} + ': ' +${vehicle.engineCapacity}"></p>
-                    <p class="card-text" th:text="#{vehicle.productionYear} + ': ' +${vehicle.productionYear}"></p>
+                    <p class="card-text" th:text="#{vehicle.vin} + ': ' +${vehicle.vin ?: '-'}"></p>
+                    <p class="card-text" th:text="#{vehicle.mileage} + ': ' +${vehicle.mileage ?: '-'}"></p>
+                    <p class="card-text"
+                       th:text="#{vehicle.productionYear} + ': ' +${vehicle.productionYear ?: '-'}"></p>
+                    </p>
                 </div>
             </div>
-<!--                <div class="card">-->
-<!--                    <div class="card-header" th:text="#{cl.id} + ': ' + ${client.userId}">-->
-<!--                    </div>-->
-<!--                    <div class="card-body">-->
-<!--                        <p class="card-text" th:text="#{cl.name} + ': ' + ${client.name}"></p>-->
-<!--                        <p class="card-text" th:text="#{cl.address} + ': ' + ${client.address}"></p>-->
-<!--                        <p class="card-text" th:text="#{cl.phoneNumber} + ': ' + ${client.phoneNumber}"></p>-->
-<!--                        <p class="card-text" th:text="#{cl.email} + ': ' + ${client.email}"></p>-->
-<!--                    </div>-->
-<!--                </div>-->
+
+            <div class="card mt-4 shadow-sm">
+                <div class="card-header fw-bold">Dane klienta</div>
+                <div class="card-body">
+                    <p class="card-text">
+                    <p class="card-text" th:text="#{cl.name} + ': ' + ${vehicle.clientName}"></p>
+                    <p class="card-text" th:text="#{cl.phoneNumber} + ': ' +${vehicle.clientPhoneNumber}"></p>
+                    </p>
+                </div>
             </div>
         </div>
+    </div>
+    </div>
 </main>
+
 
 <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js}"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

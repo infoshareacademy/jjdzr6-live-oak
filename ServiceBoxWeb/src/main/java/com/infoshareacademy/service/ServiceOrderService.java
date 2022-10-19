@@ -2,6 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.client.ClientDao;
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
+import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.client.Client;
@@ -37,6 +38,7 @@ public class ServiceOrderService {
         ServiceOrder serviceOrder = serviceOrderDao.findById(id);
         return ServiceOrderDetailsDto.fromServiceOrder(serviceOrder);
     }
+
 
     public List<ServiceOrderDto> findByQuery(String query) {
         return serviceOrderDao.findByQuery(query).stream()
@@ -76,15 +78,16 @@ public class ServiceOrderService {
 
         serviceOrderDao.update(serviceOrder);
     }
+
     @Transactional
-    public void updateStatus (Long orderId) {
+    public void updateStatus(Long orderId) {
         ServiceOrder serviceOrder = serviceOrderDao.findById(orderId);
-        if(ServiceOrderState.FINISHED.equals(serviceOrder.getState())){
+        if (ServiceOrderState.FINISHED.equals(serviceOrder.getState())) {
             return;
         }
-        if (ServiceOrderState.CREATED.equals(serviceOrder.getState())){
+        if (ServiceOrderState.CREATED.equals(serviceOrder.getState())) {
             serviceOrder.setState(ServiceOrderState.IN_PROGRESS);
-        }else {
+        } else {
             serviceOrder.setState(ServiceOrderState.FINISHED);
         }
         serviceOrderDao.update(serviceOrder);
@@ -96,28 +99,10 @@ public class ServiceOrderService {
                 .toList();
     }
 
-    public List<ServiceOrderDto> findByCriteria(String searchQuery, String filter) {
-        List<ServiceOrderDto> serviceOrders = null;
-
-        if (searchQuery.isBlank()) {
-            serviceOrders = findAll();
-        } else {
-            serviceOrders = findByQuery(searchQuery);
-        }
-
-        Map<String, ServiceOrderState> filters = Map.of(
-                "created", ServiceOrderState.CREATED,
-                "in-progress", ServiceOrderState.IN_PROGRESS,
-                "finished", ServiceOrderState.FINISHED
-        );
-
-        if (!filter.isBlank() && filters.containsKey(filter)) {
-            serviceOrders = serviceOrders.stream()
-                    .filter(serviceOrderDto -> serviceOrderDto.getState().equals(filters.get(filter)))
-                    .toList();
-        }
-
-        return serviceOrders;
+    public List<ServiceOrderDto> findByState(ServiceOrderState state) {
+        return findAll().stream()
+                .filter(serviceOrderDto -> serviceOrderDto.getState().equals(state))
+                .toList();
     }
 
 
@@ -141,3 +126,4 @@ public class ServiceOrderService {
     }
 
 }
+

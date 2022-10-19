@@ -98,6 +98,9 @@ tbody tr {
     color: #dc3545;
 }
 
+.nav-link {
+    color: #49247A;
+}
 h2.section-header {
     font-size: 16px;
     font-weight: bold;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -53,5 +54,9 @@ public class VehicleService {
         ServiceOrder serviceOrder = createServiceOrderDto.toServiceOrder();
         serviceOrder.setVehicle(vehicle);
         serviceOrderDao.save(serviceOrder);
+    }
+
+    public Optional<Vehicle> findByPlateNumber(String plateNumber) {
+        return vehicleDao.findByPlateNumber(plateNumber);
     }
 }

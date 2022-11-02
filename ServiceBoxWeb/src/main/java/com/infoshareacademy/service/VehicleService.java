@@ -61,7 +61,11 @@ public class VehicleService {
     public void updateVehicle(long vehicleId, VehicleDto vehicleDto) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).get();
         vehicle.setMake(vehicleDto.getMake());
+        vehicle.setModel(vehicleDto.getModel());
         vehicle.setPlateNumber(vehicleDto.getPlateNumber());
+        vehicle.setEngineCapacity(vehicleDto.getEngineCapacity());
+        vehicle.setProductionYear(vehicleDto.getProductionYear());
+        vehicle.setVin(vehicleDto.getVin());
         vehicleRepository.save(vehicle);
     }
 

@@ -1,11 +1,11 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
 import com.infoshareacademy.dao.vehicle.VehicleDao;
 import com.infoshareacademy.dto.serviceorder.CreateServiceOrderDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.vehicle.Vehicle;
+import com.infoshareacademy.repository.ServiceOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class VehicleService {
     private final VehicleDao vehicleDao;
-    private final ServiceOrderDao serviceOrderDao;
+
+    private final ServiceOrderRepository serviceOrderRepository;
 
     public List<VehicleDto> findAll() {
         List<Vehicle> vehicleList = vehicleDao.findAll();
@@ -53,7 +54,7 @@ public class VehicleService {
         Vehicle vehicle = vehicleDao.findById(vehicleId);
         ServiceOrder serviceOrder = createServiceOrderDto.toServiceOrder();
         serviceOrder.setVehicle(vehicle);
-        serviceOrderDao.save(serviceOrder);
+        serviceOrderRepository.save(serviceOrder);
     }
 
     @Transactional

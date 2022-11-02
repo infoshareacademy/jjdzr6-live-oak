@@ -5,8 +5,8 @@ import com.infoshareacademy.dao.user.RoleDao;
 import com.infoshareacademy.dao.vehicle.VehicleDao;
 import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.client.CreateClientDto;
-import com.infoshareacademy.dto.client.UpdateClientDto;
 import com.infoshareacademy.dto.vehicle.CreateVehicleDto;
+import com.infoshareacademy.entity.client.Address;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.user.Role;
 import com.infoshareacademy.entity.user.User;
@@ -37,7 +37,22 @@ public class ClientService {
         Client client = clientDao.findById(id);
         client.setName(clientDto.getName());
         client.setEmail(clientDto.getEmail());
+        client.setNip(clientDto.getNip());
         client.setPhoneNumber(clientDto.getPhoneNumber());
+
+        Address clientAddress = null;
+
+        if (clientDto.getAddress() != null) {
+            clientAddress = new Address(
+                    clientDto.getAddress().getStreet(),
+                    clientDto.getAddress().getHouseNumber(),
+                    clientDto.getAddress().getFlatNumber(),
+                    clientDto.getAddress().getZipCode(),
+                    clientDto.getAddress().getCity()
+            );
+        }
+        client.setAddress(clientAddress);
+
         clientDao.update(client);
     }
 

@@ -2,7 +2,6 @@ package com.infoshareacademy.controller.employee;
 
 import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.client.CreateClientDto;
-import com.infoshareacademy.dto.client.UpdateClientDto;
 import com.infoshareacademy.dto.vehicle.CreateVehicleDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.service.ClientService;
@@ -155,7 +154,7 @@ public class ClientController {
         return "redirect:/employee/clients";
     }
 
-    @GetMapping("/{id}/update")
+    @GetMapping("{id}")
     public String updateClient(@PathVariable("id") Long clientId, Model model) {
         ClientDto clientDto = clientService.findById(clientId);
 

@@ -5,6 +5,10 @@ import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.dto.user.UserDto;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 /**
  * A DTO for the {@link Client} entity
  */
@@ -16,10 +20,16 @@ import lombok.*;
 public class ClientDto {
     private Long id;
     private UserDto user;
+    @NotBlank(message = "To pole jest wymagane")
     private String name;
     private AddressDto address;
+    @Pattern(regexp="(^$|\\d{10})", message = "Niepoprawny NIP")
     private String nip;
+    @NotBlank(message = "To pole jest wymagane")
+    @Pattern(regexp="(^$|\\d{9})", message = "Niepoprawny numer telefonu")
     private String phoneNumber;
+    @NotBlank(message = "To pole jest wymagane")
+    @Email
     private String email;
     private boolean allowNotifications;
 
@@ -36,6 +46,7 @@ public class ClientDto {
         private String street;
         private String houseNumber;
         private String flatNumber;
+        @Pattern(regexp="(^$|\\d{2}-\\d{3})", message = "Podaj kod pocztowy w formacie xx-xxx")
         private String zipCode;
         private String city;
 

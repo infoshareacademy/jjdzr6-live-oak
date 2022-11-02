@@ -1,7 +1,6 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.user.RoleDao;
-import com.infoshareacademy.dao.vehicle.VehicleDao;
 import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.client.CreateClientDto;
 import com.infoshareacademy.dto.vehicle.CreateVehicleDto;
@@ -11,6 +10,7 @@ import com.infoshareacademy.entity.user.Role;
 import com.infoshareacademy.entity.user.User;
 import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.repository.ClientRepository;
+import com.infoshareacademy.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final RoleDao roleDao;
-    private final VehicleDao vehicleDao;
+    private final VehicleRepository vehicleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -85,7 +85,7 @@ public class ClientService {
         Client client = clientRepository.findById(clientId).get();
         Vehicle vehicle = createVehicleDto.toVehicle();
         vehicle.setClient(client);
-        vehicleDao.save(vehicle);
+        vehicleRepository.save(vehicle);
     }
 
     @Transactional

@@ -1,8 +1,6 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.dao.client.ClientDao;
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
-import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.client.Client;
@@ -10,18 +8,22 @@ import com.infoshareacademy.entity.serviceorder.Note;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.entity.vehicle.Vehicle;
+import com.infoshareacademy.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ServiceOrderService {
     private final ServiceOrderDao serviceOrderDao;
-    private final ClientDao clientDao;
+
+    private final ClientRepository clientRepository;
 
     public List<ServiceOrderDto> findAll() {
         return serviceOrderDao.findAll().stream()
@@ -107,7 +109,7 @@ public class ServiceOrderService {
 
 
     public List<ServiceOrderDto> findServiceOrdersByClientEmail(String email) {
-        Optional<Client> client = clientDao.findByEmail(email);
+        Optional<Client> client = clientRepository.findByEmail(email);
         List<ServiceOrder> serviceOrders = new ArrayList<>();
 
         if (client.isPresent()) {

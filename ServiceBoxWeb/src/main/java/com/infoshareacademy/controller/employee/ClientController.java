@@ -153,4 +153,32 @@ public class ClientController {
 
         return "redirect:/employee/clients";
     }
+
+    @GetMapping("{id}")
+    public String updateClient(@PathVariable("id") Long clientId, Model model) {
+        ClientDto clientDto = clientService.findById(clientId);
+
+        model.addAttribute("client", clientDto);
+        return "employee/client-update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateClient(
+            @Valid @ModelAttribute("client") ClientDto clientDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            @PathVariable("id") Long clientId, Model model
+
+    ) {
+
+        if (bindingResult.hasErrors()) {
+            return "employee/client-update";
+        }
+
+        clientService.updateClient(clientId, clientDto);
+
+        redirectAttributes.addFlashAttribute("success", "Zaktualizowano dane klienta.");
+        return "redirect:/employee/clients";
+    }
+
 }

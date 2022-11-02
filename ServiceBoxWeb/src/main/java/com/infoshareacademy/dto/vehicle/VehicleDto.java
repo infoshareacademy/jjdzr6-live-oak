@@ -1,25 +1,29 @@
 package com.infoshareacademy.dto.vehicle;
 
 import com.infoshareacademy.entity.vehicle.Vehicle;
-import lombok.Data;
-
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * A DTO for the {@link com.infoshareacademy.entity.vehicle.Vehicle} entity
  */
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class VehicleDto {
-    private final Long id;
-    private final String make;
-    private final String model;
-    private final String plateNumber;
-    private final Double engineCapacity;
-    private final Integer productionYear;
-    private final Integer mileage;
-    private final String vin;
-    private final String clientName;
-    private final String clientPhoneNumber;
+    private Long id;
+    private String make;
+    private String model;
+    private String plateNumber;
+    private Double engineCapacity;
+    private Integer productionYear;
+    private Integer mileage;
+    private String vin;
+    private String clientName;
+    private String clientPhoneNumber;
 
     public static VehicleDto fromVehicle(Vehicle vehicle) {
         if (vehicle == null) {

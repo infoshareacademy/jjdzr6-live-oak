@@ -1,7 +1,7 @@
 package com.infoshareacademy.controller.employee;
 
-import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.dto.serviceorder.CreateServiceOrderDto;
+import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
 import lombok.RequiredArgsConstructor;
@@ -81,6 +81,31 @@ public class VehicleController {
         redirectAttributes.addFlashAttribute("success", "Utworzono nowe zlecenie naprawy numer " +
                 orderNumber);
         return "redirect:/employee/service-orders";
+    }
+
+    @GetMapping("/{id}/update")
+    public String updateVehicle(@PathVariable("id") Long vehicleId, Model model) {
+        VehicleDto vehicleDto = vehicleService.findById(vehicleId);
+        model.addAttribute("vehicle", vehicleDto);
+        return "employee/vehicle-update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String updateVehicle(
+            @Valid @ModelAttribute("vehicle") VehicleDto vehicleDto,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            @PathVariable("id") Long vehicleId,
+            Model model
+    ) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("vehicle", vehicleDto);
+            return "employee/vehicle-update";
+        }
+
+        vehicleService.updateVehicle(vehicleId, vehicleDto);
+        redirectAttributes.addFlashAttribute("succes", "Zaktualizowano dane pojazdu.");
+        return "redirect:/employee/vehicles";
     }
 }
 

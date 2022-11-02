@@ -2,8 +2,8 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
 import com.infoshareacademy.dao.vehicle.VehicleDao;
-import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.dto.serviceorder.CreateServiceOrderDto;
+import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.vehicle.Vehicle;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +54,14 @@ public class VehicleService {
         ServiceOrder serviceOrder = createServiceOrderDto.toServiceOrder();
         serviceOrder.setVehicle(vehicle);
         serviceOrderDao.save(serviceOrder);
+    }
+
+    @Transactional
+    public void updateVehicle(long vehicleId, VehicleDto vehicleDto) {
+        Vehicle vehicle = vehicleDao.findById(vehicleId);
+        vehicle.setMake(vehicleDto.getMake());
+        vehicle.setPlateNumber(vehicleDto.getPlateNumber());
+        vehicleDao.update(vehicle);
     }
 
     public Optional<Vehicle> findByPlateNumber(String plateNumber) {

@@ -1,6 +1,5 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.dao.user.RoleDao;
 import com.infoshareacademy.dto.client.ClientDto;
 import com.infoshareacademy.dto.client.CreateClientDto;
 import com.infoshareacademy.dto.vehicle.CreateVehicleDto;
@@ -10,6 +9,7 @@ import com.infoshareacademy.entity.user.Role;
 import com.infoshareacademy.entity.user.User;
 import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.repository.ClientRepository;
+import com.infoshareacademy.repository.RoleRepository;
 import com.infoshareacademy.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,13 +17,14 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ClientService {
 
     private final ClientRepository clientRepository;
-    private final RoleDao roleDao;
+    private final RoleRepository roleRepository;
     private final VehicleRepository vehicleRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -90,8 +91,14 @@ public class ClientService {
 
     @Transactional
     public void createUserAccount(Long clientId, String plainPassword) {
-        Client client = clientRepository.findById(clientId).get();
-        Role role = roleDao.findByName("ROLE_CLIENT");
+        Optional<Client> clientFromDb = clientRepository.findById(clientId);
+
+        if (clientFromDb.isEmpty()) {
+            throw new IllegalArgumentException("Client with ID " + clientId + " not exists");
+        }
+
+        Client client = clientFromDb.get();
+        Role role = roleRepository.findRoleByName("ROLE_CLIENT");
 
         // create account
         User account = new User(client.getEmail(), passwordEncoder.encode(plainPassword), role);

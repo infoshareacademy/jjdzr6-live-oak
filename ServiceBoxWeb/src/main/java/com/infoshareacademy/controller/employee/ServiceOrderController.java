@@ -1,6 +1,7 @@
 package com.infoshareacademy.controller.employee;
 
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
+import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.entity.vehicle.Vehicle;
@@ -8,6 +9,7 @@ import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.Optional;
 
 @Controller
@@ -30,15 +32,22 @@ public class ServiceOrderController {
     public String getOrders(
             Model model,
             @RequestParam(name = "q", required = false, defaultValue = "") String searchQuery,
-             @PageableDefault(value = 5) @SortDefault("id") Pageable pageable)
-    {
+            @RequestParam(name = "t", required = false, defaultValue = "") String tab,
+            @PageableDefault(value = 5) @SortDefault("id") Pageable pageable
+    ) {
         if (!searchQuery.isBlank()) {
             model.addAttribute("serviceOrders", serviceOrderService.findByQuery(searchQuery, pageable));
             model.addAttribute("searchQuery", searchQuery);
         } else {
-            model.addAttribute("created", serviceOrderService.findByState(ServiceOrderState.CREATED, pageable));
-            model.addAttribute("inProgress", serviceOrderService.findByState(ServiceOrderState.IN_PROGRESS, pageable));
-            model.addAttribute("finished", serviceOrderService.findByState(ServiceOrderState.FINISHED, pageable));
+            Page<ServiceOrderDto> orders = null;
+
+            switch (tab) {
+                case "open" -> orders = serviceOrderService.findByState(ServiceOrderState.IN_PROGRESS, pageable);
+                case "closed" -> orders = serviceOrderService.findByState(ServiceOrderState.FINISHED, pageable);
+                default -> orders = serviceOrderService.findByState(ServiceOrderState.CREATED, pageable);
+            }
+
+            model.addAttribute("orders", orders);
         }
 
         return "employee/service-order-list";

@@ -32,9 +32,9 @@ public class ServiceOrderService {
                 .toList();
     }
 
-    public ServiceOrderDto findServiceOrder(Long id) {
-        ServiceOrder serviceOrder = serviceOrderRepository.findById(id).get();
-        return ServiceOrderDto.fromServiceOrder(serviceOrder);
+    public Optional<ServiceOrderDto> findServiceOrder(Long id) {
+        Optional<ServiceOrder> serviceOrder = serviceOrderRepository.findById(id);
+        return serviceOrder.map(ServiceOrderDto::fromServiceOrder);
     }
 
     public ServiceOrderDetailsDto getServiceOrderDetails(Long id) {

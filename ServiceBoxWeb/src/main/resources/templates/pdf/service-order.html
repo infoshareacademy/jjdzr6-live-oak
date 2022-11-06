@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ServiceBox</title>
+
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Inter&display=swap}" rel="stylesheet">
+
+    <style>
+        body {
+            /*background-color: #f8f9fa;*/
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+<div class="rounded-lg border shadow-lg p-10 w-3/5">
+    <div class="flex flex-row justify-between pb-4">
+        <div>
+            <h2 class="text-xl font-bold">Zlecenie nr <span th:text="${order.orderNumber}"></span>
+            </h2>
+        </div>
+        <div>
+            <div class="text-xl font-bold" th:text="${order.createdAt.toLocalDate()}">
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col pb-8">
+        <div class="pb-2">
+            <h2 class="text-xl font-bold">Dane pojazdu</h2>
+        </div>
+        <div th:text="${order.vehicleClientName}"></div>
+        <div th:text="${order.vehicleClientPhoneNumber}"></div>
+        <div th:text="${order.vehiclePlateNumber}"></div>
+    </div>
+</div>
+</body>
+
+</html>

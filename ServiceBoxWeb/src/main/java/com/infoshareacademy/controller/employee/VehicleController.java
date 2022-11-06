@@ -83,7 +83,7 @@ public class VehicleController {
         return "redirect:/employee/service-orders";
     }
 
-    @GetMapping("/{id}/update")
+    @GetMapping("/{id}")
     public String updateVehicle(@PathVariable("id") Long vehicleId, Model model) {
         VehicleDto vehicleDto = vehicleService.findById(vehicleId);
         model.addAttribute("vehicle", vehicleDto);

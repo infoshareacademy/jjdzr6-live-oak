@@ -1,11 +1,11 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.dao.serviceorder.ServiceOrderDao;
-import com.infoshareacademy.dao.vehicle.VehicleDao;
 import com.infoshareacademy.dto.serviceorder.CreateServiceOrderDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.vehicle.Vehicle;
+import com.infoshareacademy.repository.ServiceOrderRepository;
+import com.infoshareacademy.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,33 +16,34 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class VehicleService {
-    private final VehicleDao vehicleDao;
-    private final ServiceOrderDao serviceOrderDao;
+    private final VehicleRepository vehicleRepository;
+
+    private final ServiceOrderRepository serviceOrderRepository;
 
     public List<VehicleDto> findAll() {
-        List<Vehicle> vehicleList = vehicleDao.findAll();
+        List<Vehicle> vehicleList = vehicleRepository.findAll();
         return vehicleList.stream()
                 .map(VehicleDto::fromVehicle)
                 .toList();
     }
 
     public List<VehicleDto> findByQuery(String query) {
-        return vehicleDao.findByQuery(query).stream()
+        return vehicleRepository.findByQuery(query).stream()
                 .map(VehicleDto::fromVehicle)
                 .toList();
     }
 
     public boolean isPlateNumberExists(String plateNumber) {
-        return vehicleDao.findByPlateNumber(plateNumber).isPresent();
+        return vehicleRepository.findByPlateNumber(plateNumber).isPresent();
     }
 
     public VehicleDto findById(Long id) {
-        Vehicle vehicle = vehicleDao.findById(id);
+        Vehicle vehicle = vehicleRepository.findById(id).get();
         return VehicleDto.fromVehicle(vehicle);
     }
 
     public List<VehicleDto> getClientVehicles(Long clientId) {
-        List<Vehicle> vehicleList = vehicleDao.findByClientId(clientId);
+        List<Vehicle> vehicleList = vehicleRepository.findByClientId(clientId);
         return vehicleList.stream()
                 .map(VehicleDto::fromVehicle)
                 .toList();
@@ -50,21 +51,25 @@ public class VehicleService {
 
     @Transactional
     public void createServiceOrder(Long vehicleId, CreateServiceOrderDto createServiceOrderDto) {
-        Vehicle vehicle = vehicleDao.findById(vehicleId);
+        Vehicle vehicle = vehicleRepository.findById(vehicleId).get();
         ServiceOrder serviceOrder = createServiceOrderDto.toServiceOrder();
         serviceOrder.setVehicle(vehicle);
-        serviceOrderDao.save(serviceOrder);
+        serviceOrderRepository.save(serviceOrder);
     }
 
     @Transactional
     public void updateVehicle(long vehicleId, VehicleDto vehicleDto) {
-        Vehicle vehicle = vehicleDao.findById(vehicleId);
+        Vehicle vehicle = vehicleRepository.findById(vehicleId).get();
         vehicle.setMake(vehicleDto.getMake());
+        vehicle.setModel(vehicleDto.getModel());
         vehicle.setPlateNumber(vehicleDto.getPlateNumber());
-        vehicleDao.update(vehicle);
+        vehicle.setEngineCapacity(vehicleDto.getEngineCapacity());
+        vehicle.setProductionYear(vehicleDto.getProductionYear());
+        vehicle.setVin(vehicleDto.getVin());
+        vehicleRepository.save(vehicle);
     }
 
     public Optional<Vehicle> findByPlateNumber(String plateNumber) {
-        return vehicleDao.findByPlateNumber(plateNumber);
+        return vehicleRepository.findByPlateNumber(plateNumber);
     }
 }

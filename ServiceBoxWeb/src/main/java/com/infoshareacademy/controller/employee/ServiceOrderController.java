@@ -2,6 +2,7 @@ package com.infoshareacademy.controller.employee;
 
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.vehicle.VehicleDto;
+import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;

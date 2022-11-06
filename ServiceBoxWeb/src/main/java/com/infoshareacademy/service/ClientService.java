@@ -12,6 +12,9 @@ import com.infoshareacademy.repository.ClientRepository;
 import com.infoshareacademy.repository.RoleRepository;
 import com.infoshareacademy.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -58,10 +61,14 @@ public class ClientService {
         clientRepository.save(client);
     }
 
-    public List<ClientDto> findAll() {
-        return clientRepository.findAll().stream()
+    public Page<ClientDto> findAll(Pageable pageable) {
+        Page<Client> page = clientRepository.findAll(pageable);
+
+        List<ClientDto> clientsOnPage = page.stream()
                 .map(ClientDto::fromClient)
                 .toList();
+
+        return new PageImpl<>(clientsOnPage, pageable, page.getTotalElements());
     }
 
     public ClientDto findById(Long id) {
@@ -69,12 +76,14 @@ public class ClientService {
         return ClientDto.fromClient(client);
     }
 
-    public List<ClientDto> findByQuery(String query) {
-        return clientRepository.findByQuery(query).stream()
+    public Page<ClientDto> findByQuery(String query, Pageable pageable) {
+        Page<Client> page = clientRepository.findByQuery(query, pageable);
+
+        List<ClientDto> clientsOnPage = page.stream()
                 .map(ClientDto::fromClient)
                 .toList();
 
-
+        return new PageImpl<>(clientsOnPage, pageable, page.getTotalElements());
     }
 
     public boolean isEmailExists(String email) {

@@ -146,6 +146,7 @@
                             </p>
                         </div>
                         <div th:if="${not #lists.isEmpty(created)}">
+
                             <table class="table align-middle table-hover">
                                 <thead>
                                 <tr>
@@ -192,6 +193,20 @@
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="row">
+                            <!--        <div class="col-sm-6">-->
+                            <!--            <div sd:pagination-summary=""></div>-->
+                            <!--        </div>-->
+                            <div class="col-12">
+                                <nav class="d-flex justify-content-center">
+                                    <ul class="pagination" sd:page-object="${created}" sd:pagination-split="4" sd:pagination="full">
+                                        <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                        <li class="active"><a href="#"> <span class="sr-only"></span></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="in-progress-tab-pane" role="tabpanel" aria-labelledby="in-progress-tab" tabindex="0">
@@ -247,8 +262,22 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        <div class="row">
+                            <!--        <div class="col-sm-6">-->
+                            <!--            <div sd:pagination-summary=""></div>-->
+                            <!--        </div>-->
+                            <div class="col-12">
+                                <nav class="d-flex justify-content-center">
+                                    <ul class="pagination" sd:page-object="${inProgress}" sd:pagination-split="4" sd:pagination="full">
+                                        <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                        <li class="active"><a href="#"> <span class="sr-only"></span></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="tab-pane fade" id="finished-tab-pane" role="tabpanel" aria-labelledby="finished-tab" tabindex="0">
                         <div th:if="${#lists.isEmpty(finished)}">
                             <p class="alert alert-info" th:text="#{so.list}">
@@ -302,11 +331,27 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="row">
+                            <!--        <div class="col-sm-6">-->
+                            <!--            <div sd:pagination-summary=""></div>-->
+                            <!--        </div>-->
+                            <div class="col-12">
+                                <nav class="d-flex justify-content-center">
+                                    <ul class="pagination" sd:page-object="${finished}" sd:pagination-split="4" sd:pagination="full">
+                                        <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                        <li class="active"><a href="#"> <span class="sr-only"></span></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </section>
         </div>
     </div>
+
 </main>
 
 <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js}"

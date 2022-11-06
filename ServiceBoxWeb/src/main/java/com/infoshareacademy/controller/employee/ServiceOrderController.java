@@ -8,6 +8,9 @@ import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.ServiceOrderService;
 import com.infoshareacademy.service.VehicleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,15 +29,16 @@ public class ServiceOrderController {
     @GetMapping("/service-orders")
     public String getOrders(
             Model model,
-            @RequestParam(name = "q", required = false, defaultValue = "") String searchQuery
-    ) {
+            @RequestParam(name = "q", required = false, defaultValue = "") String searchQuery,
+             @PageableDefault(value = 5) @SortDefault("id") Pageable pageable)
+    {
         if (!searchQuery.isBlank()) {
-            model.addAttribute("serviceOrders", serviceOrderService.findByQuery(searchQuery));
+            model.addAttribute("serviceOrders", serviceOrderService.findByQuery(searchQuery, pageable));
             model.addAttribute("searchQuery", searchQuery);
         } else {
-            model.addAttribute("created", serviceOrderService.findByState(ServiceOrderState.CREATED));
-            model.addAttribute("inProgress", serviceOrderService.findByState(ServiceOrderState.IN_PROGRESS));
-            model.addAttribute("finished", serviceOrderService.findByState(ServiceOrderState.FINISHED));
+            model.addAttribute("created", serviceOrderService.findByState(ServiceOrderState.CREATED, pageable));
+            model.addAttribute("inProgress", serviceOrderService.findByState(ServiceOrderState.IN_PROGRESS, pageable));
+            model.addAttribute("finished", serviceOrderService.findByState(ServiceOrderState.FINISHED, pageable));
         }
 
         return "employee/service-order-list";

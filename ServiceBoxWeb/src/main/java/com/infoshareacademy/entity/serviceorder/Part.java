@@ -24,4 +24,10 @@ public class Part {
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    public Part(String partName, Double cost, Integer quantity) {
+        this.partName = partName;
+        this.cost = cost;
+        this.quantity = quantity;
+    }
 }

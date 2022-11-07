@@ -21,4 +21,9 @@ public class Repair {
 
     @Column(name = "cost", nullable = false)
     private Double cost;
+
+    public Repair(String description, Double cost) {
+        this.description = description;
+        this.cost = cost;
+    }
 }

@@ -103,12 +103,14 @@
                             <td class="text-end">
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                         Opcje
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                         <li><a th:href="@{/employee/service-orders/{id}/details(id=${service.id})}"
                                                class="dropdown-item">Szczegóły zlecenia</a></li>
+                                        <li><a th:href="@{/employee/service-orders/{id}/repair-card(id=${service.id})}"
+                                               class="dropdown-item">Karta naprawy</a></li>
                                         <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
                                                class="dropdown-item add-note-js">Dodaj notatkę</a></li>
                                         <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).CREATED}">
@@ -177,6 +179,8 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 <li><a th:href="@{/employee/service-orders/{id}/details(id=${service.id})}"
                                                        class="dropdown-item">Szczegóły zlecenia</a></li>
+                                                <li><a th:href="@{/employee/service-orders/{id}/repair-card(id=${service.id})}"
+                                                       class="dropdown-item">Karta naprawy</a></li>
                                                 <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
                                                        class="dropdown-item add-note-js">Dodaj notatkę</a></li>
                                                 <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).CREATED}">
@@ -233,6 +237,8 @@
                                                        class="dropdown-item">Szczegóły zlecenia</a></li>
                                                 <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
                                                        class="dropdown-item add-note-js">Dodaj notatkę</a></li>
+                                                <li><a th:href="@{/employee/service-orders/{id}/repair-card(id=${service.id})}"
+                                                       class="dropdown-item">Karta naprawy</a></li>
                                                 <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).CREATED}">
                                                     <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
                                                        class="dropdown-item">Rozpocznij</a></li>
@@ -288,6 +294,8 @@
                                                        class="dropdown-item">Szczegóły zlecenia</a></li>
                                                 <li><a href="#addNote" data-bs-toggle="modal" th:data-id="${service.id}"
                                                        class="dropdown-item add-note-js">Dodaj notatkę</a></li>
+                                                <li><a th:href="@{/employee/service-orders/{id}/repair-card(id=${service.id})}"
+                                                       class="dropdown-item">Karta naprawy</a></li>
                                                 <li th:if="${service.state == T(com.infoshareacademy.entity.serviceorder.ServiceOrderState).CREATED}">
                                                     <a th:href="@{/employee/service-orders/{id}/change-state(id=${service.id})}"
                                                        class="dropdown-item">Rozpocznij</a></li>

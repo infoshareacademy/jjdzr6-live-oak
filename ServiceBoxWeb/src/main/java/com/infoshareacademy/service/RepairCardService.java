@@ -37,6 +37,7 @@ public class RepairCardService {
 
         ServiceOrder serviceOrder = serviceOrderOptional.get();
         serviceOrder.setRepairCard(repairCard);
+        repairCard.setServiceOrder(serviceOrderOptional.get());
         serviceOrderRepository.save(serviceOrder);
 
         return repairCard;

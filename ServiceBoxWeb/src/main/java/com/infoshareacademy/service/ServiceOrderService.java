@@ -10,6 +10,9 @@ import com.infoshareacademy.entity.vehicle.Vehicle;
 import com.infoshareacademy.repository.ClientRepository;
 import com.infoshareacademy.repository.ServiceOrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -43,11 +46,16 @@ public class ServiceOrderService {
     }
 
 
-    public List<ServiceOrderDto> findByQuery(String query) {
-        return serviceOrderRepository.findByQuery(query).stream()
+    public Page<ServiceOrderDto> findByQuery(String query, Pageable pageable) {
+        Page<ServiceOrder> page = serviceOrderRepository.findByQuery(query, pageable);
+
+        List<ServiceOrderDto> servicesOnPage = page.stream()
                 .map(ServiceOrderDto::fromServiceOrder)
                 .toList();
+
+        return new PageImpl<>(servicesOnPage, pageable, page.getTotalElements());
     }
+
 
     public boolean isOrderExists(String orderNumber) {
         return serviceOrderRepository.findByOrderNumber(orderNumber).isPresent();
@@ -97,10 +105,14 @@ public class ServiceOrderService {
     }
 
 
-    public List<ServiceOrderDto> findByState(ServiceOrderState state) {
-        return findAll().stream()
-                .filter(serviceOrderDto -> serviceOrderDto.getState().equals(state))
+    public Page<ServiceOrderDto> findByState(ServiceOrderState state, Pageable pageable) {
+
+        Page<ServiceOrder> page = serviceOrderRepository.findServiceOrderByState(state, pageable);
+        List<ServiceOrderDto> serviceOnPage = page.stream()
+                .map(ServiceOrderDto::fromServiceOrder)
                 .toList();
+
+        return new PageImpl<>(serviceOnPage, pageable, page.getTotalElements());
     }
 
 

@@ -57,7 +57,7 @@
                         <thead>
                         <tr>
                             <th style="width: 50px;">Lp.</th>
-                            <th th:text="#{cl.name}"></th>
+                            <th><a class="sorted" sd:pagination-sort="name" th:text="#{cl.name}"></a></th>
                             <th th:text="#{cl.email}"></th>
                             <th th:text="#{cl.phoneNumber}" style="width: 120px"></th>
                             <th th:text="#{cl.address}"></th>
@@ -108,6 +108,20 @@
                     </table>
                 </div>
             </section>
+        </div>
+    </div>
+    <div class="row">
+<!--        <div class="col-sm-6">-->
+<!--            <div sd:pagination-summary=""></div>-->
+<!--        </div>-->
+        <div class="col-12">
+            <nav class="d-flex justify-content-center">
+                <ul class="pagination" sd:pagination-split="4" sd:pagination="full">
+                    <!-- Pagination created by SpringDataDialect, this content is just for mockup -->
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li class="active"><a href="#"> <span class="sr-only"></span></a></li>
+                </ul>
+            </nav>
         </div>
     </div>
 </main>

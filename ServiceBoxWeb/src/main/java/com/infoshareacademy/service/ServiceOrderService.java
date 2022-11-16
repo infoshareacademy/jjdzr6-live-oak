@@ -4,6 +4,7 @@ import com.infoshareacademy.dto.serviceorder.ServiceOrderDetailsDto;
 import com.infoshareacademy.dto.serviceorder.ServiceOrderDto;
 import com.infoshareacademy.entity.client.Client;
 import com.infoshareacademy.entity.serviceorder.Note;
+import com.infoshareacademy.entity.serviceorder.RepairCard;
 import com.infoshareacademy.entity.serviceorder.ServiceOrder;
 import com.infoshareacademy.entity.serviceorder.ServiceOrderState;
 import com.infoshareacademy.entity.vehicle.Vehicle;
@@ -135,5 +136,18 @@ public class ServiceOrderService {
         return new ArrayList<>();
     }
 
+    public boolean isReadyToClose(Long id) {
+        Optional<ServiceOrder> serviceOrder = serviceOrderRepository.findById(id);
+        return serviceOrder.isPresent() && ServiceOrderState.IN_PROGRESS.equals(serviceOrder.get().getState());
+    }
+
+    public RepairCard getRepairCard(Long id) {
+        Optional<ServiceOrder> serviceOrder = serviceOrderRepository.findById(id);
+        if (serviceOrder.isPresent()) {
+            return serviceOrder.get().getRepairCard();
+        }
+
+        return new RepairCard();
+    }
 }
 

@@ -74,7 +74,19 @@ public class ServiceOrderController {
 
     @GetMapping("/service-orders/{id}/change-state")
     public String changeServiceOrderState(@PathVariable("id") Long serviceOrderId) {
+        if (serviceOrderService.isReadyToClose(serviceOrderId)) {
+           return "redirect:/employee/service-orders/" + serviceOrderId + "/repair-card";
+        }
         serviceOrderService.updateStatus(serviceOrderId);
+        return "redirect:/employee/service-orders";
+    }
+
+    @GetMapping("/service-orders/{id}/close")
+    public String closeServiceOrder(@PathVariable("id") Long serviceOrderId) {
+        if (serviceOrderService.isReadyToClose(serviceOrderId)) {
+            serviceOrderService.updateStatus(serviceOrderId);
+        }
+
         return "redirect:/employee/service-orders";
     }
 

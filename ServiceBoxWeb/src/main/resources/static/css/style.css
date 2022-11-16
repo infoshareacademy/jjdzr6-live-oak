@@ -106,3 +106,25 @@ h2.section-header {
     font-weight: bold;
     padding-bottom: 0.5rem;
 }
+
+a.sorted {
+    color: #49247A;
+}
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color: #ffffff;
+    background-color: #611BBD;
+    border-color: #49247A;
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: #ffffff;
+    background-color: #49247A;
+    border-color: #49247A;
+}
+
+.page-link {
+    color: #212529;
+}

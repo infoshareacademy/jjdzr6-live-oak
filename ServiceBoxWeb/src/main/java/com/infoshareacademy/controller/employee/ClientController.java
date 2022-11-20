@@ -8,6 +8,9 @@ import com.infoshareacademy.service.ClientService;
 import com.infoshareacademy.service.VehicleService;
 import com.infoshareacademy.utils.PasswordGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +31,13 @@ public class ClientController {
     private final VehicleService vehicleService;
 
     @GetMapping
-    public String getClients(Model model, @RequestParam(name = "s", required = false, defaultValue = "") String searchQuery) {
+    public String getClients(Model model,
+                             @RequestParam(name = "s", required = false, defaultValue = "") String searchQuery,
+                             @PageableDefault(value = 5) @SortDefault("id") Pageable pageable) {
         if (searchQuery.isBlank()) {
-            model.addAttribute("clients", clientService.findAll());
+            model.addAttribute("clients", clientService.findAll(pageable));
         } else {
-            model.addAttribute("clients", clientService.findByQuery(searchQuery));
+            model.addAttribute("clients", clientService.findByQuery(searchQuery, pageable));
             model.addAttribute("searchQuery", searchQuery);
         }
 

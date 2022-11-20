@@ -12,6 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 
 import javax.validation.Valid;
 
@@ -23,11 +26,13 @@ public class VehicleController {
     private final ServiceOrderService serviceOrderService;
 
     @GetMapping
-    public String getVehicles(Model model, @RequestParam(name = "s", required = false, defaultValue = "") String searchQuery) {
+    public String getVehicles(Model model, @RequestParam(name = "s", required = false, defaultValue = "") String searchQuery,
+                              @PageableDefault(value = 5)
+                              @SortDefault("id") Pageable pageable) {
         if (searchQuery.isBlank()) {
-            model.addAttribute("vehicles", vehicleService.findAll());
+            model.addAttribute("vehicles", vehicleService.findAll(pageable));
         } else {
-            model.addAttribute("vehicles", vehicleService.findByQuery(searchQuery));
+            model.addAttribute("vehicles", vehicleService.findByQuery(searchQuery, pageable));
             model.addAttribute("searchQuery", searchQuery);
         }
 

@@ -8,6 +8,9 @@ import com.infoshareacademy.repository.ServiceOrderRepository;
 import com.infoshareacademy.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -20,17 +23,24 @@ public class VehicleService {
 
     private final ServiceOrderRepository serviceOrderRepository;
 
-    public List<VehicleDto> findAll() {
-        List<Vehicle> vehicleList = vehicleRepository.findAll();
-        return vehicleList.stream()
+    public Page<VehicleDto> findAll(Pageable pageable) {
+        Page<Vehicle> page = vehicleRepository.findAll(pageable);
+
+        List<VehicleDto> vehiclesOnPage = page.stream()
                 .map(VehicleDto::fromVehicle)
                 .toList();
+
+        return new PageImpl<>(vehiclesOnPage, pageable, page.getTotalElements());
     }
 
-    public List<VehicleDto> findByQuery(String query) {
-        return vehicleRepository.findByQuery(query).stream()
+    public Page<VehicleDto> findByQuery(String query, Pageable pageable) {
+        Page<Vehicle> page = vehicleRepository.findByQuery(query, pageable);
+
+        List<VehicleDto> vehiclesOnPage = page.stream()
                 .map(VehicleDto::fromVehicle)
                 .toList();
+
+        return new PageImpl<>(vehiclesOnPage, pageable, page.getTotalElements());
     }
 
     public boolean isPlateNumberExists(String plateNumber) {

@@ -18,10 +18,9 @@ public interface ServiceOrderRepository extends JpaRepository<ServiceOrder, Long
     Optional<ServiceOrder> findByOrderNumber(String orderNumber);
 
     @Query("SELECT count(so) FROM ServiceOrder so WHERE so.state = :state")
-    Long countServiceOrderWithState(ServiceOrderState state);
+    Long countByState(ServiceOrderState state);
 
-    @Query("SELECT so FROM ServiceOrder so ORDER BY so.id DESC")
-    List<ServiceOrder> getLastServiceOrders(int limit);
+    List<ServiceOrder> findFirst3ByOrderByIdDesc();
 
     Page<ServiceOrder> findServiceOrderByState(ServiceOrderState state, Pageable pageable);
 

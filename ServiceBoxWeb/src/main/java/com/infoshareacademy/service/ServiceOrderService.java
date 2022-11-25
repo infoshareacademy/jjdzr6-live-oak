@@ -63,11 +63,11 @@ public class ServiceOrderService {
     }
 
     public Long countByState(ServiceOrderState state) {
-        return serviceOrderRepository.countServiceOrderWithState(state);
+        return serviceOrderRepository.countByState(state);
     }
 
-    public List<ServiceOrderDto> getLastOrders(int limit) {
-        return serviceOrderRepository.getLastServiceOrders(limit).stream()
+    public List<ServiceOrderDto> getLast3Orders() {
+        return serviceOrderRepository.findFirst3ByOrderByIdDesc().stream()
                 .map(ServiceOrderDto::fromServiceOrder)
                 .toList();
     }

@@ -34,7 +34,7 @@ public class PageController {
         stats[2] = orderService.countByState(ServiceOrderState.FINISHED);
 
         model.addAttribute("stats", stats);
-        model.addAttribute("lastServiceOrders", orderService.getLastOrders(3));
+        model.addAttribute("lastServiceOrders", orderService.getLast3Orders());
         return "employee/start";
     }
 }
